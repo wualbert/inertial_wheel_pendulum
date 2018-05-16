@@ -1,0 +1,120 @@
+                       ;6.115 Final Project
+                   ;Serial Receiving Program
+                   ;Albert Wu
+                   
+0000:              .org 00h                                         ;power up a
+0000: 02 01 00         ljmp start                           ;jump to the beginn
+                                                                            ;wh
+0100:              .org 100h                                        ;set vector
+                   start:                                           
+0100: 12 01 1E         lcall init                           ;call subroutine "i
+                   loop:                                    ;loop over
+0103: 12 01 49         lcall getchr                         ;call subroutine "g
+0106: AA 70            mov r2, 70h               ;store first char (direction) 
+0108: 12 01 55              lcall readnum                   ;reads number and s
+                   ;set direction
+010B: EA               mov a, r2
+010C: 54 01            anl a, #000000001b      ;keep only 1 bit
+010E: B4 01 04         cjne a, #01h, cw
+                   ;1: counterclockwise
+0111: D2 B2            setb p3.2
+0113: 80 02            sjmp setPWM
+                   cw:
+                   ;0: counterclockwise
+0115: C2 B2            clr p3.2  
+                   ;set PWM
+                   setPWM:
+0117: 8B 90            mov P1, r3             ;display pwm value in r3
+0119: 12 01 38         lcall set8254           ;reflect change in 8254
+011C: 80 E5                 sjmp loop
+                            
+                   init:
+                   ;set up serial port with 11.0592 MHz crystal
+                   ;use timer 1 for 9600 baud serial communication
+011E: 75 89 20              mov tmod, #20h                  ;MCS-51 Programmer'
+0121: 75 88 40              mov tcon, #40h                  ;run timer 1
+0124: 75 8D FD              mov th1, #0fdh                  ;set 9600 baud with
+0127: 75 98 50              mov scon, #50h                  ;set to 8 bit mode 
+                           
+                   ;set up 8254 counter 0
+012A: 90 FE 03              mov dptr, #0FE03h               ;set dptr to comman
+012D: 74 24                 mov A, #24h                             ;set to mod
+012F: F0                    movx @dptr, A                   ;send command word
+                   
+0130: 90 FE 00              mov dptr, #0FE00h               ;set dptr to timer 
+0133: 74 01                 mov A, #01h                             ;start scan
+0135: F0                    movx @dptr, A                   ;set low byte to #B
+                       
+0136: 7B 00            mov r3, #00h
+                   ;set up 8254 counter 1 using the value in r3
+                   set8254:
+                   ;inverse command such that 01 corresponds to low pwm
+0138: C3               clr c
+0139: 74 00            mov A, #00h
+013B: 9B               subb A, r3
+013C: FB               mov r3, A
+                       
+013D: 90 FE 03              mov dptr, #0FE03h               ;set dptr to comman
+0140: 74 52                 mov A, #52h                             ;set to mod
+0142: F0                    movx @dptr, A                   ;send command word
+                   
+0143: 90 FE 01              mov dptr, #0FE01h               ;set dptr to timer 
+0146: EB                    mov A, r3                               ;set duty c
+0147: F0                    movx @dptr, A                   ;
+0148: 22                    ret                                             ;re
+                            
+                   getchr:
+                   ;gets a character from PC using serial. RI is SCON.0. ASCII 
+0149: 30 98 FD              jnb ri, getchr                  ;if ri is not set, 
+014C: 85 99 70              mov 70h, sbuf                           ;get charac
+014F: 53 70 7F              anl 70h, #7fh                           ;mask off 8
+0152: C2 98                 clr ri                                  ;clear rece
+0154: 22                    ret
+                   
+                   readnum:
+                   ;reads a number
+0155: 12 01 49              lcall getchr                    ;reads MSB
+0158: C0 70                 push 70h                                ;stores MSB
+015A: 85 70 71         mov 71h, 70h                         ;move MSB to send b
+015D: 12 01 9A              lcall sndchr                    ;sends MSB
+0160: 12 01 49              lcall getchr                    
+0163: C0 70                 push 70h
+0165: 85 70 71              mov 71h, 70h                    ;move MSB to send b
+0168: 12 01 9A              lcall sndchr                    ;sends MSB
+016B: 12 01 49         lcall getchr                         ;reads LSB
+016E: C0 70                 push 70h                                ;stores LSB
+0170: 85 70 71         mov 71h, 70h                         ;move MSB to send b
+0173: 12 01 9A              lcall sndchr                    ;sends MSB
+                       
+                   ;parses the number
+0176: D0 50                 pop 50h                                         ;po
+0178: D0 51                 pop 51h
+017A: D0 52                 pop 52h                                         ;po
+                            
+017C: E5 52                 mov a, 52h                              ;processes 
+017E: 24 D0                 add a, #0d0h                ;convert from ascii to 
+0180: 75 F0 64              mov b, #64h                             ;store 100 
+0183: A4                    mul ab                                  ;multiply A
+0184: F5 52                 mov 52h, a                              ;store valu
+                   
+0186: E5 51                 mov a, 51h                              ;processes 
+0188: 24 D0                 add a, #0d0h                    ;convert from ascii
+018A: 75 F0 0A              mov b, #0Ah
+018D: A4                    mul ab                                  ;multiplies
+018E: F5 51                 mov 51h, a                              ;store valu
+                   
+                            
+0190: E5 50                 mov a, 50h                              ;store LSB 
+0192: 24 D0                 add a, #0d0h                            ;convert fr
+0194: 25 51                 add a, 51h                              ;add up the
+0196: 25 52                 add a, 52h
+0198: FB                    mov r3, a                               ;store the 
+0199: 22                    ret     
+                       
+                   sndchr:
+                   ;sends a character to PC using serial. Sends the character i
+019A: C2 99                 clr scon.1                              ;clear the 
+019C: 85 71 99              mov sbuf, 71h                   ;move a character f
+                   txloop:
+019F: 30 99 FD              jnb scon.1, txloop              ;if scon.1 is not s
+01A2: 22                    ret    

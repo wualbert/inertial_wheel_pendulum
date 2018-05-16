@@ -1,0 +1,886 @@
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccYG2di7.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"Counter_1_PM.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.bss
+  20              		.align	2
+  21              	Counter_1_backup:
+  22 0000 00000000 		.space	12
+  22      00000000 
+  22      00000000 
+  23              		.section	.text.Counter_1_SaveConfig,"ax",%progbits
+  24              		.align	2
+  25              		.global	Counter_1_SaveConfig
+  26              		.thumb
+  27              		.thumb_func
+  28              		.type	Counter_1_SaveConfig, %function
+  29              	Counter_1_SaveConfig:
+  30              	.LFB0:
+  31              		.file 1 "Generated_Source\\PSoC5\\Counter_1_PM.c"
+   1:Generated_Source\PSoC5/Counter_1_PM.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/Counter_1_PM.c **** * File Name: Counter_1_PM.c  
+   3:Generated_Source\PSoC5/Counter_1_PM.c **** * Version 3.0
+   4:Generated_Source\PSoC5/Counter_1_PM.c **** *
+   5:Generated_Source\PSoC5/Counter_1_PM.c **** *  Description:
+   6:Generated_Source\PSoC5/Counter_1_PM.c **** *    This file provides the power management source code to API for the
+   7:Generated_Source\PSoC5/Counter_1_PM.c **** *    Counter.  
+   8:Generated_Source\PSoC5/Counter_1_PM.c **** *
+   9:Generated_Source\PSoC5/Counter_1_PM.c **** *   Note:
+  10:Generated_Source\PSoC5/Counter_1_PM.c **** *     None
+  11:Generated_Source\PSoC5/Counter_1_PM.c **** *
+  12:Generated_Source\PSoC5/Counter_1_PM.c **** ********************************************************************************
+  13:Generated_Source\PSoC5/Counter_1_PM.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  14:Generated_Source\PSoC5/Counter_1_PM.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  15:Generated_Source\PSoC5/Counter_1_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  16:Generated_Source\PSoC5/Counter_1_PM.c **** * the software package with which this file was provided.
+  17:Generated_Source\PSoC5/Counter_1_PM.c **** *******************************************************************************/
+  18:Generated_Source\PSoC5/Counter_1_PM.c **** 
+  19:Generated_Source\PSoC5/Counter_1_PM.c **** #include "Counter_1.h"
+  20:Generated_Source\PSoC5/Counter_1_PM.c **** 
+  21:Generated_Source\PSoC5/Counter_1_PM.c **** static Counter_1_backupStruct Counter_1_backup;
+  22:Generated_Source\PSoC5/Counter_1_PM.c **** 
+  23:Generated_Source\PSoC5/Counter_1_PM.c **** 
+  24:Generated_Source\PSoC5/Counter_1_PM.c **** /*******************************************************************************
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccYG2di7.s 			page 2
+
+
+  25:Generated_Source\PSoC5/Counter_1_PM.c **** * Function Name: Counter_1_SaveConfig
+  26:Generated_Source\PSoC5/Counter_1_PM.c **** ********************************************************************************
+  27:Generated_Source\PSoC5/Counter_1_PM.c **** * Summary:
+  28:Generated_Source\PSoC5/Counter_1_PM.c **** *     Save the current user configuration
+  29:Generated_Source\PSoC5/Counter_1_PM.c **** *
+  30:Generated_Source\PSoC5/Counter_1_PM.c **** * Parameters:  
+  31:Generated_Source\PSoC5/Counter_1_PM.c **** *  void
+  32:Generated_Source\PSoC5/Counter_1_PM.c **** *
+  33:Generated_Source\PSoC5/Counter_1_PM.c **** * Return: 
+  34:Generated_Source\PSoC5/Counter_1_PM.c **** *  void
+  35:Generated_Source\PSoC5/Counter_1_PM.c **** *
+  36:Generated_Source\PSoC5/Counter_1_PM.c **** * Global variables:
+  37:Generated_Source\PSoC5/Counter_1_PM.c **** *  Counter_1_backup:  Variables of this global structure are modified to 
+  38:Generated_Source\PSoC5/Counter_1_PM.c **** *  store the values of non retention configuration registers when Sleep() API is 
+  39:Generated_Source\PSoC5/Counter_1_PM.c **** *  called.
+  40:Generated_Source\PSoC5/Counter_1_PM.c **** *
+  41:Generated_Source\PSoC5/Counter_1_PM.c **** *******************************************************************************/
+  42:Generated_Source\PSoC5/Counter_1_PM.c **** void Counter_1_SaveConfig(void) 
+  43:Generated_Source\PSoC5/Counter_1_PM.c **** {
+  32              		.loc 1 43 0
+  33              		.cfi_startproc
+  34              		@ args = 0, pretend = 0, frame = 0
+  35              		@ frame_needed = 1, uses_anonymous_args = 0
+  36 0000 80B5     		push	{r7, lr}
+  37              		.cfi_def_cfa_offset 8
+  38              		.cfi_offset 7, -8
+  39              		.cfi_offset 14, -4
+  40 0002 00AF     		add	r7, sp, #0
+  41              		.cfi_def_cfa_register 7
+  44:Generated_Source\PSoC5/Counter_1_PM.c ****     #if (!Counter_1_UsingFixedFunction)
+  45:Generated_Source\PSoC5/Counter_1_PM.c **** 
+  46:Generated_Source\PSoC5/Counter_1_PM.c ****         Counter_1_backup.CounterUdb = Counter_1_ReadCounter();
+  42              		.loc 1 46 0
+  43 0004 FFF7FEFF 		bl	Counter_1_ReadCounter
+  44 0008 0246     		mov	r2, r0
+  45 000a 054B     		ldr	r3, .L2
+  46 000c 5A60     		str	r2, [r3, #4]
+  47:Generated_Source\PSoC5/Counter_1_PM.c **** 
+  48:Generated_Source\PSoC5/Counter_1_PM.c ****         #if(!Counter_1_ControlRegRemoved)
+  49:Generated_Source\PSoC5/Counter_1_PM.c ****             Counter_1_backup.CounterControlRegister = Counter_1_ReadControlRegister();
+  47              		.loc 1 49 0
+  48 000e FFF7FEFF 		bl	Counter_1_ReadControlRegister
+  49 0012 0346     		mov	r3, r0
+  50 0014 1A46     		mov	r2, r3
+  51 0016 024B     		ldr	r3, .L2
+  52 0018 1A72     		strb	r2, [r3, #8]
+  50:Generated_Source\PSoC5/Counter_1_PM.c ****         #endif /* (!Counter_1_ControlRegRemoved) */
+  51:Generated_Source\PSoC5/Counter_1_PM.c **** 
+  52:Generated_Source\PSoC5/Counter_1_PM.c ****     #endif /* (!Counter_1_UsingFixedFunction) */
+  53:Generated_Source\PSoC5/Counter_1_PM.c **** }
+  53              		.loc 1 53 0
+  54 001a 00BF     		nop
+  55 001c 80BD     		pop	{r7, pc}
+  56              	.L3:
+  57 001e 00BF     		.align	2
+  58              	.L2:
+  59 0020 00000000 		.word	Counter_1_backup
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccYG2di7.s 			page 3
+
+
+  60              		.cfi_endproc
+  61              	.LFE0:
+  62              		.size	Counter_1_SaveConfig, .-Counter_1_SaveConfig
+  63              		.section	.text.Counter_1_RestoreConfig,"ax",%progbits
+  64              		.align	2
+  65              		.global	Counter_1_RestoreConfig
+  66              		.thumb
+  67              		.thumb_func
+  68              		.type	Counter_1_RestoreConfig, %function
+  69              	Counter_1_RestoreConfig:
+  70              	.LFB1:
+  54:Generated_Source\PSoC5/Counter_1_PM.c **** 
+  55:Generated_Source\PSoC5/Counter_1_PM.c **** 
+  56:Generated_Source\PSoC5/Counter_1_PM.c **** /*******************************************************************************
+  57:Generated_Source\PSoC5/Counter_1_PM.c **** * Function Name: Counter_1_RestoreConfig
+  58:Generated_Source\PSoC5/Counter_1_PM.c **** ********************************************************************************
+  59:Generated_Source\PSoC5/Counter_1_PM.c **** *
+  60:Generated_Source\PSoC5/Counter_1_PM.c **** * Summary:
+  61:Generated_Source\PSoC5/Counter_1_PM.c **** *  Restores the current user configuration.
+  62:Generated_Source\PSoC5/Counter_1_PM.c **** *
+  63:Generated_Source\PSoC5/Counter_1_PM.c **** * Parameters:  
+  64:Generated_Source\PSoC5/Counter_1_PM.c **** *  void
+  65:Generated_Source\PSoC5/Counter_1_PM.c **** *
+  66:Generated_Source\PSoC5/Counter_1_PM.c **** * Return: 
+  67:Generated_Source\PSoC5/Counter_1_PM.c **** *  void
+  68:Generated_Source\PSoC5/Counter_1_PM.c **** *
+  69:Generated_Source\PSoC5/Counter_1_PM.c **** * Global variables:
+  70:Generated_Source\PSoC5/Counter_1_PM.c **** *  Counter_1_backup:  Variables of this global structure are used to 
+  71:Generated_Source\PSoC5/Counter_1_PM.c **** *  restore the values of non retention registers on wakeup from sleep mode.
+  72:Generated_Source\PSoC5/Counter_1_PM.c **** *
+  73:Generated_Source\PSoC5/Counter_1_PM.c **** *******************************************************************************/
+  74:Generated_Source\PSoC5/Counter_1_PM.c **** void Counter_1_RestoreConfig(void) 
+  75:Generated_Source\PSoC5/Counter_1_PM.c **** {      
+  71              		.loc 1 75 0
+  72              		.cfi_startproc
+  73              		@ args = 0, pretend = 0, frame = 0
+  74              		@ frame_needed = 1, uses_anonymous_args = 0
+  75 0000 80B5     		push	{r7, lr}
+  76              		.cfi_def_cfa_offset 8
+  77              		.cfi_offset 7, -8
+  78              		.cfi_offset 14, -4
+  79 0002 00AF     		add	r7, sp, #0
+  80              		.cfi_def_cfa_register 7
+  76:Generated_Source\PSoC5/Counter_1_PM.c ****     #if (!Counter_1_UsingFixedFunction)
+  77:Generated_Source\PSoC5/Counter_1_PM.c **** 
+  78:Generated_Source\PSoC5/Counter_1_PM.c ****        Counter_1_WriteCounter(Counter_1_backup.CounterUdb);
+  81              		.loc 1 78 0
+  82 0004 054B     		ldr	r3, .L5
+  83 0006 5B68     		ldr	r3, [r3, #4]
+  84 0008 1846     		mov	r0, r3
+  85 000a FFF7FEFF 		bl	Counter_1_WriteCounter
+  79:Generated_Source\PSoC5/Counter_1_PM.c **** 
+  80:Generated_Source\PSoC5/Counter_1_PM.c ****         #if(!Counter_1_ControlRegRemoved)
+  81:Generated_Source\PSoC5/Counter_1_PM.c ****             Counter_1_WriteControlRegister(Counter_1_backup.CounterControlRegister);
+  86              		.loc 1 81 0
+  87 000e 034B     		ldr	r3, .L5
+  88 0010 1B7A     		ldrb	r3, [r3, #8]	@ zero_extendqisi2
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccYG2di7.s 			page 4
+
+
+  89 0012 1846     		mov	r0, r3
+  90 0014 FFF7FEFF 		bl	Counter_1_WriteControlRegister
+  82:Generated_Source\PSoC5/Counter_1_PM.c ****         #endif /* (!Counter_1_ControlRegRemoved) */
+  83:Generated_Source\PSoC5/Counter_1_PM.c **** 
+  84:Generated_Source\PSoC5/Counter_1_PM.c ****     #endif /* (!Counter_1_UsingFixedFunction) */
+  85:Generated_Source\PSoC5/Counter_1_PM.c **** }
+  91              		.loc 1 85 0
+  92 0018 00BF     		nop
+  93 001a 80BD     		pop	{r7, pc}
+  94              	.L6:
+  95              		.align	2
+  96              	.L5:
+  97 001c 00000000 		.word	Counter_1_backup
+  98              		.cfi_endproc
+  99              	.LFE1:
+ 100              		.size	Counter_1_RestoreConfig, .-Counter_1_RestoreConfig
+ 101              		.section	.text.Counter_1_Sleep,"ax",%progbits
+ 102              		.align	2
+ 103              		.global	Counter_1_Sleep
+ 104              		.thumb
+ 105              		.thumb_func
+ 106              		.type	Counter_1_Sleep, %function
+ 107              	Counter_1_Sleep:
+ 108              	.LFB2:
+  86:Generated_Source\PSoC5/Counter_1_PM.c **** 
+  87:Generated_Source\PSoC5/Counter_1_PM.c **** 
+  88:Generated_Source\PSoC5/Counter_1_PM.c **** /*******************************************************************************
+  89:Generated_Source\PSoC5/Counter_1_PM.c **** * Function Name: Counter_1_Sleep
+  90:Generated_Source\PSoC5/Counter_1_PM.c **** ********************************************************************************
+  91:Generated_Source\PSoC5/Counter_1_PM.c **** * Summary:
+  92:Generated_Source\PSoC5/Counter_1_PM.c **** *     Stop and Save the user configuration
+  93:Generated_Source\PSoC5/Counter_1_PM.c **** *
+  94:Generated_Source\PSoC5/Counter_1_PM.c **** * Parameters:  
+  95:Generated_Source\PSoC5/Counter_1_PM.c **** *  void
+  96:Generated_Source\PSoC5/Counter_1_PM.c **** *
+  97:Generated_Source\PSoC5/Counter_1_PM.c **** * Return: 
+  98:Generated_Source\PSoC5/Counter_1_PM.c **** *  void
+  99:Generated_Source\PSoC5/Counter_1_PM.c **** *
+ 100:Generated_Source\PSoC5/Counter_1_PM.c **** * Global variables:
+ 101:Generated_Source\PSoC5/Counter_1_PM.c **** *  Counter_1_backup.enableState:  Is modified depending on the enable 
+ 102:Generated_Source\PSoC5/Counter_1_PM.c **** *  state of the block before entering sleep mode.
+ 103:Generated_Source\PSoC5/Counter_1_PM.c **** *
+ 104:Generated_Source\PSoC5/Counter_1_PM.c **** *******************************************************************************/
+ 105:Generated_Source\PSoC5/Counter_1_PM.c **** void Counter_1_Sleep(void) 
+ 106:Generated_Source\PSoC5/Counter_1_PM.c **** {
+ 109              		.loc 1 106 0
+ 110              		.cfi_startproc
+ 111              		@ args = 0, pretend = 0, frame = 0
+ 112              		@ frame_needed = 1, uses_anonymous_args = 0
+ 113 0000 80B5     		push	{r7, lr}
+ 114              		.cfi_def_cfa_offset 8
+ 115              		.cfi_offset 7, -8
+ 116              		.cfi_offset 14, -4
+ 117 0002 00AF     		add	r7, sp, #0
+ 118              		.cfi_def_cfa_register 7
+ 107:Generated_Source\PSoC5/Counter_1_PM.c ****     #if(!Counter_1_ControlRegRemoved)
+ 108:Generated_Source\PSoC5/Counter_1_PM.c ****         /* Save Counter's enable state */
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccYG2di7.s 			page 5
+
+
+ 109:Generated_Source\PSoC5/Counter_1_PM.c ****         if(Counter_1_CTRL_ENABLE == (Counter_1_CONTROL & Counter_1_CTRL_ENABLE))
+ 119              		.loc 1 109 0
+ 120 0004 094B     		ldr	r3, .L10
+ 121 0006 1B78     		ldrb	r3, [r3]
+ 122 0008 DBB2     		uxtb	r3, r3
+ 123 000a 5BB2     		sxtb	r3, r3
+ 124 000c 002B     		cmp	r3, #0
+ 125 000e 03DA     		bge	.L8
+ 110:Generated_Source\PSoC5/Counter_1_PM.c ****         {
+ 111:Generated_Source\PSoC5/Counter_1_PM.c ****             /* Counter is enabled */
+ 112:Generated_Source\PSoC5/Counter_1_PM.c ****             Counter_1_backup.CounterEnableState = 1u;
+ 126              		.loc 1 112 0
+ 127 0010 074B     		ldr	r3, .L10+4
+ 128 0012 0122     		movs	r2, #1
+ 129 0014 1A70     		strb	r2, [r3]
+ 130 0016 02E0     		b	.L9
+ 131              	.L8:
+ 113:Generated_Source\PSoC5/Counter_1_PM.c ****         }
+ 114:Generated_Source\PSoC5/Counter_1_PM.c ****         else
+ 115:Generated_Source\PSoC5/Counter_1_PM.c ****         {
+ 116:Generated_Source\PSoC5/Counter_1_PM.c ****             /* Counter is disabled */
+ 117:Generated_Source\PSoC5/Counter_1_PM.c ****             Counter_1_backup.CounterEnableState = 0u;
+ 132              		.loc 1 117 0
+ 133 0018 054B     		ldr	r3, .L10+4
+ 134 001a 0022     		movs	r2, #0
+ 135 001c 1A70     		strb	r2, [r3]
+ 136              	.L9:
+ 118:Generated_Source\PSoC5/Counter_1_PM.c ****         }
+ 119:Generated_Source\PSoC5/Counter_1_PM.c ****     #else
+ 120:Generated_Source\PSoC5/Counter_1_PM.c ****         Counter_1_backup.CounterEnableState = 1u;
+ 121:Generated_Source\PSoC5/Counter_1_PM.c ****         if(Counter_1_backup.CounterEnableState != 0u)
+ 122:Generated_Source\PSoC5/Counter_1_PM.c ****         {
+ 123:Generated_Source\PSoC5/Counter_1_PM.c ****             Counter_1_backup.CounterEnableState = 0u;
+ 124:Generated_Source\PSoC5/Counter_1_PM.c ****         }
+ 125:Generated_Source\PSoC5/Counter_1_PM.c ****     #endif /* (!Counter_1_ControlRegRemoved) */
+ 126:Generated_Source\PSoC5/Counter_1_PM.c ****     
+ 127:Generated_Source\PSoC5/Counter_1_PM.c ****     Counter_1_Stop();
+ 137              		.loc 1 127 0
+ 138 001e FFF7FEFF 		bl	Counter_1_Stop
+ 128:Generated_Source\PSoC5/Counter_1_PM.c ****     Counter_1_SaveConfig();
+ 139              		.loc 1 128 0
+ 140 0022 FFF7FEFF 		bl	Counter_1_SaveConfig
+ 129:Generated_Source\PSoC5/Counter_1_PM.c **** }
+ 141              		.loc 1 129 0
+ 142 0026 00BF     		nop
+ 143 0028 80BD     		pop	{r7, pc}
+ 144              	.L11:
+ 145 002a 00BF     		.align	2
+ 146              	.L10:
+ 147 002c 76640040 		.word	1073767542
+ 148 0030 00000000 		.word	Counter_1_backup
+ 149              		.cfi_endproc
+ 150              	.LFE2:
+ 151              		.size	Counter_1_Sleep, .-Counter_1_Sleep
+ 152              		.section	.text.Counter_1_Wakeup,"ax",%progbits
+ 153              		.align	2
+ 154              		.global	Counter_1_Wakeup
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccYG2di7.s 			page 6
+
+
+ 155              		.thumb
+ 156              		.thumb_func
+ 157              		.type	Counter_1_Wakeup, %function
+ 158              	Counter_1_Wakeup:
+ 159              	.LFB3:
+ 130:Generated_Source\PSoC5/Counter_1_PM.c **** 
+ 131:Generated_Source\PSoC5/Counter_1_PM.c **** 
+ 132:Generated_Source\PSoC5/Counter_1_PM.c **** /*******************************************************************************
+ 133:Generated_Source\PSoC5/Counter_1_PM.c **** * Function Name: Counter_1_Wakeup
+ 134:Generated_Source\PSoC5/Counter_1_PM.c **** ********************************************************************************
+ 135:Generated_Source\PSoC5/Counter_1_PM.c **** *
+ 136:Generated_Source\PSoC5/Counter_1_PM.c **** * Summary:
+ 137:Generated_Source\PSoC5/Counter_1_PM.c **** *  Restores and enables the user configuration
+ 138:Generated_Source\PSoC5/Counter_1_PM.c **** *  
+ 139:Generated_Source\PSoC5/Counter_1_PM.c **** * Parameters:  
+ 140:Generated_Source\PSoC5/Counter_1_PM.c **** *  void
+ 141:Generated_Source\PSoC5/Counter_1_PM.c **** *
+ 142:Generated_Source\PSoC5/Counter_1_PM.c **** * Return: 
+ 143:Generated_Source\PSoC5/Counter_1_PM.c **** *  void
+ 144:Generated_Source\PSoC5/Counter_1_PM.c **** *
+ 145:Generated_Source\PSoC5/Counter_1_PM.c **** * Global variables:
+ 146:Generated_Source\PSoC5/Counter_1_PM.c **** *  Counter_1_backup.enableState:  Is used to restore the enable state of 
+ 147:Generated_Source\PSoC5/Counter_1_PM.c **** *  block on wakeup from sleep mode.
+ 148:Generated_Source\PSoC5/Counter_1_PM.c **** *
+ 149:Generated_Source\PSoC5/Counter_1_PM.c **** *******************************************************************************/
+ 150:Generated_Source\PSoC5/Counter_1_PM.c **** void Counter_1_Wakeup(void) 
+ 151:Generated_Source\PSoC5/Counter_1_PM.c **** {
+ 160              		.loc 1 151 0
+ 161              		.cfi_startproc
+ 162              		@ args = 0, pretend = 0, frame = 0
+ 163              		@ frame_needed = 1, uses_anonymous_args = 0
+ 164 0000 80B5     		push	{r7, lr}
+ 165              		.cfi_def_cfa_offset 8
+ 166              		.cfi_offset 7, -8
+ 167              		.cfi_offset 14, -4
+ 168 0002 00AF     		add	r7, sp, #0
+ 169              		.cfi_def_cfa_register 7
+ 152:Generated_Source\PSoC5/Counter_1_PM.c ****     Counter_1_RestoreConfig();
+ 170              		.loc 1 152 0
+ 171 0004 FFF7FEFF 		bl	Counter_1_RestoreConfig
+ 153:Generated_Source\PSoC5/Counter_1_PM.c ****     #if(!Counter_1_ControlRegRemoved)
+ 154:Generated_Source\PSoC5/Counter_1_PM.c ****         if(Counter_1_backup.CounterEnableState == 1u)
+ 172              		.loc 1 154 0
+ 173 0008 034B     		ldr	r3, .L15
+ 174 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 175 000c 012B     		cmp	r3, #1
+ 176 000e 01D1     		bne	.L14
+ 155:Generated_Source\PSoC5/Counter_1_PM.c ****         {
+ 156:Generated_Source\PSoC5/Counter_1_PM.c ****             /* Enable Counter's operation */
+ 157:Generated_Source\PSoC5/Counter_1_PM.c ****             Counter_1_Enable();
+ 177              		.loc 1 157 0
+ 178 0010 FFF7FEFF 		bl	Counter_1_Enable
+ 179              	.L14:
+ 158:Generated_Source\PSoC5/Counter_1_PM.c ****         } /* Do nothing if Counter was disabled before */    
+ 159:Generated_Source\PSoC5/Counter_1_PM.c ****     #endif /* (!Counter_1_ControlRegRemoved) */
+ 160:Generated_Source\PSoC5/Counter_1_PM.c ****     
+ 161:Generated_Source\PSoC5/Counter_1_PM.c **** }
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccYG2di7.s 			page 7
+
+
+ 180              		.loc 1 161 0
+ 181 0014 00BF     		nop
+ 182 0016 80BD     		pop	{r7, pc}
+ 183              	.L16:
+ 184              		.align	2
+ 185              	.L15:
+ 186 0018 00000000 		.word	Counter_1_backup
+ 187              		.cfi_endproc
+ 188              	.LFE3:
+ 189              		.size	Counter_1_Wakeup, .-Counter_1_Wakeup
+ 190              		.text
+ 191              	.Letext0:
+ 192              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 193              		.file 3 "Generated_Source\\PSoC5\\Counter_1.h"
+ 194              		.section	.debug_info,"",%progbits
+ 195              	.Ldebug_info0:
+ 196 0000 3A010000 		.4byte	0x13a
+ 197 0004 0400     		.2byte	0x4
+ 198 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 199 000a 04       		.byte	0x4
+ 200 000b 01       		.uleb128 0x1
+ 201 000c BB000000 		.4byte	.LASF24
+ 202 0010 0C       		.byte	0xc
+ 203 0011 66000000 		.4byte	.LASF25
+ 204 0015 65010000 		.4byte	.LASF26
+ 205 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 206 001d 00000000 		.4byte	0
+ 207 0021 00000000 		.4byte	.Ldebug_line0
+ 208 0025 02       		.uleb128 0x2
+ 209 0026 01       		.byte	0x1
+ 210 0027 06       		.byte	0x6
+ 211 0028 F6010000 		.4byte	.LASF0
+ 212 002c 02       		.uleb128 0x2
+ 213 002d 01       		.byte	0x1
+ 214 002e 08       		.byte	0x8
+ 215 002f 33000000 		.4byte	.LASF1
+ 216 0033 02       		.uleb128 0x2
+ 217 0034 02       		.byte	0x2
+ 218 0035 05       		.byte	0x5
+ 219 0036 1F020000 		.4byte	.LASF2
+ 220 003a 02       		.uleb128 0x2
+ 221 003b 02       		.byte	0x2
+ 222 003c 07       		.byte	0x7
+ 223 003d E3010000 		.4byte	.LASF3
+ 224 0041 02       		.uleb128 0x2
+ 225 0042 04       		.byte	0x4
+ 226 0043 05       		.byte	0x5
+ 227 0044 91010000 		.4byte	.LASF4
+ 228 0048 02       		.uleb128 0x2
+ 229 0049 04       		.byte	0x4
+ 230 004a 07       		.byte	0x7
+ 231 004b 92000000 		.4byte	.LASF5
+ 232 004f 02       		.uleb128 0x2
+ 233 0050 08       		.byte	0x8
+ 234 0051 05       		.byte	0x5
+ 235 0052 00000000 		.4byte	.LASF6
+ 236 0056 02       		.uleb128 0x2
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccYG2di7.s 			page 8
+
+
+ 237 0057 08       		.byte	0x8
+ 238 0058 07       		.byte	0x7
+ 239 0059 A4000000 		.4byte	.LASF7
+ 240 005d 03       		.uleb128 0x3
+ 241 005e 04       		.byte	0x4
+ 242 005f 05       		.byte	0x5
+ 243 0060 696E7400 		.ascii	"int\000"
+ 244 0064 02       		.uleb128 0x2
+ 245 0065 04       		.byte	0x4
+ 246 0066 07       		.byte	0x7
+ 247 0067 15000000 		.4byte	.LASF8
+ 248 006b 04       		.uleb128 0x4
+ 249 006c 8C000000 		.4byte	.LASF9
+ 250 0070 02       		.byte	0x2
+ 251 0071 9201     		.2byte	0x192
+ 252 0073 2C000000 		.4byte	0x2c
+ 253 0077 04       		.uleb128 0x4
+ 254 0078 0E000000 		.4byte	.LASF10
+ 255 007c 02       		.byte	0x2
+ 256 007d 9401     		.2byte	0x194
+ 257 007f 48000000 		.4byte	0x48
+ 258 0083 02       		.uleb128 0x2
+ 259 0084 08       		.byte	0x8
+ 260 0085 04       		.byte	0x4
+ 261 0086 C5010000 		.4byte	.LASF11
+ 262 008a 02       		.uleb128 0x2
+ 263 008b 01       		.byte	0x1
+ 264 008c 08       		.byte	0x8
+ 265 008d 60010000 		.4byte	.LASF12
+ 266 0091 04       		.uleb128 0x4
+ 267 0092 29020000 		.4byte	.LASF13
+ 268 0096 02       		.byte	0x2
+ 269 0097 3C02     		.2byte	0x23c
+ 270 0099 9D000000 		.4byte	0x9d
+ 271 009d 05       		.uleb128 0x5
+ 272 009e 6B000000 		.4byte	0x6b
+ 273 00a2 02       		.uleb128 0x2
+ 274 00a3 08       		.byte	0x8
+ 275 00a4 04       		.byte	0x4
+ 276 00a5 13020000 		.4byte	.LASF14
+ 277 00a9 02       		.uleb128 0x2
+ 278 00aa 04       		.byte	0x4
+ 279 00ab 07       		.byte	0x7
+ 280 00ac 39020000 		.4byte	.LASF15
+ 281 00b0 06       		.uleb128 0x6
+ 282 00b1 0C       		.byte	0xc
+ 283 00b2 03       		.byte	0x3
+ 284 00b3 40       		.byte	0x40
+ 285 00b4 DD000000 		.4byte	0xdd
+ 286 00b8 07       		.uleb128 0x7
+ 287 00b9 9A010000 		.4byte	.LASF16
+ 288 00bd 03       		.byte	0x3
+ 289 00be 42       		.byte	0x42
+ 290 00bf 6B000000 		.4byte	0x6b
+ 291 00c3 00       		.byte	0
+ 292 00c4 07       		.uleb128 0x7
+ 293 00c5 2E020000 		.4byte	.LASF17
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccYG2di7.s 			page 9
+
+
+ 294 00c9 03       		.byte	0x3
+ 295 00ca 43       		.byte	0x43
+ 296 00cb 77000000 		.4byte	0x77
+ 297 00cf 04       		.byte	0x4
+ 298 00d0 07       		.uleb128 0x7
+ 299 00d1 49010000 		.4byte	.LASF18
+ 300 00d5 03       		.byte	0x3
+ 301 00d6 46       		.byte	0x46
+ 302 00d7 6B000000 		.4byte	0x6b
+ 303 00db 08       		.byte	0x8
+ 304 00dc 00       		.byte	0
+ 305 00dd 08       		.uleb128 0x8
+ 306 00de CC010000 		.4byte	.LASF19
+ 307 00e2 03       		.byte	0x3
+ 308 00e3 49       		.byte	0x49
+ 309 00e4 B0000000 		.4byte	0xb0
+ 310 00e8 09       		.uleb128 0x9
+ 311 00e9 41000000 		.4byte	.LASF20
+ 312 00ed 01       		.byte	0x1
+ 313 00ee 2A       		.byte	0x2a
+ 314 00ef 00000000 		.4byte	.LFB0
+ 315 00f3 24000000 		.4byte	.LFE0-.LFB0
+ 316 00f7 01       		.uleb128 0x1
+ 317 00f8 9C       		.byte	0x9c
+ 318 00f9 09       		.uleb128 0x9
+ 319 00fa AD010000 		.4byte	.LASF21
+ 320 00fe 01       		.byte	0x1
+ 321 00ff 4A       		.byte	0x4a
+ 322 0100 00000000 		.4byte	.LFB1
+ 323 0104 20000000 		.4byte	.LFE1-.LFB1
+ 324 0108 01       		.uleb128 0x1
+ 325 0109 9C       		.byte	0x9c
+ 326 010a 09       		.uleb128 0x9
+ 327 010b 56000000 		.4byte	.LASF22
+ 328 010f 01       		.byte	0x1
+ 329 0110 69       		.byte	0x69
+ 330 0111 00000000 		.4byte	.LFB2
+ 331 0115 34000000 		.4byte	.LFE2-.LFB2
+ 332 0119 01       		.uleb128 0x1
+ 333 011a 9C       		.byte	0x9c
+ 334 011b 09       		.uleb128 0x9
+ 335 011c 22000000 		.4byte	.LASF23
+ 336 0120 01       		.byte	0x1
+ 337 0121 96       		.byte	0x96
+ 338 0122 00000000 		.4byte	.LFB3
+ 339 0126 1C000000 		.4byte	.LFE3-.LFB3
+ 340 012a 01       		.uleb128 0x1
+ 341 012b 9C       		.byte	0x9c
+ 342 012c 0A       		.uleb128 0xa
+ 343 012d 02020000 		.4byte	.LASF27
+ 344 0131 01       		.byte	0x1
+ 345 0132 15       		.byte	0x15
+ 346 0133 DD000000 		.4byte	0xdd
+ 347 0137 05       		.uleb128 0x5
+ 348 0138 03       		.byte	0x3
+ 349 0139 00000000 		.4byte	Counter_1_backup
+ 350 013d 00       		.byte	0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccYG2di7.s 			page 10
+
+
+ 351              		.section	.debug_abbrev,"",%progbits
+ 352              	.Ldebug_abbrev0:
+ 353 0000 01       		.uleb128 0x1
+ 354 0001 11       		.uleb128 0x11
+ 355 0002 01       		.byte	0x1
+ 356 0003 25       		.uleb128 0x25
+ 357 0004 0E       		.uleb128 0xe
+ 358 0005 13       		.uleb128 0x13
+ 359 0006 0B       		.uleb128 0xb
+ 360 0007 03       		.uleb128 0x3
+ 361 0008 0E       		.uleb128 0xe
+ 362 0009 1B       		.uleb128 0x1b
+ 363 000a 0E       		.uleb128 0xe
+ 364 000b 55       		.uleb128 0x55
+ 365 000c 17       		.uleb128 0x17
+ 366 000d 11       		.uleb128 0x11
+ 367 000e 01       		.uleb128 0x1
+ 368 000f 10       		.uleb128 0x10
+ 369 0010 17       		.uleb128 0x17
+ 370 0011 00       		.byte	0
+ 371 0012 00       		.byte	0
+ 372 0013 02       		.uleb128 0x2
+ 373 0014 24       		.uleb128 0x24
+ 374 0015 00       		.byte	0
+ 375 0016 0B       		.uleb128 0xb
+ 376 0017 0B       		.uleb128 0xb
+ 377 0018 3E       		.uleb128 0x3e
+ 378 0019 0B       		.uleb128 0xb
+ 379 001a 03       		.uleb128 0x3
+ 380 001b 0E       		.uleb128 0xe
+ 381 001c 00       		.byte	0
+ 382 001d 00       		.byte	0
+ 383 001e 03       		.uleb128 0x3
+ 384 001f 24       		.uleb128 0x24
+ 385 0020 00       		.byte	0
+ 386 0021 0B       		.uleb128 0xb
+ 387 0022 0B       		.uleb128 0xb
+ 388 0023 3E       		.uleb128 0x3e
+ 389 0024 0B       		.uleb128 0xb
+ 390 0025 03       		.uleb128 0x3
+ 391 0026 08       		.uleb128 0x8
+ 392 0027 00       		.byte	0
+ 393 0028 00       		.byte	0
+ 394 0029 04       		.uleb128 0x4
+ 395 002a 16       		.uleb128 0x16
+ 396 002b 00       		.byte	0
+ 397 002c 03       		.uleb128 0x3
+ 398 002d 0E       		.uleb128 0xe
+ 399 002e 3A       		.uleb128 0x3a
+ 400 002f 0B       		.uleb128 0xb
+ 401 0030 3B       		.uleb128 0x3b
+ 402 0031 05       		.uleb128 0x5
+ 403 0032 49       		.uleb128 0x49
+ 404 0033 13       		.uleb128 0x13
+ 405 0034 00       		.byte	0
+ 406 0035 00       		.byte	0
+ 407 0036 05       		.uleb128 0x5
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccYG2di7.s 			page 11
+
+
+ 408 0037 35       		.uleb128 0x35
+ 409 0038 00       		.byte	0
+ 410 0039 49       		.uleb128 0x49
+ 411 003a 13       		.uleb128 0x13
+ 412 003b 00       		.byte	0
+ 413 003c 00       		.byte	0
+ 414 003d 06       		.uleb128 0x6
+ 415 003e 13       		.uleb128 0x13
+ 416 003f 01       		.byte	0x1
+ 417 0040 0B       		.uleb128 0xb
+ 418 0041 0B       		.uleb128 0xb
+ 419 0042 3A       		.uleb128 0x3a
+ 420 0043 0B       		.uleb128 0xb
+ 421 0044 3B       		.uleb128 0x3b
+ 422 0045 0B       		.uleb128 0xb
+ 423 0046 01       		.uleb128 0x1
+ 424 0047 13       		.uleb128 0x13
+ 425 0048 00       		.byte	0
+ 426 0049 00       		.byte	0
+ 427 004a 07       		.uleb128 0x7
+ 428 004b 0D       		.uleb128 0xd
+ 429 004c 00       		.byte	0
+ 430 004d 03       		.uleb128 0x3
+ 431 004e 0E       		.uleb128 0xe
+ 432 004f 3A       		.uleb128 0x3a
+ 433 0050 0B       		.uleb128 0xb
+ 434 0051 3B       		.uleb128 0x3b
+ 435 0052 0B       		.uleb128 0xb
+ 436 0053 49       		.uleb128 0x49
+ 437 0054 13       		.uleb128 0x13
+ 438 0055 38       		.uleb128 0x38
+ 439 0056 0B       		.uleb128 0xb
+ 440 0057 00       		.byte	0
+ 441 0058 00       		.byte	0
+ 442 0059 08       		.uleb128 0x8
+ 443 005a 16       		.uleb128 0x16
+ 444 005b 00       		.byte	0
+ 445 005c 03       		.uleb128 0x3
+ 446 005d 0E       		.uleb128 0xe
+ 447 005e 3A       		.uleb128 0x3a
+ 448 005f 0B       		.uleb128 0xb
+ 449 0060 3B       		.uleb128 0x3b
+ 450 0061 0B       		.uleb128 0xb
+ 451 0062 49       		.uleb128 0x49
+ 452 0063 13       		.uleb128 0x13
+ 453 0064 00       		.byte	0
+ 454 0065 00       		.byte	0
+ 455 0066 09       		.uleb128 0x9
+ 456 0067 2E       		.uleb128 0x2e
+ 457 0068 00       		.byte	0
+ 458 0069 3F       		.uleb128 0x3f
+ 459 006a 19       		.uleb128 0x19
+ 460 006b 03       		.uleb128 0x3
+ 461 006c 0E       		.uleb128 0xe
+ 462 006d 3A       		.uleb128 0x3a
+ 463 006e 0B       		.uleb128 0xb
+ 464 006f 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccYG2di7.s 			page 12
+
+
+ 465 0070 0B       		.uleb128 0xb
+ 466 0071 27       		.uleb128 0x27
+ 467 0072 19       		.uleb128 0x19
+ 468 0073 11       		.uleb128 0x11
+ 469 0074 01       		.uleb128 0x1
+ 470 0075 12       		.uleb128 0x12
+ 471 0076 06       		.uleb128 0x6
+ 472 0077 40       		.uleb128 0x40
+ 473 0078 18       		.uleb128 0x18
+ 474 0079 9642     		.uleb128 0x2116
+ 475 007b 19       		.uleb128 0x19
+ 476 007c 00       		.byte	0
+ 477 007d 00       		.byte	0
+ 478 007e 0A       		.uleb128 0xa
+ 479 007f 34       		.uleb128 0x34
+ 480 0080 00       		.byte	0
+ 481 0081 03       		.uleb128 0x3
+ 482 0082 0E       		.uleb128 0xe
+ 483 0083 3A       		.uleb128 0x3a
+ 484 0084 0B       		.uleb128 0xb
+ 485 0085 3B       		.uleb128 0x3b
+ 486 0086 0B       		.uleb128 0xb
+ 487 0087 49       		.uleb128 0x49
+ 488 0088 13       		.uleb128 0x13
+ 489 0089 02       		.uleb128 0x2
+ 490 008a 18       		.uleb128 0x18
+ 491 008b 00       		.byte	0
+ 492 008c 00       		.byte	0
+ 493 008d 00       		.byte	0
+ 494              		.section	.debug_aranges,"",%progbits
+ 495 0000 34000000 		.4byte	0x34
+ 496 0004 0200     		.2byte	0x2
+ 497 0006 00000000 		.4byte	.Ldebug_info0
+ 498 000a 04       		.byte	0x4
+ 499 000b 00       		.byte	0
+ 500 000c 0000     		.2byte	0
+ 501 000e 0000     		.2byte	0
+ 502 0010 00000000 		.4byte	.LFB0
+ 503 0014 24000000 		.4byte	.LFE0-.LFB0
+ 504 0018 00000000 		.4byte	.LFB1
+ 505 001c 20000000 		.4byte	.LFE1-.LFB1
+ 506 0020 00000000 		.4byte	.LFB2
+ 507 0024 34000000 		.4byte	.LFE2-.LFB2
+ 508 0028 00000000 		.4byte	.LFB3
+ 509 002c 1C000000 		.4byte	.LFE3-.LFB3
+ 510 0030 00000000 		.4byte	0
+ 511 0034 00000000 		.4byte	0
+ 512              		.section	.debug_ranges,"",%progbits
+ 513              	.Ldebug_ranges0:
+ 514 0000 00000000 		.4byte	.LFB0
+ 515 0004 24000000 		.4byte	.LFE0
+ 516 0008 00000000 		.4byte	.LFB1
+ 517 000c 20000000 		.4byte	.LFE1
+ 518 0010 00000000 		.4byte	.LFB2
+ 519 0014 34000000 		.4byte	.LFE2
+ 520 0018 00000000 		.4byte	.LFB3
+ 521 001c 1C000000 		.4byte	.LFE3
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccYG2di7.s 			page 13
+
+
+ 522 0020 00000000 		.4byte	0
+ 523 0024 00000000 		.4byte	0
+ 524              		.section	.debug_line,"",%progbits
+ 525              	.Ldebug_line0:
+ 526 0000 AF000000 		.section	.debug_str,"MS",%progbits,1
+ 526      02005800 
+ 526      00000201 
+ 526      FB0E0D00 
+ 526      01010101 
+ 527              	.LASF6:
+ 528 0000 6C6F6E67 		.ascii	"long long int\000"
+ 528      206C6F6E 
+ 528      6720696E 
+ 528      7400
+ 529              	.LASF10:
+ 530 000e 75696E74 		.ascii	"uint32\000"
+ 530      333200
+ 531              	.LASF8:
+ 532 0015 756E7369 		.ascii	"unsigned int\000"
+ 532      676E6564 
+ 532      20696E74 
+ 532      00
+ 533              	.LASF23:
+ 534 0022 436F756E 		.ascii	"Counter_1_Wakeup\000"
+ 534      7465725F 
+ 534      315F5761 
+ 534      6B657570 
+ 534      00
+ 535              	.LASF1:
+ 536 0033 756E7369 		.ascii	"unsigned char\000"
+ 536      676E6564 
+ 536      20636861 
+ 536      7200
+ 537              	.LASF20:
+ 538 0041 436F756E 		.ascii	"Counter_1_SaveConfig\000"
+ 538      7465725F 
+ 538      315F5361 
+ 538      7665436F 
+ 538      6E666967 
+ 539              	.LASF22:
+ 540 0056 436F756E 		.ascii	"Counter_1_Sleep\000"
+ 540      7465725F 
+ 540      315F536C 
+ 540      65657000 
+ 541              	.LASF25:
+ 542 0066 47656E65 		.ascii	"Generated_Source\\PSoC5\\Counter_1_PM.c\000"
+ 542      72617465 
+ 542      645F536F 
+ 542      75726365 
+ 542      5C50536F 
+ 543              	.LASF9:
+ 544 008c 75696E74 		.ascii	"uint8\000"
+ 544      3800
+ 545              	.LASF5:
+ 546 0092 6C6F6E67 		.ascii	"long unsigned int\000"
+ 546      20756E73 
+ 546      69676E65 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccYG2di7.s 			page 14
+
+
+ 546      6420696E 
+ 546      7400
+ 547              	.LASF7:
+ 548 00a4 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 548      206C6F6E 
+ 548      6720756E 
+ 548      7369676E 
+ 548      65642069 
+ 549              	.LASF24:
+ 550 00bb 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 550      43313120 
+ 550      352E342E 
+ 550      31203230 
+ 550      31363036 
+ 551 00ee 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 551      20726576 
+ 551      6973696F 
+ 551      6E203233 
+ 551      37373135 
+ 552 0121 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 552      66756E63 
+ 552      74696F6E 
+ 552      2D736563 
+ 552      74696F6E 
+ 553              	.LASF18:
+ 554 0149 436F756E 		.ascii	"CounterControlRegister\000"
+ 554      74657243 
+ 554      6F6E7472 
+ 554      6F6C5265 
+ 554      67697374 
+ 555              	.LASF12:
+ 556 0160 63686172 		.ascii	"char\000"
+ 556      00
+ 557              	.LASF26:
+ 558 0165 433A5C55 		.ascii	"C:\\Users\\Albert\\Documents\\6115_fp\\IWP.cydsn\000"
+ 558      73657273 
+ 558      5C416C62 
+ 558      6572745C 
+ 558      446F6375 
+ 559              	.LASF4:
+ 560 0191 6C6F6E67 		.ascii	"long int\000"
+ 560      20696E74 
+ 560      00
+ 561              	.LASF16:
+ 562 019a 436F756E 		.ascii	"CounterEnableState\000"
+ 562      74657245 
+ 562      6E61626C 
+ 562      65537461 
+ 562      746500
+ 563              	.LASF21:
+ 564 01ad 436F756E 		.ascii	"Counter_1_RestoreConfig\000"
+ 564      7465725F 
+ 564      315F5265 
+ 564      73746F72 
+ 564      65436F6E 
+ 565              	.LASF11:
+ 566 01c5 646F7562 		.ascii	"double\000"
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccYG2di7.s 			page 15
+
+
+ 566      6C6500
+ 567              	.LASF19:
+ 568 01cc 436F756E 		.ascii	"Counter_1_backupStruct\000"
+ 568      7465725F 
+ 568      315F6261 
+ 568      636B7570 
+ 568      53747275 
+ 569              	.LASF3:
+ 570 01e3 73686F72 		.ascii	"short unsigned int\000"
+ 570      7420756E 
+ 570      7369676E 
+ 570      65642069 
+ 570      6E7400
+ 571              	.LASF0:
+ 572 01f6 7369676E 		.ascii	"signed char\000"
+ 572      65642063 
+ 572      68617200 
+ 573              	.LASF27:
+ 574 0202 436F756E 		.ascii	"Counter_1_backup\000"
+ 574      7465725F 
+ 574      315F6261 
+ 574      636B7570 
+ 574      00
+ 575              	.LASF14:
+ 576 0213 6C6F6E67 		.ascii	"long double\000"
+ 576      20646F75 
+ 576      626C6500 
+ 577              	.LASF2:
+ 578 021f 73686F72 		.ascii	"short int\000"
+ 578      7420696E 
+ 578      7400
+ 579              	.LASF13:
+ 580 0229 72656738 		.ascii	"reg8\000"
+ 580      00
+ 581              	.LASF17:
+ 582 022e 436F756E 		.ascii	"CounterUdb\000"
+ 582      74657255 
+ 582      646200
+ 583              	.LASF15:
+ 584 0239 73697A65 		.ascii	"sizetype\000"
+ 584      74797065 
+ 584      00
+ 585              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

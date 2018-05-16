@@ -1,0 +1,1853 @@
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"sensorStructs.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	__aeabi_dadd
+  20              		.global	__aeabi_ddiv
+  21              		.section	.text.initToZero,"ax",%progbits
+  22              		.align	2
+  23              		.global	initToZero
+  24              		.thumb
+  25              		.thumb_func
+  26              		.type	initToZero, %function
+  27              	initToZero:
+  28              	.LFB63:
+  29              		.file 1 "sensorStructs.c"
+   1:sensorStructs.c **** /* ========================================
+   2:sensorStructs.c ****  *
+   3:sensorStructs.c ****  * Copyright Albert Wu, 2018
+   4:sensorStructs.c ****  * All Rights Reserved
+   5:sensorStructs.c ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:sensorStructs.c ****  *
+   7:sensorStructs.c ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:sensorStructs.c ****  * WHICH IS THE PROPERTY OF your company.
+   9:sensorStructs.c ****  *
+  10:sensorStructs.c ****  * ========================================
+  11:sensorStructs.c **** */
+  12:sensorStructs.c **** #include <project.h>
+  13:sensorStructs.c **** #include <device.h>
+  14:sensorStructs.c **** #include "mathUtility.h"
+  15:sensorStructs.c **** #include "sensorStructs.h"
+  16:sensorStructs.c **** 
+  17:sensorStructs.c **** //helper functions
+  18:sensorStructs.c **** double getavg(MemoryVariable *x);
+  19:sensorStructs.c **** double getder(MemoryVariable *x);
+  20:sensorStructs.c **** void updateMemoryVariable(MemoryVariable *x);
+  21:sensorStructs.c **** 
+  22:sensorStructs.c **** void initToZero(MemoryVariable *x)
+  23:sensorStructs.c **** {
+  30              		.loc 1 23 0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 24
+  33              		@ frame_needed = 1, uses_anonymous_args = 0
+  34 0000 90B5     		push	{r4, r7, lr}
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 2
+
+
+  35              		.cfi_def_cfa_offset 12
+  36              		.cfi_offset 4, -12
+  37              		.cfi_offset 7, -8
+  38              		.cfi_offset 14, -4
+  39 0002 87B0     		sub	sp, sp, #28
+  40              		.cfi_def_cfa_offset 40
+  41 0004 00AF     		add	r7, sp, #0
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+  24:sensorStructs.c ****     //samples initial values
+  25:sensorStructs.c ****     double readings = 0;
+  44              		.loc 1 25 0
+  45 0008 4FF00003 		mov	r3, #0
+  46 000c 4FF00004 		mov	r4, #0
+  47 0010 C7E90434 		strd	r3, [r7, #16]
+  48              	.LBB2:
+  26:sensorStructs.c ****     for(int i = 0; i < INIT_SAMPLES; i++)
+  49              		.loc 1 26 0
+  50 0014 0023     		movs	r3, #0
+  51 0016 FB60     		str	r3, [r7, #12]
+  52 0018 14E0     		b	.L2
+  53              	.L3:
+  27:sensorStructs.c ****     {
+  28:sensorStructs.c ****         readings += x->valueGetter();
+  54              		.loc 1 28 0 discriminator 3
+  55 001a 7B68     		ldr	r3, [r7, #4]
+  56 001c 9B6C     		ldr	r3, [r3, #72]
+  57 001e 9847     		blx	r3
+  58 0020 0346     		mov	r3, r0
+  59 0022 0C46     		mov	r4, r1
+  60 0024 1A46     		mov	r2, r3
+  61 0026 2346     		mov	r3, r4
+  62 0028 D7E90401 		ldrd	r0, [r7, #16]
+  63 002c FFF7FEFF 		bl	__aeabi_dadd
+  64 0030 0346     		mov	r3, r0
+  65 0032 0C46     		mov	r4, r1
+  66 0034 C7E90434 		strd	r3, [r7, #16]
+  29:sensorStructs.c ****         CyDelay(INIT_SAMPLE_PERIOD);
+  67              		.loc 1 29 0 discriminator 3
+  68 0038 0120     		movs	r0, #1
+  69 003a FFF7FEFF 		bl	CyDelay
+  26:sensorStructs.c ****     for(int i = 0; i < INIT_SAMPLES; i++)
+  70              		.loc 1 26 0 discriminator 3
+  71 003e FB68     		ldr	r3, [r7, #12]
+  72 0040 0133     		adds	r3, r3, #1
+  73 0042 FB60     		str	r3, [r7, #12]
+  74              	.L2:
+  26:sensorStructs.c ****     for(int i = 0; i < INIT_SAMPLES; i++)
+  75              		.loc 1 26 0 is_stmt 0 discriminator 1
+  76 0044 FB68     		ldr	r3, [r7, #12]
+  77 0046 0E2B     		cmp	r3, #14
+  78 0048 E7DD     		ble	.L3
+  79              	.LBE2:
+  30:sensorStructs.c ****     }
+  31:sensorStructs.c ****     x->offset=readings/INIT_SAMPLES;
+  80              		.loc 1 31 0 is_stmt 1
+  81 004a 4FF00002 		mov	r2, #0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 3
+
+
+  82 004e 084B     		ldr	r3, .L4
+  83 0050 D7E90401 		ldrd	r0, [r7, #16]
+  84 0054 FFF7FEFF 		bl	__aeabi_ddiv
+  85 0058 0346     		mov	r3, r0
+  86 005a 0C46     		mov	r4, r1
+  87 005c 7A68     		ldr	r2, [r7, #4]
+  88 005e C2E91034 		strd	r3, [r2, #64]
+  32:sensorStructs.c ****     updateMemoryVariable(x);
+  89              		.loc 1 32 0
+  90 0062 7868     		ldr	r0, [r7, #4]
+  91 0064 FFF7FEFF 		bl	updateMemoryVariable
+  33:sensorStructs.c **** }
+  92              		.loc 1 33 0
+  93 0068 00BF     		nop
+  94 006a 1C37     		adds	r7, r7, #28
+  95              		.cfi_def_cfa_offset 12
+  96 006c BD46     		mov	sp, r7
+  97              		.cfi_def_cfa_register 13
+  98              		@ sp needed
+  99 006e 90BD     		pop	{r4, r7, pc}
+ 100              	.L5:
+ 101              		.align	2
+ 102              	.L4:
+ 103 0070 00002E40 		.word	1076756480
+ 104              		.cfi_endproc
+ 105              	.LFE63:
+ 106              		.size	initToZero, .-initToZero
+ 107              		.section	.text.getValue,"ax",%progbits
+ 108              		.align	2
+ 109              		.global	getValue
+ 110              		.thumb
+ 111              		.thumb_func
+ 112              		.type	getValue, %function
+ 113              	getValue:
+ 114              	.LFB64:
+  34:sensorStructs.c **** 
+  35:sensorStructs.c **** double getValue(MemoryVariable *x)
+  36:sensorStructs.c **** {
+ 115              		.loc 1 36 0
+ 116              		.cfi_startproc
+ 117              		@ args = 0, pretend = 0, frame = 8
+ 118              		@ frame_needed = 1, uses_anonymous_args = 0
+ 119 0000 90B5     		push	{r4, r7, lr}
+ 120              		.cfi_def_cfa_offset 12
+ 121              		.cfi_offset 4, -12
+ 122              		.cfi_offset 7, -8
+ 123              		.cfi_offset 14, -4
+ 124 0002 83B0     		sub	sp, sp, #12
+ 125              		.cfi_def_cfa_offset 24
+ 126 0004 00AF     		add	r7, sp, #0
+ 127              		.cfi_def_cfa_register 7
+ 128 0006 7860     		str	r0, [r7, #4]
+  37:sensorStructs.c ****     updateMemoryVariable(x);
+ 129              		.loc 1 37 0
+ 130 0008 7868     		ldr	r0, [r7, #4]
+ 131 000a FFF7FEFF 		bl	updateMemoryVariable
+  38:sensorStructs.c ****     return getavg(x);
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 4
+
+
+ 132              		.loc 1 38 0
+ 133 000e 7868     		ldr	r0, [r7, #4]
+ 134 0010 FFF7FEFF 		bl	getavg
+ 135 0014 0346     		mov	r3, r0
+ 136 0016 0C46     		mov	r4, r1
+  39:sensorStructs.c **** }
+ 137              		.loc 1 39 0
+ 138 0018 1846     		mov	r0, r3
+ 139 001a 2146     		mov	r1, r4
+ 140 001c 0C37     		adds	r7, r7, #12
+ 141              		.cfi_def_cfa_offset 12
+ 142 001e BD46     		mov	sp, r7
+ 143              		.cfi_def_cfa_register 13
+ 144              		@ sp needed
+ 145 0020 90BD     		pop	{r4, r7, pc}
+ 146              		.cfi_endproc
+ 147              	.LFE64:
+ 148              		.size	getValue, .-getValue
+ 149 0022 00BF     		.section	.text.getValueWithoutUpdate,"ax",%progbits
+ 150              		.align	2
+ 151              		.global	getValueWithoutUpdate
+ 152              		.thumb
+ 153              		.thumb_func
+ 154              		.type	getValueWithoutUpdate, %function
+ 155              	getValueWithoutUpdate:
+ 156              	.LFB65:
+  40:sensorStructs.c **** 
+  41:sensorStructs.c **** double getValueWithoutUpdate(MemoryVariable*x)
+  42:sensorStructs.c **** {
+ 157              		.loc 1 42 0
+ 158              		.cfi_startproc
+ 159              		@ args = 0, pretend = 0, frame = 8
+ 160              		@ frame_needed = 1, uses_anonymous_args = 0
+ 161 0000 90B5     		push	{r4, r7, lr}
+ 162              		.cfi_def_cfa_offset 12
+ 163              		.cfi_offset 4, -12
+ 164              		.cfi_offset 7, -8
+ 165              		.cfi_offset 14, -4
+ 166 0002 83B0     		sub	sp, sp, #12
+ 167              		.cfi_def_cfa_offset 24
+ 168 0004 00AF     		add	r7, sp, #0
+ 169              		.cfi_def_cfa_register 7
+ 170 0006 7860     		str	r0, [r7, #4]
+  43:sensorStructs.c ****     return getavg(x);
+ 171              		.loc 1 43 0
+ 172 0008 7868     		ldr	r0, [r7, #4]
+ 173 000a FFF7FEFF 		bl	getavg
+ 174 000e 0346     		mov	r3, r0
+ 175 0010 0C46     		mov	r4, r1
+  44:sensorStructs.c **** }
+ 176              		.loc 1 44 0
+ 177 0012 1846     		mov	r0, r3
+ 178 0014 2146     		mov	r1, r4
+ 179 0016 0C37     		adds	r7, r7, #12
+ 180              		.cfi_def_cfa_offset 12
+ 181 0018 BD46     		mov	sp, r7
+ 182              		.cfi_def_cfa_register 13
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 5
+
+
+ 183              		@ sp needed
+ 184 001a 90BD     		pop	{r4, r7, pc}
+ 185              		.cfi_endproc
+ 186              	.LFE65:
+ 187              		.size	getValueWithoutUpdate, .-getValueWithoutUpdate
+ 188              		.section	.text.getDerivative,"ax",%progbits
+ 189              		.align	2
+ 190              		.global	getDerivative
+ 191              		.thumb
+ 192              		.thumb_func
+ 193              		.type	getDerivative, %function
+ 194              	getDerivative:
+ 195              	.LFB66:
+  45:sensorStructs.c **** 
+  46:sensorStructs.c **** double getDerivative(MemoryVariable *x)
+  47:sensorStructs.c **** {
+ 196              		.loc 1 47 0
+ 197              		.cfi_startproc
+ 198              		@ args = 0, pretend = 0, frame = 8
+ 199              		@ frame_needed = 1, uses_anonymous_args = 0
+ 200 0000 90B5     		push	{r4, r7, lr}
+ 201              		.cfi_def_cfa_offset 12
+ 202              		.cfi_offset 4, -12
+ 203              		.cfi_offset 7, -8
+ 204              		.cfi_offset 14, -4
+ 205 0002 83B0     		sub	sp, sp, #12
+ 206              		.cfi_def_cfa_offset 24
+ 207 0004 00AF     		add	r7, sp, #0
+ 208              		.cfi_def_cfa_register 7
+ 209 0006 7860     		str	r0, [r7, #4]
+  48:sensorStructs.c ****     updateMemoryVariable(x);
+ 210              		.loc 1 48 0
+ 211 0008 7868     		ldr	r0, [r7, #4]
+ 212 000a FFF7FEFF 		bl	updateMemoryVariable
+  49:sensorStructs.c ****     return getder(x);
+ 213              		.loc 1 49 0
+ 214 000e 7868     		ldr	r0, [r7, #4]
+ 215 0010 FFF7FEFF 		bl	getder
+ 216 0014 0346     		mov	r3, r0
+ 217 0016 0C46     		mov	r4, r1
+  50:sensorStructs.c **** }
+ 218              		.loc 1 50 0
+ 219 0018 1846     		mov	r0, r3
+ 220 001a 2146     		mov	r1, r4
+ 221 001c 0C37     		adds	r7, r7, #12
+ 222              		.cfi_def_cfa_offset 12
+ 223 001e BD46     		mov	sp, r7
+ 224              		.cfi_def_cfa_register 13
+ 225              		@ sp needed
+ 226 0020 90BD     		pop	{r4, r7, pc}
+ 227              		.cfi_endproc
+ 228              	.LFE66:
+ 229              		.size	getDerivative, .-getDerivative
+ 230 0022 00BF     		.section	.text.getDerivativeWithoutUpdate,"ax",%progbits
+ 231              		.align	2
+ 232              		.global	getDerivativeWithoutUpdate
+ 233              		.thumb
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 6
+
+
+ 234              		.thumb_func
+ 235              		.type	getDerivativeWithoutUpdate, %function
+ 236              	getDerivativeWithoutUpdate:
+ 237              	.LFB67:
+  51:sensorStructs.c **** double getDerivativeWithoutUpdate(MemoryVariable *x)
+  52:sensorStructs.c **** {
+ 238              		.loc 1 52 0
+ 239              		.cfi_startproc
+ 240              		@ args = 0, pretend = 0, frame = 8
+ 241              		@ frame_needed = 1, uses_anonymous_args = 0
+ 242 0000 90B5     		push	{r4, r7, lr}
+ 243              		.cfi_def_cfa_offset 12
+ 244              		.cfi_offset 4, -12
+ 245              		.cfi_offset 7, -8
+ 246              		.cfi_offset 14, -4
+ 247 0002 83B0     		sub	sp, sp, #12
+ 248              		.cfi_def_cfa_offset 24
+ 249 0004 00AF     		add	r7, sp, #0
+ 250              		.cfi_def_cfa_register 7
+ 251 0006 7860     		str	r0, [r7, #4]
+  53:sensorStructs.c ****     return getder(x);
+ 252              		.loc 1 53 0
+ 253 0008 7868     		ldr	r0, [r7, #4]
+ 254 000a FFF7FEFF 		bl	getder
+ 255 000e 0346     		mov	r3, r0
+ 256 0010 0C46     		mov	r4, r1
+  54:sensorStructs.c **** }
+ 257              		.loc 1 54 0
+ 258 0012 1846     		mov	r0, r3
+ 259 0014 2146     		mov	r1, r4
+ 260 0016 0C37     		adds	r7, r7, #12
+ 261              		.cfi_def_cfa_offset 12
+ 262 0018 BD46     		mov	sp, r7
+ 263              		.cfi_def_cfa_register 13
+ 264              		@ sp needed
+ 265 001a 90BD     		pop	{r4, r7, pc}
+ 266              		.cfi_endproc
+ 267              	.LFE67:
+ 268              		.size	getDerivativeWithoutUpdate, .-getDerivativeWithoutUpdate
+ 269              		.section	.text.getTime,"ax",%progbits
+ 270              		.align	2
+ 271              		.global	getTime
+ 272              		.thumb
+ 273              		.thumb_func
+ 274              		.type	getTime, %function
+ 275              	getTime:
+ 276              	.LFB68:
+  55:sensorStructs.c **** 
+  56:sensorStructs.c **** double getTime(MemoryVariable *x)
+  57:sensorStructs.c **** {
+ 277              		.loc 1 57 0
+ 278              		.cfi_startproc
+ 279              		@ args = 0, pretend = 0, frame = 24
+ 280              		@ frame_needed = 1, uses_anonymous_args = 0
+ 281 0000 90B5     		push	{r4, r7, lr}
+ 282              		.cfi_def_cfa_offset 12
+ 283              		.cfi_offset 4, -12
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 7
+
+
+ 284              		.cfi_offset 7, -8
+ 285              		.cfi_offset 14, -4
+ 286 0002 87B0     		sub	sp, sp, #28
+ 287              		.cfi_def_cfa_offset 40
+ 288 0004 00AF     		add	r7, sp, #0
+ 289              		.cfi_def_cfa_register 7
+ 290 0006 7860     		str	r0, [r7, #4]
+  58:sensorStructs.c ****     double sum = 0;
+ 291              		.loc 1 58 0
+ 292 0008 4FF00003 		mov	r3, #0
+ 293 000c 4FF00004 		mov	r4, #0
+ 294 0010 C7E90434 		strd	r3, [r7, #16]
+ 295              	.LBB3:
+  59:sensorStructs.c ****     for(int i = 0; i < MEMORY_SIZE; i++)
+ 296              		.loc 1 59 0
+ 297 0014 0023     		movs	r3, #0
+ 298 0016 FB60     		str	r3, [r7, #12]
+ 299 0018 12E0     		b	.L15
+ 300              	.L16:
+  60:sensorStructs.c ****     {
+  61:sensorStructs.c ****         sum+=x->timeStamps[i];
+ 301              		.loc 1 61 0 discriminator 3
+ 302 001a 7A68     		ldr	r2, [r7, #4]
+ 303 001c FB68     		ldr	r3, [r7, #12]
+ 304 001e 0433     		adds	r3, r3, #4
+ 305 0020 DB00     		lsls	r3, r3, #3
+ 306 0022 1344     		add	r3, r3, r2
+ 307 0024 18CB     		ldmia	r3, {r3-r4}
+ 308 0026 1A46     		mov	r2, r3
+ 309 0028 2346     		mov	r3, r4
+ 310 002a D7E90401 		ldrd	r0, [r7, #16]
+ 311 002e FFF7FEFF 		bl	__aeabi_dadd
+ 312 0032 0346     		mov	r3, r0
+ 313 0034 0C46     		mov	r4, r1
+ 314 0036 C7E90434 		strd	r3, [r7, #16]
+  59:sensorStructs.c ****     for(int i = 0; i < MEMORY_SIZE; i++)
+ 315              		.loc 1 59 0 discriminator 3
+ 316 003a FB68     		ldr	r3, [r7, #12]
+ 317 003c 0133     		adds	r3, r3, #1
+ 318 003e FB60     		str	r3, [r7, #12]
+ 319              	.L15:
+  59:sensorStructs.c ****     for(int i = 0; i < MEMORY_SIZE; i++)
+ 320              		.loc 1 59 0 is_stmt 0 discriminator 1
+ 321 0040 FB68     		ldr	r3, [r7, #12]
+ 322 0042 032B     		cmp	r3, #3
+ 323 0044 E9DD     		ble	.L16
+ 324              	.LBE3:
+  62:sensorStructs.c ****     }
+  63:sensorStructs.c ****     return sum/MEMORY_SIZE/COUNTER_FREQUENCY;
+ 325              		.loc 1 63 0 is_stmt 1
+ 326 0046 4FF00002 		mov	r2, #0
+ 327 004a 0D4B     		ldr	r3, .L18+8
+ 328 004c D7E90401 		ldrd	r0, [r7, #16]
+ 329 0050 FFF7FEFF 		bl	__aeabi_ddiv
+ 330 0054 0346     		mov	r3, r0
+ 331 0056 0C46     		mov	r4, r1
+ 332 0058 1846     		mov	r0, r3
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 8
+
+
+ 333 005a 2146     		mov	r1, r4
+ 334 005c 06A3     		adr	r3, .L18
+ 335 005e D3E90023 		ldrd	r2, [r3]
+ 336 0062 FFF7FEFF 		bl	__aeabi_ddiv
+ 337 0066 0346     		mov	r3, r0
+ 338 0068 0C46     		mov	r4, r1
+  64:sensorStructs.c **** }
+ 339              		.loc 1 64 0
+ 340 006a 1846     		mov	r0, r3
+ 341 006c 2146     		mov	r1, r4
+ 342 006e 1C37     		adds	r7, r7, #28
+ 343              		.cfi_def_cfa_offset 12
+ 344 0070 BD46     		mov	sp, r7
+ 345              		.cfi_def_cfa_register 13
+ 346              		@ sp needed
+ 347 0072 90BD     		pop	{r4, r7, pc}
+ 348              	.L19:
+ 349 0074 AFF30080 		.align	3
+ 350              	.L18:
+ 351 0078 00000000 		.word	0
+ 352 007c 006AF840 		.word	1090021888
+ 353 0080 00001040 		.word	1074790400
+ 354              		.cfi_endproc
+ 355              	.LFE68:
+ 356              		.size	getTime, .-getTime
+ 357              		.global	__aeabi_dsub
+ 358              		.global	__aeabi_ui2d
+ 359              		.section	.text.updateMemoryVariable,"ax",%progbits
+ 360              		.align	2
+ 361              		.global	updateMemoryVariable
+ 362              		.thumb
+ 363              		.thumb_func
+ 364              		.type	updateMemoryVariable, %function
+ 365              	updateMemoryVariable:
+ 366              	.LFB69:
+  65:sensorStructs.c **** //Helpers implementation
+  66:sensorStructs.c **** void updateMemoryVariable(MemoryVariable *x)
+  67:sensorStructs.c **** {
+ 367              		.loc 1 67 0
+ 368              		.cfi_startproc
+ 369              		@ args = 0, pretend = 0, frame = 16
+ 370              		@ frame_needed = 1, uses_anonymous_args = 0
+ 371 0000 90B5     		push	{r4, r7, lr}
+ 372              		.cfi_def_cfa_offset 12
+ 373              		.cfi_offset 4, -12
+ 374              		.cfi_offset 7, -8
+ 375              		.cfi_offset 14, -4
+ 376 0002 85B0     		sub	sp, sp, #20
+ 377              		.cfi_def_cfa_offset 32
+ 378 0004 00AF     		add	r7, sp, #0
+ 379              		.cfi_def_cfa_register 7
+ 380 0006 7860     		str	r0, [r7, #4]
+ 381              	.LBB4:
+  68:sensorStructs.c ****     for(int i = 0; i < MEMORY_SIZE; i++)
+ 382              		.loc 1 68 0
+ 383 0008 0023     		movs	r3, #0
+ 384 000a FB60     		str	r3, [r7, #12]
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 9
+
+
+ 385 000c 29E0     		b	.L21
+ 386              	.L22:
+  69:sensorStructs.c ****     {
+  70:sensorStructs.c ****         x->values[i] = x->valueGetter()-x->offset;
+ 387              		.loc 1 70 0 discriminator 3
+ 388 000e 7B68     		ldr	r3, [r7, #4]
+ 389 0010 9B6C     		ldr	r3, [r3, #72]
+ 390 0012 9847     		blx	r3
+ 391 0014 7B68     		ldr	r3, [r7, #4]
+ 392 0016 03F14004 		add	r4, r3, #64
+ 393 001a D4E90034 		ldrd	r3, [r4]
+ 394 001e 1A46     		mov	r2, r3
+ 395 0020 2346     		mov	r3, r4
+ 396 0022 FFF7FEFF 		bl	__aeabi_dsub
+ 397 0026 0346     		mov	r3, r0
+ 398 0028 0C46     		mov	r4, r1
+ 399 002a 7968     		ldr	r1, [r7, #4]
+ 400 002c FA68     		ldr	r2, [r7, #12]
+ 401 002e D200     		lsls	r2, r2, #3
+ 402 0030 0A44     		add	r2, r2, r1
+ 403 0032 C2E90034 		strd	r3, [r2]
+  71:sensorStructs.c ****         x->timeStamps[i] = (Counter_1_ReadCounter()*1.);
+ 404              		.loc 1 71 0 discriminator 3
+ 405 0036 FFF7FEFF 		bl	Counter_1_ReadCounter
+ 406 003a 0346     		mov	r3, r0
+ 407 003c 1846     		mov	r0, r3
+ 408 003e FFF7FEFF 		bl	__aeabi_ui2d
+ 409 0042 0346     		mov	r3, r0
+ 410 0044 0C46     		mov	r4, r1
+ 411 0046 7968     		ldr	r1, [r7, #4]
+ 412 0048 FA68     		ldr	r2, [r7, #12]
+ 413 004a 0432     		adds	r2, r2, #4
+ 414 004c D200     		lsls	r2, r2, #3
+ 415 004e 0A44     		add	r2, r2, r1
+ 416 0050 C2E90034 		strd	r3, [r2]
+  72:sensorStructs.c ****         CyDelayUs(MIN_SAMPLE_PERIOD);
+ 417              		.loc 1 72 0 discriminator 3
+ 418 0054 4FF4C870 		mov	r0, #400
+ 419 0058 FFF7FEFF 		bl	CyDelayUs
+  68:sensorStructs.c ****     {
+ 420              		.loc 1 68 0 discriminator 3
+ 421 005c FB68     		ldr	r3, [r7, #12]
+ 422 005e 0133     		adds	r3, r3, #1
+ 423 0060 FB60     		str	r3, [r7, #12]
+ 424              	.L21:
+  68:sensorStructs.c ****     {
+ 425              		.loc 1 68 0 is_stmt 0 discriminator 1
+ 426 0062 FB68     		ldr	r3, [r7, #12]
+ 427 0064 032B     		cmp	r3, #3
+ 428 0066 D2DD     		ble	.L22
+ 429              	.LBE4:
+  73:sensorStructs.c ****     }
+  74:sensorStructs.c **** }
+ 430              		.loc 1 74 0 is_stmt 1
+ 431 0068 00BF     		nop
+ 432 006a 1437     		adds	r7, r7, #20
+ 433              		.cfi_def_cfa_offset 12
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 10
+
+
+ 434 006c BD46     		mov	sp, r7
+ 435              		.cfi_def_cfa_register 13
+ 436              		@ sp needed
+ 437 006e 90BD     		pop	{r4, r7, pc}
+ 438              		.cfi_endproc
+ 439              	.LFE69:
+ 440              		.size	updateMemoryVariable, .-updateMemoryVariable
+ 441              		.section	.text.getavg,"ax",%progbits
+ 442              		.align	2
+ 443              		.global	getavg
+ 444              		.thumb
+ 445              		.thumb_func
+ 446              		.type	getavg, %function
+ 447              	getavg:
+ 448              	.LFB70:
+  75:sensorStructs.c **** 
+  76:sensorStructs.c **** double getavg(MemoryVariable *x)
+  77:sensorStructs.c **** {
+ 449              		.loc 1 77 0
+ 450              		.cfi_startproc
+ 451              		@ args = 0, pretend = 0, frame = 24
+ 452              		@ frame_needed = 1, uses_anonymous_args = 0
+ 453 0000 90B5     		push	{r4, r7, lr}
+ 454              		.cfi_def_cfa_offset 12
+ 455              		.cfi_offset 4, -12
+ 456              		.cfi_offset 7, -8
+ 457              		.cfi_offset 14, -4
+ 458 0002 87B0     		sub	sp, sp, #28
+ 459              		.cfi_def_cfa_offset 40
+ 460 0004 00AF     		add	r7, sp, #0
+ 461              		.cfi_def_cfa_register 7
+ 462 0006 7860     		str	r0, [r7, #4]
+  78:sensorStructs.c ****     //helper function. calculates the average
+  79:sensorStructs.c ****     double sum = 0;
+ 463              		.loc 1 79 0
+ 464 0008 4FF00003 		mov	r3, #0
+ 465 000c 4FF00004 		mov	r4, #0
+ 466 0010 C7E90434 		strd	r3, [r7, #16]
+ 467              	.LBB5:
+  80:sensorStructs.c ****     for(int i = 0; i < MEMORY_SIZE; i++)
+ 468              		.loc 1 80 0
+ 469 0014 0023     		movs	r3, #0
+ 470 0016 FB60     		str	r3, [r7, #12]
+ 471 0018 11E0     		b	.L24
+ 472              	.L25:
+  81:sensorStructs.c ****     {
+  82:sensorStructs.c ****         sum+=x->values[i];
+ 473              		.loc 1 82 0 discriminator 3
+ 474 001a 7A68     		ldr	r2, [r7, #4]
+ 475 001c FB68     		ldr	r3, [r7, #12]
+ 476 001e DB00     		lsls	r3, r3, #3
+ 477 0020 1344     		add	r3, r3, r2
+ 478 0022 18CB     		ldmia	r3, {r3-r4}
+ 479 0024 1A46     		mov	r2, r3
+ 480 0026 2346     		mov	r3, r4
+ 481 0028 D7E90401 		ldrd	r0, [r7, #16]
+ 482 002c FFF7FEFF 		bl	__aeabi_dadd
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 11
+
+
+ 483 0030 0346     		mov	r3, r0
+ 484 0032 0C46     		mov	r4, r1
+ 485 0034 C7E90434 		strd	r3, [r7, #16]
+  80:sensorStructs.c ****     for(int i = 0; i < MEMORY_SIZE; i++)
+ 486              		.loc 1 80 0 discriminator 3
+ 487 0038 FB68     		ldr	r3, [r7, #12]
+ 488 003a 0133     		adds	r3, r3, #1
+ 489 003c FB60     		str	r3, [r7, #12]
+ 490              	.L24:
+  80:sensorStructs.c ****     for(int i = 0; i < MEMORY_SIZE; i++)
+ 491              		.loc 1 80 0 is_stmt 0 discriminator 1
+ 492 003e FB68     		ldr	r3, [r7, #12]
+ 493 0040 032B     		cmp	r3, #3
+ 494 0042 EADD     		ble	.L25
+ 495              	.LBE5:
+  83:sensorStructs.c ****     }
+  84:sensorStructs.c ****     return sum/MEMORY_SIZE;
+ 496              		.loc 1 84 0 is_stmt 1
+ 497 0044 4FF00002 		mov	r2, #0
+ 498 0048 054B     		ldr	r3, .L27
+ 499 004a D7E90401 		ldrd	r0, [r7, #16]
+ 500 004e FFF7FEFF 		bl	__aeabi_ddiv
+ 501 0052 0346     		mov	r3, r0
+ 502 0054 0C46     		mov	r4, r1
+  85:sensorStructs.c **** }
+ 503              		.loc 1 85 0
+ 504 0056 1846     		mov	r0, r3
+ 505 0058 2146     		mov	r1, r4
+ 506 005a 1C37     		adds	r7, r7, #28
+ 507              		.cfi_def_cfa_offset 12
+ 508 005c BD46     		mov	sp, r7
+ 509              		.cfi_def_cfa_register 13
+ 510              		@ sp needed
+ 511 005e 90BD     		pop	{r4, r7, pc}
+ 512              	.L28:
+ 513              		.align	2
+ 514              	.L27:
+ 515 0060 00001040 		.word	1074790400
+ 516              		.cfi_endproc
+ 517              	.LFE70:
+ 518              		.size	getavg, .-getavg
+ 519              		.global	__aeabi_dcmpgt
+ 520              		.global	__aeabi_dcmplt
+ 521              		.global	__aeabi_dmul
+ 522              		.global	__aeabi_i2d
+ 523              		.section	.text.getder,"ax",%progbits
+ 524              		.align	2
+ 525              		.global	getder
+ 526              		.thumb
+ 527              		.thumb_func
+ 528              		.type	getder, %function
+ 529              	getder:
+ 530              	.LFB71:
+  86:sensorStructs.c **** double getder(MemoryVariable *x)
+  87:sensorStructs.c **** {
+ 531              		.loc 1 87 0
+ 532              		.cfi_startproc
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 12
+
+
+ 533              		@ args = 0, pretend = 0, frame = 40
+ 534              		@ frame_needed = 1, uses_anonymous_args = 0
+ 535 0000 2DE9B043 		push	{r4, r5, r7, r8, r9, lr}
+ 536              		.cfi_def_cfa_offset 24
+ 537              		.cfi_offset 4, -24
+ 538              		.cfi_offset 5, -20
+ 539              		.cfi_offset 7, -16
+ 540              		.cfi_offset 8, -12
+ 541              		.cfi_offset 9, -8
+ 542              		.cfi_offset 14, -4
+ 543 0004 8AB0     		sub	sp, sp, #40
+ 544              		.cfi_def_cfa_offset 64
+ 545 0006 00AF     		add	r7, sp, #0
+ 546              		.cfi_def_cfa_register 7
+ 547 0008 7860     		str	r0, [r7, #4]
+  88:sensorStructs.c ****     double vAvg = 0;
+ 548              		.loc 1 88 0
+ 549 000a 4FF00002 		mov	r2, #0
+ 550 000e 4FF00003 		mov	r3, #0
+ 551 0012 C7E90823 		strd	r2, [r7, #32]
+  89:sensorStructs.c ****     int added = 0;
+ 552              		.loc 1 89 0
+ 553 0016 0023     		movs	r3, #0
+ 554 0018 FB61     		str	r3, [r7, #28]
+ 555              	.LBB6:
+  90:sensorStructs.c ****     for(int i = 0; i < MEMORY_SIZE-1; i++)
+ 556              		.loc 1 90 0
+ 557 001a 0023     		movs	r3, #0
+ 558 001c BB61     		str	r3, [r7, #24]
+ 559 001e 83E0     		b	.L30
+ 560              	.L34:
+ 561              	.LBB7:
+  91:sensorStructs.c ****     {
+  92:sensorStructs.c ****         double deltaT = x->timeStamps[i+1]-x->timeStamps[i];
+ 562              		.loc 1 92 0
+ 563 0020 BB69     		ldr	r3, [r7, #24]
+ 564 0022 0133     		adds	r3, r3, #1
+ 565 0024 7A68     		ldr	r2, [r7, #4]
+ 566 0026 0433     		adds	r3, r3, #4
+ 567 0028 DB00     		lsls	r3, r3, #3
+ 568 002a 1344     		add	r3, r3, r2
+ 569 002c D3E90001 		ldrd	r0, [r3]
+ 570 0030 7A68     		ldr	r2, [r7, #4]
+ 571 0032 BB69     		ldr	r3, [r7, #24]
+ 572 0034 0433     		adds	r3, r3, #4
+ 573 0036 DB00     		lsls	r3, r3, #3
+ 574 0038 1344     		add	r3, r3, r2
+ 575 003a D3E90023 		ldrd	r2, [r3]
+ 576 003e FFF7FEFF 		bl	__aeabi_dsub
+ 577 0042 0246     		mov	r2, r0
+ 578 0044 0B46     		mov	r3, r1
+ 579 0046 C7E90423 		strd	r2, [r7, #16]
+  93:sensorStructs.c ****         double deltaX = x->values[i+1]-x->values[i];
+ 580              		.loc 1 93 0
+ 581 004a BB69     		ldr	r3, [r7, #24]
+ 582 004c 0133     		adds	r3, r3, #1
+ 583 004e 7A68     		ldr	r2, [r7, #4]
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 13
+
+
+ 584 0050 DB00     		lsls	r3, r3, #3
+ 585 0052 1344     		add	r3, r3, r2
+ 586 0054 D3E90001 		ldrd	r0, [r3]
+ 587 0058 7A68     		ldr	r2, [r7, #4]
+ 588 005a BB69     		ldr	r3, [r7, #24]
+ 589 005c DB00     		lsls	r3, r3, #3
+ 590 005e 1344     		add	r3, r3, r2
+ 591 0060 D3E90023 		ldrd	r2, [r3]
+ 592 0064 FFF7FEFF 		bl	__aeabi_dsub
+ 593 0068 0246     		mov	r2, r0
+ 594 006a 0B46     		mov	r3, r1
+ 595 006c C7E90223 		strd	r2, [r7, #8]
+  94:sensorStructs.c ****         if (deltaT>0 && fabs(deltaX)<500)  //To deal with counter wraparounds
+ 596              		.loc 1 94 0
+ 597 0070 4FF00002 		mov	r2, #0
+ 598 0074 4FF00003 		mov	r3, #0
+ 599 0078 D7E90401 		ldrd	r0, [r7, #16]
+ 600 007c FFF7FEFF 		bl	__aeabi_dcmpgt
+ 601 0080 0346     		mov	r3, r0
+ 602 0082 002B     		cmp	r3, #0
+ 603 0084 4DD0     		beq	.L31
+ 604              		.loc 1 94 0 is_stmt 0 discriminator 1
+ 605 0086 BC68     		ldr	r4, [r7, #8]
+ 606 0088 FB68     		ldr	r3, [r7, #12]
+ 607 008a 23F00045 		bic	r5, r3, #-2147483648
+ 608 008e 4FF00002 		mov	r2, #0
+ 609 0092 354B     		ldr	r3, .L38+8
+ 610 0094 2046     		mov	r0, r4
+ 611 0096 2946     		mov	r1, r5
+ 612 0098 FFF7FEFF 		bl	__aeabi_dcmplt
+ 613 009c 0346     		mov	r3, r0
+ 614 009e 002B     		cmp	r3, #0
+ 615 00a0 3FD0     		beq	.L31
+  95:sensorStructs.c ****         {
+  96:sensorStructs.c ****             vAvg+=(x->values[i+1]-x->values[i])/(x->timeStamps[i+1]-x->timeStamps[i])*COUNTER_FREQU
+ 616              		.loc 1 96 0 is_stmt 1
+ 617 00a2 BB69     		ldr	r3, [r7, #24]
+ 618 00a4 0133     		adds	r3, r3, #1
+ 619 00a6 7A68     		ldr	r2, [r7, #4]
+ 620 00a8 DB00     		lsls	r3, r3, #3
+ 621 00aa 1344     		add	r3, r3, r2
+ 622 00ac D3E90001 		ldrd	r0, [r3]
+ 623 00b0 7A68     		ldr	r2, [r7, #4]
+ 624 00b2 BB69     		ldr	r3, [r7, #24]
+ 625 00b4 DB00     		lsls	r3, r3, #3
+ 626 00b6 1344     		add	r3, r3, r2
+ 627 00b8 D3E90023 		ldrd	r2, [r3]
+ 628 00bc FFF7FEFF 		bl	__aeabi_dsub
+ 629 00c0 0246     		mov	r2, r0
+ 630 00c2 0B46     		mov	r3, r1
+ 631 00c4 9046     		mov	r8, r2
+ 632 00c6 9946     		mov	r9, r3
+ 633 00c8 BB69     		ldr	r3, [r7, #24]
+ 634 00ca 0133     		adds	r3, r3, #1
+ 635 00cc 7A68     		ldr	r2, [r7, #4]
+ 636 00ce 0433     		adds	r3, r3, #4
+ 637 00d0 DB00     		lsls	r3, r3, #3
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 14
+
+
+ 638 00d2 1344     		add	r3, r3, r2
+ 639 00d4 D3E90001 		ldrd	r0, [r3]
+ 640 00d8 7A68     		ldr	r2, [r7, #4]
+ 641 00da BB69     		ldr	r3, [r7, #24]
+ 642 00dc 0433     		adds	r3, r3, #4
+ 643 00de DB00     		lsls	r3, r3, #3
+ 644 00e0 1344     		add	r3, r3, r2
+ 645 00e2 D3E90023 		ldrd	r2, [r3]
+ 646 00e6 FFF7FEFF 		bl	__aeabi_dsub
+ 647 00ea 0246     		mov	r2, r0
+ 648 00ec 0B46     		mov	r3, r1
+ 649 00ee 4046     		mov	r0, r8
+ 650 00f0 4946     		mov	r1, r9
+ 651 00f2 FFF7FEFF 		bl	__aeabi_ddiv
+ 652 00f6 0246     		mov	r2, r0
+ 653 00f8 0B46     		mov	r3, r1
+ 654 00fa 1046     		mov	r0, r2
+ 655 00fc 1946     		mov	r1, r3
+ 656 00fe 18A3     		adr	r3, .L38
+ 657 0100 D3E90023 		ldrd	r2, [r3]
+ 658 0104 FFF7FEFF 		bl	__aeabi_dmul
+ 659 0108 0246     		mov	r2, r0
+ 660 010a 0B46     		mov	r3, r1
+ 661 010c D7E90801 		ldrd	r0, [r7, #32]
+ 662 0110 FFF7FEFF 		bl	__aeabi_dadd
+ 663 0114 0246     		mov	r2, r0
+ 664 0116 0B46     		mov	r3, r1
+ 665 0118 C7E90823 		strd	r2, [r7, #32]
+  97:sensorStructs.c ****             added++;
+ 666              		.loc 1 97 0
+ 667 011c FB69     		ldr	r3, [r7, #28]
+ 668 011e 0133     		adds	r3, r3, #1
+ 669 0120 FB61     		str	r3, [r7, #28]
+ 670              	.L31:
+ 671              	.LBE7:
+  90:sensorStructs.c ****     {
+ 672              		.loc 1 90 0 discriminator 2
+ 673 0122 BB69     		ldr	r3, [r7, #24]
+ 674 0124 0133     		adds	r3, r3, #1
+ 675 0126 BB61     		str	r3, [r7, #24]
+ 676              	.L30:
+  90:sensorStructs.c ****     {
+ 677              		.loc 1 90 0 is_stmt 0 discriminator 1
+ 678 0128 BB69     		ldr	r3, [r7, #24]
+ 679 012a 022B     		cmp	r3, #2
+ 680 012c 7FF778AF 		ble	.L34
+ 681              	.LBE6:
+  98:sensorStructs.c ****         }
+  99:sensorStructs.c ****     }
+ 100:sensorStructs.c ****     vAvg/=(added);
+ 682              		.loc 1 100 0 is_stmt 1
+ 683 0130 F869     		ldr	r0, [r7, #28]
+ 684 0132 FFF7FEFF 		bl	__aeabi_i2d
+ 685 0136 0346     		mov	r3, r0
+ 686 0138 0C46     		mov	r4, r1
+ 687 013a 1A46     		mov	r2, r3
+ 688 013c 2346     		mov	r3, r4
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 15
+
+
+ 689 013e D7E90801 		ldrd	r0, [r7, #32]
+ 690 0142 FFF7FEFF 		bl	__aeabi_ddiv
+ 691 0146 0346     		mov	r3, r0
+ 692 0148 0C46     		mov	r4, r1
+ 693 014a C7E90834 		strd	r3, [r7, #32]
+ 101:sensorStructs.c **** //    double vAvg = 0;
+ 102:sensorStructs.c **** //    vAvg=(x->values[MEMORY_SIZE-1]-x->values[0])/(x->timeStamps[MEMORY_SIZE-1]-x->timeStamps[0])*
+ 103:sensorStructs.c ****     return vAvg;
+ 694              		.loc 1 103 0
+ 695 014e D7E90834 		ldrd	r3, [r7, #32]
+ 104:sensorStructs.c **** }
+ 696              		.loc 1 104 0
+ 697 0152 1846     		mov	r0, r3
+ 698 0154 2146     		mov	r1, r4
+ 699 0156 2837     		adds	r7, r7, #40
+ 700              		.cfi_def_cfa_offset 24
+ 701 0158 BD46     		mov	sp, r7
+ 702              		.cfi_def_cfa_register 13
+ 703              		@ sp needed
+ 704 015a BDE8B083 		pop	{r4, r5, r7, r8, r9, pc}
+ 705              	.L39:
+ 706 015e 00BF     		.align	3
+ 707              	.L38:
+ 708 0160 00000000 		.word	0
+ 709 0164 006AF840 		.word	1090021888
+ 710 0168 00407F40 		.word	1082081280
+ 711              		.cfi_endproc
+ 712              	.LFE71:
+ 713              		.size	getder, .-getder
+ 714              		.text
+ 715              	.Letext0:
+ 716              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 717              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 718              		.file 4 "sensorStructs.h"
+ 719              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 720              		.section	.debug_info,"",%progbits
+ 721              	.Ldebug_info0:
+ 722 0000 49030000 		.4byte	0x349
+ 723 0004 0400     		.2byte	0x4
+ 724 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 725 000a 04       		.byte	0x4
+ 726 000b 01       		.uleb128 0x1
+ 727 000c 08000000 		.4byte	.LASF35
+ 728 0010 0C       		.byte	0xc
+ 729 0011 95010000 		.4byte	.LASF36
+ 730 0015 B8010000 		.4byte	.LASF37
+ 731 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 732 001d 00000000 		.4byte	0
+ 733 0021 00000000 		.4byte	.Ldebug_line0
+ 734 0025 02       		.uleb128 0x2
+ 735 0026 01       		.byte	0x1
+ 736 0027 06       		.byte	0x6
+ 737 0028 42020000 		.4byte	.LASF0
+ 738 002c 02       		.uleb128 0x2
+ 739 002d 01       		.byte	0x1
+ 740 002e 08       		.byte	0x8
+ 741 002f E8000000 		.4byte	.LASF1
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 16
+
+
+ 742 0033 02       		.uleb128 0x2
+ 743 0034 02       		.byte	0x2
+ 744 0035 05       		.byte	0x5
+ 745 0036 0E020000 		.4byte	.LASF2
+ 746 003a 02       		.uleb128 0x2
+ 747 003b 02       		.byte	0x2
+ 748 003c 07       		.byte	0x7
+ 749 003d 08010000 		.4byte	.LASF3
+ 750 0041 03       		.uleb128 0x3
+ 751 0042 96000000 		.4byte	.LASF9
+ 752 0046 02       		.byte	0x2
+ 753 0047 3F       		.byte	0x3f
+ 754 0048 4C000000 		.4byte	0x4c
+ 755 004c 02       		.uleb128 0x2
+ 756 004d 04       		.byte	0x4
+ 757 004e 05       		.byte	0x5
+ 758 004f 1F020000 		.4byte	.LASF4
+ 759 0053 02       		.uleb128 0x2
+ 760 0054 04       		.byte	0x4
+ 761 0055 07       		.byte	0x7
+ 762 0056 F6000000 		.4byte	.LASF5
+ 763 005a 02       		.uleb128 0x2
+ 764 005b 08       		.byte	0x8
+ 765 005c 05       		.byte	0x5
+ 766 005d ED010000 		.4byte	.LASF6
+ 767 0061 02       		.uleb128 0x2
+ 768 0062 08       		.byte	0x8
+ 769 0063 07       		.byte	0x7
+ 770 0064 66010000 		.4byte	.LASF7
+ 771 0068 04       		.uleb128 0x4
+ 772 0069 04       		.byte	0x4
+ 773 006a 05       		.byte	0x5
+ 774 006b 696E7400 		.ascii	"int\000"
+ 775 006f 02       		.uleb128 0x2
+ 776 0070 04       		.byte	0x4
+ 777 0071 07       		.byte	0x7
+ 778 0072 59010000 		.4byte	.LASF8
+ 779 0076 03       		.uleb128 0x3
+ 780 0077 B0010000 		.4byte	.LASF10
+ 781 007b 03       		.byte	0x3
+ 782 007c 2C       		.byte	0x2c
+ 783 007d 41000000 		.4byte	0x41
+ 784 0081 02       		.uleb128 0x2
+ 785 0082 08       		.byte	0x8
+ 786 0083 04       		.byte	0x4
+ 787 0084 36010000 		.4byte	.LASF11
+ 788 0088 02       		.uleb128 0x2
+ 789 0089 01       		.byte	0x1
+ 790 008a 08       		.byte	0x8
+ 791 008b FB010000 		.4byte	.LASF12
+ 792 008f 02       		.uleb128 0x2
+ 793 0090 08       		.byte	0x8
+ 794 0091 04       		.byte	0x4
+ 795 0092 36020000 		.4byte	.LASF13
+ 796 0096 02       		.uleb128 0x2
+ 797 0097 04       		.byte	0x4
+ 798 0098 07       		.byte	0x7
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 17
+
+
+ 799 0099 E4010000 		.4byte	.LASF14
+ 800 009d 02       		.uleb128 0x2
+ 801 009e 04       		.byte	0x4
+ 802 009f 04       		.byte	0x4
+ 803 00a0 C0000000 		.4byte	.LASF15
+ 804 00a4 05       		.uleb128 0x5
+ 805 00a5 86010000 		.4byte	.LASF20
+ 806 00a9 50       		.byte	0x50
+ 807 00aa 04       		.byte	0x4
+ 808 00ab 19       		.byte	0x19
+ 809 00ac E1000000 		.4byte	0xe1
+ 810 00b0 06       		.uleb128 0x6
+ 811 00b1 00020000 		.4byte	.LASF16
+ 812 00b5 04       		.byte	0x4
+ 813 00b6 1A       		.byte	0x1a
+ 814 00b7 E1000000 		.4byte	0xe1
+ 815 00bb 00       		.byte	0
+ 816 00bc 06       		.uleb128 0x6
+ 817 00bd A9000000 		.4byte	.LASF17
+ 818 00c1 04       		.byte	0x4
+ 819 00c2 1B       		.byte	0x1b
+ 820 00c3 E1000000 		.4byte	0xe1
+ 821 00c7 20       		.byte	0x20
+ 822 00c8 06       		.uleb128 0x6
+ 823 00c9 07020000 		.4byte	.LASF18
+ 824 00cd 04       		.byte	0x4
+ 825 00ce 1C       		.byte	0x1c
+ 826 00cf 81000000 		.4byte	0x81
+ 827 00d3 40       		.byte	0x40
+ 828 00d4 06       		.uleb128 0x6
+ 829 00d5 B4000000 		.4byte	.LASF19
+ 830 00d9 04       		.byte	0x4
+ 831 00da 1D       		.byte	0x1d
+ 832 00db FC000000 		.4byte	0xfc
+ 833 00df 48       		.byte	0x48
+ 834 00e0 00       		.byte	0
+ 835 00e1 07       		.uleb128 0x7
+ 836 00e2 81000000 		.4byte	0x81
+ 837 00e6 F1000000 		.4byte	0xf1
+ 838 00ea 08       		.uleb128 0x8
+ 839 00eb 96000000 		.4byte	0x96
+ 840 00ef 03       		.byte	0x3
+ 841 00f0 00       		.byte	0
+ 842 00f1 09       		.uleb128 0x9
+ 843 00f2 81000000 		.4byte	0x81
+ 844 00f6 FC000000 		.4byte	0xfc
+ 845 00fa 0A       		.uleb128 0xa
+ 846 00fb 00       		.byte	0
+ 847 00fc 0B       		.uleb128 0xb
+ 848 00fd 04       		.byte	0x4
+ 849 00fe F1000000 		.4byte	0xf1
+ 850 0102 03       		.uleb128 0x3
+ 851 0103 86010000 		.4byte	.LASF20
+ 852 0107 04       		.byte	0x4
+ 853 0108 1E       		.byte	0x1e
+ 854 0109 A4000000 		.4byte	0xa4
+ 855 010d 0C       		.uleb128 0xc
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 18
+
+
+ 856 010e A5010000 		.4byte	.LASF27
+ 857 0112 01       		.byte	0x1
+ 858 0113 16       		.byte	0x16
+ 859 0114 00000000 		.4byte	.LFB63
+ 860 0118 74000000 		.4byte	.LFE63-.LFB63
+ 861 011c 01       		.uleb128 0x1
+ 862 011d 9C       		.byte	0x9c
+ 863 011e 53010000 		.4byte	0x153
+ 864 0122 0D       		.uleb128 0xd
+ 865 0123 7800     		.ascii	"x\000"
+ 866 0125 01       		.byte	0x1
+ 867 0126 16       		.byte	0x16
+ 868 0127 53010000 		.4byte	0x153
+ 869 012b 02       		.uleb128 0x2
+ 870 012c 91       		.byte	0x91
+ 871 012d 5C       		.sleb128 -36
+ 872 012e 0E       		.uleb128 0xe
+ 873 012f 7D010000 		.4byte	.LASF21
+ 874 0133 01       		.byte	0x1
+ 875 0134 19       		.byte	0x19
+ 876 0135 81000000 		.4byte	0x81
+ 877 0139 02       		.uleb128 0x2
+ 878 013a 91       		.byte	0x91
+ 879 013b 68       		.sleb128 -24
+ 880 013c 0F       		.uleb128 0xf
+ 881 013d 14000000 		.4byte	.LBB2
+ 882 0141 36000000 		.4byte	.LBE2-.LBB2
+ 883 0145 10       		.uleb128 0x10
+ 884 0146 6900     		.ascii	"i\000"
+ 885 0148 01       		.byte	0x1
+ 886 0149 1A       		.byte	0x1a
+ 887 014a 68000000 		.4byte	0x68
+ 888 014e 02       		.uleb128 0x2
+ 889 014f 91       		.byte	0x91
+ 890 0150 64       		.sleb128 -28
+ 891 0151 00       		.byte	0
+ 892 0152 00       		.byte	0
+ 893 0153 0B       		.uleb128 0xb
+ 894 0154 04       		.byte	0x4
+ 895 0155 02010000 		.4byte	0x102
+ 896 0159 11       		.uleb128 0x11
+ 897 015a A0000000 		.4byte	.LASF22
+ 898 015e 01       		.byte	0x1
+ 899 015f 23       		.byte	0x23
+ 900 0160 81000000 		.4byte	0x81
+ 901 0164 00000000 		.4byte	.LFB64
+ 902 0168 22000000 		.4byte	.LFE64-.LFB64
+ 903 016c 01       		.uleb128 0x1
+ 904 016d 9C       		.byte	0x9c
+ 905 016e 7F010000 		.4byte	0x17f
+ 906 0172 0D       		.uleb128 0xd
+ 907 0173 7800     		.ascii	"x\000"
+ 908 0175 01       		.byte	0x1
+ 909 0176 23       		.byte	0x23
+ 910 0177 53010000 		.4byte	0x153
+ 911 017b 02       		.uleb128 0x2
+ 912 017c 91       		.byte	0x91
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 19
+
+
+ 913 017d 6C       		.sleb128 -20
+ 914 017e 00       		.byte	0
+ 915 017f 11       		.uleb128 0x11
+ 916 0180 3D010000 		.4byte	.LASF23
+ 917 0184 01       		.byte	0x1
+ 918 0185 29       		.byte	0x29
+ 919 0186 81000000 		.4byte	0x81
+ 920 018a 00000000 		.4byte	.LFB65
+ 921 018e 1C000000 		.4byte	.LFE65-.LFB65
+ 922 0192 01       		.uleb128 0x1
+ 923 0193 9C       		.byte	0x9c
+ 924 0194 A5010000 		.4byte	0x1a5
+ 925 0198 0D       		.uleb128 0xd
+ 926 0199 7800     		.ascii	"x\000"
+ 927 019b 01       		.byte	0x1
+ 928 019c 29       		.byte	0x29
+ 929 019d 53010000 		.4byte	0x153
+ 930 01a1 02       		.uleb128 0x2
+ 931 01a2 91       		.byte	0x91
+ 932 01a3 6C       		.sleb128 -20
+ 933 01a4 00       		.byte	0
+ 934 01a5 11       		.uleb128 0x11
+ 935 01a6 28020000 		.4byte	.LASF24
+ 936 01aa 01       		.byte	0x1
+ 937 01ab 2E       		.byte	0x2e
+ 938 01ac 81000000 		.4byte	0x81
+ 939 01b0 00000000 		.4byte	.LFB66
+ 940 01b4 22000000 		.4byte	.LFE66-.LFB66
+ 941 01b8 01       		.uleb128 0x1
+ 942 01b9 9C       		.byte	0x9c
+ 943 01ba CB010000 		.4byte	0x1cb
+ 944 01be 0D       		.uleb128 0xd
+ 945 01bf 7800     		.ascii	"x\000"
+ 946 01c1 01       		.byte	0x1
+ 947 01c2 2E       		.byte	0x2e
+ 948 01c3 53010000 		.4byte	0x153
+ 949 01c7 02       		.uleb128 0x2
+ 950 01c8 91       		.byte	0x91
+ 951 01c9 6C       		.sleb128 -20
+ 952 01ca 00       		.byte	0
+ 953 01cb 11       		.uleb128 0x11
+ 954 01cc C6000000 		.4byte	.LASF25
+ 955 01d0 01       		.byte	0x1
+ 956 01d1 33       		.byte	0x33
+ 957 01d2 81000000 		.4byte	0x81
+ 958 01d6 00000000 		.4byte	.LFB67
+ 959 01da 1C000000 		.4byte	.LFE67-.LFB67
+ 960 01de 01       		.uleb128 0x1
+ 961 01df 9C       		.byte	0x9c
+ 962 01e0 F1010000 		.4byte	0x1f1
+ 963 01e4 0D       		.uleb128 0xd
+ 964 01e5 7800     		.ascii	"x\000"
+ 965 01e7 01       		.byte	0x1
+ 966 01e8 33       		.byte	0x33
+ 967 01e9 53010000 		.4byte	0x153
+ 968 01ed 02       		.uleb128 0x2
+ 969 01ee 91       		.byte	0x91
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 20
+
+
+ 970 01ef 6C       		.sleb128 -20
+ 971 01f0 00       		.byte	0
+ 972 01f1 11       		.uleb128 0x11
+ 973 01f2 00000000 		.4byte	.LASF26
+ 974 01f6 01       		.byte	0x1
+ 975 01f7 38       		.byte	0x38
+ 976 01f8 81000000 		.4byte	0x81
+ 977 01fc 00000000 		.4byte	.LFB68
+ 978 0200 84000000 		.4byte	.LFE68-.LFB68
+ 979 0204 01       		.uleb128 0x1
+ 980 0205 9C       		.byte	0x9c
+ 981 0206 3B020000 		.4byte	0x23b
+ 982 020a 0D       		.uleb128 0xd
+ 983 020b 7800     		.ascii	"x\000"
+ 984 020d 01       		.byte	0x1
+ 985 020e 38       		.byte	0x38
+ 986 020f 53010000 		.4byte	0x153
+ 987 0213 02       		.uleb128 0x2
+ 988 0214 91       		.byte	0x91
+ 989 0215 5C       		.sleb128 -36
+ 990 0216 10       		.uleb128 0x10
+ 991 0217 73756D00 		.ascii	"sum\000"
+ 992 021b 01       		.byte	0x1
+ 993 021c 3A       		.byte	0x3a
+ 994 021d 81000000 		.4byte	0x81
+ 995 0221 02       		.uleb128 0x2
+ 996 0222 91       		.byte	0x91
+ 997 0223 68       		.sleb128 -24
+ 998 0224 0F       		.uleb128 0xf
+ 999 0225 14000000 		.4byte	.LBB3
+ 1000 0229 32000000 		.4byte	.LBE3-.LBB3
+ 1001 022d 10       		.uleb128 0x10
+ 1002 022e 6900     		.ascii	"i\000"
+ 1003 0230 01       		.byte	0x1
+ 1004 0231 3B       		.byte	0x3b
+ 1005 0232 68000000 		.4byte	0x68
+ 1006 0236 02       		.uleb128 0x2
+ 1007 0237 91       		.byte	0x91
+ 1008 0238 64       		.sleb128 -28
+ 1009 0239 00       		.byte	0
+ 1010 023a 00       		.byte	0
+ 1011 023b 0C       		.uleb128 0xc
+ 1012 023c 4E020000 		.4byte	.LASF28
+ 1013 0240 01       		.byte	0x1
+ 1014 0241 42       		.byte	0x42
+ 1015 0242 00000000 		.4byte	.LFB69
+ 1016 0246 70000000 		.4byte	.LFE69-.LFB69
+ 1017 024a 01       		.uleb128 0x1
+ 1018 024b 9C       		.byte	0x9c
+ 1019 024c 73020000 		.4byte	0x273
+ 1020 0250 0D       		.uleb128 0xd
+ 1021 0251 7800     		.ascii	"x\000"
+ 1022 0253 01       		.byte	0x1
+ 1023 0254 42       		.byte	0x42
+ 1024 0255 53010000 		.4byte	0x153
+ 1025 0259 02       		.uleb128 0x2
+ 1026 025a 91       		.byte	0x91
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 21
+
+
+ 1027 025b 64       		.sleb128 -28
+ 1028 025c 0F       		.uleb128 0xf
+ 1029 025d 08000000 		.4byte	.LBB4
+ 1030 0261 60000000 		.4byte	.LBE4-.LBB4
+ 1031 0265 10       		.uleb128 0x10
+ 1032 0266 6900     		.ascii	"i\000"
+ 1033 0268 01       		.byte	0x1
+ 1034 0269 44       		.byte	0x44
+ 1035 026a 68000000 		.4byte	0x68
+ 1036 026e 02       		.uleb128 0x2
+ 1037 026f 91       		.byte	0x91
+ 1038 0270 6C       		.sleb128 -20
+ 1039 0271 00       		.byte	0
+ 1040 0272 00       		.byte	0
+ 1041 0273 11       		.uleb128 0x11
+ 1042 0274 E1000000 		.4byte	.LASF29
+ 1043 0278 01       		.byte	0x1
+ 1044 0279 4C       		.byte	0x4c
+ 1045 027a 81000000 		.4byte	0x81
+ 1046 027e 00000000 		.4byte	.LFB70
+ 1047 0282 64000000 		.4byte	.LFE70-.LFB70
+ 1048 0286 01       		.uleb128 0x1
+ 1049 0287 9C       		.byte	0x9c
+ 1050 0288 BD020000 		.4byte	0x2bd
+ 1051 028c 0D       		.uleb128 0xd
+ 1052 028d 7800     		.ascii	"x\000"
+ 1053 028f 01       		.byte	0x1
+ 1054 0290 4C       		.byte	0x4c
+ 1055 0291 53010000 		.4byte	0x153
+ 1056 0295 02       		.uleb128 0x2
+ 1057 0296 91       		.byte	0x91
+ 1058 0297 5C       		.sleb128 -36
+ 1059 0298 10       		.uleb128 0x10
+ 1060 0299 73756D00 		.ascii	"sum\000"
+ 1061 029d 01       		.byte	0x1
+ 1062 029e 4F       		.byte	0x4f
+ 1063 029f 81000000 		.4byte	0x81
+ 1064 02a3 02       		.uleb128 0x2
+ 1065 02a4 91       		.byte	0x91
+ 1066 02a5 68       		.sleb128 -24
+ 1067 02a6 0F       		.uleb128 0xf
+ 1068 02a7 14000000 		.4byte	.LBB5
+ 1069 02ab 30000000 		.4byte	.LBE5-.LBB5
+ 1070 02af 10       		.uleb128 0x10
+ 1071 02b0 6900     		.ascii	"i\000"
+ 1072 02b2 01       		.byte	0x1
+ 1073 02b3 50       		.byte	0x50
+ 1074 02b4 68000000 		.4byte	0x68
+ 1075 02b8 02       		.uleb128 0x2
+ 1076 02b9 91       		.byte	0x91
+ 1077 02ba 64       		.sleb128 -28
+ 1078 02bb 00       		.byte	0
+ 1079 02bc 00       		.byte	0
+ 1080 02bd 11       		.uleb128 0x11
+ 1081 02be 18020000 		.4byte	.LASF30
+ 1082 02c2 01       		.byte	0x1
+ 1083 02c3 56       		.byte	0x56
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 22
+
+
+ 1084 02c4 81000000 		.4byte	0x81
+ 1085 02c8 00000000 		.4byte	.LFB71
+ 1086 02cc 6C010000 		.4byte	.LFE71-.LFB71
+ 1087 02d0 01       		.uleb128 0x1
+ 1088 02d1 9C       		.byte	0x9c
+ 1089 02d2 3B030000 		.4byte	0x33b
+ 1090 02d6 0D       		.uleb128 0xd
+ 1091 02d7 7800     		.ascii	"x\000"
+ 1092 02d9 01       		.byte	0x1
+ 1093 02da 56       		.byte	0x56
+ 1094 02db 53010000 		.4byte	0x153
+ 1095 02df 02       		.uleb128 0x2
+ 1096 02e0 91       		.byte	0x91
+ 1097 02e1 44       		.sleb128 -60
+ 1098 02e2 0E       		.uleb128 0xe
+ 1099 02e3 63020000 		.4byte	.LASF31
+ 1100 02e7 01       		.byte	0x1
+ 1101 02e8 58       		.byte	0x58
+ 1102 02e9 81000000 		.4byte	0x81
+ 1103 02ed 02       		.uleb128 0x2
+ 1104 02ee 91       		.byte	0x91
+ 1105 02ef 60       		.sleb128 -32
+ 1106 02f0 0E       		.uleb128 0xe
+ 1107 02f1 53010000 		.4byte	.LASF32
+ 1108 02f5 01       		.byte	0x1
+ 1109 02f6 59       		.byte	0x59
+ 1110 02f7 68000000 		.4byte	0x68
+ 1111 02fb 02       		.uleb128 0x2
+ 1112 02fc 91       		.byte	0x91
+ 1113 02fd 5C       		.sleb128 -36
+ 1114 02fe 0F       		.uleb128 0xf
+ 1115 02ff 1A000000 		.4byte	.LBB6
+ 1116 0303 16010000 		.4byte	.LBE6-.LBB6
+ 1117 0307 10       		.uleb128 0x10
+ 1118 0308 6900     		.ascii	"i\000"
+ 1119 030a 01       		.byte	0x1
+ 1120 030b 5A       		.byte	0x5a
+ 1121 030c 68000000 		.4byte	0x68
+ 1122 0310 02       		.uleb128 0x2
+ 1123 0311 91       		.byte	0x91
+ 1124 0312 58       		.sleb128 -40
+ 1125 0313 0F       		.uleb128 0xf
+ 1126 0314 20000000 		.4byte	.LBB7
+ 1127 0318 02010000 		.4byte	.LBE7-.LBB7
+ 1128 031c 0E       		.uleb128 0xe
+ 1129 031d 1B010000 		.4byte	.LASF33
+ 1130 0321 01       		.byte	0x1
+ 1131 0322 5C       		.byte	0x5c
+ 1132 0323 81000000 		.4byte	0x81
+ 1133 0327 02       		.uleb128 0x2
+ 1134 0328 91       		.byte	0x91
+ 1135 0329 50       		.sleb128 -48
+ 1136 032a 0E       		.uleb128 0xe
+ 1137 032b 2F010000 		.4byte	.LASF34
+ 1138 032f 01       		.byte	0x1
+ 1139 0330 5D       		.byte	0x5d
+ 1140 0331 81000000 		.4byte	0x81
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 23
+
+
+ 1141 0335 02       		.uleb128 0x2
+ 1142 0336 91       		.byte	0x91
+ 1143 0337 48       		.sleb128 -56
+ 1144 0338 00       		.byte	0
+ 1145 0339 00       		.byte	0
+ 1146 033a 00       		.byte	0
+ 1147 033b 12       		.uleb128 0x12
+ 1148 033c 22010000 		.4byte	.LASF38
+ 1149 0340 05       		.byte	0x5
+ 1150 0341 9606     		.2byte	0x696
+ 1151 0343 47030000 		.4byte	0x347
+ 1152 0347 13       		.uleb128 0x13
+ 1153 0348 76000000 		.4byte	0x76
+ 1154 034c 00       		.byte	0
+ 1155              		.section	.debug_abbrev,"",%progbits
+ 1156              	.Ldebug_abbrev0:
+ 1157 0000 01       		.uleb128 0x1
+ 1158 0001 11       		.uleb128 0x11
+ 1159 0002 01       		.byte	0x1
+ 1160 0003 25       		.uleb128 0x25
+ 1161 0004 0E       		.uleb128 0xe
+ 1162 0005 13       		.uleb128 0x13
+ 1163 0006 0B       		.uleb128 0xb
+ 1164 0007 03       		.uleb128 0x3
+ 1165 0008 0E       		.uleb128 0xe
+ 1166 0009 1B       		.uleb128 0x1b
+ 1167 000a 0E       		.uleb128 0xe
+ 1168 000b 55       		.uleb128 0x55
+ 1169 000c 17       		.uleb128 0x17
+ 1170 000d 11       		.uleb128 0x11
+ 1171 000e 01       		.uleb128 0x1
+ 1172 000f 10       		.uleb128 0x10
+ 1173 0010 17       		.uleb128 0x17
+ 1174 0011 00       		.byte	0
+ 1175 0012 00       		.byte	0
+ 1176 0013 02       		.uleb128 0x2
+ 1177 0014 24       		.uleb128 0x24
+ 1178 0015 00       		.byte	0
+ 1179 0016 0B       		.uleb128 0xb
+ 1180 0017 0B       		.uleb128 0xb
+ 1181 0018 3E       		.uleb128 0x3e
+ 1182 0019 0B       		.uleb128 0xb
+ 1183 001a 03       		.uleb128 0x3
+ 1184 001b 0E       		.uleb128 0xe
+ 1185 001c 00       		.byte	0
+ 1186 001d 00       		.byte	0
+ 1187 001e 03       		.uleb128 0x3
+ 1188 001f 16       		.uleb128 0x16
+ 1189 0020 00       		.byte	0
+ 1190 0021 03       		.uleb128 0x3
+ 1191 0022 0E       		.uleb128 0xe
+ 1192 0023 3A       		.uleb128 0x3a
+ 1193 0024 0B       		.uleb128 0xb
+ 1194 0025 3B       		.uleb128 0x3b
+ 1195 0026 0B       		.uleb128 0xb
+ 1196 0027 49       		.uleb128 0x49
+ 1197 0028 13       		.uleb128 0x13
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 24
+
+
+ 1198 0029 00       		.byte	0
+ 1199 002a 00       		.byte	0
+ 1200 002b 04       		.uleb128 0x4
+ 1201 002c 24       		.uleb128 0x24
+ 1202 002d 00       		.byte	0
+ 1203 002e 0B       		.uleb128 0xb
+ 1204 002f 0B       		.uleb128 0xb
+ 1205 0030 3E       		.uleb128 0x3e
+ 1206 0031 0B       		.uleb128 0xb
+ 1207 0032 03       		.uleb128 0x3
+ 1208 0033 08       		.uleb128 0x8
+ 1209 0034 00       		.byte	0
+ 1210 0035 00       		.byte	0
+ 1211 0036 05       		.uleb128 0x5
+ 1212 0037 13       		.uleb128 0x13
+ 1213 0038 01       		.byte	0x1
+ 1214 0039 03       		.uleb128 0x3
+ 1215 003a 0E       		.uleb128 0xe
+ 1216 003b 0B       		.uleb128 0xb
+ 1217 003c 0B       		.uleb128 0xb
+ 1218 003d 3A       		.uleb128 0x3a
+ 1219 003e 0B       		.uleb128 0xb
+ 1220 003f 3B       		.uleb128 0x3b
+ 1221 0040 0B       		.uleb128 0xb
+ 1222 0041 01       		.uleb128 0x1
+ 1223 0042 13       		.uleb128 0x13
+ 1224 0043 00       		.byte	0
+ 1225 0044 00       		.byte	0
+ 1226 0045 06       		.uleb128 0x6
+ 1227 0046 0D       		.uleb128 0xd
+ 1228 0047 00       		.byte	0
+ 1229 0048 03       		.uleb128 0x3
+ 1230 0049 0E       		.uleb128 0xe
+ 1231 004a 3A       		.uleb128 0x3a
+ 1232 004b 0B       		.uleb128 0xb
+ 1233 004c 3B       		.uleb128 0x3b
+ 1234 004d 0B       		.uleb128 0xb
+ 1235 004e 49       		.uleb128 0x49
+ 1236 004f 13       		.uleb128 0x13
+ 1237 0050 38       		.uleb128 0x38
+ 1238 0051 0B       		.uleb128 0xb
+ 1239 0052 00       		.byte	0
+ 1240 0053 00       		.byte	0
+ 1241 0054 07       		.uleb128 0x7
+ 1242 0055 01       		.uleb128 0x1
+ 1243 0056 01       		.byte	0x1
+ 1244 0057 49       		.uleb128 0x49
+ 1245 0058 13       		.uleb128 0x13
+ 1246 0059 01       		.uleb128 0x1
+ 1247 005a 13       		.uleb128 0x13
+ 1248 005b 00       		.byte	0
+ 1249 005c 00       		.byte	0
+ 1250 005d 08       		.uleb128 0x8
+ 1251 005e 21       		.uleb128 0x21
+ 1252 005f 00       		.byte	0
+ 1253 0060 49       		.uleb128 0x49
+ 1254 0061 13       		.uleb128 0x13
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 25
+
+
+ 1255 0062 2F       		.uleb128 0x2f
+ 1256 0063 0B       		.uleb128 0xb
+ 1257 0064 00       		.byte	0
+ 1258 0065 00       		.byte	0
+ 1259 0066 09       		.uleb128 0x9
+ 1260 0067 15       		.uleb128 0x15
+ 1261 0068 01       		.byte	0x1
+ 1262 0069 49       		.uleb128 0x49
+ 1263 006a 13       		.uleb128 0x13
+ 1264 006b 01       		.uleb128 0x1
+ 1265 006c 13       		.uleb128 0x13
+ 1266 006d 00       		.byte	0
+ 1267 006e 00       		.byte	0
+ 1268 006f 0A       		.uleb128 0xa
+ 1269 0070 18       		.uleb128 0x18
+ 1270 0071 00       		.byte	0
+ 1271 0072 00       		.byte	0
+ 1272 0073 00       		.byte	0
+ 1273 0074 0B       		.uleb128 0xb
+ 1274 0075 0F       		.uleb128 0xf
+ 1275 0076 00       		.byte	0
+ 1276 0077 0B       		.uleb128 0xb
+ 1277 0078 0B       		.uleb128 0xb
+ 1278 0079 49       		.uleb128 0x49
+ 1279 007a 13       		.uleb128 0x13
+ 1280 007b 00       		.byte	0
+ 1281 007c 00       		.byte	0
+ 1282 007d 0C       		.uleb128 0xc
+ 1283 007e 2E       		.uleb128 0x2e
+ 1284 007f 01       		.byte	0x1
+ 1285 0080 3F       		.uleb128 0x3f
+ 1286 0081 19       		.uleb128 0x19
+ 1287 0082 03       		.uleb128 0x3
+ 1288 0083 0E       		.uleb128 0xe
+ 1289 0084 3A       		.uleb128 0x3a
+ 1290 0085 0B       		.uleb128 0xb
+ 1291 0086 3B       		.uleb128 0x3b
+ 1292 0087 0B       		.uleb128 0xb
+ 1293 0088 27       		.uleb128 0x27
+ 1294 0089 19       		.uleb128 0x19
+ 1295 008a 11       		.uleb128 0x11
+ 1296 008b 01       		.uleb128 0x1
+ 1297 008c 12       		.uleb128 0x12
+ 1298 008d 06       		.uleb128 0x6
+ 1299 008e 40       		.uleb128 0x40
+ 1300 008f 18       		.uleb128 0x18
+ 1301 0090 9642     		.uleb128 0x2116
+ 1302 0092 19       		.uleb128 0x19
+ 1303 0093 01       		.uleb128 0x1
+ 1304 0094 13       		.uleb128 0x13
+ 1305 0095 00       		.byte	0
+ 1306 0096 00       		.byte	0
+ 1307 0097 0D       		.uleb128 0xd
+ 1308 0098 05       		.uleb128 0x5
+ 1309 0099 00       		.byte	0
+ 1310 009a 03       		.uleb128 0x3
+ 1311 009b 08       		.uleb128 0x8
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 26
+
+
+ 1312 009c 3A       		.uleb128 0x3a
+ 1313 009d 0B       		.uleb128 0xb
+ 1314 009e 3B       		.uleb128 0x3b
+ 1315 009f 0B       		.uleb128 0xb
+ 1316 00a0 49       		.uleb128 0x49
+ 1317 00a1 13       		.uleb128 0x13
+ 1318 00a2 02       		.uleb128 0x2
+ 1319 00a3 18       		.uleb128 0x18
+ 1320 00a4 00       		.byte	0
+ 1321 00a5 00       		.byte	0
+ 1322 00a6 0E       		.uleb128 0xe
+ 1323 00a7 34       		.uleb128 0x34
+ 1324 00a8 00       		.byte	0
+ 1325 00a9 03       		.uleb128 0x3
+ 1326 00aa 0E       		.uleb128 0xe
+ 1327 00ab 3A       		.uleb128 0x3a
+ 1328 00ac 0B       		.uleb128 0xb
+ 1329 00ad 3B       		.uleb128 0x3b
+ 1330 00ae 0B       		.uleb128 0xb
+ 1331 00af 49       		.uleb128 0x49
+ 1332 00b0 13       		.uleb128 0x13
+ 1333 00b1 02       		.uleb128 0x2
+ 1334 00b2 18       		.uleb128 0x18
+ 1335 00b3 00       		.byte	0
+ 1336 00b4 00       		.byte	0
+ 1337 00b5 0F       		.uleb128 0xf
+ 1338 00b6 0B       		.uleb128 0xb
+ 1339 00b7 01       		.byte	0x1
+ 1340 00b8 11       		.uleb128 0x11
+ 1341 00b9 01       		.uleb128 0x1
+ 1342 00ba 12       		.uleb128 0x12
+ 1343 00bb 06       		.uleb128 0x6
+ 1344 00bc 00       		.byte	0
+ 1345 00bd 00       		.byte	0
+ 1346 00be 10       		.uleb128 0x10
+ 1347 00bf 34       		.uleb128 0x34
+ 1348 00c0 00       		.byte	0
+ 1349 00c1 03       		.uleb128 0x3
+ 1350 00c2 08       		.uleb128 0x8
+ 1351 00c3 3A       		.uleb128 0x3a
+ 1352 00c4 0B       		.uleb128 0xb
+ 1353 00c5 3B       		.uleb128 0x3b
+ 1354 00c6 0B       		.uleb128 0xb
+ 1355 00c7 49       		.uleb128 0x49
+ 1356 00c8 13       		.uleb128 0x13
+ 1357 00c9 02       		.uleb128 0x2
+ 1358 00ca 18       		.uleb128 0x18
+ 1359 00cb 00       		.byte	0
+ 1360 00cc 00       		.byte	0
+ 1361 00cd 11       		.uleb128 0x11
+ 1362 00ce 2E       		.uleb128 0x2e
+ 1363 00cf 01       		.byte	0x1
+ 1364 00d0 3F       		.uleb128 0x3f
+ 1365 00d1 19       		.uleb128 0x19
+ 1366 00d2 03       		.uleb128 0x3
+ 1367 00d3 0E       		.uleb128 0xe
+ 1368 00d4 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 27
+
+
+ 1369 00d5 0B       		.uleb128 0xb
+ 1370 00d6 3B       		.uleb128 0x3b
+ 1371 00d7 0B       		.uleb128 0xb
+ 1372 00d8 27       		.uleb128 0x27
+ 1373 00d9 19       		.uleb128 0x19
+ 1374 00da 49       		.uleb128 0x49
+ 1375 00db 13       		.uleb128 0x13
+ 1376 00dc 11       		.uleb128 0x11
+ 1377 00dd 01       		.uleb128 0x1
+ 1378 00de 12       		.uleb128 0x12
+ 1379 00df 06       		.uleb128 0x6
+ 1380 00e0 40       		.uleb128 0x40
+ 1381 00e1 18       		.uleb128 0x18
+ 1382 00e2 9642     		.uleb128 0x2116
+ 1383 00e4 19       		.uleb128 0x19
+ 1384 00e5 01       		.uleb128 0x1
+ 1385 00e6 13       		.uleb128 0x13
+ 1386 00e7 00       		.byte	0
+ 1387 00e8 00       		.byte	0
+ 1388 00e9 12       		.uleb128 0x12
+ 1389 00ea 34       		.uleb128 0x34
+ 1390 00eb 00       		.byte	0
+ 1391 00ec 03       		.uleb128 0x3
+ 1392 00ed 0E       		.uleb128 0xe
+ 1393 00ee 3A       		.uleb128 0x3a
+ 1394 00ef 0B       		.uleb128 0xb
+ 1395 00f0 3B       		.uleb128 0x3b
+ 1396 00f1 05       		.uleb128 0x5
+ 1397 00f2 49       		.uleb128 0x49
+ 1398 00f3 13       		.uleb128 0x13
+ 1399 00f4 3F       		.uleb128 0x3f
+ 1400 00f5 19       		.uleb128 0x19
+ 1401 00f6 3C       		.uleb128 0x3c
+ 1402 00f7 19       		.uleb128 0x19
+ 1403 00f8 00       		.byte	0
+ 1404 00f9 00       		.byte	0
+ 1405 00fa 13       		.uleb128 0x13
+ 1406 00fb 35       		.uleb128 0x35
+ 1407 00fc 00       		.byte	0
+ 1408 00fd 49       		.uleb128 0x49
+ 1409 00fe 13       		.uleb128 0x13
+ 1410 00ff 00       		.byte	0
+ 1411 0100 00       		.byte	0
+ 1412 0101 00       		.byte	0
+ 1413              		.section	.debug_aranges,"",%progbits
+ 1414 0000 5C000000 		.4byte	0x5c
+ 1415 0004 0200     		.2byte	0x2
+ 1416 0006 00000000 		.4byte	.Ldebug_info0
+ 1417 000a 04       		.byte	0x4
+ 1418 000b 00       		.byte	0
+ 1419 000c 0000     		.2byte	0
+ 1420 000e 0000     		.2byte	0
+ 1421 0010 00000000 		.4byte	.LFB63
+ 1422 0014 74000000 		.4byte	.LFE63-.LFB63
+ 1423 0018 00000000 		.4byte	.LFB64
+ 1424 001c 22000000 		.4byte	.LFE64-.LFB64
+ 1425 0020 00000000 		.4byte	.LFB65
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 28
+
+
+ 1426 0024 1C000000 		.4byte	.LFE65-.LFB65
+ 1427 0028 00000000 		.4byte	.LFB66
+ 1428 002c 22000000 		.4byte	.LFE66-.LFB66
+ 1429 0030 00000000 		.4byte	.LFB67
+ 1430 0034 1C000000 		.4byte	.LFE67-.LFB67
+ 1431 0038 00000000 		.4byte	.LFB68
+ 1432 003c 84000000 		.4byte	.LFE68-.LFB68
+ 1433 0040 00000000 		.4byte	.LFB69
+ 1434 0044 70000000 		.4byte	.LFE69-.LFB69
+ 1435 0048 00000000 		.4byte	.LFB70
+ 1436 004c 64000000 		.4byte	.LFE70-.LFB70
+ 1437 0050 00000000 		.4byte	.LFB71
+ 1438 0054 6C010000 		.4byte	.LFE71-.LFB71
+ 1439 0058 00000000 		.4byte	0
+ 1440 005c 00000000 		.4byte	0
+ 1441              		.section	.debug_ranges,"",%progbits
+ 1442              	.Ldebug_ranges0:
+ 1443 0000 00000000 		.4byte	.LFB63
+ 1444 0004 74000000 		.4byte	.LFE63
+ 1445 0008 00000000 		.4byte	.LFB64
+ 1446 000c 22000000 		.4byte	.LFE64
+ 1447 0010 00000000 		.4byte	.LFB65
+ 1448 0014 1C000000 		.4byte	.LFE65
+ 1449 0018 00000000 		.4byte	.LFB66
+ 1450 001c 22000000 		.4byte	.LFE66
+ 1451 0020 00000000 		.4byte	.LFB67
+ 1452 0024 1C000000 		.4byte	.LFE67
+ 1453 0028 00000000 		.4byte	.LFB68
+ 1454 002c 84000000 		.4byte	.LFE68
+ 1455 0030 00000000 		.4byte	.LFB69
+ 1456 0034 70000000 		.4byte	.LFE69
+ 1457 0038 00000000 		.4byte	.LFB70
+ 1458 003c 64000000 		.4byte	.LFE70
+ 1459 0040 00000000 		.4byte	.LFB71
+ 1460 0044 6C010000 		.4byte	.LFE71
+ 1461 0048 00000000 		.4byte	0
+ 1462 004c 00000000 		.4byte	0
+ 1463              		.section	.debug_line,"",%progbits
+ 1464              	.Ldebug_line0:
+ 1465 0000 7F020000 		.section	.debug_str,"MS",%progbits,1
+ 1465      02005B01 
+ 1465      00000201 
+ 1465      FB0E0D00 
+ 1465      01010101 
+ 1466              	.LASF26:
+ 1467 0000 67657454 		.ascii	"getTime\000"
+ 1467      696D6500 
+ 1468              	.LASF35:
+ 1469 0008 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1469      43313120 
+ 1469      352E342E 
+ 1469      31203230 
+ 1469      31363036 
+ 1470 003b 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1470      20726576 
+ 1470      6973696F 
+ 1470      6E203233 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 29
+
+
+ 1470      37373135 
+ 1471 006e 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1471      66756E63 
+ 1471      74696F6E 
+ 1471      2D736563 
+ 1471      74696F6E 
+ 1472              	.LASF9:
+ 1473 0096 5F5F696E 		.ascii	"__int32_t\000"
+ 1473      7433325F 
+ 1473      7400
+ 1474              	.LASF22:
+ 1475 00a0 67657456 		.ascii	"getValue\000"
+ 1475      616C7565 
+ 1475      00
+ 1476              	.LASF17:
+ 1477 00a9 74696D65 		.ascii	"timeStamps\000"
+ 1477      5374616D 
+ 1477      707300
+ 1478              	.LASF19:
+ 1479 00b4 76616C75 		.ascii	"valueGetter\000"
+ 1479      65476574 
+ 1479      74657200 
+ 1480              	.LASF15:
+ 1481 00c0 666C6F61 		.ascii	"float\000"
+ 1481      7400
+ 1482              	.LASF25:
+ 1483 00c6 67657444 		.ascii	"getDerivativeWithoutUpdate\000"
+ 1483      65726976 
+ 1483      61746976 
+ 1483      65576974 
+ 1483      686F7574 
+ 1484              	.LASF29:
+ 1485 00e1 67657461 		.ascii	"getavg\000"
+ 1485      766700
+ 1486              	.LASF1:
+ 1487 00e8 756E7369 		.ascii	"unsigned char\000"
+ 1487      676E6564 
+ 1487      20636861 
+ 1487      7200
+ 1488              	.LASF5:
+ 1489 00f6 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1489      20756E73 
+ 1489      69676E65 
+ 1489      6420696E 
+ 1489      7400
+ 1490              	.LASF3:
+ 1491 0108 73686F72 		.ascii	"short unsigned int\000"
+ 1491      7420756E 
+ 1491      7369676E 
+ 1491      65642069 
+ 1491      6E7400
+ 1492              	.LASF33:
+ 1493 011b 64656C74 		.ascii	"deltaT\000"
+ 1493      615400
+ 1494              	.LASF38:
+ 1495 0122 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1495      52784275 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 30
+
+
+ 1495      66666572 
+ 1495      00
+ 1496              	.LASF34:
+ 1497 012f 64656C74 		.ascii	"deltaX\000"
+ 1497      615800
+ 1498              	.LASF11:
+ 1499 0136 646F7562 		.ascii	"double\000"
+ 1499      6C6500
+ 1500              	.LASF23:
+ 1501 013d 67657456 		.ascii	"getValueWithoutUpdate\000"
+ 1501      616C7565 
+ 1501      57697468 
+ 1501      6F757455 
+ 1501      70646174 
+ 1502              	.LASF32:
+ 1503 0153 61646465 		.ascii	"added\000"
+ 1503      6400
+ 1504              	.LASF8:
+ 1505 0159 756E7369 		.ascii	"unsigned int\000"
+ 1505      676E6564 
+ 1505      20696E74 
+ 1505      00
+ 1506              	.LASF7:
+ 1507 0166 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1507      206C6F6E 
+ 1507      6720756E 
+ 1507      7369676E 
+ 1507      65642069 
+ 1508              	.LASF21:
+ 1509 017d 72656164 		.ascii	"readings\000"
+ 1509      696E6773 
+ 1509      00
+ 1510              	.LASF20:
+ 1511 0186 4D656D6F 		.ascii	"MemoryVariable\000"
+ 1511      72795661 
+ 1511      72696162 
+ 1511      6C6500
+ 1512              	.LASF36:
+ 1513 0195 73656E73 		.ascii	"sensorStructs.c\000"
+ 1513      6F725374 
+ 1513      72756374 
+ 1513      732E6300 
+ 1514              	.LASF27:
+ 1515 01a5 696E6974 		.ascii	"initToZero\000"
+ 1515      546F5A65 
+ 1515      726F00
+ 1516              	.LASF10:
+ 1517 01b0 696E7433 		.ascii	"int32_t\000"
+ 1517      325F7400 
+ 1518              	.LASF37:
+ 1519 01b8 433A5C55 		.ascii	"C:\\Users\\Albert\\Documents\\6115_fp\\IWP.cydsn\000"
+ 1519      73657273 
+ 1519      5C416C62 
+ 1519      6572745C 
+ 1519      446F6375 
+ 1520              	.LASF14:
+ 1521 01e4 73697A65 		.ascii	"sizetype\000"
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccMEz8U0.s 			page 31
+
+
+ 1521      74797065 
+ 1521      00
+ 1522              	.LASF6:
+ 1523 01ed 6C6F6E67 		.ascii	"long long int\000"
+ 1523      206C6F6E 
+ 1523      6720696E 
+ 1523      7400
+ 1524              	.LASF12:
+ 1525 01fb 63686172 		.ascii	"char\000"
+ 1525      00
+ 1526              	.LASF16:
+ 1527 0200 76616C75 		.ascii	"values\000"
+ 1527      657300
+ 1528              	.LASF18:
+ 1529 0207 6F666673 		.ascii	"offset\000"
+ 1529      657400
+ 1530              	.LASF2:
+ 1531 020e 73686F72 		.ascii	"short int\000"
+ 1531      7420696E 
+ 1531      7400
+ 1532              	.LASF30:
+ 1533 0218 67657464 		.ascii	"getder\000"
+ 1533      657200
+ 1534              	.LASF4:
+ 1535 021f 6C6F6E67 		.ascii	"long int\000"
+ 1535      20696E74 
+ 1535      00
+ 1536              	.LASF24:
+ 1537 0228 67657444 		.ascii	"getDerivative\000"
+ 1537      65726976 
+ 1537      61746976 
+ 1537      6500
+ 1538              	.LASF13:
+ 1539 0236 6C6F6E67 		.ascii	"long double\000"
+ 1539      20646F75 
+ 1539      626C6500 
+ 1540              	.LASF0:
+ 1541 0242 7369676E 		.ascii	"signed char\000"
+ 1541      65642063 
+ 1541      68617200 
+ 1542              	.LASF28:
+ 1543 024e 75706461 		.ascii	"updateMemoryVariable\000"
+ 1543      74654D65 
+ 1543      6D6F7279 
+ 1543      56617269 
+ 1543      61626C65 
+ 1544              	.LASF31:
+ 1545 0263 76417667 		.ascii	"vAvg\000"
+ 1545      00
+ 1546              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

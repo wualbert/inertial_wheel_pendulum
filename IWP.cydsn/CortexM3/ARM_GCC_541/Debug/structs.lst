@@ -1,0 +1,1370 @@
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"structs.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.initToZero,"ax",%progbits
+  20              		.align	2
+  21              		.global	initToZero
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	initToZero, %function
+  25              	initToZero:
+  26              	.LFB63:
+  27              		.file 1 "structs.c"
+   1:structs.c     **** /* ========================================
+   2:structs.c     ****  *
+   3:structs.c     ****  * Copyright Albert Wu, 2018
+   4:structs.c     ****  * All Rights Reserved
+   5:structs.c     ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:structs.c     ****  *
+   7:structs.c     ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:structs.c     ****  * WHICH IS THE PROPERTY OF your company.
+   9:structs.c     ****  *
+  10:structs.c     ****  * ========================================
+  11:structs.c     **** */
+  12:structs.c     **** #include <project.h>
+  13:structs.c     **** #include <device.h>
+  14:structs.c     **** 
+  15:structs.c     **** #include "structs.h"
+  16:structs.c     **** 
+  17:structs.c     **** //helper functions
+  18:structs.c     **** float getavg(MemoryVariable *x);
+  19:structs.c     **** float getder(MemoryVariable *x);
+  20:structs.c     **** void updateMemoryVariable(MemoryVariable *x);
+  21:structs.c     **** 
+  22:structs.c     **** void initToZero(MemoryVariable *x)
+  23:structs.c     **** {
+  28              		.loc 1 23 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 2
+
+
+  35              		.cfi_offset 14, -4
+  36 0002 82B0     		sub	sp, sp, #8
+  37              		.cfi_def_cfa_offset 16
+  38 0004 00AF     		add	r7, sp, #0
+  39              		.cfi_def_cfa_register 7
+  40 0006 7860     		str	r0, [r7, #4]
+  24:structs.c     ****     //samples initial values
+  25:structs.c     ****     updateMemoryVariable(x);
+  41              		.loc 1 25 0
+  42 0008 7868     		ldr	r0, [r7, #4]
+  43 000a FFF7FEFF 		bl	updateMemoryVariable
+  26:structs.c     ****     x->offset=getavg(x);
+  44              		.loc 1 26 0
+  45 000e 7868     		ldr	r0, [r7, #4]
+  46 0010 FFF7FEFF 		bl	getavg
+  47 0014 0246     		mov	r2, r0
+  48 0016 7B68     		ldr	r3, [r7, #4]
+  49 0018 9A62     		str	r2, [r3, #40]	@ float
+  27:structs.c     **** }
+  50              		.loc 1 27 0
+  51 001a 00BF     		nop
+  52 001c 0837     		adds	r7, r7, #8
+  53              		.cfi_def_cfa_offset 8
+  54 001e BD46     		mov	sp, r7
+  55              		.cfi_def_cfa_register 13
+  56              		@ sp needed
+  57 0020 80BD     		pop	{r7, pc}
+  58              		.cfi_endproc
+  59              	.LFE63:
+  60              		.size	initToZero, .-initToZero
+  61 0022 00BF     		.section	.text.getValue,"ax",%progbits
+  62              		.align	2
+  63              		.global	getValue
+  64              		.thumb
+  65              		.thumb_func
+  66              		.type	getValue, %function
+  67              	getValue:
+  68              	.LFB64:
+  28:structs.c     **** 
+  29:structs.c     **** float getValue(MemoryVariable *x)
+  30:structs.c     **** {
+  69              		.loc 1 30 0
+  70              		.cfi_startproc
+  71              		@ args = 0, pretend = 0, frame = 8
+  72              		@ frame_needed = 1, uses_anonymous_args = 0
+  73 0000 80B5     		push	{r7, lr}
+  74              		.cfi_def_cfa_offset 8
+  75              		.cfi_offset 7, -8
+  76              		.cfi_offset 14, -4
+  77 0002 82B0     		sub	sp, sp, #8
+  78              		.cfi_def_cfa_offset 16
+  79 0004 00AF     		add	r7, sp, #0
+  80              		.cfi_def_cfa_register 7
+  81 0006 7860     		str	r0, [r7, #4]
+  31:structs.c     ****     updateMemoryVariable(x);
+  82              		.loc 1 31 0
+  83 0008 7868     		ldr	r0, [r7, #4]
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 3
+
+
+  84 000a FFF7FEFF 		bl	updateMemoryVariable
+  32:structs.c     ****     return getavg(x);
+  85              		.loc 1 32 0
+  86 000e 7868     		ldr	r0, [r7, #4]
+  87 0010 FFF7FEFF 		bl	getavg
+  88 0014 0346     		mov	r3, r0
+  33:structs.c     **** }
+  89              		.loc 1 33 0
+  90 0016 1846     		mov	r0, r3
+  91 0018 0837     		adds	r7, r7, #8
+  92              		.cfi_def_cfa_offset 8
+  93 001a BD46     		mov	sp, r7
+  94              		.cfi_def_cfa_register 13
+  95              		@ sp needed
+  96 001c 80BD     		pop	{r7, pc}
+  97              		.cfi_endproc
+  98              	.LFE64:
+  99              		.size	getValue, .-getValue
+ 100 001e 00BF     		.section	.text.getValueWithoutUpdate,"ax",%progbits
+ 101              		.align	2
+ 102              		.global	getValueWithoutUpdate
+ 103              		.thumb
+ 104              		.thumb_func
+ 105              		.type	getValueWithoutUpdate, %function
+ 106              	getValueWithoutUpdate:
+ 107              	.LFB65:
+  34:structs.c     **** 
+  35:structs.c     **** float getValueWithoutUpdate(MemoryVariable*x)
+  36:structs.c     **** {
+ 108              		.loc 1 36 0
+ 109              		.cfi_startproc
+ 110              		@ args = 0, pretend = 0, frame = 8
+ 111              		@ frame_needed = 1, uses_anonymous_args = 0
+ 112 0000 80B5     		push	{r7, lr}
+ 113              		.cfi_def_cfa_offset 8
+ 114              		.cfi_offset 7, -8
+ 115              		.cfi_offset 14, -4
+ 116 0002 82B0     		sub	sp, sp, #8
+ 117              		.cfi_def_cfa_offset 16
+ 118 0004 00AF     		add	r7, sp, #0
+ 119              		.cfi_def_cfa_register 7
+ 120 0006 7860     		str	r0, [r7, #4]
+  37:structs.c     ****     return getavg(x);
+ 121              		.loc 1 37 0
+ 122 0008 7868     		ldr	r0, [r7, #4]
+ 123 000a FFF7FEFF 		bl	getavg
+ 124 000e 0346     		mov	r3, r0
+  38:structs.c     **** }
+ 125              		.loc 1 38 0
+ 126 0010 1846     		mov	r0, r3
+ 127 0012 0837     		adds	r7, r7, #8
+ 128              		.cfi_def_cfa_offset 8
+ 129 0014 BD46     		mov	sp, r7
+ 130              		.cfi_def_cfa_register 13
+ 131              		@ sp needed
+ 132 0016 80BD     		pop	{r7, pc}
+ 133              		.cfi_endproc
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 4
+
+
+ 134              	.LFE65:
+ 135              		.size	getValueWithoutUpdate, .-getValueWithoutUpdate
+ 136              		.section	.text.getDerivative,"ax",%progbits
+ 137              		.align	2
+ 138              		.global	getDerivative
+ 139              		.thumb
+ 140              		.thumb_func
+ 141              		.type	getDerivative, %function
+ 142              	getDerivative:
+ 143              	.LFB66:
+  39:structs.c     **** 
+  40:structs.c     **** float getDerivative(MemoryVariable *x)
+  41:structs.c     **** {
+ 144              		.loc 1 41 0
+ 145              		.cfi_startproc
+ 146              		@ args = 0, pretend = 0, frame = 8
+ 147              		@ frame_needed = 1, uses_anonymous_args = 0
+ 148 0000 80B5     		push	{r7, lr}
+ 149              		.cfi_def_cfa_offset 8
+ 150              		.cfi_offset 7, -8
+ 151              		.cfi_offset 14, -4
+ 152 0002 82B0     		sub	sp, sp, #8
+ 153              		.cfi_def_cfa_offset 16
+ 154 0004 00AF     		add	r7, sp, #0
+ 155              		.cfi_def_cfa_register 7
+ 156 0006 7860     		str	r0, [r7, #4]
+  42:structs.c     ****     updateMemoryVariable(x);
+ 157              		.loc 1 42 0
+ 158 0008 7868     		ldr	r0, [r7, #4]
+ 159 000a FFF7FEFF 		bl	updateMemoryVariable
+  43:structs.c     ****     return getder(x);
+ 160              		.loc 1 43 0
+ 161 000e 7868     		ldr	r0, [r7, #4]
+ 162 0010 FFF7FEFF 		bl	getder
+ 163 0014 0346     		mov	r3, r0
+  44:structs.c     **** }
+ 164              		.loc 1 44 0
+ 165 0016 1846     		mov	r0, r3
+ 166 0018 0837     		adds	r7, r7, #8
+ 167              		.cfi_def_cfa_offset 8
+ 168 001a BD46     		mov	sp, r7
+ 169              		.cfi_def_cfa_register 13
+ 170              		@ sp needed
+ 171 001c 80BD     		pop	{r7, pc}
+ 172              		.cfi_endproc
+ 173              	.LFE66:
+ 174              		.size	getDerivative, .-getDerivative
+ 175              		.global	__aeabi_ui2f
+ 176 001e 00BF     		.section	.text.updateMemoryVariable,"ax",%progbits
+ 177              		.align	2
+ 178              		.global	updateMemoryVariable
+ 179              		.thumb
+ 180              		.thumb_func
+ 181              		.type	updateMemoryVariable, %function
+ 182              	updateMemoryVariable:
+ 183              	.LFB67:
+  45:structs.c     **** 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 5
+
+
+  46:structs.c     **** //Helpers implementation
+  47:structs.c     **** void updateMemoryVariable(MemoryVariable *x)
+  48:structs.c     **** {
+ 184              		.loc 1 48 0
+ 185              		.cfi_startproc
+ 186              		@ args = 0, pretend = 0, frame = 16
+ 187              		@ frame_needed = 1, uses_anonymous_args = 0
+ 188 0000 80B5     		push	{r7, lr}
+ 189              		.cfi_def_cfa_offset 8
+ 190              		.cfi_offset 7, -8
+ 191              		.cfi_offset 14, -4
+ 192 0002 84B0     		sub	sp, sp, #16
+ 193              		.cfi_def_cfa_offset 24
+ 194 0004 00AF     		add	r7, sp, #0
+ 195              		.cfi_def_cfa_register 7
+ 196 0006 7860     		str	r0, [r7, #4]
+ 197              	.LBB2:
+  49:structs.c     ****     for(int i = 0; i < MEMORY_SIZE; i++)
+ 198              		.loc 1 49 0
+ 199 0008 0023     		movs	r3, #0
+ 200 000a FB60     		str	r3, [r7, #12]
+ 201 000c 1AE0     		b	.L9
+ 202              	.L10:
+  50:structs.c     ****     {
+  51:structs.c     ****         x->values[i] = x->valueGetter();
+ 203              		.loc 1 51 0 discriminator 3
+ 204 000e 7B68     		ldr	r3, [r7, #4]
+ 205 0010 DB6A     		ldr	r3, [r3, #44]
+ 206 0012 9847     		blx	r3
+ 207 0014 0146     		mov	r1, r0
+ 208 0016 7B68     		ldr	r3, [r7, #4]
+ 209 0018 FA68     		ldr	r2, [r7, #12]
+ 210 001a 43F82210 		str	r1, [r3, r2, lsl #2]	@ float
+  52:structs.c     ****         x->timeStamps[i] = Counter_1_ReadCounter()*COUNTER_FREQUENCY;
+ 211              		.loc 1 52 0 discriminator 3
+ 212 001e FFF7FEFF 		bl	Counter_1_ReadCounter
+ 213 0022 0246     		mov	r2, r0
+ 214 0024 0B4B     		ldr	r3, .L11
+ 215 0026 03FB02F3 		mul	r3, r3, r2
+ 216 002a 1846     		mov	r0, r3
+ 217 002c FFF7FEFF 		bl	__aeabi_ui2f
+ 218 0030 0146     		mov	r1, r0
+ 219 0032 7A68     		ldr	r2, [r7, #4]
+ 220 0034 FB68     		ldr	r3, [r7, #12]
+ 221 0036 0433     		adds	r3, r3, #4
+ 222 0038 9B00     		lsls	r3, r3, #2
+ 223 003a 1344     		add	r3, r3, r2
+ 224 003c 5960     		str	r1, [r3, #4]	@ float
+  49:structs.c     ****     for(int i = 0; i < MEMORY_SIZE; i++)
+ 225              		.loc 1 49 0 discriminator 3
+ 226 003e FB68     		ldr	r3, [r7, #12]
+ 227 0040 0133     		adds	r3, r3, #1
+ 228 0042 FB60     		str	r3, [r7, #12]
+ 229              	.L9:
+  49:structs.c     ****     for(int i = 0; i < MEMORY_SIZE; i++)
+ 230              		.loc 1 49 0 is_stmt 0 discriminator 1
+ 231 0044 FB68     		ldr	r3, [r7, #12]
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 6
+
+
+ 232 0046 042B     		cmp	r3, #4
+ 233 0048 E1DD     		ble	.L10
+ 234              	.LBE2:
+  53:structs.c     ****     }
+  54:structs.c     **** }
+ 235              		.loc 1 54 0 is_stmt 1
+ 236 004a 00BF     		nop
+ 237 004c 1037     		adds	r7, r7, #16
+ 238              		.cfi_def_cfa_offset 8
+ 239 004e BD46     		mov	sp, r7
+ 240              		.cfi_def_cfa_register 13
+ 241              		@ sp needed
+ 242 0050 80BD     		pop	{r7, pc}
+ 243              	.L12:
+ 244 0052 00BF     		.align	2
+ 245              	.L11:
+ 246 0054 A0860100 		.word	100000
+ 247              		.cfi_endproc
+ 248              	.LFE67:
+ 249              		.size	updateMemoryVariable, .-updateMemoryVariable
+ 250              		.global	__aeabi_fsub
+ 251              		.global	__aeabi_fadd
+ 252              		.global	__aeabi_fdiv
+ 253              		.section	.text.getavg,"ax",%progbits
+ 254              		.align	2
+ 255              		.global	getavg
+ 256              		.thumb
+ 257              		.thumb_func
+ 258              		.type	getavg, %function
+ 259              	getavg:
+ 260              	.LFB68:
+  55:structs.c     **** 
+  56:structs.c     **** float getavg(MemoryVariable *x)
+  57:structs.c     **** {
+ 261              		.loc 1 57 0
+ 262              		.cfi_startproc
+ 263              		@ args = 0, pretend = 0, frame = 16
+ 264              		@ frame_needed = 1, uses_anonymous_args = 0
+ 265 0000 80B5     		push	{r7, lr}
+ 266              		.cfi_def_cfa_offset 8
+ 267              		.cfi_offset 7, -8
+ 268              		.cfi_offset 14, -4
+ 269 0002 84B0     		sub	sp, sp, #16
+ 270              		.cfi_def_cfa_offset 24
+ 271 0004 00AF     		add	r7, sp, #0
+ 272              		.cfi_def_cfa_register 7
+ 273 0006 7860     		str	r0, [r7, #4]
+  58:structs.c     ****     //helper function. calculates the average
+  59:structs.c     ****     float sum = 0;
+ 274              		.loc 1 59 0
+ 275 0008 4FF00003 		mov	r3, #0
+ 276 000c FB60     		str	r3, [r7, #12]	@ float
+ 277              	.LBB3:
+  60:structs.c     ****     for(int i = 0; i < MEMORY_SIZE; i++)
+ 278              		.loc 1 60 0
+ 279 000e 0023     		movs	r3, #0
+ 280 0010 BB60     		str	r3, [r7, #8]
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 7
+
+
+ 281 0012 13E0     		b	.L14
+ 282              	.L15:
+  61:structs.c     ****     {
+  62:structs.c     ****         sum+=x->values[i]-x->offset;
+ 283              		.loc 1 62 0 discriminator 3
+ 284 0014 7B68     		ldr	r3, [r7, #4]
+ 285 0016 BA68     		ldr	r2, [r7, #8]
+ 286 0018 53F82220 		ldr	r2, [r3, r2, lsl #2]	@ float
+ 287 001c 7B68     		ldr	r3, [r7, #4]
+ 288 001e 9B6A     		ldr	r3, [r3, #40]	@ float
+ 289 0020 1946     		mov	r1, r3
+ 290 0022 1046     		mov	r0, r2
+ 291 0024 FFF7FEFF 		bl	__aeabi_fsub
+ 292 0028 0346     		mov	r3, r0
+ 293 002a 1946     		mov	r1, r3
+ 294 002c F868     		ldr	r0, [r7, #12]	@ float
+ 295 002e FFF7FEFF 		bl	__aeabi_fadd
+ 296 0032 0346     		mov	r3, r0
+ 297 0034 FB60     		str	r3, [r7, #12]	@ float
+  60:structs.c     ****     for(int i = 0; i < MEMORY_SIZE; i++)
+ 298              		.loc 1 60 0 discriminator 3
+ 299 0036 BB68     		ldr	r3, [r7, #8]
+ 300 0038 0133     		adds	r3, r3, #1
+ 301 003a BB60     		str	r3, [r7, #8]
+ 302              	.L14:
+  60:structs.c     ****     for(int i = 0; i < MEMORY_SIZE; i++)
+ 303              		.loc 1 60 0 is_stmt 0 discriminator 1
+ 304 003c BB68     		ldr	r3, [r7, #8]
+ 305 003e 042B     		cmp	r3, #4
+ 306 0040 E8DD     		ble	.L15
+ 307              	.LBE3:
+  63:structs.c     ****     }
+  64:structs.c     ****     return sum/MEMORY_SIZE;
+ 308              		.loc 1 64 0 is_stmt 1
+ 309 0042 0449     		ldr	r1, .L17
+ 310 0044 F868     		ldr	r0, [r7, #12]	@ float
+ 311 0046 FFF7FEFF 		bl	__aeabi_fdiv
+ 312 004a 0346     		mov	r3, r0
+  65:structs.c     **** }
+ 313              		.loc 1 65 0
+ 314 004c 1846     		mov	r0, r3
+ 315 004e 1037     		adds	r7, r7, #16
+ 316              		.cfi_def_cfa_offset 8
+ 317 0050 BD46     		mov	sp, r7
+ 318              		.cfi_def_cfa_register 13
+ 319              		@ sp needed
+ 320 0052 80BD     		pop	{r7, pc}
+ 321              	.L18:
+ 322              		.align	2
+ 323              	.L17:
+ 324 0054 0000A040 		.word	1084227584
+ 325              		.cfi_endproc
+ 326              	.LFE68:
+ 327              		.size	getavg, .-getavg
+ 328              		.section	.text.getder,"ax",%progbits
+ 329              		.align	2
+ 330              		.global	getder
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 8
+
+
+ 331              		.thumb
+ 332              		.thumb_func
+ 333              		.type	getder, %function
+ 334              	getder:
+ 335              	.LFB69:
+  66:structs.c     **** float getder(MemoryVariable *x)
+  67:structs.c     **** {
+ 336              		.loc 1 67 0
+ 337              		.cfi_startproc
+ 338              		@ args = 0, pretend = 0, frame = 16
+ 339              		@ frame_needed = 1, uses_anonymous_args = 0
+ 340 0000 90B5     		push	{r4, r7, lr}
+ 341              		.cfi_def_cfa_offset 12
+ 342              		.cfi_offset 4, -12
+ 343              		.cfi_offset 7, -8
+ 344              		.cfi_offset 14, -4
+ 345 0002 85B0     		sub	sp, sp, #20
+ 346              		.cfi_def_cfa_offset 32
+ 347 0004 00AF     		add	r7, sp, #0
+ 348              		.cfi_def_cfa_register 7
+ 349 0006 7860     		str	r0, [r7, #4]
+  68:structs.c     ****     float vAvg = 0;
+ 350              		.loc 1 68 0
+ 351 0008 4FF00003 		mov	r3, #0
+ 352 000c FB60     		str	r3, [r7, #12]	@ float
+ 353              	.LBB4:
+  69:structs.c     ****     for(int i = 0; i < MEMORY_SIZE-1; i++)
+ 354              		.loc 1 69 0
+ 355 000e 0023     		movs	r3, #0
+ 356 0010 BB60     		str	r3, [r7, #8]
+ 357 0012 2CE0     		b	.L20
+ 358              	.L21:
+  70:structs.c     ****     {
+  71:structs.c     ****         vAvg+=(x->values[i+1]-x->values[i])/(x->timeStamps[i+1]-x->timeStamps[i]);
+ 359              		.loc 1 71 0 discriminator 3
+ 360 0014 BB68     		ldr	r3, [r7, #8]
+ 361 0016 5A1C     		adds	r2, r3, #1
+ 362 0018 7B68     		ldr	r3, [r7, #4]
+ 363 001a 53F82200 		ldr	r0, [r3, r2, lsl #2]	@ float
+ 364 001e 7B68     		ldr	r3, [r7, #4]
+ 365 0020 BA68     		ldr	r2, [r7, #8]
+ 366 0022 53F82230 		ldr	r3, [r3, r2, lsl #2]	@ float
+ 367 0026 1946     		mov	r1, r3
+ 368 0028 FFF7FEFF 		bl	__aeabi_fsub
+ 369 002c 0346     		mov	r3, r0
+ 370 002e 1C46     		mov	r4, r3
+ 371 0030 BB68     		ldr	r3, [r7, #8]
+ 372 0032 0133     		adds	r3, r3, #1
+ 373 0034 7A68     		ldr	r2, [r7, #4]
+ 374 0036 0433     		adds	r3, r3, #4
+ 375 0038 9B00     		lsls	r3, r3, #2
+ 376 003a 1344     		add	r3, r3, r2
+ 377 003c 5868     		ldr	r0, [r3, #4]	@ float
+ 378 003e 7A68     		ldr	r2, [r7, #4]
+ 379 0040 BB68     		ldr	r3, [r7, #8]
+ 380 0042 0433     		adds	r3, r3, #4
+ 381 0044 9B00     		lsls	r3, r3, #2
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 9
+
+
+ 382 0046 1344     		add	r3, r3, r2
+ 383 0048 5B68     		ldr	r3, [r3, #4]	@ float
+ 384 004a 1946     		mov	r1, r3
+ 385 004c FFF7FEFF 		bl	__aeabi_fsub
+ 386 0050 0346     		mov	r3, r0
+ 387 0052 1946     		mov	r1, r3
+ 388 0054 2046     		mov	r0, r4
+ 389 0056 FFF7FEFF 		bl	__aeabi_fdiv
+ 390 005a 0346     		mov	r3, r0
+ 391 005c 1946     		mov	r1, r3
+ 392 005e F868     		ldr	r0, [r7, #12]	@ float
+ 393 0060 FFF7FEFF 		bl	__aeabi_fadd
+ 394 0064 0346     		mov	r3, r0
+ 395 0066 FB60     		str	r3, [r7, #12]	@ float
+  69:structs.c     ****     for(int i = 0; i < MEMORY_SIZE-1; i++)
+ 396              		.loc 1 69 0 discriminator 3
+ 397 0068 BB68     		ldr	r3, [r7, #8]
+ 398 006a 0133     		adds	r3, r3, #1
+ 399 006c BB60     		str	r3, [r7, #8]
+ 400              	.L20:
+  69:structs.c     ****     for(int i = 0; i < MEMORY_SIZE-1; i++)
+ 401              		.loc 1 69 0 is_stmt 0 discriminator 1
+ 402 006e BB68     		ldr	r3, [r7, #8]
+ 403 0070 032B     		cmp	r3, #3
+ 404 0072 CFDD     		ble	.L21
+ 405              	.LBE4:
+  72:structs.c     ****     }
+  73:structs.c     ****     vAvg/=(MEMORY_SIZE-1);
+ 406              		.loc 1 73 0 is_stmt 1
+ 407 0074 4FF08141 		mov	r1, #1082130432
+ 408 0078 F868     		ldr	r0, [r7, #12]	@ float
+ 409 007a FFF7FEFF 		bl	__aeabi_fdiv
+ 410 007e 0346     		mov	r3, r0
+ 411 0080 FB60     		str	r3, [r7, #12]	@ float
+  74:structs.c     ****     return vAvg;
+ 412              		.loc 1 74 0
+ 413 0082 FB68     		ldr	r3, [r7, #12]	@ float
+  75:structs.c     **** }
+ 414              		.loc 1 75 0
+ 415 0084 1846     		mov	r0, r3
+ 416 0086 1437     		adds	r7, r7, #20
+ 417              		.cfi_def_cfa_offset 12
+ 418 0088 BD46     		mov	sp, r7
+ 419              		.cfi_def_cfa_register 13
+ 420              		@ sp needed
+ 421 008a 90BD     		pop	{r4, r7, pc}
+ 422              		.cfi_endproc
+ 423              	.LFE69:
+ 424              		.size	getder, .-getder
+ 425              		.text
+ 426              	.Letext0:
+ 427              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 428              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 429              		.file 4 "structs.h"
+ 430              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 431              		.section	.debug_info,"",%progbits
+ 432              	.Ldebug_info0:
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 10
+
+
+ 433 0000 81020000 		.4byte	0x281
+ 434 0004 0400     		.2byte	0x4
+ 435 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 436 000a 04       		.byte	0x4
+ 437 000b 01       		.uleb128 0x1
+ 438 000c 00000000 		.4byte	.LASF29
+ 439 0010 0C       		.byte	0xc
+ 440 0011 8E000000 		.4byte	.LASF30
+ 441 0015 72010000 		.4byte	.LASF31
+ 442 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 443 001d 00000000 		.4byte	0
+ 444 0021 00000000 		.4byte	.Ldebug_line0
+ 445 0025 02       		.uleb128 0x2
+ 446 0026 01       		.byte	0x1
+ 447 0027 06       		.byte	0x6
+ 448 0028 FC010000 		.4byte	.LASF0
+ 449 002c 02       		.uleb128 0x2
+ 450 002d 01       		.byte	0x1
+ 451 002e 08       		.byte	0x8
+ 452 002f CF000000 		.4byte	.LASF1
+ 453 0033 02       		.uleb128 0x2
+ 454 0034 02       		.byte	0x2
+ 455 0035 05       		.byte	0x5
+ 456 0036 C8010000 		.4byte	.LASF2
+ 457 003a 02       		.uleb128 0x2
+ 458 003b 02       		.byte	0x2
+ 459 003c 07       		.byte	0x7
+ 460 003d EF000000 		.4byte	.LASF3
+ 461 0041 03       		.uleb128 0x3
+ 462 0042 98000000 		.4byte	.LASF9
+ 463 0046 02       		.byte	0x2
+ 464 0047 3F       		.byte	0x3f
+ 465 0048 4C000000 		.4byte	0x4c
+ 466 004c 02       		.uleb128 0x2
+ 467 004d 04       		.byte	0x4
+ 468 004e 05       		.byte	0x5
+ 469 004f D9010000 		.4byte	.LASF4
+ 470 0053 02       		.uleb128 0x2
+ 471 0054 04       		.byte	0x4
+ 472 0055 07       		.byte	0x7
+ 473 0056 DD000000 		.4byte	.LASF5
+ 474 005a 02       		.uleb128 0x2
+ 475 005b 08       		.byte	0x8
+ 476 005c 05       		.byte	0x5
+ 477 005d A7010000 		.4byte	.LASF6
+ 478 0061 02       		.uleb128 0x2
+ 479 0062 08       		.byte	0x8
+ 480 0063 07       		.byte	0x7
+ 481 0064 39010000 		.4byte	.LASF7
+ 482 0068 04       		.uleb128 0x4
+ 483 0069 04       		.byte	0x4
+ 484 006a 05       		.byte	0x5
+ 485 006b 696E7400 		.ascii	"int\000"
+ 486 006f 02       		.uleb128 0x2
+ 487 0070 04       		.byte	0x4
+ 488 0071 07       		.byte	0x7
+ 489 0072 2C010000 		.4byte	.LASF8
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 11
+
+
+ 490 0076 03       		.uleb128 0x3
+ 491 0077 6A010000 		.4byte	.LASF10
+ 492 007b 03       		.byte	0x3
+ 493 007c 2C       		.byte	0x2c
+ 494 007d 41000000 		.4byte	0x41
+ 495 0081 02       		.uleb128 0x2
+ 496 0082 04       		.byte	0x4
+ 497 0083 04       		.byte	0x4
+ 498 0084 C2000000 		.4byte	.LASF11
+ 499 0088 02       		.uleb128 0x2
+ 500 0089 08       		.byte	0x8
+ 501 008a 04       		.byte	0x4
+ 502 008b 0F010000 		.4byte	.LASF12
+ 503 008f 02       		.uleb128 0x2
+ 504 0090 01       		.byte	0x1
+ 505 0091 08       		.byte	0x8
+ 506 0092 B5010000 		.4byte	.LASF13
+ 507 0096 02       		.uleb128 0x2
+ 508 0097 08       		.byte	0x8
+ 509 0098 04       		.byte	0x4
+ 510 0099 F0010000 		.4byte	.LASF14
+ 511 009d 02       		.uleb128 0x2
+ 512 009e 04       		.byte	0x4
+ 513 009f 07       		.byte	0x7
+ 514 00a0 9E010000 		.4byte	.LASF15
+ 515 00a4 05       		.uleb128 0x5
+ 516 00a5 50010000 		.4byte	.LASF20
+ 517 00a9 30       		.byte	0x30
+ 518 00aa 04       		.byte	0x4
+ 519 00ab 12       		.byte	0x12
+ 520 00ac E1000000 		.4byte	0xe1
+ 521 00b0 06       		.uleb128 0x6
+ 522 00b1 BA010000 		.4byte	.LASF16
+ 523 00b5 04       		.byte	0x4
+ 524 00b6 13       		.byte	0x13
+ 525 00b7 E1000000 		.4byte	0xe1
+ 526 00bb 00       		.byte	0
+ 527 00bc 06       		.uleb128 0x6
+ 528 00bd AB000000 		.4byte	.LASF17
+ 529 00c1 04       		.byte	0x4
+ 530 00c2 14       		.byte	0x14
+ 531 00c3 E1000000 		.4byte	0xe1
+ 532 00c7 14       		.byte	0x14
+ 533 00c8 06       		.uleb128 0x6
+ 534 00c9 C1010000 		.4byte	.LASF18
+ 535 00cd 04       		.byte	0x4
+ 536 00ce 15       		.byte	0x15
+ 537 00cf 81000000 		.4byte	0x81
+ 538 00d3 28       		.byte	0x28
+ 539 00d4 06       		.uleb128 0x6
+ 540 00d5 B6000000 		.4byte	.LASF19
+ 541 00d9 04       		.byte	0x4
+ 542 00da 16       		.byte	0x16
+ 543 00db FC000000 		.4byte	0xfc
+ 544 00df 2C       		.byte	0x2c
+ 545 00e0 00       		.byte	0
+ 546 00e1 07       		.uleb128 0x7
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 12
+
+
+ 547 00e2 81000000 		.4byte	0x81
+ 548 00e6 F1000000 		.4byte	0xf1
+ 549 00ea 08       		.uleb128 0x8
+ 550 00eb 9D000000 		.4byte	0x9d
+ 551 00ef 04       		.byte	0x4
+ 552 00f0 00       		.byte	0
+ 553 00f1 09       		.uleb128 0x9
+ 554 00f2 81000000 		.4byte	0x81
+ 555 00f6 FC000000 		.4byte	0xfc
+ 556 00fa 0A       		.uleb128 0xa
+ 557 00fb 00       		.byte	0
+ 558 00fc 0B       		.uleb128 0xb
+ 559 00fd 04       		.byte	0x4
+ 560 00fe F1000000 		.4byte	0xf1
+ 561 0102 03       		.uleb128 0x3
+ 562 0103 50010000 		.4byte	.LASF20
+ 563 0107 04       		.byte	0x4
+ 564 0108 17       		.byte	0x17
+ 565 0109 A4000000 		.4byte	0xa4
+ 566 010d 0C       		.uleb128 0xc
+ 567 010e 5F010000 		.4byte	.LASF24
+ 568 0112 01       		.byte	0x1
+ 569 0113 16       		.byte	0x16
+ 570 0114 00000000 		.4byte	.LFB63
+ 571 0118 22000000 		.4byte	.LFE63-.LFB63
+ 572 011c 01       		.uleb128 0x1
+ 573 011d 9C       		.byte	0x9c
+ 574 011e 2F010000 		.4byte	0x12f
+ 575 0122 0D       		.uleb128 0xd
+ 576 0123 7800     		.ascii	"x\000"
+ 577 0125 01       		.byte	0x1
+ 578 0126 16       		.byte	0x16
+ 579 0127 2F010000 		.4byte	0x12f
+ 580 012b 02       		.uleb128 0x2
+ 581 012c 91       		.byte	0x91
+ 582 012d 74       		.sleb128 -12
+ 583 012e 00       		.byte	0
+ 584 012f 0B       		.uleb128 0xb
+ 585 0130 04       		.byte	0x4
+ 586 0131 02010000 		.4byte	0x102
+ 587 0135 0E       		.uleb128 0xe
+ 588 0136 A2000000 		.4byte	.LASF21
+ 589 013a 01       		.byte	0x1
+ 590 013b 1D       		.byte	0x1d
+ 591 013c 81000000 		.4byte	0x81
+ 592 0140 00000000 		.4byte	.LFB64
+ 593 0144 1E000000 		.4byte	.LFE64-.LFB64
+ 594 0148 01       		.uleb128 0x1
+ 595 0149 9C       		.byte	0x9c
+ 596 014a 5B010000 		.4byte	0x15b
+ 597 014e 0D       		.uleb128 0xd
+ 598 014f 7800     		.ascii	"x\000"
+ 599 0151 01       		.byte	0x1
+ 600 0152 1D       		.byte	0x1d
+ 601 0153 2F010000 		.4byte	0x12f
+ 602 0157 02       		.uleb128 0x2
+ 603 0158 91       		.byte	0x91
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 13
+
+
+ 604 0159 74       		.sleb128 -12
+ 605 015a 00       		.byte	0
+ 606 015b 0E       		.uleb128 0xe
+ 607 015c 16010000 		.4byte	.LASF22
+ 608 0160 01       		.byte	0x1
+ 609 0161 23       		.byte	0x23
+ 610 0162 81000000 		.4byte	0x81
+ 611 0166 00000000 		.4byte	.LFB65
+ 612 016a 18000000 		.4byte	.LFE65-.LFB65
+ 613 016e 01       		.uleb128 0x1
+ 614 016f 9C       		.byte	0x9c
+ 615 0170 81010000 		.4byte	0x181
+ 616 0174 0D       		.uleb128 0xd
+ 617 0175 7800     		.ascii	"x\000"
+ 618 0177 01       		.byte	0x1
+ 619 0178 23       		.byte	0x23
+ 620 0179 2F010000 		.4byte	0x12f
+ 621 017d 02       		.uleb128 0x2
+ 622 017e 91       		.byte	0x91
+ 623 017f 74       		.sleb128 -12
+ 624 0180 00       		.byte	0
+ 625 0181 0E       		.uleb128 0xe
+ 626 0182 E2010000 		.4byte	.LASF23
+ 627 0186 01       		.byte	0x1
+ 628 0187 28       		.byte	0x28
+ 629 0188 81000000 		.4byte	0x81
+ 630 018c 00000000 		.4byte	.LFB66
+ 631 0190 1E000000 		.4byte	.LFE66-.LFB66
+ 632 0194 01       		.uleb128 0x1
+ 633 0195 9C       		.byte	0x9c
+ 634 0196 A7010000 		.4byte	0x1a7
+ 635 019a 0D       		.uleb128 0xd
+ 636 019b 7800     		.ascii	"x\000"
+ 637 019d 01       		.byte	0x1
+ 638 019e 28       		.byte	0x28
+ 639 019f 2F010000 		.4byte	0x12f
+ 640 01a3 02       		.uleb128 0x2
+ 641 01a4 91       		.byte	0x91
+ 642 01a5 74       		.sleb128 -12
+ 643 01a6 00       		.byte	0
+ 644 01a7 0C       		.uleb128 0xc
+ 645 01a8 08020000 		.4byte	.LASF25
+ 646 01ac 01       		.byte	0x1
+ 647 01ad 2F       		.byte	0x2f
+ 648 01ae 00000000 		.4byte	.LFB67
+ 649 01b2 58000000 		.4byte	.LFE67-.LFB67
+ 650 01b6 01       		.uleb128 0x1
+ 651 01b7 9C       		.byte	0x9c
+ 652 01b8 DF010000 		.4byte	0x1df
+ 653 01bc 0D       		.uleb128 0xd
+ 654 01bd 7800     		.ascii	"x\000"
+ 655 01bf 01       		.byte	0x1
+ 656 01c0 2F       		.byte	0x2f
+ 657 01c1 2F010000 		.4byte	0x12f
+ 658 01c5 02       		.uleb128 0x2
+ 659 01c6 91       		.byte	0x91
+ 660 01c7 6C       		.sleb128 -20
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 14
+
+
+ 661 01c8 0F       		.uleb128 0xf
+ 662 01c9 08000000 		.4byte	.LBB2
+ 663 01cd 42000000 		.4byte	.LBE2-.LBB2
+ 664 01d1 10       		.uleb128 0x10
+ 665 01d2 6900     		.ascii	"i\000"
+ 666 01d4 01       		.byte	0x1
+ 667 01d5 31       		.byte	0x31
+ 668 01d6 68000000 		.4byte	0x68
+ 669 01da 02       		.uleb128 0x2
+ 670 01db 91       		.byte	0x91
+ 671 01dc 74       		.sleb128 -12
+ 672 01dd 00       		.byte	0
+ 673 01de 00       		.byte	0
+ 674 01df 0E       		.uleb128 0xe
+ 675 01e0 C8000000 		.4byte	.LASF26
+ 676 01e4 01       		.byte	0x1
+ 677 01e5 38       		.byte	0x38
+ 678 01e6 81000000 		.4byte	0x81
+ 679 01ea 00000000 		.4byte	.LFB68
+ 680 01ee 58000000 		.4byte	.LFE68-.LFB68
+ 681 01f2 01       		.uleb128 0x1
+ 682 01f3 9C       		.byte	0x9c
+ 683 01f4 29020000 		.4byte	0x229
+ 684 01f8 0D       		.uleb128 0xd
+ 685 01f9 7800     		.ascii	"x\000"
+ 686 01fb 01       		.byte	0x1
+ 687 01fc 38       		.byte	0x38
+ 688 01fd 2F010000 		.4byte	0x12f
+ 689 0201 02       		.uleb128 0x2
+ 690 0202 91       		.byte	0x91
+ 691 0203 6C       		.sleb128 -20
+ 692 0204 10       		.uleb128 0x10
+ 693 0205 73756D00 		.ascii	"sum\000"
+ 694 0209 01       		.byte	0x1
+ 695 020a 3B       		.byte	0x3b
+ 696 020b 81000000 		.4byte	0x81
+ 697 020f 02       		.uleb128 0x2
+ 698 0210 91       		.byte	0x91
+ 699 0211 74       		.sleb128 -12
+ 700 0212 0F       		.uleb128 0xf
+ 701 0213 0E000000 		.4byte	.LBB3
+ 702 0217 34000000 		.4byte	.LBE3-.LBB3
+ 703 021b 10       		.uleb128 0x10
+ 704 021c 6900     		.ascii	"i\000"
+ 705 021e 01       		.byte	0x1
+ 706 021f 3C       		.byte	0x3c
+ 707 0220 68000000 		.4byte	0x68
+ 708 0224 02       		.uleb128 0x2
+ 709 0225 91       		.byte	0x91
+ 710 0226 70       		.sleb128 -16
+ 711 0227 00       		.byte	0
+ 712 0228 00       		.byte	0
+ 713 0229 0E       		.uleb128 0xe
+ 714 022a D2010000 		.4byte	.LASF27
+ 715 022e 01       		.byte	0x1
+ 716 022f 42       		.byte	0x42
+ 717 0230 81000000 		.4byte	0x81
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 15
+
+
+ 718 0234 00000000 		.4byte	.LFB69
+ 719 0238 8C000000 		.4byte	.LFE69-.LFB69
+ 720 023c 01       		.uleb128 0x1
+ 721 023d 9C       		.byte	0x9c
+ 722 023e 73020000 		.4byte	0x273
+ 723 0242 0D       		.uleb128 0xd
+ 724 0243 7800     		.ascii	"x\000"
+ 725 0245 01       		.byte	0x1
+ 726 0246 42       		.byte	0x42
+ 727 0247 2F010000 		.4byte	0x12f
+ 728 024b 02       		.uleb128 0x2
+ 729 024c 91       		.byte	0x91
+ 730 024d 64       		.sleb128 -28
+ 731 024e 11       		.uleb128 0x11
+ 732 024f 1D020000 		.4byte	.LASF28
+ 733 0253 01       		.byte	0x1
+ 734 0254 44       		.byte	0x44
+ 735 0255 81000000 		.4byte	0x81
+ 736 0259 02       		.uleb128 0x2
+ 737 025a 91       		.byte	0x91
+ 738 025b 6C       		.sleb128 -20
+ 739 025c 0F       		.uleb128 0xf
+ 740 025d 0E000000 		.4byte	.LBB4
+ 741 0261 66000000 		.4byte	.LBE4-.LBB4
+ 742 0265 10       		.uleb128 0x10
+ 743 0266 6900     		.ascii	"i\000"
+ 744 0268 01       		.byte	0x1
+ 745 0269 45       		.byte	0x45
+ 746 026a 68000000 		.4byte	0x68
+ 747 026e 02       		.uleb128 0x2
+ 748 026f 91       		.byte	0x91
+ 749 0270 68       		.sleb128 -24
+ 750 0271 00       		.byte	0
+ 751 0272 00       		.byte	0
+ 752 0273 12       		.uleb128 0x12
+ 753 0274 02010000 		.4byte	.LASF32
+ 754 0278 05       		.byte	0x5
+ 755 0279 9606     		.2byte	0x696
+ 756 027b 7F020000 		.4byte	0x27f
+ 757 027f 13       		.uleb128 0x13
+ 758 0280 76000000 		.4byte	0x76
+ 759 0284 00       		.byte	0
+ 760              		.section	.debug_abbrev,"",%progbits
+ 761              	.Ldebug_abbrev0:
+ 762 0000 01       		.uleb128 0x1
+ 763 0001 11       		.uleb128 0x11
+ 764 0002 01       		.byte	0x1
+ 765 0003 25       		.uleb128 0x25
+ 766 0004 0E       		.uleb128 0xe
+ 767 0005 13       		.uleb128 0x13
+ 768 0006 0B       		.uleb128 0xb
+ 769 0007 03       		.uleb128 0x3
+ 770 0008 0E       		.uleb128 0xe
+ 771 0009 1B       		.uleb128 0x1b
+ 772 000a 0E       		.uleb128 0xe
+ 773 000b 55       		.uleb128 0x55
+ 774 000c 17       		.uleb128 0x17
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 16
+
+
+ 775 000d 11       		.uleb128 0x11
+ 776 000e 01       		.uleb128 0x1
+ 777 000f 10       		.uleb128 0x10
+ 778 0010 17       		.uleb128 0x17
+ 779 0011 00       		.byte	0
+ 780 0012 00       		.byte	0
+ 781 0013 02       		.uleb128 0x2
+ 782 0014 24       		.uleb128 0x24
+ 783 0015 00       		.byte	0
+ 784 0016 0B       		.uleb128 0xb
+ 785 0017 0B       		.uleb128 0xb
+ 786 0018 3E       		.uleb128 0x3e
+ 787 0019 0B       		.uleb128 0xb
+ 788 001a 03       		.uleb128 0x3
+ 789 001b 0E       		.uleb128 0xe
+ 790 001c 00       		.byte	0
+ 791 001d 00       		.byte	0
+ 792 001e 03       		.uleb128 0x3
+ 793 001f 16       		.uleb128 0x16
+ 794 0020 00       		.byte	0
+ 795 0021 03       		.uleb128 0x3
+ 796 0022 0E       		.uleb128 0xe
+ 797 0023 3A       		.uleb128 0x3a
+ 798 0024 0B       		.uleb128 0xb
+ 799 0025 3B       		.uleb128 0x3b
+ 800 0026 0B       		.uleb128 0xb
+ 801 0027 49       		.uleb128 0x49
+ 802 0028 13       		.uleb128 0x13
+ 803 0029 00       		.byte	0
+ 804 002a 00       		.byte	0
+ 805 002b 04       		.uleb128 0x4
+ 806 002c 24       		.uleb128 0x24
+ 807 002d 00       		.byte	0
+ 808 002e 0B       		.uleb128 0xb
+ 809 002f 0B       		.uleb128 0xb
+ 810 0030 3E       		.uleb128 0x3e
+ 811 0031 0B       		.uleb128 0xb
+ 812 0032 03       		.uleb128 0x3
+ 813 0033 08       		.uleb128 0x8
+ 814 0034 00       		.byte	0
+ 815 0035 00       		.byte	0
+ 816 0036 05       		.uleb128 0x5
+ 817 0037 13       		.uleb128 0x13
+ 818 0038 01       		.byte	0x1
+ 819 0039 03       		.uleb128 0x3
+ 820 003a 0E       		.uleb128 0xe
+ 821 003b 0B       		.uleb128 0xb
+ 822 003c 0B       		.uleb128 0xb
+ 823 003d 3A       		.uleb128 0x3a
+ 824 003e 0B       		.uleb128 0xb
+ 825 003f 3B       		.uleb128 0x3b
+ 826 0040 0B       		.uleb128 0xb
+ 827 0041 01       		.uleb128 0x1
+ 828 0042 13       		.uleb128 0x13
+ 829 0043 00       		.byte	0
+ 830 0044 00       		.byte	0
+ 831 0045 06       		.uleb128 0x6
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 17
+
+
+ 832 0046 0D       		.uleb128 0xd
+ 833 0047 00       		.byte	0
+ 834 0048 03       		.uleb128 0x3
+ 835 0049 0E       		.uleb128 0xe
+ 836 004a 3A       		.uleb128 0x3a
+ 837 004b 0B       		.uleb128 0xb
+ 838 004c 3B       		.uleb128 0x3b
+ 839 004d 0B       		.uleb128 0xb
+ 840 004e 49       		.uleb128 0x49
+ 841 004f 13       		.uleb128 0x13
+ 842 0050 38       		.uleb128 0x38
+ 843 0051 0B       		.uleb128 0xb
+ 844 0052 00       		.byte	0
+ 845 0053 00       		.byte	0
+ 846 0054 07       		.uleb128 0x7
+ 847 0055 01       		.uleb128 0x1
+ 848 0056 01       		.byte	0x1
+ 849 0057 49       		.uleb128 0x49
+ 850 0058 13       		.uleb128 0x13
+ 851 0059 01       		.uleb128 0x1
+ 852 005a 13       		.uleb128 0x13
+ 853 005b 00       		.byte	0
+ 854 005c 00       		.byte	0
+ 855 005d 08       		.uleb128 0x8
+ 856 005e 21       		.uleb128 0x21
+ 857 005f 00       		.byte	0
+ 858 0060 49       		.uleb128 0x49
+ 859 0061 13       		.uleb128 0x13
+ 860 0062 2F       		.uleb128 0x2f
+ 861 0063 0B       		.uleb128 0xb
+ 862 0064 00       		.byte	0
+ 863 0065 00       		.byte	0
+ 864 0066 09       		.uleb128 0x9
+ 865 0067 15       		.uleb128 0x15
+ 866 0068 01       		.byte	0x1
+ 867 0069 49       		.uleb128 0x49
+ 868 006a 13       		.uleb128 0x13
+ 869 006b 01       		.uleb128 0x1
+ 870 006c 13       		.uleb128 0x13
+ 871 006d 00       		.byte	0
+ 872 006e 00       		.byte	0
+ 873 006f 0A       		.uleb128 0xa
+ 874 0070 18       		.uleb128 0x18
+ 875 0071 00       		.byte	0
+ 876 0072 00       		.byte	0
+ 877 0073 00       		.byte	0
+ 878 0074 0B       		.uleb128 0xb
+ 879 0075 0F       		.uleb128 0xf
+ 880 0076 00       		.byte	0
+ 881 0077 0B       		.uleb128 0xb
+ 882 0078 0B       		.uleb128 0xb
+ 883 0079 49       		.uleb128 0x49
+ 884 007a 13       		.uleb128 0x13
+ 885 007b 00       		.byte	0
+ 886 007c 00       		.byte	0
+ 887 007d 0C       		.uleb128 0xc
+ 888 007e 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 18
+
+
+ 889 007f 01       		.byte	0x1
+ 890 0080 3F       		.uleb128 0x3f
+ 891 0081 19       		.uleb128 0x19
+ 892 0082 03       		.uleb128 0x3
+ 893 0083 0E       		.uleb128 0xe
+ 894 0084 3A       		.uleb128 0x3a
+ 895 0085 0B       		.uleb128 0xb
+ 896 0086 3B       		.uleb128 0x3b
+ 897 0087 0B       		.uleb128 0xb
+ 898 0088 27       		.uleb128 0x27
+ 899 0089 19       		.uleb128 0x19
+ 900 008a 11       		.uleb128 0x11
+ 901 008b 01       		.uleb128 0x1
+ 902 008c 12       		.uleb128 0x12
+ 903 008d 06       		.uleb128 0x6
+ 904 008e 40       		.uleb128 0x40
+ 905 008f 18       		.uleb128 0x18
+ 906 0090 9642     		.uleb128 0x2116
+ 907 0092 19       		.uleb128 0x19
+ 908 0093 01       		.uleb128 0x1
+ 909 0094 13       		.uleb128 0x13
+ 910 0095 00       		.byte	0
+ 911 0096 00       		.byte	0
+ 912 0097 0D       		.uleb128 0xd
+ 913 0098 05       		.uleb128 0x5
+ 914 0099 00       		.byte	0
+ 915 009a 03       		.uleb128 0x3
+ 916 009b 08       		.uleb128 0x8
+ 917 009c 3A       		.uleb128 0x3a
+ 918 009d 0B       		.uleb128 0xb
+ 919 009e 3B       		.uleb128 0x3b
+ 920 009f 0B       		.uleb128 0xb
+ 921 00a0 49       		.uleb128 0x49
+ 922 00a1 13       		.uleb128 0x13
+ 923 00a2 02       		.uleb128 0x2
+ 924 00a3 18       		.uleb128 0x18
+ 925 00a4 00       		.byte	0
+ 926 00a5 00       		.byte	0
+ 927 00a6 0E       		.uleb128 0xe
+ 928 00a7 2E       		.uleb128 0x2e
+ 929 00a8 01       		.byte	0x1
+ 930 00a9 3F       		.uleb128 0x3f
+ 931 00aa 19       		.uleb128 0x19
+ 932 00ab 03       		.uleb128 0x3
+ 933 00ac 0E       		.uleb128 0xe
+ 934 00ad 3A       		.uleb128 0x3a
+ 935 00ae 0B       		.uleb128 0xb
+ 936 00af 3B       		.uleb128 0x3b
+ 937 00b0 0B       		.uleb128 0xb
+ 938 00b1 27       		.uleb128 0x27
+ 939 00b2 19       		.uleb128 0x19
+ 940 00b3 49       		.uleb128 0x49
+ 941 00b4 13       		.uleb128 0x13
+ 942 00b5 11       		.uleb128 0x11
+ 943 00b6 01       		.uleb128 0x1
+ 944 00b7 12       		.uleb128 0x12
+ 945 00b8 06       		.uleb128 0x6
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 19
+
+
+ 946 00b9 40       		.uleb128 0x40
+ 947 00ba 18       		.uleb128 0x18
+ 948 00bb 9642     		.uleb128 0x2116
+ 949 00bd 19       		.uleb128 0x19
+ 950 00be 01       		.uleb128 0x1
+ 951 00bf 13       		.uleb128 0x13
+ 952 00c0 00       		.byte	0
+ 953 00c1 00       		.byte	0
+ 954 00c2 0F       		.uleb128 0xf
+ 955 00c3 0B       		.uleb128 0xb
+ 956 00c4 01       		.byte	0x1
+ 957 00c5 11       		.uleb128 0x11
+ 958 00c6 01       		.uleb128 0x1
+ 959 00c7 12       		.uleb128 0x12
+ 960 00c8 06       		.uleb128 0x6
+ 961 00c9 00       		.byte	0
+ 962 00ca 00       		.byte	0
+ 963 00cb 10       		.uleb128 0x10
+ 964 00cc 34       		.uleb128 0x34
+ 965 00cd 00       		.byte	0
+ 966 00ce 03       		.uleb128 0x3
+ 967 00cf 08       		.uleb128 0x8
+ 968 00d0 3A       		.uleb128 0x3a
+ 969 00d1 0B       		.uleb128 0xb
+ 970 00d2 3B       		.uleb128 0x3b
+ 971 00d3 0B       		.uleb128 0xb
+ 972 00d4 49       		.uleb128 0x49
+ 973 00d5 13       		.uleb128 0x13
+ 974 00d6 02       		.uleb128 0x2
+ 975 00d7 18       		.uleb128 0x18
+ 976 00d8 00       		.byte	0
+ 977 00d9 00       		.byte	0
+ 978 00da 11       		.uleb128 0x11
+ 979 00db 34       		.uleb128 0x34
+ 980 00dc 00       		.byte	0
+ 981 00dd 03       		.uleb128 0x3
+ 982 00de 0E       		.uleb128 0xe
+ 983 00df 3A       		.uleb128 0x3a
+ 984 00e0 0B       		.uleb128 0xb
+ 985 00e1 3B       		.uleb128 0x3b
+ 986 00e2 0B       		.uleb128 0xb
+ 987 00e3 49       		.uleb128 0x49
+ 988 00e4 13       		.uleb128 0x13
+ 989 00e5 02       		.uleb128 0x2
+ 990 00e6 18       		.uleb128 0x18
+ 991 00e7 00       		.byte	0
+ 992 00e8 00       		.byte	0
+ 993 00e9 12       		.uleb128 0x12
+ 994 00ea 34       		.uleb128 0x34
+ 995 00eb 00       		.byte	0
+ 996 00ec 03       		.uleb128 0x3
+ 997 00ed 0E       		.uleb128 0xe
+ 998 00ee 3A       		.uleb128 0x3a
+ 999 00ef 0B       		.uleb128 0xb
+ 1000 00f0 3B       		.uleb128 0x3b
+ 1001 00f1 05       		.uleb128 0x5
+ 1002 00f2 49       		.uleb128 0x49
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 20
+
+
+ 1003 00f3 13       		.uleb128 0x13
+ 1004 00f4 3F       		.uleb128 0x3f
+ 1005 00f5 19       		.uleb128 0x19
+ 1006 00f6 3C       		.uleb128 0x3c
+ 1007 00f7 19       		.uleb128 0x19
+ 1008 00f8 00       		.byte	0
+ 1009 00f9 00       		.byte	0
+ 1010 00fa 13       		.uleb128 0x13
+ 1011 00fb 35       		.uleb128 0x35
+ 1012 00fc 00       		.byte	0
+ 1013 00fd 49       		.uleb128 0x49
+ 1014 00fe 13       		.uleb128 0x13
+ 1015 00ff 00       		.byte	0
+ 1016 0100 00       		.byte	0
+ 1017 0101 00       		.byte	0
+ 1018              		.section	.debug_aranges,"",%progbits
+ 1019 0000 4C000000 		.4byte	0x4c
+ 1020 0004 0200     		.2byte	0x2
+ 1021 0006 00000000 		.4byte	.Ldebug_info0
+ 1022 000a 04       		.byte	0x4
+ 1023 000b 00       		.byte	0
+ 1024 000c 0000     		.2byte	0
+ 1025 000e 0000     		.2byte	0
+ 1026 0010 00000000 		.4byte	.LFB63
+ 1027 0014 22000000 		.4byte	.LFE63-.LFB63
+ 1028 0018 00000000 		.4byte	.LFB64
+ 1029 001c 1E000000 		.4byte	.LFE64-.LFB64
+ 1030 0020 00000000 		.4byte	.LFB65
+ 1031 0024 18000000 		.4byte	.LFE65-.LFB65
+ 1032 0028 00000000 		.4byte	.LFB66
+ 1033 002c 1E000000 		.4byte	.LFE66-.LFB66
+ 1034 0030 00000000 		.4byte	.LFB67
+ 1035 0034 58000000 		.4byte	.LFE67-.LFB67
+ 1036 0038 00000000 		.4byte	.LFB68
+ 1037 003c 58000000 		.4byte	.LFE68-.LFB68
+ 1038 0040 00000000 		.4byte	.LFB69
+ 1039 0044 8C000000 		.4byte	.LFE69-.LFB69
+ 1040 0048 00000000 		.4byte	0
+ 1041 004c 00000000 		.4byte	0
+ 1042              		.section	.debug_ranges,"",%progbits
+ 1043              	.Ldebug_ranges0:
+ 1044 0000 00000000 		.4byte	.LFB63
+ 1045 0004 22000000 		.4byte	.LFE63
+ 1046 0008 00000000 		.4byte	.LFB64
+ 1047 000c 1E000000 		.4byte	.LFE64
+ 1048 0010 00000000 		.4byte	.LFB65
+ 1049 0014 18000000 		.4byte	.LFE65
+ 1050 0018 00000000 		.4byte	.LFB66
+ 1051 001c 1E000000 		.4byte	.LFE66
+ 1052 0020 00000000 		.4byte	.LFB67
+ 1053 0024 58000000 		.4byte	.LFE67
+ 1054 0028 00000000 		.4byte	.LFB68
+ 1055 002c 58000000 		.4byte	.LFE68
+ 1056 0030 00000000 		.4byte	.LFB69
+ 1057 0034 8C000000 		.4byte	.LFE69
+ 1058 0038 00000000 		.4byte	0
+ 1059 003c 00000000 		.4byte	0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 21
+
+
+ 1060              		.section	.debug_line,"",%progbits
+ 1061              	.Ldebug_line0:
+ 1062 0000 0F020000 		.section	.debug_str,"MS",%progbits,1
+ 1062      02004F01 
+ 1062      00000201 
+ 1062      FB0E0D00 
+ 1062      01010101 
+ 1063              	.LASF29:
+ 1064 0000 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1064      43313120 
+ 1064      352E342E 
+ 1064      31203230 
+ 1064      31363036 
+ 1065 0033 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1065      20726576 
+ 1065      6973696F 
+ 1065      6E203233 
+ 1065      37373135 
+ 1066 0066 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1066      66756E63 
+ 1066      74696F6E 
+ 1066      2D736563 
+ 1066      74696F6E 
+ 1067              	.LASF30:
+ 1068 008e 73747275 		.ascii	"structs.c\000"
+ 1068      6374732E 
+ 1068      6300
+ 1069              	.LASF9:
+ 1070 0098 5F5F696E 		.ascii	"__int32_t\000"
+ 1070      7433325F 
+ 1070      7400
+ 1071              	.LASF21:
+ 1072 00a2 67657456 		.ascii	"getValue\000"
+ 1072      616C7565 
+ 1072      00
+ 1073              	.LASF17:
+ 1074 00ab 74696D65 		.ascii	"timeStamps\000"
+ 1074      5374616D 
+ 1074      707300
+ 1075              	.LASF19:
+ 1076 00b6 76616C75 		.ascii	"valueGetter\000"
+ 1076      65476574 
+ 1076      74657200 
+ 1077              	.LASF11:
+ 1078 00c2 666C6F61 		.ascii	"float\000"
+ 1078      7400
+ 1079              	.LASF26:
+ 1080 00c8 67657461 		.ascii	"getavg\000"
+ 1080      766700
+ 1081              	.LASF1:
+ 1082 00cf 756E7369 		.ascii	"unsigned char\000"
+ 1082      676E6564 
+ 1082      20636861 
+ 1082      7200
+ 1083              	.LASF5:
+ 1084 00dd 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1084      20756E73 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 22
+
+
+ 1084      69676E65 
+ 1084      6420696E 
+ 1084      7400
+ 1085              	.LASF3:
+ 1086 00ef 73686F72 		.ascii	"short unsigned int\000"
+ 1086      7420756E 
+ 1086      7369676E 
+ 1086      65642069 
+ 1086      6E7400
+ 1087              	.LASF32:
+ 1088 0102 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1088      52784275 
+ 1088      66666572 
+ 1088      00
+ 1089              	.LASF12:
+ 1090 010f 646F7562 		.ascii	"double\000"
+ 1090      6C6500
+ 1091              	.LASF22:
+ 1092 0116 67657456 		.ascii	"getValueWithoutUpdate\000"
+ 1092      616C7565 
+ 1092      57697468 
+ 1092      6F757455 
+ 1092      70646174 
+ 1093              	.LASF8:
+ 1094 012c 756E7369 		.ascii	"unsigned int\000"
+ 1094      676E6564 
+ 1094      20696E74 
+ 1094      00
+ 1095              	.LASF7:
+ 1096 0139 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1096      206C6F6E 
+ 1096      6720756E 
+ 1096      7369676E 
+ 1096      65642069 
+ 1097              	.LASF20:
+ 1098 0150 4D656D6F 		.ascii	"MemoryVariable\000"
+ 1098      72795661 
+ 1098      72696162 
+ 1098      6C6500
+ 1099              	.LASF24:
+ 1100 015f 696E6974 		.ascii	"initToZero\000"
+ 1100      546F5A65 
+ 1100      726F00
+ 1101              	.LASF10:
+ 1102 016a 696E7433 		.ascii	"int32_t\000"
+ 1102      325F7400 
+ 1103              	.LASF31:
+ 1104 0172 433A5C55 		.ascii	"C:\\Users\\Albert\\Documents\\6115_fp\\IWP.cydsn\000"
+ 1104      73657273 
+ 1104      5C416C62 
+ 1104      6572745C 
+ 1104      446F6375 
+ 1105              	.LASF15:
+ 1106 019e 73697A65 		.ascii	"sizetype\000"
+ 1106      74797065 
+ 1106      00
+ 1107              	.LASF6:
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccJDFDki.s 			page 23
+
+
+ 1108 01a7 6C6F6E67 		.ascii	"long long int\000"
+ 1108      206C6F6E 
+ 1108      6720696E 
+ 1108      7400
+ 1109              	.LASF13:
+ 1110 01b5 63686172 		.ascii	"char\000"
+ 1110      00
+ 1111              	.LASF16:
+ 1112 01ba 76616C75 		.ascii	"values\000"
+ 1112      657300
+ 1113              	.LASF18:
+ 1114 01c1 6F666673 		.ascii	"offset\000"
+ 1114      657400
+ 1115              	.LASF2:
+ 1116 01c8 73686F72 		.ascii	"short int\000"
+ 1116      7420696E 
+ 1116      7400
+ 1117              	.LASF27:
+ 1118 01d2 67657464 		.ascii	"getder\000"
+ 1118      657200
+ 1119              	.LASF4:
+ 1120 01d9 6C6F6E67 		.ascii	"long int\000"
+ 1120      20696E74 
+ 1120      00
+ 1121              	.LASF23:
+ 1122 01e2 67657444 		.ascii	"getDerivative\000"
+ 1122      65726976 
+ 1122      61746976 
+ 1122      6500
+ 1123              	.LASF14:
+ 1124 01f0 6C6F6E67 		.ascii	"long double\000"
+ 1124      20646F75 
+ 1124      626C6500 
+ 1125              	.LASF0:
+ 1126 01fc 7369676E 		.ascii	"signed char\000"
+ 1126      65642063 
+ 1126      68617200 
+ 1127              	.LASF25:
+ 1128 0208 75706461 		.ascii	"updateMemoryVariable\000"
+ 1128      74654D65 
+ 1128      6D6F7279 
+ 1128      56617269 
+ 1128      61626C65 
+ 1129              	.LASF28:
+ 1130 021d 76417667 		.ascii	"vAvg\000"
+ 1130      00
+ 1131              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,0 +1,580 @@
+ARM GAS  C:\Users\student\AppData\Local\Temp\cc7CApAJ.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"quadDec.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.initQuadDec,"ax",%progbits
+  19              		.align	2
+  20              		.global	initQuadDec
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	initQuadDec, %function
+  24              	initQuadDec:
+  25              	.LFB63:
+  26              		.file 1 ".\\quadDec.c"
+   1:.\quadDec.c   **** /* ========================================
+   2:.\quadDec.c   ****  *
+   3:.\quadDec.c   ****  * Copyright Albert Wu, 2018
+   4:.\quadDec.c   ****  * All Rights Reserved
+   5:.\quadDec.c   ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:.\quadDec.c   ****  *
+   7:.\quadDec.c   ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:.\quadDec.c   ****  * WHICH IS THE PROPERTY OF your company.
+   9:.\quadDec.c   ****  *
+  10:.\quadDec.c   ****  * ========================================
+  11:.\quadDec.c   **** */
+  12:.\quadDec.c   **** #include "quadDec.h"
+  13:.\quadDec.c   **** 
+  14:.\quadDec.c   **** void initQuadDec()
+  15:.\quadDec.c   **** {
+  27              		.loc 1 15 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 7, -8
+  34              		.cfi_offset 14, -4
+  35 0002 00AF     		add	r7, sp, #0
+  36              		.cfi_def_cfa_register 7
+  16:.\quadDec.c   ****     QuadDec_Motor_Start();
+  37              		.loc 1 16 0
+  38 0004 FFF7FEFF 		bl	QuadDec_Motor_Start
+  17:.\quadDec.c   ****     QuadDec_Shoulder_Start();
+  39              		.loc 1 17 0
+  40 0008 FFF7FEFF 		bl	QuadDec_Shoulder_Start
+ARM GAS  C:\Users\student\AppData\Local\Temp\cc7CApAJ.s 			page 2
+
+
+  18:.\quadDec.c   ****     
+  19:.\quadDec.c   ****     //Zero the decoders
+  20:.\quadDec.c   ****     QuadDec_Motor_SetCounter(0);
+  41              		.loc 1 20 0
+  42 000c 0020     		movs	r0, #0
+  43 000e FFF7FEFF 		bl	QuadDec_Motor_SetCounter
+  21:.\quadDec.c   ****     QuadDec_Shoulder_SetCounter(0);
+  44              		.loc 1 21 0
+  45 0012 0020     		movs	r0, #0
+  46 0014 FFF7FEFF 		bl	QuadDec_Shoulder_SetCounter
+  22:.\quadDec.c   **** }
+  47              		.loc 1 22 0
+  48 0018 80BD     		pop	{r7, pc}
+  49              		.cfi_endproc
+  50              	.LFE63:
+  51              		.size	initQuadDec, .-initQuadDec
+  52 001a 00BF     		.section	.text.getMotorDecReading,"ax",%progbits
+  53              		.align	2
+  54              		.global	getMotorDecReading
+  55              		.thumb
+  56              		.thumb_func
+  57              		.type	getMotorDecReading, %function
+  58              	getMotorDecReading:
+  59              	.LFB64:
+  23:.\quadDec.c   **** 
+  24:.\quadDec.c   **** int16 getMotorDecReading()
+  25:.\quadDec.c   **** {
+  60              		.loc 1 25 0
+  61              		.cfi_startproc
+  62              		@ args = 0, pretend = 0, frame = 0
+  63              		@ frame_needed = 1, uses_anonymous_args = 0
+  64 0000 80B5     		push	{r7, lr}
+  65              		.cfi_def_cfa_offset 8
+  66              		.cfi_offset 7, -8
+  67              		.cfi_offset 14, -4
+  68 0002 00AF     		add	r7, sp, #0
+  69              		.cfi_def_cfa_register 7
+  26:.\quadDec.c   ****     return QuadDec_Motor_GetCounter();
+  70              		.loc 1 26 0
+  71 0004 FFF7FEFF 		bl	QuadDec_Motor_GetCounter
+  72 0008 0346     		mov	r3, r0
+  73 000a 9BB2     		uxth	r3, r3
+  74 000c 1BB2     		sxth	r3, r3
+  27:.\quadDec.c   **** }
+  75              		.loc 1 27 0
+  76 000e 1846     		mov	r0, r3
+  77 0010 80BD     		pop	{r7, pc}
+  78              		.cfi_endproc
+  79              	.LFE64:
+  80              		.size	getMotorDecReading, .-getMotorDecReading
+  81 0012 00BF     		.section	.text.getShoulderDecReading,"ax",%progbits
+  82              		.align	2
+  83              		.global	getShoulderDecReading
+  84              		.thumb
+  85              		.thumb_func
+  86              		.type	getShoulderDecReading, %function
+  87              	getShoulderDecReading:
+ARM GAS  C:\Users\student\AppData\Local\Temp\cc7CApAJ.s 			page 3
+
+
+  88              	.LFB65:
+  28:.\quadDec.c   **** int16 getShoulderDecReading()
+  29:.\quadDec.c   **** {
+  89              		.loc 1 29 0
+  90              		.cfi_startproc
+  91              		@ args = 0, pretend = 0, frame = 0
+  92              		@ frame_needed = 1, uses_anonymous_args = 0
+  93 0000 80B5     		push	{r7, lr}
+  94              		.cfi_def_cfa_offset 8
+  95              		.cfi_offset 7, -8
+  96              		.cfi_offset 14, -4
+  97 0002 00AF     		add	r7, sp, #0
+  98              		.cfi_def_cfa_register 7
+  30:.\quadDec.c   ****     return QuadDec_Shoulder_GetCounter();
+  99              		.loc 1 30 0
+ 100 0004 FFF7FEFF 		bl	QuadDec_Shoulder_GetCounter
+ 101 0008 0346     		mov	r3, r0
+  31:.\quadDec.c   **** }
+ 102              		.loc 1 31 0
+ 103 000a 1846     		mov	r0, r3
+ 104 000c 80BD     		pop	{r7, pc}
+ 105              		.cfi_endproc
+ 106              	.LFE65:
+ 107              		.size	getShoulderDecReading, .-getShoulderDecReading
+ 108 000e 00BF     		.text
+ 109              	.Letext0:
+ 110              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.
+ 111              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.
+ 112              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 113              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 114              		.section	.debug_info,"",%progbits
+ 115              	.Ldebug_info0:
+ 116 0000 F2000000 		.4byte	0xf2
+ 117 0004 0400     		.2byte	0x4
+ 118 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 119 000a 04       		.byte	0x4
+ 120 000b 01       		.uleb128 0x1
+ 121 000c 8B000000 		.4byte	.LASF18
+ 122 0010 01       		.byte	0x1
+ 123 0011 76000000 		.4byte	.LASF19
+ 124 0015 20010000 		.4byte	.LASF20
+ 125 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 126 001d 00000000 		.4byte	0
+ 127 0021 00000000 		.4byte	.Ldebug_line0
+ 128 0025 02       		.uleb128 0x2
+ 129 0026 01       		.byte	0x1
+ 130 0027 06       		.byte	0x6
+ 131 0028 58010000 		.4byte	.LASF0
+ 132 002c 02       		.uleb128 0x2
+ 133 002d 01       		.byte	0x1
+ 134 002e 08       		.byte	0x8
+ 135 002f 63000000 		.4byte	.LASF1
+ 136 0033 02       		.uleb128 0x2
+ 137 0034 02       		.byte	0x2
+ 138 0035 05       		.byte	0x5
+ 139 0036 8D010000 		.4byte	.LASF2
+ 140 003a 02       		.uleb128 0x2
+ARM GAS  C:\Users\student\AppData\Local\Temp\cc7CApAJ.s 			page 4
+
+
+ 141 003b 02       		.byte	0x2
+ 142 003c 07       		.byte	0x7
+ 143 003d 0E000000 		.4byte	.LASF3
+ 144 0041 03       		.uleb128 0x3
+ 145 0042 64010000 		.4byte	.LASF9
+ 146 0046 02       		.byte	0x2
+ 147 0047 3F       		.byte	0x3f
+ 148 0048 4C000000 		.4byte	0x4c
+ 149 004c 02       		.uleb128 0x2
+ 150 004d 04       		.byte	0x4
+ 151 004e 05       		.byte	0x5
+ 152 004f 82000000 		.4byte	.LASF4
+ 153 0053 02       		.uleb128 0x2
+ 154 0054 04       		.byte	0x4
+ 155 0055 07       		.byte	0x7
+ 156 0056 3A000000 		.4byte	.LASF5
+ 157 005a 02       		.uleb128 0x2
+ 158 005b 08       		.byte	0x8
+ 159 005c 05       		.byte	0x5
+ 160 005d 00000000 		.4byte	.LASF6
+ 161 0061 02       		.uleb128 0x2
+ 162 0062 08       		.byte	0x8
+ 163 0063 07       		.byte	0x7
+ 164 0064 4C000000 		.4byte	.LASF7
+ 165 0068 04       		.uleb128 0x4
+ 166 0069 04       		.byte	0x4
+ 167 006a 05       		.byte	0x5
+ 168 006b 696E7400 		.ascii	"int\000"
+ 169 006f 02       		.uleb128 0x2
+ 170 0070 04       		.byte	0x4
+ 171 0071 07       		.byte	0x7
+ 172 0072 21000000 		.4byte	.LASF8
+ 173 0076 03       		.uleb128 0x3
+ 174 0077 97010000 		.4byte	.LASF10
+ 175 007b 03       		.byte	0x3
+ 176 007c 2C       		.byte	0x2c
+ 177 007d 41000000 		.4byte	0x41
+ 178 0081 05       		.uleb128 0x5
+ 179 0082 87010000 		.4byte	.LASF11
+ 180 0086 04       		.byte	0x4
+ 181 0087 9601     		.2byte	0x196
+ 182 0089 33000000 		.4byte	0x33
+ 183 008d 02       		.uleb128 0x2
+ 184 008e 04       		.byte	0x4
+ 185 008f 04       		.byte	0x4
+ 186 0090 81010000 		.4byte	.LASF12
+ 187 0094 02       		.uleb128 0x2
+ 188 0095 08       		.byte	0x8
+ 189 0096 04       		.byte	0x4
+ 190 0097 19010000 		.4byte	.LASF13
+ 191 009b 02       		.uleb128 0x2
+ 192 009c 01       		.byte	0x1
+ 193 009d 08       		.byte	0x8
+ 194 009e 71000000 		.4byte	.LASF14
+ 195 00a2 02       		.uleb128 0x2
+ 196 00a3 04       		.byte	0x4
+ 197 00a4 07       		.byte	0x7
+ARM GAS  C:\Users\student\AppData\Local\Temp\cc7CApAJ.s 			page 5
+
+
+ 198 00a5 B5010000 		.4byte	.LASF15
+ 199 00a9 06       		.uleb128 0x6
+ 200 00aa 2E000000 		.4byte	.LASF21
+ 201 00ae 01       		.byte	0x1
+ 202 00af 0E       		.byte	0xe
+ 203 00b0 00000000 		.4byte	.LFB63
+ 204 00b4 1A000000 		.4byte	.LFE63-.LFB63
+ 205 00b8 01       		.uleb128 0x1
+ 206 00b9 9C       		.byte	0x9c
+ 207 00ba 07       		.uleb128 0x7
+ 208 00bb 6E010000 		.4byte	.LASF16
+ 209 00bf 01       		.byte	0x1
+ 210 00c0 18       		.byte	0x18
+ 211 00c1 81000000 		.4byte	0x81
+ 212 00c5 00000000 		.4byte	.LFB64
+ 213 00c9 12000000 		.4byte	.LFE64-.LFB64
+ 214 00cd 01       		.uleb128 0x1
+ 215 00ce 9C       		.byte	0x9c
+ 216 00cf 07       		.uleb128 0x7
+ 217 00d0 9F010000 		.4byte	.LASF17
+ 218 00d4 01       		.byte	0x1
+ 219 00d5 1C       		.byte	0x1c
+ 220 00d6 81000000 		.4byte	0x81
+ 221 00da 00000000 		.4byte	.LFB65
+ 222 00de 0E000000 		.4byte	.LFE65-.LFB65
+ 223 00e2 01       		.uleb128 0x1
+ 224 00e3 9C       		.byte	0x9c
+ 225 00e4 08       		.uleb128 0x8
+ 226 00e5 4B010000 		.4byte	.LASF22
+ 227 00e9 05       		.byte	0x5
+ 228 00ea 9606     		.2byte	0x696
+ 229 00ec F0000000 		.4byte	0xf0
+ 230 00f0 09       		.uleb128 0x9
+ 231 00f1 76000000 		.4byte	0x76
+ 232 00f5 00       		.byte	0
+ 233              		.section	.debug_abbrev,"",%progbits
+ 234              	.Ldebug_abbrev0:
+ 235 0000 01       		.uleb128 0x1
+ 236 0001 11       		.uleb128 0x11
+ 237 0002 01       		.byte	0x1
+ 238 0003 25       		.uleb128 0x25
+ 239 0004 0E       		.uleb128 0xe
+ 240 0005 13       		.uleb128 0x13
+ 241 0006 0B       		.uleb128 0xb
+ 242 0007 03       		.uleb128 0x3
+ 243 0008 0E       		.uleb128 0xe
+ 244 0009 1B       		.uleb128 0x1b
+ 245 000a 0E       		.uleb128 0xe
+ 246 000b 55       		.uleb128 0x55
+ 247 000c 17       		.uleb128 0x17
+ 248 000d 11       		.uleb128 0x11
+ 249 000e 01       		.uleb128 0x1
+ 250 000f 10       		.uleb128 0x10
+ 251 0010 17       		.uleb128 0x17
+ 252 0011 00       		.byte	0
+ 253 0012 00       		.byte	0
+ 254 0013 02       		.uleb128 0x2
+ARM GAS  C:\Users\student\AppData\Local\Temp\cc7CApAJ.s 			page 6
+
+
+ 255 0014 24       		.uleb128 0x24
+ 256 0015 00       		.byte	0
+ 257 0016 0B       		.uleb128 0xb
+ 258 0017 0B       		.uleb128 0xb
+ 259 0018 3E       		.uleb128 0x3e
+ 260 0019 0B       		.uleb128 0xb
+ 261 001a 03       		.uleb128 0x3
+ 262 001b 0E       		.uleb128 0xe
+ 263 001c 00       		.byte	0
+ 264 001d 00       		.byte	0
+ 265 001e 03       		.uleb128 0x3
+ 266 001f 16       		.uleb128 0x16
+ 267 0020 00       		.byte	0
+ 268 0021 03       		.uleb128 0x3
+ 269 0022 0E       		.uleb128 0xe
+ 270 0023 3A       		.uleb128 0x3a
+ 271 0024 0B       		.uleb128 0xb
+ 272 0025 3B       		.uleb128 0x3b
+ 273 0026 0B       		.uleb128 0xb
+ 274 0027 49       		.uleb128 0x49
+ 275 0028 13       		.uleb128 0x13
+ 276 0029 00       		.byte	0
+ 277 002a 00       		.byte	0
+ 278 002b 04       		.uleb128 0x4
+ 279 002c 24       		.uleb128 0x24
+ 280 002d 00       		.byte	0
+ 281 002e 0B       		.uleb128 0xb
+ 282 002f 0B       		.uleb128 0xb
+ 283 0030 3E       		.uleb128 0x3e
+ 284 0031 0B       		.uleb128 0xb
+ 285 0032 03       		.uleb128 0x3
+ 286 0033 08       		.uleb128 0x8
+ 287 0034 00       		.byte	0
+ 288 0035 00       		.byte	0
+ 289 0036 05       		.uleb128 0x5
+ 290 0037 16       		.uleb128 0x16
+ 291 0038 00       		.byte	0
+ 292 0039 03       		.uleb128 0x3
+ 293 003a 0E       		.uleb128 0xe
+ 294 003b 3A       		.uleb128 0x3a
+ 295 003c 0B       		.uleb128 0xb
+ 296 003d 3B       		.uleb128 0x3b
+ 297 003e 05       		.uleb128 0x5
+ 298 003f 49       		.uleb128 0x49
+ 299 0040 13       		.uleb128 0x13
+ 300 0041 00       		.byte	0
+ 301 0042 00       		.byte	0
+ 302 0043 06       		.uleb128 0x6
+ 303 0044 2E       		.uleb128 0x2e
+ 304 0045 00       		.byte	0
+ 305 0046 3F       		.uleb128 0x3f
+ 306 0047 19       		.uleb128 0x19
+ 307 0048 03       		.uleb128 0x3
+ 308 0049 0E       		.uleb128 0xe
+ 309 004a 3A       		.uleb128 0x3a
+ 310 004b 0B       		.uleb128 0xb
+ 311 004c 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\student\AppData\Local\Temp\cc7CApAJ.s 			page 7
+
+
+ 312 004d 0B       		.uleb128 0xb
+ 313 004e 11       		.uleb128 0x11
+ 314 004f 01       		.uleb128 0x1
+ 315 0050 12       		.uleb128 0x12
+ 316 0051 06       		.uleb128 0x6
+ 317 0052 40       		.uleb128 0x40
+ 318 0053 18       		.uleb128 0x18
+ 319 0054 9642     		.uleb128 0x2116
+ 320 0056 19       		.uleb128 0x19
+ 321 0057 00       		.byte	0
+ 322 0058 00       		.byte	0
+ 323 0059 07       		.uleb128 0x7
+ 324 005a 2E       		.uleb128 0x2e
+ 325 005b 00       		.byte	0
+ 326 005c 3F       		.uleb128 0x3f
+ 327 005d 19       		.uleb128 0x19
+ 328 005e 03       		.uleb128 0x3
+ 329 005f 0E       		.uleb128 0xe
+ 330 0060 3A       		.uleb128 0x3a
+ 331 0061 0B       		.uleb128 0xb
+ 332 0062 3B       		.uleb128 0x3b
+ 333 0063 0B       		.uleb128 0xb
+ 334 0064 49       		.uleb128 0x49
+ 335 0065 13       		.uleb128 0x13
+ 336 0066 11       		.uleb128 0x11
+ 337 0067 01       		.uleb128 0x1
+ 338 0068 12       		.uleb128 0x12
+ 339 0069 06       		.uleb128 0x6
+ 340 006a 40       		.uleb128 0x40
+ 341 006b 18       		.uleb128 0x18
+ 342 006c 9642     		.uleb128 0x2116
+ 343 006e 19       		.uleb128 0x19
+ 344 006f 00       		.byte	0
+ 345 0070 00       		.byte	0
+ 346 0071 08       		.uleb128 0x8
+ 347 0072 34       		.uleb128 0x34
+ 348 0073 00       		.byte	0
+ 349 0074 03       		.uleb128 0x3
+ 350 0075 0E       		.uleb128 0xe
+ 351 0076 3A       		.uleb128 0x3a
+ 352 0077 0B       		.uleb128 0xb
+ 353 0078 3B       		.uleb128 0x3b
+ 354 0079 05       		.uleb128 0x5
+ 355 007a 49       		.uleb128 0x49
+ 356 007b 13       		.uleb128 0x13
+ 357 007c 3F       		.uleb128 0x3f
+ 358 007d 19       		.uleb128 0x19
+ 359 007e 3C       		.uleb128 0x3c
+ 360 007f 19       		.uleb128 0x19
+ 361 0080 00       		.byte	0
+ 362 0081 00       		.byte	0
+ 363 0082 09       		.uleb128 0x9
+ 364 0083 35       		.uleb128 0x35
+ 365 0084 00       		.byte	0
+ 366 0085 49       		.uleb128 0x49
+ 367 0086 13       		.uleb128 0x13
+ 368 0087 00       		.byte	0
+ARM GAS  C:\Users\student\AppData\Local\Temp\cc7CApAJ.s 			page 8
+
+
+ 369 0088 00       		.byte	0
+ 370 0089 00       		.byte	0
+ 371              		.section	.debug_aranges,"",%progbits
+ 372 0000 2C000000 		.4byte	0x2c
+ 373 0004 0200     		.2byte	0x2
+ 374 0006 00000000 		.4byte	.Ldebug_info0
+ 375 000a 04       		.byte	0x4
+ 376 000b 00       		.byte	0
+ 377 000c 0000     		.2byte	0
+ 378 000e 0000     		.2byte	0
+ 379 0010 00000000 		.4byte	.LFB63
+ 380 0014 1A000000 		.4byte	.LFE63-.LFB63
+ 381 0018 00000000 		.4byte	.LFB64
+ 382 001c 12000000 		.4byte	.LFE64-.LFB64
+ 383 0020 00000000 		.4byte	.LFB65
+ 384 0024 0E000000 		.4byte	.LFE65-.LFB65
+ 385 0028 00000000 		.4byte	0
+ 386 002c 00000000 		.4byte	0
+ 387              		.section	.debug_ranges,"",%progbits
+ 388              	.Ldebug_ranges0:
+ 389 0000 00000000 		.4byte	.LFB63
+ 390 0004 1A000000 		.4byte	.LFE63
+ 391 0008 00000000 		.4byte	.LFB64
+ 392 000c 12000000 		.4byte	.LFE64
+ 393 0010 00000000 		.4byte	.LFB65
+ 394 0014 0E000000 		.4byte	.LFE65
+ 395 0018 00000000 		.4byte	0
+ 396 001c 00000000 		.4byte	0
+ 397              		.section	.debug_line,"",%progbits
+ 398              	.Ldebug_line0:
+ 399 0000 88010000 		.section	.debug_str,"MS",%progbits,1
+ 399      02004C01 
+ 399      00000201 
+ 399      FB0E0D00 
+ 399      01010101 
+ 400              	.LASF6:
+ 401 0000 6C6F6E67 		.ascii	"long long int\000"
+ 401      206C6F6E 
+ 401      6720696E 
+ 401      7400
+ 402              	.LASF3:
+ 403 000e 73686F72 		.ascii	"short unsigned int\000"
+ 403      7420756E 
+ 403      7369676E 
+ 403      65642069 
+ 403      6E7400
+ 404              	.LASF8:
+ 405 0021 756E7369 		.ascii	"unsigned int\000"
+ 405      676E6564 
+ 405      20696E74 
+ 405      00
+ 406              	.LASF21:
+ 407 002e 696E6974 		.ascii	"initQuadDec\000"
+ 407      51756164 
+ 407      44656300 
+ 408              	.LASF5:
+ 409 003a 6C6F6E67 		.ascii	"long unsigned int\000"
+ARM GAS  C:\Users\student\AppData\Local\Temp\cc7CApAJ.s 			page 9
+
+
+ 409      20756E73 
+ 409      69676E65 
+ 409      6420696E 
+ 409      7400
+ 410              	.LASF7:
+ 411 004c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 411      206C6F6E 
+ 411      6720756E 
+ 411      7369676E 
+ 411      65642069 
+ 412              	.LASF1:
+ 413 0063 756E7369 		.ascii	"unsigned char\000"
+ 413      676E6564 
+ 413      20636861 
+ 413      7200
+ 414              	.LASF14:
+ 415 0071 63686172 		.ascii	"char\000"
+ 415      00
+ 416              	.LASF19:
+ 417 0076 2E5C7175 		.ascii	".\\quadDec.c\000"
+ 417      61644465 
+ 417      632E6300 
+ 418              	.LASF4:
+ 419 0082 6C6F6E67 		.ascii	"long int\000"
+ 419      20696E74 
+ 419      00
+ 420              	.LASF18:
+ 421 008b 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 421      4320342E 
+ 421      392E3320 
+ 421      32303135 
+ 421      30333033 
+ 422 00be 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 422      20726576 
+ 422      6973696F 
+ 422      6E203232 
+ 422      31323230 
+ 423 00f1 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 423      66756E63 
+ 423      74696F6E 
+ 423      2D736563 
+ 423      74696F6E 
+ 424              	.LASF13:
+ 425 0119 646F7562 		.ascii	"double\000"
+ 425      6C6500
+ 426              	.LASF20:
+ 427 0120 433A5C55 		.ascii	"C:\\Users\\student\\Desktop\\6115_fp\\IWP.cydsn\000"
+ 427      73657273 
+ 427      5C737475 
+ 427      64656E74 
+ 427      5C446573 
+ 428              	.LASF22:
+ 429 014b 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 429      52784275 
+ 429      66666572 
+ 429      00
+ 430              	.LASF0:
+ARM GAS  C:\Users\student\AppData\Local\Temp\cc7CApAJ.s 			page 10
+
+
+ 431 0158 7369676E 		.ascii	"signed char\000"
+ 431      65642063 
+ 431      68617200 
+ 432              	.LASF9:
+ 433 0164 5F5F696E 		.ascii	"__int32_t\000"
+ 433      7433325F 
+ 433      7400
+ 434              	.LASF16:
+ 435 016e 6765744D 		.ascii	"getMotorDecReading\000"
+ 435      6F746F72 
+ 435      44656352 
+ 435      65616469 
+ 435      6E6700
+ 436              	.LASF12:
+ 437 0181 666C6F61 		.ascii	"float\000"
+ 437      7400
+ 438              	.LASF11:
+ 439 0187 696E7431 		.ascii	"int16\000"
+ 439      3600
+ 440              	.LASF2:
+ 441 018d 73686F72 		.ascii	"short int\000"
+ 441      7420696E 
+ 441      7400
+ 442              	.LASF10:
+ 443 0197 696E7433 		.ascii	"int32_t\000"
+ 443      325F7400 
+ 444              	.LASF17:
+ 445 019f 67657453 		.ascii	"getShoulderDecReading\000"
+ 445      686F756C 
+ 445      64657244 
+ 445      65635265 
+ 445      6164696E 
+ 446              	.LASF15:
+ 447 01b5 73697A65 		.ascii	"sizetype\000"
+ 447      74797065 
+ 447      00
+ 448              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

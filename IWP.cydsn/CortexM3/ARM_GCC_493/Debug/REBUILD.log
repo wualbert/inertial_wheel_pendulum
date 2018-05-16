@@ -1,0 +1,120 @@
+--------------- Rebuild Started: 05/05/2018 16:37:00 Project: IWP, Configuration: ARM GCC 4.9-2015-q1-update Debug ---------------
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\main.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\adc.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\cyfitter_cfg.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\Cm3Start.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\CyBootAsmGnu.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\CyDmac.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\CyFlash.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\CyLib.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\cyPm.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\CySpc.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\cyutils.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\LCD.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\LCD_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\LCD_LCDPort.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\UART.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\UART_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\UART_INT.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\UART_BOOT.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\tx_int.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\rx_int.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\TX.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\cymetadata.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\QuadDec_Motor.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\QuadDec_Motor_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\QuadDec_Shoulder.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\QuadDec_Shoulder_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\Clock_Enc_Motor.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\Clock_Enc_Motor_1.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\ADC1_In.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\ADC2_In.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\Motor_A.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\Motor_B.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\Shoulder_A.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\Shoulder_B.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\Shoulder_I.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\UART_IntClock.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\QuadDec_Motor_Cnt8.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\QuadDec_Motor_Cnt8_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\QuadDec_Shoulder_Cnt16.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\QuadDec_Shoulder_Cnt16_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\ADC1.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\ADC1_INT.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\ADC1_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\ADC2.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\ADC2_INT.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\ADC2_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\ADC1_IRQ.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\ADC1_theACLK.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\ADC1_Bypass.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\ADC2_IRQ.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\ADC2_theACLK.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\ADC2_Bypass.o"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\IWP.hex"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\IWP.elf"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\IWP.map"
+Deleting file ".\IWP.cycdx"
+Deleting file ".\IWP.svd"
+Deleting file ".\IWP.rpt"
+Deleting file ".\IWP_timing.html"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\.deps\C_FILE.P"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\.deps\ARM_C_FILE.P"
+Deleting file ".\CortexM3\ARM_GCC_493\Debug\.deps\GNU_ARM_ASM_FILE.P"
+cydsfit.exe -.appdatapath "C:\Users\student\AppData\Local\Cypress Semiconductor\PSoC Creator\3.3" -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -p C:\Users\student\Desktop\6115_fp\IWP.cydsn\IWP.cyprj -d CY8C5868AXI-LP035 -s C:\Users\student\Desktop\6115_fp\IWP.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
+Elaborating Design...
+HDL Generation ...
+Synthesis ...
+Place and Route ...
+Tech mapping ...
+Analog Placement ...
+Analog Routing ...
+Analog Code Generation ...
+Digital Placement ...
+Digital Routing ...
+Bitstream Generation ...
+Static timing analysis ...
+API Generation ...
+Dependency Generation ...
+Clean Temporary Files ...
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Debug/main.lst -g -Wall -ffunction-sections -O0 -ffat-lto-objects -c .\main.c -o .\CortexM3\ARM_GCC_493\Debug\main.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Debug/adc.lst -g -Wall -ffunction-sections -O0 -ffat-lto-objects -c .\adc.c -o .\CortexM3\ARM_GCC_493\Debug\adc.o
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -Wno-main -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_493\Debug/quadDec.lst -g -Wall -ffunction-sections -O0 -ffat-lto-objects -c .\quadDec.c -o .\CortexM3\ARM_GCC_493\Debug\quadDec.o
+In file included from .\quadDec.c:12:0:
+.\quadDec.h:17:1: error: unknown type name 'int16'
+ int16 getMotorDecReading();
+ ^
+.\quadDec.h:18:1: error: unknown type name 'int16'
+ int16 getShoulderDecReading();
+ ^
+.\quadDec.c: In function 'initQuadDec':
+.\quadDec.c:16:5: warning: implicit declaration of function 'QuadDec_Motor_Start' [-Wimplicit-function-declaration]
+     QuadDec_Motor_Start();
+     ^
+.\quadDec.c:17:5: warning: implicit declaration of function 'QuadDec_Shoulder_Start' [-Wimplicit-function-declaration]
+     QuadDec_Shoulder_Start();
+     ^
+The command 'arm-none-eabi-gcc.exe' failed with exit code '1'.
+.\quadDec.c:20:5: warning: implicit declaration of function 'QuadDec__Motor_SetCounter' [-Wimplicit-function-declaration]
+     QuadDec__Motor_SetCounter(0);
+     ^
+.\quadDec.c:21:5: warning: implicit declaration of function 'QuadDec_Shoulder_SetCounter' [-Wimplicit-function-declaration]
+     QuadDec_Shoulder_SetCounter(0);
+     ^
+.\quadDec.c: At top level:
+.\quadDec.c:24:1: error: unknown type name 'int16'
+ int16 getMotorDecReading()
+ ^
+.\quadDec.c: In function 'getMotorDecReading':
+.\quadDec.c:26:5: warning: implicit declaration of function 'QuadDec_Motor_GetCounter' [-Wimplicit-function-declaration]
+     return QuadDec_Motor_GetCounter();
+     ^
+.\quadDec.c: At top level:
+.\quadDec.c:28:1: error: unknown type name 'int16'
+ int16 getShoulderDecReading()
+ ^
+.\quadDec.c: In function 'getShoulderDecReading':
+.\quadDec.c:30:5: warning: implicit declaration of function 'QuadDec_Shoulder_GetCounter' [-Wimplicit-function-declaration]
+     return QuadDec_Shoulder_GetCounter();
+     ^
+--------------- Rebuild Failed: 05/05/2018 16:37:12 ---------------

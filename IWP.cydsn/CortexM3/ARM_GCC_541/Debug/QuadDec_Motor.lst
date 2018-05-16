@@ -1,0 +1,1731 @@
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"QuadDec_Motor.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	QuadDec_Motor_initVar
+  20              		.bss
+  21              		.type	QuadDec_Motor_initVar, %object
+  22              		.size	QuadDec_Motor_initVar, 1
+  23              	QuadDec_Motor_initVar:
+  24 0000 00       		.space	1
+  25              		.section	.text.QuadDec_Motor_Init,"ax",%progbits
+  26              		.align	2
+  27              		.global	QuadDec_Motor_Init
+  28              		.thumb
+  29              		.thumb_func
+  30              		.type	QuadDec_Motor_Init, %function
+  31              	QuadDec_Motor_Init:
+  32              	.LFB0:
+  33              		.file 1 "Generated_Source\\PSoC5\\QuadDec_Motor.c"
+   1:Generated_Source\PSoC5/QuadDec_Motor.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/QuadDec_Motor.c **** * File Name: QuadDec_Motor.c  
+   3:Generated_Source\PSoC5/QuadDec_Motor.c **** * Version 3.0
+   4:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+   5:Generated_Source\PSoC5/QuadDec_Motor.c **** * Description:
+   6:Generated_Source\PSoC5/QuadDec_Motor.c **** *  This file provides the source code to the API for the Quadrature Decoder
+   7:Generated_Source\PSoC5/QuadDec_Motor.c **** *  component.
+   8:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+   9:Generated_Source\PSoC5/QuadDec_Motor.c **** * Note:
+  10:Generated_Source\PSoC5/QuadDec_Motor.c **** *  None.
+  11:Generated_Source\PSoC5/QuadDec_Motor.c **** *   
+  12:Generated_Source\PSoC5/QuadDec_Motor.c **** ********************************************************************************
+  13:Generated_Source\PSoC5/QuadDec_Motor.c **** * Copyright 2008-2014, Cypress Semiconductor Corporation.  All rights reserved.
+  14:Generated_Source\PSoC5/QuadDec_Motor.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  15:Generated_Source\PSoC5/QuadDec_Motor.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  16:Generated_Source\PSoC5/QuadDec_Motor.c **** * the software package with which this file was provided.
+  17:Generated_Source\PSoC5/QuadDec_Motor.c **** *******************************************************************************/
+  18:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+  19:Generated_Source\PSoC5/QuadDec_Motor.c **** #include "QuadDec_Motor.h"
+  20:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+  21:Generated_Source\PSoC5/QuadDec_Motor.c **** #if (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT)
+  22:Generated_Source\PSoC5/QuadDec_Motor.c ****     #include "QuadDec_Motor_PVT.h"
+  23:Generated_Source\PSoC5/QuadDec_Motor.c **** #endif /* QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT */
+  24:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 2
+
+
+  25:Generated_Source\PSoC5/QuadDec_Motor.c **** uint8 QuadDec_Motor_initVar = 0u;
+  26:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+  27:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+  28:Generated_Source\PSoC5/QuadDec_Motor.c **** /*******************************************************************************
+  29:Generated_Source\PSoC5/QuadDec_Motor.c **** * Function Name: QuadDec_Motor_Init
+  30:Generated_Source\PSoC5/QuadDec_Motor.c **** ********************************************************************************
+  31:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+  32:Generated_Source\PSoC5/QuadDec_Motor.c **** * Summary:
+  33:Generated_Source\PSoC5/QuadDec_Motor.c **** *  Inits/Restores default QuadDec configuration provided with customizer.
+  34:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+  35:Generated_Source\PSoC5/QuadDec_Motor.c **** * Parameters:
+  36:Generated_Source\PSoC5/QuadDec_Motor.c **** *  None.
+  37:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+  38:Generated_Source\PSoC5/QuadDec_Motor.c **** * Return:
+  39:Generated_Source\PSoC5/QuadDec_Motor.c **** *  None.
+  40:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+  41:Generated_Source\PSoC5/QuadDec_Motor.c **** *******************************************************************************/
+  42:Generated_Source\PSoC5/QuadDec_Motor.c **** void QuadDec_Motor_Init(void) 
+  43:Generated_Source\PSoC5/QuadDec_Motor.c **** {
+  34              		.loc 1 43 0
+  35              		.cfi_startproc
+  36              		@ args = 0, pretend = 0, frame = 0
+  37              		@ frame_needed = 1, uses_anonymous_args = 0
+  38 0000 80B5     		push	{r7, lr}
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 7, -8
+  41              		.cfi_offset 14, -4
+  42 0002 00AF     		add	r7, sp, #0
+  43              		.cfi_def_cfa_register 7
+  44:Generated_Source\PSoC5/QuadDec_Motor.c ****     #if (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT)
+  45:Generated_Source\PSoC5/QuadDec_Motor.c ****         /* Disable Interrupt. */
+  46:Generated_Source\PSoC5/QuadDec_Motor.c ****         CyIntDisable(QuadDec_Motor_ISR_NUMBER);
+  44              		.loc 1 46 0
+  45 0004 064B     		ldr	r3, .L2
+  46 0006 0222     		movs	r2, #2
+  47 0008 1A60     		str	r2, [r3]
+  47:Generated_Source\PSoC5/QuadDec_Motor.c ****         /* Set the ISR to point to the QuadDec_Motor_isr Interrupt. */
+  48:Generated_Source\PSoC5/QuadDec_Motor.c ****         (void) CyIntSetVector(QuadDec_Motor_ISR_NUMBER, & QuadDec_Motor_ISR);
+  48              		.loc 1 48 0
+  49 000a 0649     		ldr	r1, .L2+4
+  50 000c 0120     		movs	r0, #1
+  51 000e FFF7FEFF 		bl	CyIntSetVector
+  49:Generated_Source\PSoC5/QuadDec_Motor.c ****         /* Set the priority. */
+  50:Generated_Source\PSoC5/QuadDec_Motor.c ****         CyIntSetPriority(QuadDec_Motor_ISR_NUMBER, QuadDec_Motor_ISR_PRIORITY);
+  52              		.loc 1 50 0
+  53 0012 0721     		movs	r1, #7
+  54 0014 0120     		movs	r0, #1
+  55 0016 FFF7FEFF 		bl	CyIntSetPriority
+  51:Generated_Source\PSoC5/QuadDec_Motor.c ****     #endif /* QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT */
+  52:Generated_Source\PSoC5/QuadDec_Motor.c **** }
+  56              		.loc 1 52 0
+  57 001a 00BF     		nop
+  58 001c 80BD     		pop	{r7, pc}
+  59              	.L3:
+  60 001e 00BF     		.align	2
+  61              	.L2:
+  62 0020 80E100E0 		.word	-536813184
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 3
+
+
+  63 0024 00000000 		.word	QuadDec_Motor_ISR
+  64              		.cfi_endproc
+  65              	.LFE0:
+  66              		.size	QuadDec_Motor_Init, .-QuadDec_Motor_Init
+  67              		.section	.text.QuadDec_Motor_Enable,"ax",%progbits
+  68              		.align	2
+  69              		.global	QuadDec_Motor_Enable
+  70              		.thumb
+  71              		.thumb_func
+  72              		.type	QuadDec_Motor_Enable, %function
+  73              	QuadDec_Motor_Enable:
+  74              	.LFB1:
+  53:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+  54:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+  55:Generated_Source\PSoC5/QuadDec_Motor.c **** /*******************************************************************************
+  56:Generated_Source\PSoC5/QuadDec_Motor.c **** * Function Name: QuadDec_Motor_Enable
+  57:Generated_Source\PSoC5/QuadDec_Motor.c **** ********************************************************************************
+  58:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+  59:Generated_Source\PSoC5/QuadDec_Motor.c **** * Summary:
+  60:Generated_Source\PSoC5/QuadDec_Motor.c **** *  This function enable interrupts from Component and also enable Component's
+  61:Generated_Source\PSoC5/QuadDec_Motor.c **** *  ISR in case of 32-bit counter.
+  62:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+  63:Generated_Source\PSoC5/QuadDec_Motor.c **** * Parameters:
+  64:Generated_Source\PSoC5/QuadDec_Motor.c **** *  None.
+  65:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+  66:Generated_Source\PSoC5/QuadDec_Motor.c **** * Return:
+  67:Generated_Source\PSoC5/QuadDec_Motor.c **** *  None.
+  68:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+  69:Generated_Source\PSoC5/QuadDec_Motor.c **** *******************************************************************************/
+  70:Generated_Source\PSoC5/QuadDec_Motor.c **** void QuadDec_Motor_Enable(void) 
+  71:Generated_Source\PSoC5/QuadDec_Motor.c **** {
+  75              		.loc 1 71 0
+  76              		.cfi_startproc
+  77              		@ args = 0, pretend = 0, frame = 8
+  78              		@ frame_needed = 1, uses_anonymous_args = 0
+  79 0000 80B5     		push	{r7, lr}
+  80              		.cfi_def_cfa_offset 8
+  81              		.cfi_offset 7, -8
+  82              		.cfi_offset 14, -4
+  83 0002 82B0     		sub	sp, sp, #8
+  84              		.cfi_def_cfa_offset 16
+  85 0004 00AF     		add	r7, sp, #0
+  86              		.cfi_def_cfa_register 7
+  72:Generated_Source\PSoC5/QuadDec_Motor.c ****     uint8 enableInterrupts;
+  73:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+  74:Generated_Source\PSoC5/QuadDec_Motor.c ****     QuadDec_Motor_SetInterruptMask(QuadDec_Motor_INIT_INT_MASK);
+  87              		.loc 1 74 0
+  88 0006 0F20     		movs	r0, #15
+  89 0008 FFF7FEFF 		bl	QuadDec_Motor_SetInterruptMask
+  75:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+  76:Generated_Source\PSoC5/QuadDec_Motor.c ****     /* Clear pending interrupts. */
+  77:Generated_Source\PSoC5/QuadDec_Motor.c ****     (void) QuadDec_Motor_GetEvents();
+  90              		.loc 1 77 0
+  91 000c FFF7FEFF 		bl	QuadDec_Motor_GetEvents
+  78:Generated_Source\PSoC5/QuadDec_Motor.c ****     
+  79:Generated_Source\PSoC5/QuadDec_Motor.c ****     enableInterrupts = CyEnterCriticalSection();
+  92              		.loc 1 79 0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 4
+
+
+  93 0010 FFF7FEFF 		bl	CyEnterCriticalSection
+  94 0014 0346     		mov	r3, r0
+  95 0016 FB71     		strb	r3, [r7, #7]
+  80:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+  81:Generated_Source\PSoC5/QuadDec_Motor.c ****     /* Enable interrupts from Statusi register */
+  82:Generated_Source\PSoC5/QuadDec_Motor.c ****     QuadDec_Motor_SR_AUX_CONTROL |= QuadDec_Motor_INTERRUPTS_ENABLE;
+  96              		.loc 1 82 0
+  97 0018 094A     		ldr	r2, .L5
+  98 001a 094B     		ldr	r3, .L5
+  99 001c 1B78     		ldrb	r3, [r3]
+ 100 001e DBB2     		uxtb	r3, r3
+ 101 0020 43F01003 		orr	r3, r3, #16
+ 102 0024 DBB2     		uxtb	r3, r3
+ 103 0026 1370     		strb	r3, [r2]
+  83:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+  84:Generated_Source\PSoC5/QuadDec_Motor.c ****     CyExitCriticalSection(enableInterrupts);        
+ 104              		.loc 1 84 0
+ 105 0028 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 106 002a 1846     		mov	r0, r3
+ 107 002c FFF7FEFF 		bl	CyExitCriticalSection
+  85:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+  86:Generated_Source\PSoC5/QuadDec_Motor.c ****     #if (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT)
+  87:Generated_Source\PSoC5/QuadDec_Motor.c ****         /* Enable Component interrupts */
+  88:Generated_Source\PSoC5/QuadDec_Motor.c ****         CyIntEnable(QuadDec_Motor_ISR_NUMBER);
+ 108              		.loc 1 88 0
+ 109 0030 044B     		ldr	r3, .L5+4
+ 110 0032 0222     		movs	r2, #2
+ 111 0034 1A60     		str	r2, [r3]
+  89:Generated_Source\PSoC5/QuadDec_Motor.c ****     #endif /* QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT */
+  90:Generated_Source\PSoC5/QuadDec_Motor.c **** }
+ 112              		.loc 1 90 0
+ 113 0036 00BF     		nop
+ 114 0038 0837     		adds	r7, r7, #8
+ 115              		.cfi_def_cfa_offset 8
+ 116 003a BD46     		mov	sp, r7
+ 117              		.cfi_def_cfa_register 13
+ 118              		@ sp needed
+ 119 003c 80BD     		pop	{r7, pc}
+ 120              	.L6:
+ 121 003e 00BF     		.align	2
+ 122              	.L5:
+ 123 0040 98650040 		.word	1073767832
+ 124 0044 00E100E0 		.word	-536813312
+ 125              		.cfi_endproc
+ 126              	.LFE1:
+ 127              		.size	QuadDec_Motor_Enable, .-QuadDec_Motor_Enable
+ 128              		.section	.text.QuadDec_Motor_Start,"ax",%progbits
+ 129              		.align	2
+ 130              		.global	QuadDec_Motor_Start
+ 131              		.thumb
+ 132              		.thumb_func
+ 133              		.type	QuadDec_Motor_Start, %function
+ 134              	QuadDec_Motor_Start:
+ 135              	.LFB2:
+  91:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+  92:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+  93:Generated_Source\PSoC5/QuadDec_Motor.c **** /*******************************************************************************
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 5
+
+
+  94:Generated_Source\PSoC5/QuadDec_Motor.c **** * Function Name: QuadDec_Motor_Start
+  95:Generated_Source\PSoC5/QuadDec_Motor.c **** ********************************************************************************
+  96:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+  97:Generated_Source\PSoC5/QuadDec_Motor.c **** * Summary:
+  98:Generated_Source\PSoC5/QuadDec_Motor.c **** *  Initializes UDBs and other relevant hardware.
+  99:Generated_Source\PSoC5/QuadDec_Motor.c **** *  Resets counter, enables or disables all relevant interrupts.
+ 100:Generated_Source\PSoC5/QuadDec_Motor.c **** *  Starts monitoring the inputs and counting.
+ 101:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 102:Generated_Source\PSoC5/QuadDec_Motor.c **** * Parameters:
+ 103:Generated_Source\PSoC5/QuadDec_Motor.c **** *  None.
+ 104:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 105:Generated_Source\PSoC5/QuadDec_Motor.c **** * Return:
+ 106:Generated_Source\PSoC5/QuadDec_Motor.c **** *  None.
+ 107:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 108:Generated_Source\PSoC5/QuadDec_Motor.c **** * Global variables:
+ 109:Generated_Source\PSoC5/QuadDec_Motor.c **** *  QuadDec_Motor_initVar - used to check initial configuration, modified on
+ 110:Generated_Source\PSoC5/QuadDec_Motor.c **** *  first function call.
+ 111:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 112:Generated_Source\PSoC5/QuadDec_Motor.c **** * Reentrant:
+ 113:Generated_Source\PSoC5/QuadDec_Motor.c **** *  No.
+ 114:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 115:Generated_Source\PSoC5/QuadDec_Motor.c **** *******************************************************************************/
+ 116:Generated_Source\PSoC5/QuadDec_Motor.c **** void QuadDec_Motor_Start(void) 
+ 117:Generated_Source\PSoC5/QuadDec_Motor.c **** {
+ 136              		.loc 1 117 0
+ 137              		.cfi_startproc
+ 138              		@ args = 0, pretend = 0, frame = 0
+ 139              		@ frame_needed = 1, uses_anonymous_args = 0
+ 140 0000 80B5     		push	{r7, lr}
+ 141              		.cfi_def_cfa_offset 8
+ 142              		.cfi_offset 7, -8
+ 143              		.cfi_offset 14, -4
+ 144 0002 00AF     		add	r7, sp, #0
+ 145              		.cfi_def_cfa_register 7
+ 118:Generated_Source\PSoC5/QuadDec_Motor.c ****     #if (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_8_BIT)
+ 119:Generated_Source\PSoC5/QuadDec_Motor.c ****         QuadDec_Motor_Cnt8_Start();
+ 120:Generated_Source\PSoC5/QuadDec_Motor.c ****         QuadDec_Motor_Cnt8_WriteCounter(QuadDec_Motor_COUNTER_INIT_VALUE);
+ 121:Generated_Source\PSoC5/QuadDec_Motor.c ****     #else
+ 122:Generated_Source\PSoC5/QuadDec_Motor.c ****         /* (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_16_BIT) || 
+ 123:Generated_Source\PSoC5/QuadDec_Motor.c ****         *  (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT) 
+ 124:Generated_Source\PSoC5/QuadDec_Motor.c ****         */
+ 125:Generated_Source\PSoC5/QuadDec_Motor.c ****         QuadDec_Motor_Cnt16_Start();
+ 146              		.loc 1 125 0
+ 147 0004 FFF7FEFF 		bl	QuadDec_Motor_Cnt16_Start
+ 126:Generated_Source\PSoC5/QuadDec_Motor.c ****         QuadDec_Motor_Cnt16_WriteCounter(QuadDec_Motor_COUNTER_INIT_VALUE);
+ 148              		.loc 1 126 0
+ 149 0008 4FF40040 		mov	r0, #32768
+ 150 000c FFF7FEFF 		bl	QuadDec_Motor_Cnt16_WriteCounter
+ 127:Generated_Source\PSoC5/QuadDec_Motor.c ****     #endif /* QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_8_BIT */
+ 128:Generated_Source\PSoC5/QuadDec_Motor.c ****     
+ 129:Generated_Source\PSoC5/QuadDec_Motor.c ****     #if (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT)        
+ 130:Generated_Source\PSoC5/QuadDec_Motor.c ****        QuadDec_Motor_count32SoftPart = 0;
+ 151              		.loc 1 130 0
+ 152 0010 074B     		ldr	r3, .L9
+ 153 0012 0022     		movs	r2, #0
+ 154 0014 1A60     		str	r2, [r3]
+ 131:Generated_Source\PSoC5/QuadDec_Motor.c ****     #endif /* QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT */
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 6
+
+
+ 132:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 133:Generated_Source\PSoC5/QuadDec_Motor.c ****     if (QuadDec_Motor_initVar == 0u)
+ 155              		.loc 1 133 0
+ 156 0016 074B     		ldr	r3, .L9+4
+ 157 0018 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 158 001a 002B     		cmp	r3, #0
+ 159 001c 04D1     		bne	.L8
+ 134:Generated_Source\PSoC5/QuadDec_Motor.c ****     {
+ 135:Generated_Source\PSoC5/QuadDec_Motor.c ****         QuadDec_Motor_Init();
+ 160              		.loc 1 135 0
+ 161 001e FFF7FEFF 		bl	QuadDec_Motor_Init
+ 136:Generated_Source\PSoC5/QuadDec_Motor.c ****         QuadDec_Motor_initVar = 1u;
+ 162              		.loc 1 136 0
+ 163 0022 044B     		ldr	r3, .L9+4
+ 164 0024 0122     		movs	r2, #1
+ 165 0026 1A70     		strb	r2, [r3]
+ 166              	.L8:
+ 137:Generated_Source\PSoC5/QuadDec_Motor.c ****     }
+ 138:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 139:Generated_Source\PSoC5/QuadDec_Motor.c ****     QuadDec_Motor_Enable();
+ 167              		.loc 1 139 0
+ 168 0028 FFF7FEFF 		bl	QuadDec_Motor_Enable
+ 140:Generated_Source\PSoC5/QuadDec_Motor.c **** }
+ 169              		.loc 1 140 0
+ 170 002c 00BF     		nop
+ 171 002e 80BD     		pop	{r7, pc}
+ 172              	.L10:
+ 173              		.align	2
+ 174              	.L9:
+ 175 0030 00000000 		.word	QuadDec_Motor_count32SoftPart
+ 176 0034 00000000 		.word	QuadDec_Motor_initVar
+ 177              		.cfi_endproc
+ 178              	.LFE2:
+ 179              		.size	QuadDec_Motor_Start, .-QuadDec_Motor_Start
+ 180              		.section	.text.QuadDec_Motor_Stop,"ax",%progbits
+ 181              		.align	2
+ 182              		.global	QuadDec_Motor_Stop
+ 183              		.thumb
+ 184              		.thumb_func
+ 185              		.type	QuadDec_Motor_Stop, %function
+ 186              	QuadDec_Motor_Stop:
+ 187              	.LFB3:
+ 141:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 142:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 143:Generated_Source\PSoC5/QuadDec_Motor.c **** /*******************************************************************************
+ 144:Generated_Source\PSoC5/QuadDec_Motor.c **** * Function Name: QuadDec_Motor_Stop
+ 145:Generated_Source\PSoC5/QuadDec_Motor.c **** ********************************************************************************
+ 146:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 147:Generated_Source\PSoC5/QuadDec_Motor.c **** * Summary:
+ 148:Generated_Source\PSoC5/QuadDec_Motor.c **** *  Turns off UDBs and other relevant hardware.
+ 149:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 150:Generated_Source\PSoC5/QuadDec_Motor.c **** * Parameters:
+ 151:Generated_Source\PSoC5/QuadDec_Motor.c **** *  None.
+ 152:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 153:Generated_Source\PSoC5/QuadDec_Motor.c **** * Return:
+ 154:Generated_Source\PSoC5/QuadDec_Motor.c **** *  None.
+ 155:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 7
+
+
+ 156:Generated_Source\PSoC5/QuadDec_Motor.c **** *******************************************************************************/
+ 157:Generated_Source\PSoC5/QuadDec_Motor.c **** void QuadDec_Motor_Stop(void) 
+ 158:Generated_Source\PSoC5/QuadDec_Motor.c **** {
+ 188              		.loc 1 158 0
+ 189              		.cfi_startproc
+ 190              		@ args = 0, pretend = 0, frame = 8
+ 191              		@ frame_needed = 1, uses_anonymous_args = 0
+ 192 0000 80B5     		push	{r7, lr}
+ 193              		.cfi_def_cfa_offset 8
+ 194              		.cfi_offset 7, -8
+ 195              		.cfi_offset 14, -4
+ 196 0002 82B0     		sub	sp, sp, #8
+ 197              		.cfi_def_cfa_offset 16
+ 198 0004 00AF     		add	r7, sp, #0
+ 199              		.cfi_def_cfa_register 7
+ 159:Generated_Source\PSoC5/QuadDec_Motor.c ****     uint8 enableInterrupts;
+ 160:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 161:Generated_Source\PSoC5/QuadDec_Motor.c ****     #if (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_8_BIT)
+ 162:Generated_Source\PSoC5/QuadDec_Motor.c ****         QuadDec_Motor_Cnt8_Stop();
+ 163:Generated_Source\PSoC5/QuadDec_Motor.c ****     #else 
+ 164:Generated_Source\PSoC5/QuadDec_Motor.c ****         /* (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_16_BIT) ||
+ 165:Generated_Source\PSoC5/QuadDec_Motor.c ****         *  (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT)
+ 166:Generated_Source\PSoC5/QuadDec_Motor.c ****         */
+ 167:Generated_Source\PSoC5/QuadDec_Motor.c ****         QuadDec_Motor_Cnt16_Stop();    /* counter disable */
+ 200              		.loc 1 167 0
+ 201 0006 FFF7FEFF 		bl	QuadDec_Motor_Cnt16_Stop
+ 168:Generated_Source\PSoC5/QuadDec_Motor.c ****     #endif /* (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_8_BIT) */
+ 169:Generated_Source\PSoC5/QuadDec_Motor.c ****  
+ 170:Generated_Source\PSoC5/QuadDec_Motor.c ****     enableInterrupts = CyEnterCriticalSection();
+ 202              		.loc 1 170 0
+ 203 000a FFF7FEFF 		bl	CyEnterCriticalSection
+ 204 000e 0346     		mov	r3, r0
+ 205 0010 FB71     		strb	r3, [r7, #7]
+ 171:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 172:Generated_Source\PSoC5/QuadDec_Motor.c ****     /* Disable interrupts interrupts from Statusi register */
+ 173:Generated_Source\PSoC5/QuadDec_Motor.c ****     QuadDec_Motor_SR_AUX_CONTROL &= (uint8) (~QuadDec_Motor_INTERRUPTS_ENABLE);
+ 206              		.loc 1 173 0
+ 207 0012 094A     		ldr	r2, .L12
+ 208 0014 084B     		ldr	r3, .L12
+ 209 0016 1B78     		ldrb	r3, [r3]
+ 210 0018 DBB2     		uxtb	r3, r3
+ 211 001a 23F01003 		bic	r3, r3, #16
+ 212 001e DBB2     		uxtb	r3, r3
+ 213 0020 1370     		strb	r3, [r2]
+ 174:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 175:Generated_Source\PSoC5/QuadDec_Motor.c ****     CyExitCriticalSection(enableInterrupts);
+ 214              		.loc 1 175 0
+ 215 0022 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 216 0024 1846     		mov	r0, r3
+ 217 0026 FFF7FEFF 		bl	CyExitCriticalSection
+ 176:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 177:Generated_Source\PSoC5/QuadDec_Motor.c ****     #if (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT)
+ 178:Generated_Source\PSoC5/QuadDec_Motor.c ****         CyIntDisable(QuadDec_Motor_ISR_NUMBER);    /* interrupt disable */
+ 218              		.loc 1 178 0
+ 219 002a 044B     		ldr	r3, .L12+4
+ 220 002c 0222     		movs	r2, #2
+ 221 002e 1A60     		str	r2, [r3]
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 8
+
+
+ 179:Generated_Source\PSoC5/QuadDec_Motor.c ****     #endif /* QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT */
+ 180:Generated_Source\PSoC5/QuadDec_Motor.c **** }
+ 222              		.loc 1 180 0
+ 223 0030 00BF     		nop
+ 224 0032 0837     		adds	r7, r7, #8
+ 225              		.cfi_def_cfa_offset 8
+ 226 0034 BD46     		mov	sp, r7
+ 227              		.cfi_def_cfa_register 13
+ 228              		@ sp needed
+ 229 0036 80BD     		pop	{r7, pc}
+ 230              	.L13:
+ 231              		.align	2
+ 232              	.L12:
+ 233 0038 98650040 		.word	1073767832
+ 234 003c 80E100E0 		.word	-536813184
+ 235              		.cfi_endproc
+ 236              	.LFE3:
+ 237              		.size	QuadDec_Motor_Stop, .-QuadDec_Motor_Stop
+ 238              		.section	.text.QuadDec_Motor_GetCounter,"ax",%progbits
+ 239              		.align	2
+ 240              		.global	QuadDec_Motor_GetCounter
+ 241              		.thumb
+ 242              		.thumb_func
+ 243              		.type	QuadDec_Motor_GetCounter, %function
+ 244              	QuadDec_Motor_GetCounter:
+ 245              	.LFB4:
+ 181:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 182:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 183:Generated_Source\PSoC5/QuadDec_Motor.c **** /*******************************************************************************
+ 184:Generated_Source\PSoC5/QuadDec_Motor.c **** * Function Name: QuadDec_Motor_GetCounter
+ 185:Generated_Source\PSoC5/QuadDec_Motor.c **** ********************************************************************************
+ 186:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 187:Generated_Source\PSoC5/QuadDec_Motor.c **** * Summary:
+ 188:Generated_Source\PSoC5/QuadDec_Motor.c **** *  Reports the current value of the counter.
+ 189:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 190:Generated_Source\PSoC5/QuadDec_Motor.c **** * Parameters:
+ 191:Generated_Source\PSoC5/QuadDec_Motor.c **** *  None.
+ 192:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 193:Generated_Source\PSoC5/QuadDec_Motor.c **** * Return:
+ 194:Generated_Source\PSoC5/QuadDec_Motor.c **** *  The counter value. Return type is signed and per the counter size setting.
+ 195:Generated_Source\PSoC5/QuadDec_Motor.c **** *  A positive value indicates clockwise movement (B before A).
+ 196:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 197:Generated_Source\PSoC5/QuadDec_Motor.c **** * Global variables:
+ 198:Generated_Source\PSoC5/QuadDec_Motor.c **** *  QuadDec_Motor_count32SoftPart - used to get hi 16 bit for current value
+ 199:Generated_Source\PSoC5/QuadDec_Motor.c **** *  of the 32-bit counter, when Counter size equal 32-bit.
+ 200:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 201:Generated_Source\PSoC5/QuadDec_Motor.c **** *******************************************************************************/
+ 202:Generated_Source\PSoC5/QuadDec_Motor.c **** int32 QuadDec_Motor_GetCounter(void) 
+ 203:Generated_Source\PSoC5/QuadDec_Motor.c **** {
+ 246              		.loc 1 203 0
+ 247              		.cfi_startproc
+ 248              		@ args = 0, pretend = 0, frame = 8
+ 249              		@ frame_needed = 1, uses_anonymous_args = 0
+ 250 0000 80B5     		push	{r7, lr}
+ 251              		.cfi_def_cfa_offset 8
+ 252              		.cfi_offset 7, -8
+ 253              		.cfi_offset 14, -4
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 9
+
+
+ 254 0002 82B0     		sub	sp, sp, #8
+ 255              		.cfi_def_cfa_offset 16
+ 256 0004 00AF     		add	r7, sp, #0
+ 257              		.cfi_def_cfa_register 7
+ 204:Generated_Source\PSoC5/QuadDec_Motor.c ****     int32 count;
+ 205:Generated_Source\PSoC5/QuadDec_Motor.c ****     uint16 tmpCnt;
+ 206:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 207:Generated_Source\PSoC5/QuadDec_Motor.c ****     #if (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT)
+ 208:Generated_Source\PSoC5/QuadDec_Motor.c ****         int16 hwCount;
+ 209:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 210:Generated_Source\PSoC5/QuadDec_Motor.c ****         CyIntDisable(QuadDec_Motor_ISR_NUMBER);
+ 258              		.loc 1 210 0
+ 259 0006 0D4B     		ldr	r3, .L16
+ 260 0008 0222     		movs	r2, #2
+ 261 000a 1A60     		str	r2, [r3]
+ 211:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 212:Generated_Source\PSoC5/QuadDec_Motor.c ****         tmpCnt = QuadDec_Motor_Cnt16_ReadCounter();
+ 262              		.loc 1 212 0
+ 263 000c FFF7FEFF 		bl	QuadDec_Motor_Cnt16_ReadCounter
+ 264 0010 0346     		mov	r3, r0
+ 265 0012 FB80     		strh	r3, [r7, #6]	@ movhi
+ 213:Generated_Source\PSoC5/QuadDec_Motor.c ****         hwCount = (int16) ((int32) tmpCnt - (int32) QuadDec_Motor_COUNTER_INIT_VALUE);
+ 266              		.loc 1 213 0
+ 267 0014 FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 268 0016 A3F50043 		sub	r3, r3, #32768
+ 269 001a 9BB2     		uxth	r3, r3
+ 270 001c BB80     		strh	r3, [r7, #4]	@ movhi
+ 214:Generated_Source\PSoC5/QuadDec_Motor.c ****         count = QuadDec_Motor_count32SoftPart + hwCount;
+ 271              		.loc 1 214 0
+ 272 001e B7F90420 		ldrsh	r2, [r7, #4]
+ 273 0022 074B     		ldr	r3, .L16+4
+ 274 0024 1B68     		ldr	r3, [r3]
+ 275 0026 1344     		add	r3, r3, r2
+ 276 0028 3B60     		str	r3, [r7]
+ 215:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 216:Generated_Source\PSoC5/QuadDec_Motor.c ****         CyIntEnable(QuadDec_Motor_ISR_NUMBER);
+ 277              		.loc 1 216 0
+ 278 002a 064B     		ldr	r3, .L16+8
+ 279 002c 0222     		movs	r2, #2
+ 280 002e 1A60     		str	r2, [r3]
+ 217:Generated_Source\PSoC5/QuadDec_Motor.c ****     #else 
+ 218:Generated_Source\PSoC5/QuadDec_Motor.c ****         /* (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_8_BIT) || 
+ 219:Generated_Source\PSoC5/QuadDec_Motor.c ****         *  (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_16_BIT)
+ 220:Generated_Source\PSoC5/QuadDec_Motor.c ****         */
+ 221:Generated_Source\PSoC5/QuadDec_Motor.c ****         #if (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_8_BIT)
+ 222:Generated_Source\PSoC5/QuadDec_Motor.c ****             tmpCnt = QuadDec_Motor_Cnt8_ReadCounter();
+ 223:Generated_Source\PSoC5/QuadDec_Motor.c ****         #else /* (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_16_BIT) */
+ 224:Generated_Source\PSoC5/QuadDec_Motor.c ****             tmpCnt = QuadDec_Motor_Cnt16_ReadCounter();
+ 225:Generated_Source\PSoC5/QuadDec_Motor.c ****         #endif  /* QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_8_BIT */
+ 226:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 227:Generated_Source\PSoC5/QuadDec_Motor.c ****         count = (int32) ((int32) tmpCnt -
+ 228:Generated_Source\PSoC5/QuadDec_Motor.c ****                 (int32) QuadDec_Motor_COUNTER_INIT_VALUE);
+ 229:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 230:Generated_Source\PSoC5/QuadDec_Motor.c ****     #endif /* QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT */ 
+ 231:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 232:Generated_Source\PSoC5/QuadDec_Motor.c ****     return (count);
+ 281              		.loc 1 232 0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 10
+
+
+ 282 0030 3B68     		ldr	r3, [r7]
+ 233:Generated_Source\PSoC5/QuadDec_Motor.c **** }
+ 283              		.loc 1 233 0
+ 284 0032 1846     		mov	r0, r3
+ 285 0034 0837     		adds	r7, r7, #8
+ 286              		.cfi_def_cfa_offset 8
+ 287 0036 BD46     		mov	sp, r7
+ 288              		.cfi_def_cfa_register 13
+ 289              		@ sp needed
+ 290 0038 80BD     		pop	{r7, pc}
+ 291              	.L17:
+ 292 003a 00BF     		.align	2
+ 293              	.L16:
+ 294 003c 80E100E0 		.word	-536813184
+ 295 0040 00000000 		.word	QuadDec_Motor_count32SoftPart
+ 296 0044 00E100E0 		.word	-536813312
+ 297              		.cfi_endproc
+ 298              	.LFE4:
+ 299              		.size	QuadDec_Motor_GetCounter, .-QuadDec_Motor_GetCounter
+ 300              		.section	.text.QuadDec_Motor_SetCounter,"ax",%progbits
+ 301              		.align	2
+ 302              		.global	QuadDec_Motor_SetCounter
+ 303              		.thumb
+ 304              		.thumb_func
+ 305              		.type	QuadDec_Motor_SetCounter, %function
+ 306              	QuadDec_Motor_SetCounter:
+ 307              	.LFB5:
+ 234:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 235:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 236:Generated_Source\PSoC5/QuadDec_Motor.c **** /*******************************************************************************
+ 237:Generated_Source\PSoC5/QuadDec_Motor.c **** * Function Name: QuadDec_Motor_SetCounter
+ 238:Generated_Source\PSoC5/QuadDec_Motor.c **** ********************************************************************************
+ 239:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 240:Generated_Source\PSoC5/QuadDec_Motor.c **** * Summary:
+ 241:Generated_Source\PSoC5/QuadDec_Motor.c **** *  Sets the current value of the counter.
+ 242:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 243:Generated_Source\PSoC5/QuadDec_Motor.c **** * Parameters:
+ 244:Generated_Source\PSoC5/QuadDec_Motor.c **** *  value:  The new value. Parameter type is signed and per the counter size
+ 245:Generated_Source\PSoC5/QuadDec_Motor.c **** *  setting.
+ 246:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 247:Generated_Source\PSoC5/QuadDec_Motor.c **** * Return:
+ 248:Generated_Source\PSoC5/QuadDec_Motor.c **** *  None.
+ 249:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 250:Generated_Source\PSoC5/QuadDec_Motor.c **** * Global variables:
+ 251:Generated_Source\PSoC5/QuadDec_Motor.c **** *  QuadDec_Motor_count32SoftPart - modified to set hi 16 bit for current
+ 252:Generated_Source\PSoC5/QuadDec_Motor.c **** *  value of the 32-bit counter, when Counter size equal 32-bit.
+ 253:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 254:Generated_Source\PSoC5/QuadDec_Motor.c **** * Reentrant:
+ 255:Generated_Source\PSoC5/QuadDec_Motor.c **** *  No.
+ 256:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 257:Generated_Source\PSoC5/QuadDec_Motor.c **** *******************************************************************************/
+ 258:Generated_Source\PSoC5/QuadDec_Motor.c **** void QuadDec_Motor_SetCounter(int32 value) 
+ 259:Generated_Source\PSoC5/QuadDec_Motor.c **** {
+ 308              		.loc 1 259 0
+ 309              		.cfi_startproc
+ 310              		@ args = 0, pretend = 0, frame = 8
+ 311              		@ frame_needed = 1, uses_anonymous_args = 0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 11
+
+
+ 312 0000 80B5     		push	{r7, lr}
+ 313              		.cfi_def_cfa_offset 8
+ 314              		.cfi_offset 7, -8
+ 315              		.cfi_offset 14, -4
+ 316 0002 82B0     		sub	sp, sp, #8
+ 317              		.cfi_def_cfa_offset 16
+ 318 0004 00AF     		add	r7, sp, #0
+ 319              		.cfi_def_cfa_register 7
+ 320 0006 7860     		str	r0, [r7, #4]
+ 260:Generated_Source\PSoC5/QuadDec_Motor.c ****     #if ((QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_8_BIT) || \
+ 261:Generated_Source\PSoC5/QuadDec_Motor.c ****          (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_16_BIT))
+ 262:Generated_Source\PSoC5/QuadDec_Motor.c ****         uint16 count;
+ 263:Generated_Source\PSoC5/QuadDec_Motor.c ****         
+ 264:Generated_Source\PSoC5/QuadDec_Motor.c ****         if (value >= 0)
+ 265:Generated_Source\PSoC5/QuadDec_Motor.c ****         {
+ 266:Generated_Source\PSoC5/QuadDec_Motor.c ****             count = (uint16) value + QuadDec_Motor_COUNTER_INIT_VALUE;
+ 267:Generated_Source\PSoC5/QuadDec_Motor.c ****         }
+ 268:Generated_Source\PSoC5/QuadDec_Motor.c ****         else
+ 269:Generated_Source\PSoC5/QuadDec_Motor.c ****         {
+ 270:Generated_Source\PSoC5/QuadDec_Motor.c ****             count = QuadDec_Motor_COUNTER_INIT_VALUE - (uint16)(-value);
+ 271:Generated_Source\PSoC5/QuadDec_Motor.c ****         }
+ 272:Generated_Source\PSoC5/QuadDec_Motor.c ****         #if (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_8_BIT)
+ 273:Generated_Source\PSoC5/QuadDec_Motor.c ****             QuadDec_Motor_Cnt8_WriteCounter(count);
+ 274:Generated_Source\PSoC5/QuadDec_Motor.c ****         #else /* (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_16_BIT) */
+ 275:Generated_Source\PSoC5/QuadDec_Motor.c ****             QuadDec_Motor_Cnt16_WriteCounter(count);
+ 276:Generated_Source\PSoC5/QuadDec_Motor.c ****         #endif  /* QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_8_BIT */
+ 277:Generated_Source\PSoC5/QuadDec_Motor.c ****     #else /* (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT) */
+ 278:Generated_Source\PSoC5/QuadDec_Motor.c ****         CyIntDisable(QuadDec_Motor_ISR_NUMBER);
+ 321              		.loc 1 278 0
+ 322 0008 084B     		ldr	r3, .L19
+ 323 000a 0222     		movs	r2, #2
+ 324 000c 1A60     		str	r2, [r3]
+ 279:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 280:Generated_Source\PSoC5/QuadDec_Motor.c ****         QuadDec_Motor_Cnt16_WriteCounter(QuadDec_Motor_COUNTER_INIT_VALUE);
+ 325              		.loc 1 280 0
+ 326 000e 4FF40040 		mov	r0, #32768
+ 327 0012 FFF7FEFF 		bl	QuadDec_Motor_Cnt16_WriteCounter
+ 281:Generated_Source\PSoC5/QuadDec_Motor.c ****         QuadDec_Motor_count32SoftPart = value;
+ 328              		.loc 1 281 0
+ 329 0016 064A     		ldr	r2, .L19+4
+ 330 0018 7B68     		ldr	r3, [r7, #4]
+ 331 001a 1360     		str	r3, [r2]
+ 282:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 283:Generated_Source\PSoC5/QuadDec_Motor.c ****         CyIntEnable(QuadDec_Motor_ISR_NUMBER);
+ 332              		.loc 1 283 0
+ 333 001c 054B     		ldr	r3, .L19+8
+ 334 001e 0222     		movs	r2, #2
+ 335 0020 1A60     		str	r2, [r3]
+ 284:Generated_Source\PSoC5/QuadDec_Motor.c ****     #endif  /* (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_8_BIT) ||
+ 285:Generated_Source\PSoC5/QuadDec_Motor.c ****              * (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_16_BIT)
+ 286:Generated_Source\PSoC5/QuadDec_Motor.c ****              */
+ 287:Generated_Source\PSoC5/QuadDec_Motor.c **** }
+ 336              		.loc 1 287 0
+ 337 0022 00BF     		nop
+ 338 0024 0837     		adds	r7, r7, #8
+ 339              		.cfi_def_cfa_offset 8
+ 340 0026 BD46     		mov	sp, r7
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 12
+
+
+ 341              		.cfi_def_cfa_register 13
+ 342              		@ sp needed
+ 343 0028 80BD     		pop	{r7, pc}
+ 344              	.L20:
+ 345 002a 00BF     		.align	2
+ 346              	.L19:
+ 347 002c 80E100E0 		.word	-536813184
+ 348 0030 00000000 		.word	QuadDec_Motor_count32SoftPart
+ 349 0034 00E100E0 		.word	-536813312
+ 350              		.cfi_endproc
+ 351              	.LFE5:
+ 352              		.size	QuadDec_Motor_SetCounter, .-QuadDec_Motor_SetCounter
+ 353              		.section	.text.QuadDec_Motor_GetEvents,"ax",%progbits
+ 354              		.align	2
+ 355              		.global	QuadDec_Motor_GetEvents
+ 356              		.thumb
+ 357              		.thumb_func
+ 358              		.type	QuadDec_Motor_GetEvents, %function
+ 359              	QuadDec_Motor_GetEvents:
+ 360              	.LFB6:
+ 288:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 289:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 290:Generated_Source\PSoC5/QuadDec_Motor.c **** /*******************************************************************************
+ 291:Generated_Source\PSoC5/QuadDec_Motor.c **** * Function Name: QuadDec_Motor_GetEvents
+ 292:Generated_Source\PSoC5/QuadDec_Motor.c **** ********************************************************************************
+ 293:Generated_Source\PSoC5/QuadDec_Motor.c **** * 
+ 294:Generated_Source\PSoC5/QuadDec_Motor.c **** * Summary:
+ 295:Generated_Source\PSoC5/QuadDec_Motor.c **** *   Reports the current status of events. This function clears the bits of the 
+ 296:Generated_Source\PSoC5/QuadDec_Motor.c **** *   status register.
+ 297:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 298:Generated_Source\PSoC5/QuadDec_Motor.c **** * Parameters:
+ 299:Generated_Source\PSoC5/QuadDec_Motor.c **** *  None.
+ 300:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 301:Generated_Source\PSoC5/QuadDec_Motor.c **** * Return:
+ 302:Generated_Source\PSoC5/QuadDec_Motor.c **** *  The events, as bits in an unsigned 8-bit value:
+ 303:Generated_Source\PSoC5/QuadDec_Motor.c **** *    Bit      Description
+ 304:Generated_Source\PSoC5/QuadDec_Motor.c **** *     0        Counter overflow.
+ 305:Generated_Source\PSoC5/QuadDec_Motor.c **** *     1        Counter underflow.
+ 306:Generated_Source\PSoC5/QuadDec_Motor.c **** *     2        Counter reset due to index, if index input is used.
+ 307:Generated_Source\PSoC5/QuadDec_Motor.c **** *     3        Invalid A, B inputs state transition.
+ 308:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 309:Generated_Source\PSoC5/QuadDec_Motor.c **** *******************************************************************************/
+ 310:Generated_Source\PSoC5/QuadDec_Motor.c **** uint8 QuadDec_Motor_GetEvents(void) 
+ 311:Generated_Source\PSoC5/QuadDec_Motor.c **** {
+ 361              		.loc 1 311 0
+ 362              		.cfi_startproc
+ 363              		@ args = 0, pretend = 0, frame = 0
+ 364              		@ frame_needed = 1, uses_anonymous_args = 0
+ 365              		@ link register save eliminated.
+ 366 0000 80B4     		push	{r7}
+ 367              		.cfi_def_cfa_offset 4
+ 368              		.cfi_offset 7, -4
+ 369 0002 00AF     		add	r7, sp, #0
+ 370              		.cfi_def_cfa_register 7
+ 312:Generated_Source\PSoC5/QuadDec_Motor.c ****     return (QuadDec_Motor_STATUS_REG & QuadDec_Motor_INIT_INT_MASK);
+ 371              		.loc 1 312 0
+ 372 0004 044B     		ldr	r3, .L23
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 13
+
+
+ 373 0006 1B78     		ldrb	r3, [r3]
+ 374 0008 DBB2     		uxtb	r3, r3
+ 375 000a 03F00F03 		and	r3, r3, #15
+ 376 000e DBB2     		uxtb	r3, r3
+ 313:Generated_Source\PSoC5/QuadDec_Motor.c **** }
+ 377              		.loc 1 313 0
+ 378 0010 1846     		mov	r0, r3
+ 379 0012 BD46     		mov	sp, r7
+ 380              		.cfi_def_cfa_register 13
+ 381              		@ sp needed
+ 382 0014 80BC     		pop	{r7}
+ 383              		.cfi_restore 7
+ 384              		.cfi_def_cfa_offset 0
+ 385 0016 7047     		bx	lr
+ 386              	.L24:
+ 387              		.align	2
+ 388              	.L23:
+ 389 0018 68650040 		.word	1073767784
+ 390              		.cfi_endproc
+ 391              	.LFE6:
+ 392              		.size	QuadDec_Motor_GetEvents, .-QuadDec_Motor_GetEvents
+ 393              		.section	.text.QuadDec_Motor_SetInterruptMask,"ax",%progbits
+ 394              		.align	2
+ 395              		.global	QuadDec_Motor_SetInterruptMask
+ 396              		.thumb
+ 397              		.thumb_func
+ 398              		.type	QuadDec_Motor_SetInterruptMask, %function
+ 399              	QuadDec_Motor_SetInterruptMask:
+ 400              	.LFB7:
+ 314:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 315:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 316:Generated_Source\PSoC5/QuadDec_Motor.c **** /*******************************************************************************
+ 317:Generated_Source\PSoC5/QuadDec_Motor.c **** * Function Name: QuadDec_Motor_SetInterruptMask
+ 318:Generated_Source\PSoC5/QuadDec_Motor.c **** ********************************************************************************
+ 319:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 320:Generated_Source\PSoC5/QuadDec_Motor.c **** * Summary:
+ 321:Generated_Source\PSoC5/QuadDec_Motor.c **** *  Enables / disables interrupts due to the events.
+ 322:Generated_Source\PSoC5/QuadDec_Motor.c **** *  For the 32-bit counter, the overflow, underflow and reset interrupts cannot
+ 323:Generated_Source\PSoC5/QuadDec_Motor.c **** *  be disabled, these bits are ignored.
+ 324:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 325:Generated_Source\PSoC5/QuadDec_Motor.c **** * Parameters:
+ 326:Generated_Source\PSoC5/QuadDec_Motor.c **** *  mask: Enable / disable bits in an 8-bit value, where 1 enables the interrupt.
+ 327:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 328:Generated_Source\PSoC5/QuadDec_Motor.c **** * Return:
+ 329:Generated_Source\PSoC5/QuadDec_Motor.c **** *  None.
+ 330:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 331:Generated_Source\PSoC5/QuadDec_Motor.c **** *******************************************************************************/
+ 332:Generated_Source\PSoC5/QuadDec_Motor.c **** void QuadDec_Motor_SetInterruptMask(uint8 mask) 
+ 333:Generated_Source\PSoC5/QuadDec_Motor.c **** {
+ 401              		.loc 1 333 0
+ 402              		.cfi_startproc
+ 403              		@ args = 0, pretend = 0, frame = 8
+ 404              		@ frame_needed = 1, uses_anonymous_args = 0
+ 405              		@ link register save eliminated.
+ 406 0000 80B4     		push	{r7}
+ 407              		.cfi_def_cfa_offset 4
+ 408              		.cfi_offset 7, -4
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 14
+
+
+ 409 0002 83B0     		sub	sp, sp, #12
+ 410              		.cfi_def_cfa_offset 16
+ 411 0004 00AF     		add	r7, sp, #0
+ 412              		.cfi_def_cfa_register 7
+ 413 0006 0346     		mov	r3, r0
+ 414 0008 FB71     		strb	r3, [r7, #7]
+ 334:Generated_Source\PSoC5/QuadDec_Motor.c ****     #if (QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT)
+ 335:Generated_Source\PSoC5/QuadDec_Motor.c ****         /* Underflow, Overflow and Reset interrupts for 32-bit Counter are always enable */
+ 336:Generated_Source\PSoC5/QuadDec_Motor.c ****         mask |= (QuadDec_Motor_COUNTER_OVERFLOW | QuadDec_Motor_COUNTER_UNDERFLOW |
+ 415              		.loc 1 336 0
+ 416 000a FB79     		ldrb	r3, [r7, #7]
+ 417 000c 43F00703 		orr	r3, r3, #7
+ 418 0010 FB71     		strb	r3, [r7, #7]
+ 337:Generated_Source\PSoC5/QuadDec_Motor.c ****                  QuadDec_Motor_COUNTER_RESET);
+ 338:Generated_Source\PSoC5/QuadDec_Motor.c ****     #endif /* QuadDec_Motor_COUNTER_SIZE == QuadDec_Motor_COUNTER_SIZE_32_BIT */
+ 339:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 340:Generated_Source\PSoC5/QuadDec_Motor.c ****     QuadDec_Motor_STATUS_MASK = mask;
+ 419              		.loc 1 340 0
+ 420 0012 044A     		ldr	r2, .L26
+ 421 0014 FB79     		ldrb	r3, [r7, #7]
+ 422 0016 1370     		strb	r3, [r2]
+ 341:Generated_Source\PSoC5/QuadDec_Motor.c **** }
+ 423              		.loc 1 341 0
+ 424 0018 00BF     		nop
+ 425 001a 0C37     		adds	r7, r7, #12
+ 426              		.cfi_def_cfa_offset 4
+ 427 001c BD46     		mov	sp, r7
+ 428              		.cfi_def_cfa_register 13
+ 429              		@ sp needed
+ 430 001e 80BC     		pop	{r7}
+ 431              		.cfi_restore 7
+ 432              		.cfi_def_cfa_offset 0
+ 433 0020 7047     		bx	lr
+ 434              	.L27:
+ 435 0022 00BF     		.align	2
+ 436              	.L26:
+ 437 0024 88650040 		.word	1073767816
+ 438              		.cfi_endproc
+ 439              	.LFE7:
+ 440              		.size	QuadDec_Motor_SetInterruptMask, .-QuadDec_Motor_SetInterruptMask
+ 441              		.section	.text.QuadDec_Motor_GetInterruptMask,"ax",%progbits
+ 442              		.align	2
+ 443              		.global	QuadDec_Motor_GetInterruptMask
+ 444              		.thumb
+ 445              		.thumb_func
+ 446              		.type	QuadDec_Motor_GetInterruptMask, %function
+ 447              	QuadDec_Motor_GetInterruptMask:
+ 448              	.LFB8:
+ 342:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 343:Generated_Source\PSoC5/QuadDec_Motor.c **** 
+ 344:Generated_Source\PSoC5/QuadDec_Motor.c **** /*******************************************************************************
+ 345:Generated_Source\PSoC5/QuadDec_Motor.c **** * Function Name: QuadDec_Motor_GetInterruptMask
+ 346:Generated_Source\PSoC5/QuadDec_Motor.c **** ********************************************************************************
+ 347:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 348:Generated_Source\PSoC5/QuadDec_Motor.c **** * Summary:
+ 349:Generated_Source\PSoC5/QuadDec_Motor.c **** *  Reports the current interrupt mask settings.
+ 350:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 15
+
+
+ 351:Generated_Source\PSoC5/QuadDec_Motor.c **** * Parameters:
+ 352:Generated_Source\PSoC5/QuadDec_Motor.c **** *  None.
+ 353:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 354:Generated_Source\PSoC5/QuadDec_Motor.c **** * Return:
+ 355:Generated_Source\PSoC5/QuadDec_Motor.c **** *  Enable / disable bits in an 8-bit value, where 1 enables the interrupt.
+ 356:Generated_Source\PSoC5/QuadDec_Motor.c **** *  For the 32-bit counter, the overflow, underflow and reset enable bits are
+ 357:Generated_Source\PSoC5/QuadDec_Motor.c **** *  always set.
+ 358:Generated_Source\PSoC5/QuadDec_Motor.c **** *
+ 359:Generated_Source\PSoC5/QuadDec_Motor.c **** *******************************************************************************/
+ 360:Generated_Source\PSoC5/QuadDec_Motor.c **** uint8 QuadDec_Motor_GetInterruptMask(void) 
+ 361:Generated_Source\PSoC5/QuadDec_Motor.c **** {
+ 449              		.loc 1 361 0
+ 450              		.cfi_startproc
+ 451              		@ args = 0, pretend = 0, frame = 0
+ 452              		@ frame_needed = 1, uses_anonymous_args = 0
+ 453              		@ link register save eliminated.
+ 454 0000 80B4     		push	{r7}
+ 455              		.cfi_def_cfa_offset 4
+ 456              		.cfi_offset 7, -4
+ 457 0002 00AF     		add	r7, sp, #0
+ 458              		.cfi_def_cfa_register 7
+ 362:Generated_Source\PSoC5/QuadDec_Motor.c ****     return (QuadDec_Motor_STATUS_MASK & QuadDec_Motor_INIT_INT_MASK);
+ 459              		.loc 1 362 0
+ 460 0004 044B     		ldr	r3, .L30
+ 461 0006 1B78     		ldrb	r3, [r3]
+ 462 0008 DBB2     		uxtb	r3, r3
+ 463 000a 03F00F03 		and	r3, r3, #15
+ 464 000e DBB2     		uxtb	r3, r3
+ 363:Generated_Source\PSoC5/QuadDec_Motor.c **** }
+ 465              		.loc 1 363 0
+ 466 0010 1846     		mov	r0, r3
+ 467 0012 BD46     		mov	sp, r7
+ 468              		.cfi_def_cfa_register 13
+ 469              		@ sp needed
+ 470 0014 80BC     		pop	{r7}
+ 471              		.cfi_restore 7
+ 472              		.cfi_def_cfa_offset 0
+ 473 0016 7047     		bx	lr
+ 474              	.L31:
+ 475              		.align	2
+ 476              	.L30:
+ 477 0018 88650040 		.word	1073767816
+ 478              		.cfi_endproc
+ 479              	.LFE8:
+ 480              		.size	QuadDec_Motor_GetInterruptMask, .-QuadDec_Motor_GetInterruptMask
+ 481              		.text
+ 482              	.Letext0:
+ 483              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 484              		.file 3 "Generated_Source\\PSoC5\\QuadDec_Motor_PVT.h"
+ 485              		.section	.debug_info,"",%progbits
+ 486              	.Ldebug_info0:
+ 487 0000 29020000 		.4byte	0x229
+ 488 0004 0400     		.2byte	0x4
+ 489 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 490 000a 04       		.byte	0x4
+ 491 000b 01       		.uleb128 0x1
+ 492 000c 19000000 		.4byte	.LASF36
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 16
+
+
+ 493 0010 0C       		.byte	0xc
+ 494 0011 1D010000 		.4byte	.LASF37
+ 495 0015 59020000 		.4byte	.LASF38
+ 496 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 497 001d 00000000 		.4byte	0
+ 498 0021 00000000 		.4byte	.Ldebug_line0
+ 499 0025 02       		.uleb128 0x2
+ 500 0026 04       		.byte	0x4
+ 501 0027 05       		.byte	0x5
+ 502 0028 696E7400 		.ascii	"int\000"
+ 503 002c 03       		.uleb128 0x3
+ 504 002d 04       		.byte	0x4
+ 505 002e 07       		.byte	0x7
+ 506 002f 16020000 		.4byte	.LASF0
+ 507 0033 03       		.uleb128 0x3
+ 508 0034 08       		.byte	0x8
+ 509 0035 05       		.byte	0x5
+ 510 0036 8E020000 		.4byte	.LASF1
+ 511 003a 03       		.uleb128 0x3
+ 512 003b 08       		.byte	0x8
+ 513 003c 04       		.byte	0x4
+ 514 003d D5020000 		.4byte	.LASF2
+ 515 0041 03       		.uleb128 0x3
+ 516 0042 01       		.byte	0x1
+ 517 0043 06       		.byte	0x6
+ 518 0044 E1020000 		.4byte	.LASF3
+ 519 0048 03       		.uleb128 0x3
+ 520 0049 01       		.byte	0x1
+ 521 004a 08       		.byte	0x8
+ 522 004b 02010000 		.4byte	.LASF4
+ 523 004f 03       		.uleb128 0x3
+ 524 0050 02       		.byte	0x2
+ 525 0051 05       		.byte	0x5
+ 526 0052 B6020000 		.4byte	.LASF5
+ 527 0056 03       		.uleb128 0x3
+ 528 0057 02       		.byte	0x2
+ 529 0058 07       		.byte	0x7
+ 530 0059 E4000000 		.4byte	.LASF6
+ 531 005d 03       		.uleb128 0x3
+ 532 005e 04       		.byte	0x4
+ 533 005f 05       		.byte	0x5
+ 534 0060 C6020000 		.4byte	.LASF7
+ 535 0064 03       		.uleb128 0x3
+ 536 0065 04       		.byte	0x4
+ 537 0066 07       		.byte	0x7
+ 538 0067 44010000 		.4byte	.LASF8
+ 539 006b 03       		.uleb128 0x3
+ 540 006c 08       		.byte	0x8
+ 541 006d 07       		.byte	0x7
+ 542 006e 23020000 		.4byte	.LASF9
+ 543 0072 03       		.uleb128 0x3
+ 544 0073 04       		.byte	0x4
+ 545 0074 07       		.byte	0x7
+ 546 0075 85020000 		.4byte	.LASF10
+ 547 0079 03       		.uleb128 0x3
+ 548 007a 01       		.byte	0x1
+ 549 007b 08       		.byte	0x8
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 17
+
+
+ 550 007c F7000000 		.4byte	.LASF11
+ 551 0080 04       		.uleb128 0x4
+ 552 0081 C0020000 		.4byte	.LASF12
+ 553 0085 02       		.byte	0x2
+ 554 0086 9201     		.2byte	0x192
+ 555 0088 48000000 		.4byte	0x48
+ 556 008c 04       		.uleb128 0x4
+ 557 008d DC010000 		.4byte	.LASF13
+ 558 0091 02       		.byte	0x2
+ 559 0092 9301     		.2byte	0x193
+ 560 0094 56000000 		.4byte	0x56
+ 561 0098 04       		.uleb128 0x4
+ 562 0099 E3010000 		.4byte	.LASF14
+ 563 009d 02       		.byte	0x2
+ 564 009e 9401     		.2byte	0x194
+ 565 00a0 64000000 		.4byte	0x64
+ 566 00a4 04       		.uleb128 0x4
+ 567 00a5 FC000000 		.4byte	.LASF15
+ 568 00a9 02       		.byte	0x2
+ 569 00aa 9601     		.2byte	0x196
+ 570 00ac 4F000000 		.4byte	0x4f
+ 571 00b0 04       		.uleb128 0x4
+ 572 00b1 75010000 		.4byte	.LASF16
+ 573 00b5 02       		.byte	0x2
+ 574 00b6 9701     		.2byte	0x197
+ 575 00b8 5D000000 		.4byte	0x5d
+ 576 00bc 03       		.uleb128 0x3
+ 577 00bd 08       		.byte	0x8
+ 578 00be 04       		.byte	0x4
+ 579 00bf C2010000 		.4byte	.LASF17
+ 580 00c3 04       		.uleb128 0x4
+ 581 00c4 18010000 		.4byte	.LASF18
+ 582 00c8 02       		.byte	0x2
+ 583 00c9 3C02     		.2byte	0x23c
+ 584 00cb CF000000 		.4byte	0xcf
+ 585 00cf 05       		.uleb128 0x5
+ 586 00d0 80000000 		.4byte	0x80
+ 587 00d4 04       		.uleb128 0x4
+ 588 00d5 CF020000 		.4byte	.LASF19
+ 589 00d9 02       		.byte	0x2
+ 590 00da 3E02     		.2byte	0x23e
+ 591 00dc E0000000 		.4byte	0xe0
+ 592 00e0 05       		.uleb128 0x5
+ 593 00e1 98000000 		.4byte	0x98
+ 594 00e5 06       		.uleb128 0x6
+ 595 00e6 B3000000 		.4byte	.LASF20
+ 596 00ea 01       		.byte	0x1
+ 597 00eb 2A       		.byte	0x2a
+ 598 00ec 00000000 		.4byte	.LFB0
+ 599 00f0 28000000 		.4byte	.LFE0-.LFB0
+ 600 00f4 01       		.uleb128 0x1
+ 601 00f5 9C       		.byte	0x9c
+ 602 00f6 07       		.uleb128 0x7
+ 603 00f7 A1020000 		.4byte	.LASF22
+ 604 00fb 01       		.byte	0x1
+ 605 00fc 46       		.byte	0x46
+ 606 00fd 00000000 		.4byte	.LFB1
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 18
+
+
+ 607 0101 48000000 		.4byte	.LFE1-.LFB1
+ 608 0105 01       		.uleb128 0x1
+ 609 0106 9C       		.byte	0x9c
+ 610 0107 1A010000 		.4byte	0x11a
+ 611 010b 08       		.uleb128 0x8
+ 612 010c 9B010000 		.4byte	.LASF24
+ 613 0110 01       		.byte	0x1
+ 614 0111 48       		.byte	0x48
+ 615 0112 80000000 		.4byte	0x80
+ 616 0116 02       		.uleb128 0x2
+ 617 0117 91       		.byte	0x91
+ 618 0118 77       		.sleb128 -9
+ 619 0119 00       		.byte	0
+ 620 011a 06       		.uleb128 0x6
+ 621 011b 02020000 		.4byte	.LASF21
+ 622 011f 01       		.byte	0x1
+ 623 0120 74       		.byte	0x74
+ 624 0121 00000000 		.4byte	.LFB2
+ 625 0125 38000000 		.4byte	.LFE2-.LFB2
+ 626 0129 01       		.uleb128 0x1
+ 627 012a 9C       		.byte	0x9c
+ 628 012b 07       		.uleb128 0x7
+ 629 012c C9010000 		.4byte	.LASF23
+ 630 0130 01       		.byte	0x1
+ 631 0131 9D       		.byte	0x9d
+ 632 0132 00000000 		.4byte	.LFB3
+ 633 0136 40000000 		.4byte	.LFE3-.LFB3
+ 634 013a 01       		.uleb128 0x1
+ 635 013b 9C       		.byte	0x9c
+ 636 013c 4F010000 		.4byte	0x14f
+ 637 0140 08       		.uleb128 0x8
+ 638 0141 9B010000 		.4byte	.LASF24
+ 639 0145 01       		.byte	0x1
+ 640 0146 9F       		.byte	0x9f
+ 641 0147 80000000 		.4byte	0x80
+ 642 014b 02       		.uleb128 0x2
+ 643 014c 91       		.byte	0x91
+ 644 014d 77       		.sleb128 -9
+ 645 014e 00       		.byte	0
+ 646 014f 09       		.uleb128 0x9
+ 647 0150 00000000 		.4byte	.LASF39
+ 648 0154 01       		.byte	0x1
+ 649 0155 CA       		.byte	0xca
+ 650 0156 B0000000 		.4byte	0xb0
+ 651 015a 00000000 		.4byte	.LFB4
+ 652 015e 48000000 		.4byte	.LFE4-.LFB4
+ 653 0162 01       		.uleb128 0x1
+ 654 0163 9C       		.byte	0x9c
+ 655 0164 93010000 		.4byte	0x193
+ 656 0168 08       		.uleb128 0x8
+ 657 0169 AD000000 		.4byte	.LASF25
+ 658 016d 01       		.byte	0x1
+ 659 016e CC       		.byte	0xcc
+ 660 016f B0000000 		.4byte	0xb0
+ 661 0173 02       		.uleb128 0x2
+ 662 0174 91       		.byte	0x91
+ 663 0175 70       		.sleb128 -16
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 19
+
+
+ 664 0176 08       		.uleb128 0x8
+ 665 0177 7B010000 		.4byte	.LASF26
+ 666 017b 01       		.byte	0x1
+ 667 017c CD       		.byte	0xcd
+ 668 017d 8C000000 		.4byte	0x8c
+ 669 0181 02       		.uleb128 0x2
+ 670 0182 91       		.byte	0x91
+ 671 0183 76       		.sleb128 -10
+ 672 0184 08       		.uleb128 0x8
+ 673 0185 10010000 		.4byte	.LASF27
+ 674 0189 01       		.byte	0x1
+ 675 018a D0       		.byte	0xd0
+ 676 018b A4000000 		.4byte	0xa4
+ 677 018f 02       		.uleb128 0x2
+ 678 0190 91       		.byte	0x91
+ 679 0191 74       		.sleb128 -12
+ 680 0192 00       		.byte	0
+ 681 0193 0A       		.uleb128 0xa
+ 682 0194 82010000 		.4byte	.LASF28
+ 683 0198 01       		.byte	0x1
+ 684 0199 0201     		.2byte	0x102
+ 685 019b 00000000 		.4byte	.LFB5
+ 686 019f 38000000 		.4byte	.LFE5-.LFB5
+ 687 01a3 01       		.uleb128 0x1
+ 688 01a4 9C       		.byte	0x9c
+ 689 01a5 B9010000 		.4byte	0x1b9
+ 690 01a9 0B       		.uleb128 0xb
+ 691 01aa A7000000 		.4byte	.LASF30
+ 692 01ae 01       		.byte	0x1
+ 693 01af 0201     		.2byte	0x102
+ 694 01b1 B0000000 		.4byte	0xb0
+ 695 01b5 02       		.uleb128 0x2
+ 696 01b6 91       		.byte	0x91
+ 697 01b7 74       		.sleb128 -12
+ 698 01b8 00       		.byte	0
+ 699 01b9 0C       		.uleb128 0xc
+ 700 01ba EA010000 		.4byte	.LASF32
+ 701 01be 01       		.byte	0x1
+ 702 01bf 3601     		.2byte	0x136
+ 703 01c1 80000000 		.4byte	0x80
+ 704 01c5 00000000 		.4byte	.LFB6
+ 705 01c9 1C000000 		.4byte	.LFE6-.LFB6
+ 706 01cd 01       		.uleb128 0x1
+ 707 01ce 9C       		.byte	0x9c
+ 708 01cf 0D       		.uleb128 0xd
+ 709 01d0 56010000 		.4byte	.LASF29
+ 710 01d4 01       		.byte	0x1
+ 711 01d5 4C01     		.2byte	0x14c
+ 712 01d7 00000000 		.4byte	.LFB7
+ 713 01db 28000000 		.4byte	.LFE7-.LFB7
+ 714 01df 01       		.uleb128 0x1
+ 715 01e0 9C       		.byte	0x9c
+ 716 01e1 F5010000 		.4byte	0x1f5
+ 717 01e5 0B       		.uleb128 0xb
+ 718 01e6 9C020000 		.4byte	.LASF31
+ 719 01ea 01       		.byte	0x1
+ 720 01eb 4C01     		.2byte	0x14c
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 20
+
+
+ 721 01ed 80000000 		.4byte	0x80
+ 722 01f1 02       		.uleb128 0x2
+ 723 01f2 91       		.byte	0x91
+ 724 01f3 77       		.sleb128 -9
+ 725 01f4 00       		.byte	0
+ 726 01f5 0C       		.uleb128 0xc
+ 727 01f6 3A020000 		.4byte	.LASF33
+ 728 01fa 01       		.byte	0x1
+ 729 01fb 6801     		.2byte	0x168
+ 730 01fd 80000000 		.4byte	0x80
+ 731 0201 00000000 		.4byte	.LFB8
+ 732 0205 1C000000 		.4byte	.LFE8-.LFB8
+ 733 0209 01       		.uleb128 0x1
+ 734 020a 9C       		.byte	0x9c
+ 735 020b 0E       		.uleb128 0xe
+ 736 020c AC010000 		.4byte	.LASF34
+ 737 0210 01       		.byte	0x1
+ 738 0211 19       		.byte	0x19
+ 739 0212 80000000 		.4byte	0x80
+ 740 0216 05       		.uleb128 0x5
+ 741 0217 03       		.byte	0x3
+ 742 0218 00000000 		.4byte	QuadDec_Motor_initVar
+ 743 021c 0F       		.uleb128 0xf
+ 744 021d C6000000 		.4byte	.LASF35
+ 745 0221 03       		.byte	0x3
+ 746 0222 18       		.byte	0x18
+ 747 0223 27020000 		.4byte	0x227
+ 748 0227 05       		.uleb128 0x5
+ 749 0228 B0000000 		.4byte	0xb0
+ 750 022c 00       		.byte	0
+ 751              		.section	.debug_abbrev,"",%progbits
+ 752              	.Ldebug_abbrev0:
+ 753 0000 01       		.uleb128 0x1
+ 754 0001 11       		.uleb128 0x11
+ 755 0002 01       		.byte	0x1
+ 756 0003 25       		.uleb128 0x25
+ 757 0004 0E       		.uleb128 0xe
+ 758 0005 13       		.uleb128 0x13
+ 759 0006 0B       		.uleb128 0xb
+ 760 0007 03       		.uleb128 0x3
+ 761 0008 0E       		.uleb128 0xe
+ 762 0009 1B       		.uleb128 0x1b
+ 763 000a 0E       		.uleb128 0xe
+ 764 000b 55       		.uleb128 0x55
+ 765 000c 17       		.uleb128 0x17
+ 766 000d 11       		.uleb128 0x11
+ 767 000e 01       		.uleb128 0x1
+ 768 000f 10       		.uleb128 0x10
+ 769 0010 17       		.uleb128 0x17
+ 770 0011 00       		.byte	0
+ 771 0012 00       		.byte	0
+ 772 0013 02       		.uleb128 0x2
+ 773 0014 24       		.uleb128 0x24
+ 774 0015 00       		.byte	0
+ 775 0016 0B       		.uleb128 0xb
+ 776 0017 0B       		.uleb128 0xb
+ 777 0018 3E       		.uleb128 0x3e
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 21
+
+
+ 778 0019 0B       		.uleb128 0xb
+ 779 001a 03       		.uleb128 0x3
+ 780 001b 08       		.uleb128 0x8
+ 781 001c 00       		.byte	0
+ 782 001d 00       		.byte	0
+ 783 001e 03       		.uleb128 0x3
+ 784 001f 24       		.uleb128 0x24
+ 785 0020 00       		.byte	0
+ 786 0021 0B       		.uleb128 0xb
+ 787 0022 0B       		.uleb128 0xb
+ 788 0023 3E       		.uleb128 0x3e
+ 789 0024 0B       		.uleb128 0xb
+ 790 0025 03       		.uleb128 0x3
+ 791 0026 0E       		.uleb128 0xe
+ 792 0027 00       		.byte	0
+ 793 0028 00       		.byte	0
+ 794 0029 04       		.uleb128 0x4
+ 795 002a 16       		.uleb128 0x16
+ 796 002b 00       		.byte	0
+ 797 002c 03       		.uleb128 0x3
+ 798 002d 0E       		.uleb128 0xe
+ 799 002e 3A       		.uleb128 0x3a
+ 800 002f 0B       		.uleb128 0xb
+ 801 0030 3B       		.uleb128 0x3b
+ 802 0031 05       		.uleb128 0x5
+ 803 0032 49       		.uleb128 0x49
+ 804 0033 13       		.uleb128 0x13
+ 805 0034 00       		.byte	0
+ 806 0035 00       		.byte	0
+ 807 0036 05       		.uleb128 0x5
+ 808 0037 35       		.uleb128 0x35
+ 809 0038 00       		.byte	0
+ 810 0039 49       		.uleb128 0x49
+ 811 003a 13       		.uleb128 0x13
+ 812 003b 00       		.byte	0
+ 813 003c 00       		.byte	0
+ 814 003d 06       		.uleb128 0x6
+ 815 003e 2E       		.uleb128 0x2e
+ 816 003f 00       		.byte	0
+ 817 0040 3F       		.uleb128 0x3f
+ 818 0041 19       		.uleb128 0x19
+ 819 0042 03       		.uleb128 0x3
+ 820 0043 0E       		.uleb128 0xe
+ 821 0044 3A       		.uleb128 0x3a
+ 822 0045 0B       		.uleb128 0xb
+ 823 0046 3B       		.uleb128 0x3b
+ 824 0047 0B       		.uleb128 0xb
+ 825 0048 27       		.uleb128 0x27
+ 826 0049 19       		.uleb128 0x19
+ 827 004a 11       		.uleb128 0x11
+ 828 004b 01       		.uleb128 0x1
+ 829 004c 12       		.uleb128 0x12
+ 830 004d 06       		.uleb128 0x6
+ 831 004e 40       		.uleb128 0x40
+ 832 004f 18       		.uleb128 0x18
+ 833 0050 9642     		.uleb128 0x2116
+ 834 0052 19       		.uleb128 0x19
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 22
+
+
+ 835 0053 00       		.byte	0
+ 836 0054 00       		.byte	0
+ 837 0055 07       		.uleb128 0x7
+ 838 0056 2E       		.uleb128 0x2e
+ 839 0057 01       		.byte	0x1
+ 840 0058 3F       		.uleb128 0x3f
+ 841 0059 19       		.uleb128 0x19
+ 842 005a 03       		.uleb128 0x3
+ 843 005b 0E       		.uleb128 0xe
+ 844 005c 3A       		.uleb128 0x3a
+ 845 005d 0B       		.uleb128 0xb
+ 846 005e 3B       		.uleb128 0x3b
+ 847 005f 0B       		.uleb128 0xb
+ 848 0060 27       		.uleb128 0x27
+ 849 0061 19       		.uleb128 0x19
+ 850 0062 11       		.uleb128 0x11
+ 851 0063 01       		.uleb128 0x1
+ 852 0064 12       		.uleb128 0x12
+ 853 0065 06       		.uleb128 0x6
+ 854 0066 40       		.uleb128 0x40
+ 855 0067 18       		.uleb128 0x18
+ 856 0068 9642     		.uleb128 0x2116
+ 857 006a 19       		.uleb128 0x19
+ 858 006b 01       		.uleb128 0x1
+ 859 006c 13       		.uleb128 0x13
+ 860 006d 00       		.byte	0
+ 861 006e 00       		.byte	0
+ 862 006f 08       		.uleb128 0x8
+ 863 0070 34       		.uleb128 0x34
+ 864 0071 00       		.byte	0
+ 865 0072 03       		.uleb128 0x3
+ 866 0073 0E       		.uleb128 0xe
+ 867 0074 3A       		.uleb128 0x3a
+ 868 0075 0B       		.uleb128 0xb
+ 869 0076 3B       		.uleb128 0x3b
+ 870 0077 0B       		.uleb128 0xb
+ 871 0078 49       		.uleb128 0x49
+ 872 0079 13       		.uleb128 0x13
+ 873 007a 02       		.uleb128 0x2
+ 874 007b 18       		.uleb128 0x18
+ 875 007c 00       		.byte	0
+ 876 007d 00       		.byte	0
+ 877 007e 09       		.uleb128 0x9
+ 878 007f 2E       		.uleb128 0x2e
+ 879 0080 01       		.byte	0x1
+ 880 0081 3F       		.uleb128 0x3f
+ 881 0082 19       		.uleb128 0x19
+ 882 0083 03       		.uleb128 0x3
+ 883 0084 0E       		.uleb128 0xe
+ 884 0085 3A       		.uleb128 0x3a
+ 885 0086 0B       		.uleb128 0xb
+ 886 0087 3B       		.uleb128 0x3b
+ 887 0088 0B       		.uleb128 0xb
+ 888 0089 27       		.uleb128 0x27
+ 889 008a 19       		.uleb128 0x19
+ 890 008b 49       		.uleb128 0x49
+ 891 008c 13       		.uleb128 0x13
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 23
+
+
+ 892 008d 11       		.uleb128 0x11
+ 893 008e 01       		.uleb128 0x1
+ 894 008f 12       		.uleb128 0x12
+ 895 0090 06       		.uleb128 0x6
+ 896 0091 40       		.uleb128 0x40
+ 897 0092 18       		.uleb128 0x18
+ 898 0093 9642     		.uleb128 0x2116
+ 899 0095 19       		.uleb128 0x19
+ 900 0096 01       		.uleb128 0x1
+ 901 0097 13       		.uleb128 0x13
+ 902 0098 00       		.byte	0
+ 903 0099 00       		.byte	0
+ 904 009a 0A       		.uleb128 0xa
+ 905 009b 2E       		.uleb128 0x2e
+ 906 009c 01       		.byte	0x1
+ 907 009d 3F       		.uleb128 0x3f
+ 908 009e 19       		.uleb128 0x19
+ 909 009f 03       		.uleb128 0x3
+ 910 00a0 0E       		.uleb128 0xe
+ 911 00a1 3A       		.uleb128 0x3a
+ 912 00a2 0B       		.uleb128 0xb
+ 913 00a3 3B       		.uleb128 0x3b
+ 914 00a4 05       		.uleb128 0x5
+ 915 00a5 27       		.uleb128 0x27
+ 916 00a6 19       		.uleb128 0x19
+ 917 00a7 11       		.uleb128 0x11
+ 918 00a8 01       		.uleb128 0x1
+ 919 00a9 12       		.uleb128 0x12
+ 920 00aa 06       		.uleb128 0x6
+ 921 00ab 40       		.uleb128 0x40
+ 922 00ac 18       		.uleb128 0x18
+ 923 00ad 9642     		.uleb128 0x2116
+ 924 00af 19       		.uleb128 0x19
+ 925 00b0 01       		.uleb128 0x1
+ 926 00b1 13       		.uleb128 0x13
+ 927 00b2 00       		.byte	0
+ 928 00b3 00       		.byte	0
+ 929 00b4 0B       		.uleb128 0xb
+ 930 00b5 05       		.uleb128 0x5
+ 931 00b6 00       		.byte	0
+ 932 00b7 03       		.uleb128 0x3
+ 933 00b8 0E       		.uleb128 0xe
+ 934 00b9 3A       		.uleb128 0x3a
+ 935 00ba 0B       		.uleb128 0xb
+ 936 00bb 3B       		.uleb128 0x3b
+ 937 00bc 05       		.uleb128 0x5
+ 938 00bd 49       		.uleb128 0x49
+ 939 00be 13       		.uleb128 0x13
+ 940 00bf 02       		.uleb128 0x2
+ 941 00c0 18       		.uleb128 0x18
+ 942 00c1 00       		.byte	0
+ 943 00c2 00       		.byte	0
+ 944 00c3 0C       		.uleb128 0xc
+ 945 00c4 2E       		.uleb128 0x2e
+ 946 00c5 00       		.byte	0
+ 947 00c6 3F       		.uleb128 0x3f
+ 948 00c7 19       		.uleb128 0x19
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 24
+
+
+ 949 00c8 03       		.uleb128 0x3
+ 950 00c9 0E       		.uleb128 0xe
+ 951 00ca 3A       		.uleb128 0x3a
+ 952 00cb 0B       		.uleb128 0xb
+ 953 00cc 3B       		.uleb128 0x3b
+ 954 00cd 05       		.uleb128 0x5
+ 955 00ce 27       		.uleb128 0x27
+ 956 00cf 19       		.uleb128 0x19
+ 957 00d0 49       		.uleb128 0x49
+ 958 00d1 13       		.uleb128 0x13
+ 959 00d2 11       		.uleb128 0x11
+ 960 00d3 01       		.uleb128 0x1
+ 961 00d4 12       		.uleb128 0x12
+ 962 00d5 06       		.uleb128 0x6
+ 963 00d6 40       		.uleb128 0x40
+ 964 00d7 18       		.uleb128 0x18
+ 965 00d8 9742     		.uleb128 0x2117
+ 966 00da 19       		.uleb128 0x19
+ 967 00db 00       		.byte	0
+ 968 00dc 00       		.byte	0
+ 969 00dd 0D       		.uleb128 0xd
+ 970 00de 2E       		.uleb128 0x2e
+ 971 00df 01       		.byte	0x1
+ 972 00e0 3F       		.uleb128 0x3f
+ 973 00e1 19       		.uleb128 0x19
+ 974 00e2 03       		.uleb128 0x3
+ 975 00e3 0E       		.uleb128 0xe
+ 976 00e4 3A       		.uleb128 0x3a
+ 977 00e5 0B       		.uleb128 0xb
+ 978 00e6 3B       		.uleb128 0x3b
+ 979 00e7 05       		.uleb128 0x5
+ 980 00e8 27       		.uleb128 0x27
+ 981 00e9 19       		.uleb128 0x19
+ 982 00ea 11       		.uleb128 0x11
+ 983 00eb 01       		.uleb128 0x1
+ 984 00ec 12       		.uleb128 0x12
+ 985 00ed 06       		.uleb128 0x6
+ 986 00ee 40       		.uleb128 0x40
+ 987 00ef 18       		.uleb128 0x18
+ 988 00f0 9742     		.uleb128 0x2117
+ 989 00f2 19       		.uleb128 0x19
+ 990 00f3 01       		.uleb128 0x1
+ 991 00f4 13       		.uleb128 0x13
+ 992 00f5 00       		.byte	0
+ 993 00f6 00       		.byte	0
+ 994 00f7 0E       		.uleb128 0xe
+ 995 00f8 34       		.uleb128 0x34
+ 996 00f9 00       		.byte	0
+ 997 00fa 03       		.uleb128 0x3
+ 998 00fb 0E       		.uleb128 0xe
+ 999 00fc 3A       		.uleb128 0x3a
+ 1000 00fd 0B       		.uleb128 0xb
+ 1001 00fe 3B       		.uleb128 0x3b
+ 1002 00ff 0B       		.uleb128 0xb
+ 1003 0100 49       		.uleb128 0x49
+ 1004 0101 13       		.uleb128 0x13
+ 1005 0102 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 25
+
+
+ 1006 0103 19       		.uleb128 0x19
+ 1007 0104 02       		.uleb128 0x2
+ 1008 0105 18       		.uleb128 0x18
+ 1009 0106 00       		.byte	0
+ 1010 0107 00       		.byte	0
+ 1011 0108 0F       		.uleb128 0xf
+ 1012 0109 34       		.uleb128 0x34
+ 1013 010a 00       		.byte	0
+ 1014 010b 03       		.uleb128 0x3
+ 1015 010c 0E       		.uleb128 0xe
+ 1016 010d 3A       		.uleb128 0x3a
+ 1017 010e 0B       		.uleb128 0xb
+ 1018 010f 3B       		.uleb128 0x3b
+ 1019 0110 0B       		.uleb128 0xb
+ 1020 0111 49       		.uleb128 0x49
+ 1021 0112 13       		.uleb128 0x13
+ 1022 0113 3F       		.uleb128 0x3f
+ 1023 0114 19       		.uleb128 0x19
+ 1024 0115 3C       		.uleb128 0x3c
+ 1025 0116 19       		.uleb128 0x19
+ 1026 0117 00       		.byte	0
+ 1027 0118 00       		.byte	0
+ 1028 0119 00       		.byte	0
+ 1029              		.section	.debug_aranges,"",%progbits
+ 1030 0000 5C000000 		.4byte	0x5c
+ 1031 0004 0200     		.2byte	0x2
+ 1032 0006 00000000 		.4byte	.Ldebug_info0
+ 1033 000a 04       		.byte	0x4
+ 1034 000b 00       		.byte	0
+ 1035 000c 0000     		.2byte	0
+ 1036 000e 0000     		.2byte	0
+ 1037 0010 00000000 		.4byte	.LFB0
+ 1038 0014 28000000 		.4byte	.LFE0-.LFB0
+ 1039 0018 00000000 		.4byte	.LFB1
+ 1040 001c 48000000 		.4byte	.LFE1-.LFB1
+ 1041 0020 00000000 		.4byte	.LFB2
+ 1042 0024 38000000 		.4byte	.LFE2-.LFB2
+ 1043 0028 00000000 		.4byte	.LFB3
+ 1044 002c 40000000 		.4byte	.LFE3-.LFB3
+ 1045 0030 00000000 		.4byte	.LFB4
+ 1046 0034 48000000 		.4byte	.LFE4-.LFB4
+ 1047 0038 00000000 		.4byte	.LFB5
+ 1048 003c 38000000 		.4byte	.LFE5-.LFB5
+ 1049 0040 00000000 		.4byte	.LFB6
+ 1050 0044 1C000000 		.4byte	.LFE6-.LFB6
+ 1051 0048 00000000 		.4byte	.LFB7
+ 1052 004c 28000000 		.4byte	.LFE7-.LFB7
+ 1053 0050 00000000 		.4byte	.LFB8
+ 1054 0054 1C000000 		.4byte	.LFE8-.LFB8
+ 1055 0058 00000000 		.4byte	0
+ 1056 005c 00000000 		.4byte	0
+ 1057              		.section	.debug_ranges,"",%progbits
+ 1058              	.Ldebug_ranges0:
+ 1059 0000 00000000 		.4byte	.LFB0
+ 1060 0004 28000000 		.4byte	.LFE0
+ 1061 0008 00000000 		.4byte	.LFB1
+ 1062 000c 48000000 		.4byte	.LFE1
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 26
+
+
+ 1063 0010 00000000 		.4byte	.LFB2
+ 1064 0014 38000000 		.4byte	.LFE2
+ 1065 0018 00000000 		.4byte	.LFB3
+ 1066 001c 40000000 		.4byte	.LFE3
+ 1067 0020 00000000 		.4byte	.LFB4
+ 1068 0024 48000000 		.4byte	.LFE4
+ 1069 0028 00000000 		.4byte	.LFB5
+ 1070 002c 38000000 		.4byte	.LFE5
+ 1071 0030 00000000 		.4byte	.LFB6
+ 1072 0034 1C000000 		.4byte	.LFE6
+ 1073 0038 00000000 		.4byte	.LFB7
+ 1074 003c 28000000 		.4byte	.LFE7
+ 1075 0040 00000000 		.4byte	.LFB8
+ 1076 0044 1C000000 		.4byte	.LFE8
+ 1077 0048 00000000 		.4byte	0
+ 1078 004c 00000000 		.4byte	0
+ 1079              		.section	.debug_line,"",%progbits
+ 1080              	.Ldebug_line0:
+ 1081 0000 28010000 		.section	.debug_str,"MS",%progbits,1
+ 1081      02006100 
+ 1081      00000201 
+ 1081      FB0E0D00 
+ 1081      01010101 
+ 1082              	.LASF39:
+ 1083 0000 51756164 		.ascii	"QuadDec_Motor_GetCounter\000"
+ 1083      4465635F 
+ 1083      4D6F746F 
+ 1083      725F4765 
+ 1083      74436F75 
+ 1084              	.LASF36:
+ 1085 0019 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1085      43313120 
+ 1085      352E342E 
+ 1085      31203230 
+ 1085      31363036 
+ 1086 004c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1086      20726576 
+ 1086      6973696F 
+ 1086      6E203233 
+ 1086      37373135 
+ 1087 007f 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1087      66756E63 
+ 1087      74696F6E 
+ 1087      2D736563 
+ 1087      74696F6E 
+ 1088              	.LASF30:
+ 1089 00a7 76616C75 		.ascii	"value\000"
+ 1089      6500
+ 1090              	.LASF25:
+ 1091 00ad 636F756E 		.ascii	"count\000"
+ 1091      7400
+ 1092              	.LASF20:
+ 1093 00b3 51756164 		.ascii	"QuadDec_Motor_Init\000"
+ 1093      4465635F 
+ 1093      4D6F746F 
+ 1093      725F496E 
+ 1093      697400
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 27
+
+
+ 1094              	.LASF35:
+ 1095 00c6 51756164 		.ascii	"QuadDec_Motor_count32SoftPart\000"
+ 1095      4465635F 
+ 1095      4D6F746F 
+ 1095      725F636F 
+ 1095      756E7433 
+ 1096              	.LASF6:
+ 1097 00e4 73686F72 		.ascii	"short unsigned int\000"
+ 1097      7420756E 
+ 1097      7369676E 
+ 1097      65642069 
+ 1097      6E7400
+ 1098              	.LASF11:
+ 1099 00f7 63686172 		.ascii	"char\000"
+ 1099      00
+ 1100              	.LASF15:
+ 1101 00fc 696E7431 		.ascii	"int16\000"
+ 1101      3600
+ 1102              	.LASF4:
+ 1103 0102 756E7369 		.ascii	"unsigned char\000"
+ 1103      676E6564 
+ 1103      20636861 
+ 1103      7200
+ 1104              	.LASF27:
+ 1105 0110 6877436F 		.ascii	"hwCount\000"
+ 1105      756E7400 
+ 1106              	.LASF18:
+ 1107 0118 72656738 		.ascii	"reg8\000"
+ 1107      00
+ 1108              	.LASF37:
+ 1109 011d 47656E65 		.ascii	"Generated_Source\\PSoC5\\QuadDec_Motor.c\000"
+ 1109      72617465 
+ 1109      645F536F 
+ 1109      75726365 
+ 1109      5C50536F 
+ 1110              	.LASF8:
+ 1111 0144 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1111      20756E73 
+ 1111      69676E65 
+ 1111      6420696E 
+ 1111      7400
+ 1112              	.LASF29:
+ 1113 0156 51756164 		.ascii	"QuadDec_Motor_SetInterruptMask\000"
+ 1113      4465635F 
+ 1113      4D6F746F 
+ 1113      725F5365 
+ 1113      74496E74 
+ 1114              	.LASF16:
+ 1115 0175 696E7433 		.ascii	"int32\000"
+ 1115      3200
+ 1116              	.LASF26:
+ 1117 017b 746D7043 		.ascii	"tmpCnt\000"
+ 1117      6E7400
+ 1118              	.LASF28:
+ 1119 0182 51756164 		.ascii	"QuadDec_Motor_SetCounter\000"
+ 1119      4465635F 
+ 1119      4D6F746F 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 28
+
+
+ 1119      725F5365 
+ 1119      74436F75 
+ 1120              	.LASF24:
+ 1121 019b 656E6162 		.ascii	"enableInterrupts\000"
+ 1121      6C65496E 
+ 1121      74657272 
+ 1121      75707473 
+ 1121      00
+ 1122              	.LASF34:
+ 1123 01ac 51756164 		.ascii	"QuadDec_Motor_initVar\000"
+ 1123      4465635F 
+ 1123      4D6F746F 
+ 1123      725F696E 
+ 1123      69745661 
+ 1124              	.LASF17:
+ 1125 01c2 646F7562 		.ascii	"double\000"
+ 1125      6C6500
+ 1126              	.LASF23:
+ 1127 01c9 51756164 		.ascii	"QuadDec_Motor_Stop\000"
+ 1127      4465635F 
+ 1127      4D6F746F 
+ 1127      725F5374 
+ 1127      6F7000
+ 1128              	.LASF13:
+ 1129 01dc 75696E74 		.ascii	"uint16\000"
+ 1129      313600
+ 1130              	.LASF14:
+ 1131 01e3 75696E74 		.ascii	"uint32\000"
+ 1131      333200
+ 1132              	.LASF32:
+ 1133 01ea 51756164 		.ascii	"QuadDec_Motor_GetEvents\000"
+ 1133      4465635F 
+ 1133      4D6F746F 
+ 1133      725F4765 
+ 1133      74457665 
+ 1134              	.LASF21:
+ 1135 0202 51756164 		.ascii	"QuadDec_Motor_Start\000"
+ 1135      4465635F 
+ 1135      4D6F746F 
+ 1135      725F5374 
+ 1135      61727400 
+ 1136              	.LASF0:
+ 1137 0216 756E7369 		.ascii	"unsigned int\000"
+ 1137      676E6564 
+ 1137      20696E74 
+ 1137      00
+ 1138              	.LASF9:
+ 1139 0223 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1139      206C6F6E 
+ 1139      6720756E 
+ 1139      7369676E 
+ 1139      65642069 
+ 1140              	.LASF33:
+ 1141 023a 51756164 		.ascii	"QuadDec_Motor_GetInterruptMask\000"
+ 1141      4465635F 
+ 1141      4D6F746F 
+ 1141      725F4765 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccQBAPSA.s 			page 29
+
+
+ 1141      74496E74 
+ 1142              	.LASF38:
+ 1143 0259 433A5C55 		.ascii	"C:\\Users\\Albert\\Documents\\6115_fp\\IWP.cydsn\000"
+ 1143      73657273 
+ 1143      5C416C62 
+ 1143      6572745C 
+ 1143      446F6375 
+ 1144              	.LASF10:
+ 1145 0285 73697A65 		.ascii	"sizetype\000"
+ 1145      74797065 
+ 1145      00
+ 1146              	.LASF1:
+ 1147 028e 6C6F6E67 		.ascii	"long long int\000"
+ 1147      206C6F6E 
+ 1147      6720696E 
+ 1147      7400
+ 1148              	.LASF31:
+ 1149 029c 6D61736B 		.ascii	"mask\000"
+ 1149      00
+ 1150              	.LASF22:
+ 1151 02a1 51756164 		.ascii	"QuadDec_Motor_Enable\000"
+ 1151      4465635F 
+ 1151      4D6F746F 
+ 1151      725F456E 
+ 1151      61626C65 
+ 1152              	.LASF5:
+ 1153 02b6 73686F72 		.ascii	"short int\000"
+ 1153      7420696E 
+ 1153      7400
+ 1154              	.LASF12:
+ 1155 02c0 75696E74 		.ascii	"uint8\000"
+ 1155      3800
+ 1156              	.LASF7:
+ 1157 02c6 6C6F6E67 		.ascii	"long int\000"
+ 1157      20696E74 
+ 1157      00
+ 1158              	.LASF19:
+ 1159 02cf 72656733 		.ascii	"reg32\000"
+ 1159      3200
+ 1160              	.LASF2:
+ 1161 02d5 6C6F6E67 		.ascii	"long double\000"
+ 1161      20646F75 
+ 1161      626C6500 
+ 1162              	.LASF3:
+ 1163 02e1 7369676E 		.ascii	"signed char\000"
+ 1163      65642063 
+ 1163      68617200 
+ 1164              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

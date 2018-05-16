@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="IWP\IWP\Source Files\uartUtil.c">
+<ExpandedNodeIds>
+<v>IWP</v>
+<v>IWP\IWP</v>
+<v>IWP\IWP\TopDesign</v>
+<v>IWP\IWP\IWP.cydwr</v>
+<v>IWP\IWP\IWP.cydwr\Pins</v>
+<v>IWP\IWP\IWP.cydwr\Analog</v>
+<v>IWP\IWP\IWP.cydwr\Clocks</v>
+<v>IWP\IWP\IWP.cydwr\Interrupts</v>
+<v>IWP\IWP\IWP.cydwr\DMA</v>
+<v>IWP\IWP\IWP.cydwr\System</v>
+<v>IWP\IWP\IWP.cydwr\Directives</v>
+<v>IWP\IWP\IWP.cydwr\Flash Security</v>
+<v>IWP\IWP\IWP.cydwr\EEPROM</v>
+<v>IWP\IWP\Header Files</v>
+<v>IWP\IWP\Header Files\adc.h</v>
+<v>IWP\IWP\Header Files\controllers.h</v>
+<v>IWP\IWP\Header Files\controlParameters.h</v>
+<v>IWP\IWP\Header Files\device.h</v>
+<v>IWP\IWP\Header Files\hardware.h</v>
+<v>IWP\IWP\Header Files\hardwareParameters.h</v>
+<v>IWP\IWP\Header Files\mathUtility.h</v>
+<v>IWP\IWP\Header Files\quadDec.h</v>
+<v>IWP\IWP\Header Files\sensorStructs.h</v>
+<v>IWP\IWP\Header Files\test.h</v>
+<v>IWP\IWP\Header Files\uartUtil.h</v>
+<v>IWP\IWP\Source Files</v>
+<v>IWP\IWP\Source Files\adc.c</v>
+<v>IWP\IWP\Source Files\controllers.c</v>
+<v>IWP\IWP\Source Files\main.c</v>
+<v>IWP\IWP\Source Files\mathUtility.c</v>
+<v>IWP\IWP\Source Files\quadDec.c</v>
+<v>IWP\IWP\Source Files\sensorStructs.c</v>
+<v>IWP\IWP\Source Files\test.c</v>
+<v>IWP\IWP\Source Files\uartUtil.c</v>
+<v>IWP\IWP\Generated_Source\PSoC5</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>IWP</v>
+<v>IWP\IWP</v>
+<v>IWP\IWP\TopDesign</v>
+<v>IWP\IWP\IWP.cydwr</v>
+<v>IWP\IWP\IWP.cydwr\Pins</v>
+<v>IWP\IWP\IWP.cydwr\Analog</v>
+<v>IWP\IWP\IWP.cydwr\Clocks</v>
+<v>IWP\IWP\IWP.cydwr\Interrupts</v>
+<v>IWP\IWP\IWP.cydwr\DMA</v>
+<v>IWP\IWP\IWP.cydwr\System</v>
+<v>IWP\IWP\IWP.cydwr\Directives</v>
+<v>IWP\IWP\IWP.cydwr\Flash Security</v>
+<v>IWP\IWP\IWP.cydwr\EEPROM</v>
+<v>IWP\IWP\Header Files</v>
+<v>IWP\IWP\Header Files\adc.h</v>
+<v>IWP\IWP\Header Files\controllers.h</v>
+<v>IWP\IWP\Header Files\controlParameters.h</v>
+<v>IWP\IWP\Header Files\device.h</v>
+<v>IWP\IWP\Header Files\hardware.h</v>
+<v>IWP\IWP\Header Files\hardwareParameters.h</v>
+<v>IWP\IWP\Header Files\mathUtility.h</v>
+<v>IWP\IWP\Header Files\quadDec.h</v>
+<v>IWP\IWP\Header Files\sensorStructs.h</v>
+<v>IWP\IWP\Header Files\test.h</v>
+<v>IWP\IWP\Header Files\uartUtil.h</v>
+<v>IWP\IWP\Source Files</v>
+<v>IWP\IWP\Source Files\adc.c</v>
+<v>IWP\IWP\Source Files\controllers.c</v>
+<v>IWP\IWP\Source Files\main.c</v>
+<v>IWP\IWP\Source Files\mathUtility.c</v>
+<v>IWP\IWP\Source Files\quadDec.c</v>
+<v>IWP\IWP\Source Files\sensorStructs.c</v>
+<v>IWP\IWP\Source Files\test.c</v>
+<v>IWP\IWP\Source Files\uartUtil.c</v>
+<v>IWP\IWP\Generated_Source</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>IWP</v>
+<v>IWP\IWP</v>
+<v>IWP\IWP\TopDesign</v>
+<v>IWP\IWP\TopDesign\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>IWP</v>
+<v>IWP\IWP</v>
+<v>IWP\IWP\TopDesign</v>
+<v>IWP\IWP\TopDesign\TopDesign.cysch</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>IWP</v>
+<v>IWP\IWP</v>
+<v>IWP\IWP\CortexM3</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\adc.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC1.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC1_Bypass.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC1_In.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC1_INT.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC1_IRQ.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC1_PM.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC1_theACLK.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_2.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_3.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_4.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_Enc_Motor.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_Enc_Shoulder.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\controllers.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Counter_1.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Counter_1_PM.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_1.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_2.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_LCDPort.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_PM.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\mathUtility.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_A.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_B.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_1.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\quadDec.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\QuadDec_Motor.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\QuadDec_Motor_Cnt16.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\QuadDec_Motor_Cnt16_PM.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\QuadDec_Motor_INT.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\QuadDec_Motor_isr.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\QuadDec_Motor_PM.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\QuadDec_Shoulder.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\QuadDec_Shoulder_Cnt16.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\QuadDec_Shoulder_Cnt16_PM.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\QuadDec_Shoulder_INT.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\QuadDec_Shoulder_isr.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\QuadDec_Shoulder_PM.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\rx_int.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\sensorStructs.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Shoulder_A.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Shoulder_B.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Shoulder_I.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\test.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\TX.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\tx_int.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\UART.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_BOOT.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_INT.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_IntClock.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\UART_PM.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\uartUtil.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\IWP.elf</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\IWP.hex</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\IWP.map</v>
+<v>IWP\IWP\IWP.gpdsc</v>
+<v>IWP\IWP\IWP.rpt</v>
+<v>IWP\IWP\IWP_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>IWP</v>
+<v>IWP\IWP</v>
+<v>IWP\IWP\CortexM3</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\adc.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC1.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC1_Bypass.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC1_In.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC1_INT.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC1_IRQ.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC1_PM.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\ADC1_theACLK.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_2.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_3.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_4.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_Enc_Motor.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Clock_Enc_Shoulder.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\controllers.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Counter_1.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Counter_1_PM.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_1.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\isr_2.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_LCDPort.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\LCD_PM.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\mathUtility.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_A.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Motor_B.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\Pin_1.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\quadDec.lst</v>
+<v>IWP\IWP\CortexM3\ARM_GCC_541\Debug\Listing Files\QuadDec_Motor.lst</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>IWP</v>
+<v>IWP\IWP</v>
+<v>IWP\IWP\PSoC 5LP Architecture TRM</v>
+<v>IWP\IWP\CY8C58LP Family Datasheet</v>
+<v>IWP\IWP\System Reference Guides</v>
+<v>IWP\IWP\System Reference Guides\cy_boot_v5_40</v>
+<v>IWP\IWP\ADC_SAR_v3_0.pdf</v>
+<v>IWP\IWP\CharLCD_v2_20.pdf</v>
+<v>IWP\IWP\Counter_v3_0.pdf</v>
+<v>IWP\IWP\cy_clock_v2_20</v>
+<v>IWP\IWP\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>IWP\IWP\cy_isr_v1_70</v>
+<v>IWP\IWP\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>IWP\IWP\cy_pins_v2_20</v>
+<v>IWP\IWP\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>IWP\IWP\cy_sync_v1_0.pdf</v>
+<v>IWP\IWP\GlitchFilter_v2_0.pdf</v>
+<v>IWP\IWP\QuadDec_v3_0</v>
+<v>IWP\IWP\QuadDec_v3_0\QuadDec_v3_0.pdf</v>
+<v>IWP\IWP\UART_v2_50.pdf</v>
+<v>IWP\IWP\ZeroTerminal.pdf</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>IWP</v>
+<v>IWP\IWP</v>
+<v>IWP\IWP\PSoC 5LP Architecture TRM</v>
+<v>IWP\IWP\CY8C58LP Family Datasheet</v>
+<v>IWP\IWP\System Reference Guides</v>
+<v>IWP\IWP\System Reference Guides\cy_boot_v5_40</v>
+<v>IWP\IWP\ADC_SAR_v3_0.pdf</v>
+<v>IWP\IWP\CharLCD_v2_20.pdf</v>
+<v>IWP\IWP\Counter_v3_0.pdf</v>
+<v>IWP\IWP\cy_clock_v2_20</v>
+<v>IWP\IWP\cy_clock_v2_20\cy_clock_v2_20.pdf</v>
+<v>IWP\IWP\cy_isr_v1_70</v>
+<v>IWP\IWP\cy_isr_v1_70\cy_isr_v1_70.pdf</v>
+<v>IWP\IWP\cy_pins_v2_20</v>
+<v>IWP\IWP\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>IWP\IWP\cy_sync_v1_0.pdf</v>
+<v>IWP\IWP\GlitchFilter_v2_0.pdf</v>
+<v>IWP\IWP\QuadDec_v3_0</v>
+<v>IWP\IWP\QuadDec_v3_0\QuadDec_v3_0.pdf</v>
+<v>IWP\IWP\UART_v2_50.pdf</v>
+<v>IWP\IWP\ZeroTerminal.pdf</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+<dataGuid v="5f2be1a5-0687-4501-bb8c-cf21cb8211bf">
+<CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf type_name="CyDesigner.Common.ProjMgmt.GUI.CyBookmarkData" version="1">
+<indicators />
+</CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs>
+<name v=".\test.h" />
+<name v=".\mathUtility.h" />
+<name v=".\mathUtility.c" />
+<name v=".\adc.c" />
+<name v=".\sensorStructs.c" />
+<name v=".\test.c" />
+<name v=".\adc.h" />
+<name v=".\TopDesign\TopDesign.cysch" />
+<name v=".\main.c" />
+<name v=".\controllers.c" />
+<name v=".\controlParameters.h" />
+<name v=".\controllers.h" />
+<name v=".\device.h" />
+<name v=".\hardware.h" />
+<name v=".\quadDec.h" />
+<name v=".\sensorStructs.h" />
+<name v=".\uartUtil.h" />
+<name v=".\quadDec.c" />
+<name v=".\uartUtil.c" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1203, 681" SelectedTabbedMdiWindow="8c888c9b-c6d2-4b24-92c4-d94d5dc30b61"><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\test.h" Guid="30cb6705-5ac4-4399-9e46-35aa663ec46f" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\mathUtility.h" Guid="c9e19901-205a-4010-b3a2-257c493526cf" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\mathUtility.c" Guid="ba3c427e-c5b3-4cc3-8693-cf2468d570ea" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\adc.c" Guid="af1c821b-1b53-40c9-ad1d-ced0b942bac3" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\sensorStructs.c" Guid="af2bd4cb-152d-4871-92c0-652fe7c7ad00" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\test.c" Guid="54b09179-eb7a-4b53-9060-ed1250ff9830" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\adc.h" Guid="e14da5ca-d579-4142-9b42-8ac8ab202168" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\TopDesign\TopDesign.cysch" Guid="835a2f08-29df-4d5e-b2fb-681fc277896b" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\main.c" Guid="99b32af7-1734-4780-8208-07ab1e323f0c" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\controllers.c" Guid="7a3a9a94-fb35-426d-886c-b7f320740c31" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\controlParameters.h" Guid="9bafd4a0-f0b2-465d-aeb2-0fa9388077d0" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="7cf32085-372a-4359-a8aa-12154a853b2a" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\controllers.h" Guid="f2b81b5e-b334-49f9-abe4-d63672aedaa0" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\device.h" Guid="4f12b444-4e28-4028-b61d-56d82486a564" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\hardware.h" Guid="88761d82-170d-40d8-a583-6b7ffe08188d" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\quadDec.h" Guid="e5cd9494-6701-4897-819c-b977f9fb55a2" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\sensorStructs.h" Guid="e3839b62-3ee2-4783-9987-c977ffff503b" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\uartUtil.h" Guid="4a9ee8e3-6710-4b52-ad8c-3d0144c22141" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\quadDec.c" Guid="714c4017-b51b-4fbb-a25a-4d2f1c87f592" /><DocumentWindow Key="C:\Users\Albert\Documents\6115_fp\IWP.cydsn\uartUtil.c" Guid="8c888c9b-c6d2-4b24-92c4-d94d5dc30b61" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>

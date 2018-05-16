@@ -1,0 +1,603 @@
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccyTmQvb.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"adcUtil.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.initADC,"ax",%progbits
+  20              		.align	2
+  21              		.global	initADC
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	initADC, %function
+  25              	initADC:
+  26              	.LFB63:
+  27              		.file 1 "adcUtil.c"
+   1:adcUtil.c     **** /* ========================================
+   2:adcUtil.c     ****  *
+   3:adcUtil.c     ****  * Copyright Albert Wu, 2018
+   4:adcUtil.c     ****  * All Rights Reserved
+   5:adcUtil.c     ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:adcUtil.c     ****  *
+   7:adcUtil.c     ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:adcUtil.c     ****  * WHICH IS THE PROPERTY OF your company.
+   9:adcUtil.c     ****  *
+  10:adcUtil.c     ****  * ========================================
+  11:adcUtil.c     **** */
+  12:adcUtil.c     **** #include "adcUtil.h"
+  13:adcUtil.c     **** 
+  14:adcUtil.c     **** void initADC()
+  15:adcUtil.c     **** {
+  28              		.loc 1 15 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 00AF     		add	r7, sp, #0
+  37              		.cfi_def_cfa_register 7
+  16:adcUtil.c     ****     //Initalizes ADCs
+  17:adcUtil.c     ****     ADC1_Start();
+  38              		.loc 1 17 0
+  39 0004 FFF7FEFF 		bl	ADC1_Start
+  18:adcUtil.c     ****     ADC1_StartConvert();
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccyTmQvb.s 			page 2
+
+
+  40              		.loc 1 18 0
+  41 0008 FFF7FEFF 		bl	ADC1_StartConvert
+  19:adcUtil.c     ****     ADC2_Start();
+  42              		.loc 1 19 0
+  43 000c FFF7FEFF 		bl	ADC2_Start
+  20:adcUtil.c     ****     ADC2_StartConvert();
+  44              		.loc 1 20 0
+  45 0010 FFF7FEFF 		bl	ADC2_StartConvert
+  21:adcUtil.c     **** }
+  46              		.loc 1 21 0
+  47 0014 00BF     		nop
+  48 0016 80BD     		pop	{r7, pc}
+  49              		.cfi_endproc
+  50              	.LFE63:
+  51              		.size	initADC, .-initADC
+  52              		.section	.text.getADCReading,"ax",%progbits
+  53              		.align	2
+  54              		.global	getADCReading
+  55              		.thumb
+  56              		.thumb_func
+  57              		.type	getADCReading, %function
+  58              	getADCReading:
+  59              	.LFB64:
+  22:adcUtil.c     **** int16 getADCReading(int adcID)
+  23:adcUtil.c     **** {
+  60              		.loc 1 23 0
+  61              		.cfi_startproc
+  62              		@ args = 0, pretend = 0, frame = 8
+  63              		@ frame_needed = 1, uses_anonymous_args = 0
+  64 0000 80B5     		push	{r7, lr}
+  65              		.cfi_def_cfa_offset 8
+  66              		.cfi_offset 7, -8
+  67              		.cfi_offset 14, -4
+  68 0002 82B0     		sub	sp, sp, #8
+  69              		.cfi_def_cfa_offset 16
+  70 0004 00AF     		add	r7, sp, #0
+  71              		.cfi_def_cfa_register 7
+  72 0006 7860     		str	r0, [r7, #4]
+  24:adcUtil.c     ****     switch(adcID)
+  73              		.loc 1 24 0
+  74 0008 7B68     		ldr	r3, [r7, #4]
+  75 000a 012B     		cmp	r3, #1
+  76 000c 02D0     		beq	.L4
+  77 000e 022B     		cmp	r3, #2
+  78 0010 04D0     		beq	.L5
+  79 0012 07E0     		b	.L7
+  80              	.L4:
+  25:adcUtil.c     ****     {
+  26:adcUtil.c     ****         case 1:        
+  27:adcUtil.c     ****             return ADC1_GetResult16();
+  81              		.loc 1 27 0
+  82 0014 FFF7FEFF 		bl	ADC1_GetResult16
+  83 0018 0346     		mov	r3, r0
+  84 001a 04E0     		b	.L6
+  85              	.L5:
+  28:adcUtil.c     ****             break;
+  29:adcUtil.c     ****             
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccyTmQvb.s 			page 3
+
+
+  30:adcUtil.c     ****         case 2:
+  31:adcUtil.c     ****             return ADC2_GetResult16();         
+  86              		.loc 1 31 0
+  87 001c FFF7FEFF 		bl	ADC2_GetResult16
+  88 0020 0346     		mov	r3, r0
+  89 0022 00E0     		b	.L6
+  90              	.L7:
+  32:adcUtil.c     ****             break;
+  33:adcUtil.c     ****     }
+  34:adcUtil.c     ****     return 0;
+  91              		.loc 1 34 0
+  92 0024 0023     		movs	r3, #0
+  93              	.L6:
+  35:adcUtil.c     **** }
+  94              		.loc 1 35 0
+  95 0026 1846     		mov	r0, r3
+  96 0028 0837     		adds	r7, r7, #8
+  97              		.cfi_def_cfa_offset 8
+  98 002a BD46     		mov	sp, r7
+  99              		.cfi_def_cfa_register 13
+ 100              		@ sp needed
+ 101 002c 80BD     		pop	{r7, pc}
+ 102              		.cfi_endproc
+ 103              	.LFE64:
+ 104              		.size	getADCReading, .-getADCReading
+ 105 002e 00BF     		.text
+ 106              	.Letext0:
+ 107              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 108              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 109              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 110              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 111              		.section	.debug_info,"",%progbits
+ 112              	.Ldebug_info0:
+ 113 0000 F7000000 		.4byte	0xf7
+ 114 0004 0400     		.2byte	0x4
+ 115 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 116 000a 04       		.byte	0x4
+ 117 000b 01       		.uleb128 0x1
+ 118 000c 75000000 		.4byte	.LASF17
+ 119 0010 0C       		.byte	0xc
+ 120 0011 34000000 		.4byte	.LASF18
+ 121 0015 16010000 		.4byte	.LASF19
+ 122 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 123 001d 00000000 		.4byte	0
+ 124 0021 00000000 		.4byte	.Ldebug_line0
+ 125 0025 02       		.uleb128 0x2
+ 126 0026 01       		.byte	0x1
+ 127 0027 06       		.byte	0x6
+ 128 0028 5F010000 		.4byte	.LASF0
+ 129 002c 02       		.uleb128 0x2
+ 130 002d 01       		.byte	0x1
+ 131 002e 08       		.byte	0x8
+ 132 002f 03010000 		.4byte	.LASF1
+ 133 0033 02       		.uleb128 0x2
+ 134 0034 02       		.byte	0x2
+ 135 0035 05       		.byte	0x5
+ 136 0036 95010000 		.4byte	.LASF2
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccyTmQvb.s 			page 4
+
+
+ 137 003a 02       		.uleb128 0x2
+ 138 003b 02       		.byte	0x2
+ 139 003c 07       		.byte	0x7
+ 140 003d 0E000000 		.4byte	.LASF3
+ 141 0041 03       		.uleb128 0x3
+ 142 0042 7F010000 		.4byte	.LASF9
+ 143 0046 02       		.byte	0x2
+ 144 0047 3F       		.byte	0x3f
+ 145 0048 4C000000 		.4byte	0x4c
+ 146 004c 02       		.uleb128 0x2
+ 147 004d 04       		.byte	0x4
+ 148 004e 05       		.byte	0x5
+ 149 004f 42010000 		.4byte	.LASF4
+ 150 0053 02       		.uleb128 0x2
+ 151 0054 04       		.byte	0x4
+ 152 0055 07       		.byte	0x7
+ 153 0056 3E000000 		.4byte	.LASF5
+ 154 005a 02       		.uleb128 0x2
+ 155 005b 08       		.byte	0x8
+ 156 005c 05       		.byte	0x5
+ 157 005d 00000000 		.4byte	.LASF6
+ 158 0061 02       		.uleb128 0x2
+ 159 0062 08       		.byte	0x8
+ 160 0063 07       		.byte	0x7
+ 161 0064 50000000 		.4byte	.LASF7
+ 162 0068 04       		.uleb128 0x4
+ 163 0069 04       		.byte	0x4
+ 164 006a 05       		.byte	0x5
+ 165 006b 696E7400 		.ascii	"int\000"
+ 166 006f 02       		.uleb128 0x2
+ 167 0070 04       		.byte	0x4
+ 168 0071 07       		.byte	0x7
+ 169 0072 27000000 		.4byte	.LASF8
+ 170 0076 03       		.uleb128 0x3
+ 171 0077 9F010000 		.4byte	.LASF10
+ 172 007b 03       		.byte	0x3
+ 173 007c 2C       		.byte	0x2c
+ 174 007d 41000000 		.4byte	0x41
+ 175 0081 05       		.uleb128 0x5
+ 176 0082 8F010000 		.4byte	.LASF11
+ 177 0086 04       		.byte	0x4
+ 178 0087 9601     		.2byte	0x196
+ 179 0089 33000000 		.4byte	0x33
+ 180 008d 02       		.uleb128 0x2
+ 181 008e 04       		.byte	0x4
+ 182 008f 04       		.byte	0x4
+ 183 0090 89010000 		.4byte	.LASF12
+ 184 0094 02       		.uleb128 0x2
+ 185 0095 08       		.byte	0x8
+ 186 0096 04       		.byte	0x4
+ 187 0097 4B010000 		.4byte	.LASF13
+ 188 009b 02       		.uleb128 0x2
+ 189 009c 01       		.byte	0x1
+ 190 009d 08       		.byte	0x8
+ 191 009e 11010000 		.4byte	.LASF14
+ 192 00a2 02       		.uleb128 0x2
+ 193 00a3 08       		.byte	0x8
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccyTmQvb.s 			page 5
+
+
+ 194 00a4 04       		.byte	0x4
+ 195 00a5 6B010000 		.4byte	.LASF15
+ 196 00a9 02       		.uleb128 0x2
+ 197 00aa 04       		.byte	0x4
+ 198 00ab 07       		.byte	0x7
+ 199 00ac A7010000 		.4byte	.LASF16
+ 200 00b0 06       		.uleb128 0x6
+ 201 00b1 77010000 		.4byte	.LASF20
+ 202 00b5 01       		.byte	0x1
+ 203 00b6 0E       		.byte	0xe
+ 204 00b7 00000000 		.4byte	.LFB63
+ 205 00bb 18000000 		.4byte	.LFE63-.LFB63
+ 206 00bf 01       		.uleb128 0x1
+ 207 00c0 9C       		.byte	0x9c
+ 208 00c1 07       		.uleb128 0x7
+ 209 00c2 67000000 		.4byte	.LASF21
+ 210 00c6 01       		.byte	0x1
+ 211 00c7 16       		.byte	0x16
+ 212 00c8 81000000 		.4byte	0x81
+ 213 00cc 00000000 		.4byte	.LFB64
+ 214 00d0 2E000000 		.4byte	.LFE64-.LFB64
+ 215 00d4 01       		.uleb128 0x1
+ 216 00d5 9C       		.byte	0x9c
+ 217 00d6 E9000000 		.4byte	0xe9
+ 218 00da 08       		.uleb128 0x8
+ 219 00db 21000000 		.4byte	.LASF22
+ 220 00df 01       		.byte	0x1
+ 221 00e0 16       		.byte	0x16
+ 222 00e1 68000000 		.4byte	0x68
+ 223 00e5 02       		.uleb128 0x2
+ 224 00e6 91       		.byte	0x91
+ 225 00e7 74       		.sleb128 -12
+ 226 00e8 00       		.byte	0
+ 227 00e9 09       		.uleb128 0x9
+ 228 00ea 52010000 		.4byte	.LASF23
+ 229 00ee 05       		.byte	0x5
+ 230 00ef 9606     		.2byte	0x696
+ 231 00f1 F5000000 		.4byte	0xf5
+ 232 00f5 0A       		.uleb128 0xa
+ 233 00f6 76000000 		.4byte	0x76
+ 234 00fa 00       		.byte	0
+ 235              		.section	.debug_abbrev,"",%progbits
+ 236              	.Ldebug_abbrev0:
+ 237 0000 01       		.uleb128 0x1
+ 238 0001 11       		.uleb128 0x11
+ 239 0002 01       		.byte	0x1
+ 240 0003 25       		.uleb128 0x25
+ 241 0004 0E       		.uleb128 0xe
+ 242 0005 13       		.uleb128 0x13
+ 243 0006 0B       		.uleb128 0xb
+ 244 0007 03       		.uleb128 0x3
+ 245 0008 0E       		.uleb128 0xe
+ 246 0009 1B       		.uleb128 0x1b
+ 247 000a 0E       		.uleb128 0xe
+ 248 000b 55       		.uleb128 0x55
+ 249 000c 17       		.uleb128 0x17
+ 250 000d 11       		.uleb128 0x11
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccyTmQvb.s 			page 6
+
+
+ 251 000e 01       		.uleb128 0x1
+ 252 000f 10       		.uleb128 0x10
+ 253 0010 17       		.uleb128 0x17
+ 254 0011 00       		.byte	0
+ 255 0012 00       		.byte	0
+ 256 0013 02       		.uleb128 0x2
+ 257 0014 24       		.uleb128 0x24
+ 258 0015 00       		.byte	0
+ 259 0016 0B       		.uleb128 0xb
+ 260 0017 0B       		.uleb128 0xb
+ 261 0018 3E       		.uleb128 0x3e
+ 262 0019 0B       		.uleb128 0xb
+ 263 001a 03       		.uleb128 0x3
+ 264 001b 0E       		.uleb128 0xe
+ 265 001c 00       		.byte	0
+ 266 001d 00       		.byte	0
+ 267 001e 03       		.uleb128 0x3
+ 268 001f 16       		.uleb128 0x16
+ 269 0020 00       		.byte	0
+ 270 0021 03       		.uleb128 0x3
+ 271 0022 0E       		.uleb128 0xe
+ 272 0023 3A       		.uleb128 0x3a
+ 273 0024 0B       		.uleb128 0xb
+ 274 0025 3B       		.uleb128 0x3b
+ 275 0026 0B       		.uleb128 0xb
+ 276 0027 49       		.uleb128 0x49
+ 277 0028 13       		.uleb128 0x13
+ 278 0029 00       		.byte	0
+ 279 002a 00       		.byte	0
+ 280 002b 04       		.uleb128 0x4
+ 281 002c 24       		.uleb128 0x24
+ 282 002d 00       		.byte	0
+ 283 002e 0B       		.uleb128 0xb
+ 284 002f 0B       		.uleb128 0xb
+ 285 0030 3E       		.uleb128 0x3e
+ 286 0031 0B       		.uleb128 0xb
+ 287 0032 03       		.uleb128 0x3
+ 288 0033 08       		.uleb128 0x8
+ 289 0034 00       		.byte	0
+ 290 0035 00       		.byte	0
+ 291 0036 05       		.uleb128 0x5
+ 292 0037 16       		.uleb128 0x16
+ 293 0038 00       		.byte	0
+ 294 0039 03       		.uleb128 0x3
+ 295 003a 0E       		.uleb128 0xe
+ 296 003b 3A       		.uleb128 0x3a
+ 297 003c 0B       		.uleb128 0xb
+ 298 003d 3B       		.uleb128 0x3b
+ 299 003e 05       		.uleb128 0x5
+ 300 003f 49       		.uleb128 0x49
+ 301 0040 13       		.uleb128 0x13
+ 302 0041 00       		.byte	0
+ 303 0042 00       		.byte	0
+ 304 0043 06       		.uleb128 0x6
+ 305 0044 2E       		.uleb128 0x2e
+ 306 0045 00       		.byte	0
+ 307 0046 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccyTmQvb.s 			page 7
+
+
+ 308 0047 19       		.uleb128 0x19
+ 309 0048 03       		.uleb128 0x3
+ 310 0049 0E       		.uleb128 0xe
+ 311 004a 3A       		.uleb128 0x3a
+ 312 004b 0B       		.uleb128 0xb
+ 313 004c 3B       		.uleb128 0x3b
+ 314 004d 0B       		.uleb128 0xb
+ 315 004e 11       		.uleb128 0x11
+ 316 004f 01       		.uleb128 0x1
+ 317 0050 12       		.uleb128 0x12
+ 318 0051 06       		.uleb128 0x6
+ 319 0052 40       		.uleb128 0x40
+ 320 0053 18       		.uleb128 0x18
+ 321 0054 9642     		.uleb128 0x2116
+ 322 0056 19       		.uleb128 0x19
+ 323 0057 00       		.byte	0
+ 324 0058 00       		.byte	0
+ 325 0059 07       		.uleb128 0x7
+ 326 005a 2E       		.uleb128 0x2e
+ 327 005b 01       		.byte	0x1
+ 328 005c 3F       		.uleb128 0x3f
+ 329 005d 19       		.uleb128 0x19
+ 330 005e 03       		.uleb128 0x3
+ 331 005f 0E       		.uleb128 0xe
+ 332 0060 3A       		.uleb128 0x3a
+ 333 0061 0B       		.uleb128 0xb
+ 334 0062 3B       		.uleb128 0x3b
+ 335 0063 0B       		.uleb128 0xb
+ 336 0064 27       		.uleb128 0x27
+ 337 0065 19       		.uleb128 0x19
+ 338 0066 49       		.uleb128 0x49
+ 339 0067 13       		.uleb128 0x13
+ 340 0068 11       		.uleb128 0x11
+ 341 0069 01       		.uleb128 0x1
+ 342 006a 12       		.uleb128 0x12
+ 343 006b 06       		.uleb128 0x6
+ 344 006c 40       		.uleb128 0x40
+ 345 006d 18       		.uleb128 0x18
+ 346 006e 9642     		.uleb128 0x2116
+ 347 0070 19       		.uleb128 0x19
+ 348 0071 01       		.uleb128 0x1
+ 349 0072 13       		.uleb128 0x13
+ 350 0073 00       		.byte	0
+ 351 0074 00       		.byte	0
+ 352 0075 08       		.uleb128 0x8
+ 353 0076 05       		.uleb128 0x5
+ 354 0077 00       		.byte	0
+ 355 0078 03       		.uleb128 0x3
+ 356 0079 0E       		.uleb128 0xe
+ 357 007a 3A       		.uleb128 0x3a
+ 358 007b 0B       		.uleb128 0xb
+ 359 007c 3B       		.uleb128 0x3b
+ 360 007d 0B       		.uleb128 0xb
+ 361 007e 49       		.uleb128 0x49
+ 362 007f 13       		.uleb128 0x13
+ 363 0080 02       		.uleb128 0x2
+ 364 0081 18       		.uleb128 0x18
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccyTmQvb.s 			page 8
+
+
+ 365 0082 00       		.byte	0
+ 366 0083 00       		.byte	0
+ 367 0084 09       		.uleb128 0x9
+ 368 0085 34       		.uleb128 0x34
+ 369 0086 00       		.byte	0
+ 370 0087 03       		.uleb128 0x3
+ 371 0088 0E       		.uleb128 0xe
+ 372 0089 3A       		.uleb128 0x3a
+ 373 008a 0B       		.uleb128 0xb
+ 374 008b 3B       		.uleb128 0x3b
+ 375 008c 05       		.uleb128 0x5
+ 376 008d 49       		.uleb128 0x49
+ 377 008e 13       		.uleb128 0x13
+ 378 008f 3F       		.uleb128 0x3f
+ 379 0090 19       		.uleb128 0x19
+ 380 0091 3C       		.uleb128 0x3c
+ 381 0092 19       		.uleb128 0x19
+ 382 0093 00       		.byte	0
+ 383 0094 00       		.byte	0
+ 384 0095 0A       		.uleb128 0xa
+ 385 0096 35       		.uleb128 0x35
+ 386 0097 00       		.byte	0
+ 387 0098 49       		.uleb128 0x49
+ 388 0099 13       		.uleb128 0x13
+ 389 009a 00       		.byte	0
+ 390 009b 00       		.byte	0
+ 391 009c 00       		.byte	0
+ 392              		.section	.debug_aranges,"",%progbits
+ 393 0000 24000000 		.4byte	0x24
+ 394 0004 0200     		.2byte	0x2
+ 395 0006 00000000 		.4byte	.Ldebug_info0
+ 396 000a 04       		.byte	0x4
+ 397 000b 00       		.byte	0
+ 398 000c 0000     		.2byte	0
+ 399 000e 0000     		.2byte	0
+ 400 0010 00000000 		.4byte	.LFB63
+ 401 0014 18000000 		.4byte	.LFE63-.LFB63
+ 402 0018 00000000 		.4byte	.LFB64
+ 403 001c 2E000000 		.4byte	.LFE64-.LFB64
+ 404 0020 00000000 		.4byte	0
+ 405 0024 00000000 		.4byte	0
+ 406              		.section	.debug_ranges,"",%progbits
+ 407              	.Ldebug_ranges0:
+ 408 0000 00000000 		.4byte	.LFB63
+ 409 0004 18000000 		.4byte	.LFE63
+ 410 0008 00000000 		.4byte	.LFB64
+ 411 000c 2E000000 		.4byte	.LFE64
+ 412 0010 00000000 		.4byte	0
+ 413 0014 00000000 		.4byte	0
+ 414              		.section	.debug_line,"",%progbits
+ 415              	.Ldebug_line0:
+ 416 0000 7D010000 		.section	.debug_str,"MS",%progbits,1
+ 416      02004F01 
+ 416      00000201 
+ 416      FB0E0D00 
+ 416      01010101 
+ 417              	.LASF6:
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccyTmQvb.s 			page 9
+
+
+ 418 0000 6C6F6E67 		.ascii	"long long int\000"
+ 418      206C6F6E 
+ 418      6720696E 
+ 418      7400
+ 419              	.LASF3:
+ 420 000e 73686F72 		.ascii	"short unsigned int\000"
+ 420      7420756E 
+ 420      7369676E 
+ 420      65642069 
+ 420      6E7400
+ 421              	.LASF22:
+ 422 0021 61646349 		.ascii	"adcID\000"
+ 422      4400
+ 423              	.LASF8:
+ 424 0027 756E7369 		.ascii	"unsigned int\000"
+ 424      676E6564 
+ 424      20696E74 
+ 424      00
+ 425              	.LASF18:
+ 426 0034 61646355 		.ascii	"adcUtil.c\000"
+ 426      74696C2E 
+ 426      6300
+ 427              	.LASF5:
+ 428 003e 6C6F6E67 		.ascii	"long unsigned int\000"
+ 428      20756E73 
+ 428      69676E65 
+ 428      6420696E 
+ 428      7400
+ 429              	.LASF7:
+ 430 0050 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 430      206C6F6E 
+ 430      6720756E 
+ 430      7369676E 
+ 430      65642069 
+ 431              	.LASF21:
+ 432 0067 67657441 		.ascii	"getADCReading\000"
+ 432      44435265 
+ 432      6164696E 
+ 432      6700
+ 433              	.LASF17:
+ 434 0075 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 434      43313120 
+ 434      352E342E 
+ 434      31203230 
+ 434      31363036 
+ 435 00a8 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 435      20726576 
+ 435      6973696F 
+ 435      6E203233 
+ 435      37373135 
+ 436 00db 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 436      66756E63 
+ 436      74696F6E 
+ 436      2D736563 
+ 436      74696F6E 
+ 437              	.LASF1:
+ 438 0103 756E7369 		.ascii	"unsigned char\000"
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccyTmQvb.s 			page 10
+
+
+ 438      676E6564 
+ 438      20636861 
+ 438      7200
+ 439              	.LASF14:
+ 440 0111 63686172 		.ascii	"char\000"
+ 440      00
+ 441              	.LASF19:
+ 442 0116 433A5C55 		.ascii	"C:\\Users\\Albert\\Documents\\6115_fp\\IWP.cydsn\000"
+ 442      73657273 
+ 442      5C416C62 
+ 442      6572745C 
+ 442      446F6375 
+ 443              	.LASF4:
+ 444 0142 6C6F6E67 		.ascii	"long int\000"
+ 444      20696E74 
+ 444      00
+ 445              	.LASF13:
+ 446 014b 646F7562 		.ascii	"double\000"
+ 446      6C6500
+ 447              	.LASF23:
+ 448 0152 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 448      52784275 
+ 448      66666572 
+ 448      00
+ 449              	.LASF0:
+ 450 015f 7369676E 		.ascii	"signed char\000"
+ 450      65642063 
+ 450      68617200 
+ 451              	.LASF15:
+ 452 016b 6C6F6E67 		.ascii	"long double\000"
+ 452      20646F75 
+ 452      626C6500 
+ 453              	.LASF20:
+ 454 0177 696E6974 		.ascii	"initADC\000"
+ 454      41444300 
+ 455              	.LASF9:
+ 456 017f 5F5F696E 		.ascii	"__int32_t\000"
+ 456      7433325F 
+ 456      7400
+ 457              	.LASF12:
+ 458 0189 666C6F61 		.ascii	"float\000"
+ 458      7400
+ 459              	.LASF11:
+ 460 018f 696E7431 		.ascii	"int16\000"
+ 460      3600
+ 461              	.LASF2:
+ 462 0195 73686F72 		.ascii	"short int\000"
+ 462      7420696E 
+ 462      7400
+ 463              	.LASF10:
+ 464 019f 696E7433 		.ascii	"int32_t\000"
+ 464      325F7400 
+ 465              	.LASF16:
+ 466 01a7 73697A65 		.ascii	"sizetype\000"
+ 466      74797065 
+ 466      00
+ 467              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccyTmQvb.s 			page 11
+
+

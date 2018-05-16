@@ -1,0 +1,864 @@
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccL0fMTa.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"uartUtil.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.initUART,"ax",%progbits
+  20              		.align	2
+  21              		.global	initUART
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	initUART, %function
+  25              	initUART:
+  26              	.LFB63:
+  27              		.file 1 "uartUtil.c"
+   1:uartUtil.c    **** /* ========================================
+   2:uartUtil.c    ****  *
+   3:uartUtil.c    ****  * Copyright YOUR COMPANY, THE YEAR
+   4:uartUtil.c    ****  * All Rights Reserved
+   5:uartUtil.c    ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:uartUtil.c    ****  *
+   7:uartUtil.c    ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:uartUtil.c    ****  * WHICH IS THE PROPERTY OF your company.
+   9:uartUtil.c    ****  *
+  10:uartUtil.c    ****  * ========================================
+  11:uartUtil.c    **** */
+  12:uartUtil.c    **** 
+  13:uartUtil.c    **** extern _Bool enableMotor;
+  14:uartUtil.c    **** #include "uartUtil.h"
+  15:uartUtil.c    **** 
+  16:uartUtil.c    **** void initUART()
+  17:uartUtil.c    **** {
+  28              		.loc 1 17 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 00AF     		add	r7, sp, #0
+  37              		.cfi_def_cfa_register 7
+  18:uartUtil.c    ****     UART_Start();
+  38              		.loc 1 18 0
+  39 0004 FFF7FEFF 		bl	UART_Start
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccL0fMTa.s 			page 2
+
+
+  19:uartUtil.c    **** }
+  40              		.loc 1 19 0
+  41 0008 00BF     		nop
+  42 000a 80BD     		pop	{r7, pc}
+  43              		.cfi_endproc
+  44              	.LFE63:
+  45              		.size	initUART, .-initUART
+  46              		.section	.rodata
+  47              		.align	2
+  48              	.LC0:
+  49 0000 25303364 		.ascii	"%03d\000"
+  49      00
+  50              		.global	__aeabi_i2d
+  51              		.global	__aeabi_d2iz
+  52              		.section	.text.sendValue,"ax",%progbits
+  53              		.align	2
+  54              		.global	sendValue
+  55              		.thumb
+  56              		.thumb_func
+  57              		.type	sendValue, %function
+  58              	sendValue:
+  59              	.LFB64:
+  20:uartUtil.c    **** 
+  21:uartUtil.c    **** void sendValue(int value, _Bool direction)
+  22:uartUtil.c    **** {
+  60              		.loc 1 22 0
+  61              		.cfi_startproc
+  62              		@ args = 0, pretend = 0, frame = 8
+  63              		@ frame_needed = 1, uses_anonymous_args = 0
+  64 0000 90B5     		push	{r4, r7, lr}
+  65              		.cfi_def_cfa_offset 12
+  66              		.cfi_offset 4, -12
+  67              		.cfi_offset 7, -8
+  68              		.cfi_offset 14, -4
+  69 0002 83B0     		sub	sp, sp, #12
+  70              		.cfi_def_cfa_offset 24
+  71 0004 00AF     		add	r7, sp, #0
+  72              		.cfi_def_cfa_register 7
+  73 0006 7860     		str	r0, [r7, #4]
+  74 0008 0B46     		mov	r3, r1
+  75 000a FB70     		strb	r3, [r7, #3]
+  23:uartUtil.c    ****     if(!enableMotor)
+  76              		.loc 1 23 0
+  77 000c 1E4B     		ldr	r3, .L5+8
+  78 000e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  79 0010 83F00103 		eor	r3, r3, #1
+  80 0014 DBB2     		uxtb	r3, r3
+  81 0016 002B     		cmp	r3, #0
+  82 0018 0BD0     		beq	.L3
+  83              	.LBB2:
+  24:uartUtil.c    ****     {
+  25:uartUtil.c    ****         UART_PutChar(0);
+  84              		.loc 1 25 0
+  85 001a 0020     		movs	r0, #0
+  86 001c FFF7FEFF 		bl	UART_PutChar
+  26:uartUtil.c    ****         static char hex[3];
+  27:uartUtil.c    ****         sprintf(hex, "%03d", 0);
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccL0fMTa.s 			page 3
+
+
+  87              		.loc 1 27 0
+  88 0020 0022     		movs	r2, #0
+  89 0022 1A49     		ldr	r1, .L5+12
+  90 0024 1A48     		ldr	r0, .L5+16
+  91 0026 FFF7FEFF 		bl	sprintf
+  28:uartUtil.c    ****         UART_PutString(hex);
+  92              		.loc 1 28 0
+  93 002a 1948     		ldr	r0, .L5+16
+  94 002c FFF7FEFF 		bl	UART_PutString
+  29:uartUtil.c    ****         return;
+  95              		.loc 1 29 0
+  96 0030 21E0     		b	.L2
+  97              	.L3:
+  98              	.LBE2:
+  30:uartUtil.c    ****     }
+  31:uartUtil.c    ****     //Sends a value between 0~255 with direction
+  32:uartUtil.c    ****     UART_PutChar(direction);
+  99              		.loc 1 32 0
+ 100 0032 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 101 0034 1846     		mov	r0, r3
+ 102 0036 FFF7FEFF 		bl	UART_PutChar
+  33:uartUtil.c    ****     //convert value to hex and send
+  34:uartUtil.c    ****     value = min(max(value,1),255);  //cap in range
+ 103              		.loc 1 34 0
+ 104 003a 7868     		ldr	r0, [r7, #4]
+ 105 003c FFF7FEFF 		bl	__aeabi_i2d
+ 106 0040 4FF00002 		mov	r2, #0
+ 107 0044 134B     		ldr	r3, .L5+20
+ 108 0046 FFF7FEFF 		bl	max
+ 109 004a 0DA3     		adr	r3, .L5
+ 110 004c D3E90023 		ldrd	r2, [r3]
+ 111 0050 FFF7FEFF 		bl	min
+ 112 0054 0346     		mov	r3, r0
+ 113 0056 0C46     		mov	r4, r1
+ 114 0058 1846     		mov	r0, r3
+ 115 005a 2146     		mov	r1, r4
+ 116 005c FFF7FEFF 		bl	__aeabi_d2iz
+ 117 0060 0346     		mov	r3, r0
+ 118 0062 7B60     		str	r3, [r7, #4]
+  35:uartUtil.c    ****     static char hex[3];
+  36:uartUtil.c    ****     sprintf(hex, "%03d", value);
+ 119              		.loc 1 36 0
+ 120 0064 7A68     		ldr	r2, [r7, #4]
+ 121 0066 0949     		ldr	r1, .L5+12
+ 122 0068 0B48     		ldr	r0, .L5+24
+ 123 006a FFF7FEFF 		bl	sprintf
+  37:uartUtil.c    ****     UART_PutString(hex);
+ 124              		.loc 1 37 0
+ 125 006e 0A48     		ldr	r0, .L5+24
+ 126 0070 FFF7FEFF 		bl	UART_PutString
+  38:uartUtil.c    ****     return;
+ 127              		.loc 1 38 0
+ 128 0074 00BF     		nop
+ 129              	.L2:
+  39:uartUtil.c    **** }
+ 130              		.loc 1 39 0
+ 131 0076 0C37     		adds	r7, r7, #12
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccL0fMTa.s 			page 4
+
+
+ 132              		.cfi_def_cfa_offset 12
+ 133 0078 BD46     		mov	sp, r7
+ 134              		.cfi_def_cfa_register 13
+ 135              		@ sp needed
+ 136 007a 90BD     		pop	{r4, r7, pc}
+ 137              	.L6:
+ 138 007c AFF30080 		.align	3
+ 139              	.L5:
+ 140 0080 00000000 		.word	0
+ 141 0084 00E06F40 		.word	1081073664
+ 142 0088 00000000 		.word	enableMotor
+ 143 008c 00000000 		.word	.LC0
+ 144 0090 00000000 		.word	hex.6885
+ 145 0094 0000F03F 		.word	1072693248
+ 146 0098 04000000 		.word	hex.6887
+ 147              		.cfi_endproc
+ 148              	.LFE64:
+ 149              		.size	sendValue, .-sendValue
+ 150              		.bss
+ 151              		.align	2
+ 152              	hex.6885:
+ 153 0000 000000   		.space	3
+ 154 0003 00       		.align	2
+ 155              	hex.6887:
+ 156 0004 000000   		.space	3
+ 157              		.text
+ 158              	.Letext0:
+ 159              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 160              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 161              		.file 4 "Generated_Source\\PSoC5/core_cm3.h"
+ 162              		.file 5 "<built-in>"
+ 163              		.section	.debug_info,"",%progbits
+ 164              	.Ldebug_info0:
+ 165 0000 86010000 		.4byte	0x186
+ 166 0004 0400     		.2byte	0x4
+ 167 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 168 000a 04       		.byte	0x4
+ 169 000b 01       		.uleb128 0x1
+ 170 000c 71000000 		.4byte	.LASF21
+ 171 0010 0C       		.byte	0xc
+ 172 0011 C1010000 		.4byte	.LASF22
+ 173 0015 19010000 		.4byte	.LASF23
+ 174 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 175 001d 00000000 		.4byte	0
+ 176 0021 00000000 		.4byte	.Ldebug_line0
+ 177 0025 02       		.uleb128 0x2
+ 178 0026 01       		.byte	0x1
+ 179 0027 06       		.byte	0x6
+ 180 0028 8A010000 		.4byte	.LASF0
+ 181 002c 02       		.uleb128 0x2
+ 182 002d 01       		.byte	0x1
+ 183 002e 08       		.byte	0x8
+ 184 002f FF000000 		.4byte	.LASF1
+ 185 0033 02       		.uleb128 0x2
+ 186 0034 02       		.byte	0x2
+ 187 0035 05       		.byte	0x5
+ 188 0036 4E010000 		.4byte	.LASF2
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccL0fMTa.s 			page 5
+
+
+ 189 003a 02       		.uleb128 0x2
+ 190 003b 02       		.byte	0x2
+ 191 003c 07       		.byte	0x7
+ 192 003d 5E000000 		.4byte	.LASF3
+ 193 0041 03       		.uleb128 0x3
+ 194 0042 A0010000 		.4byte	.LASF9
+ 195 0046 02       		.byte	0x2
+ 196 0047 3F       		.byte	0x3f
+ 197 0048 4C000000 		.4byte	0x4c
+ 198 004c 02       		.uleb128 0x2
+ 199 004d 04       		.byte	0x4
+ 200 004e 05       		.byte	0x5
+ 201 004f 45010000 		.4byte	.LASF4
+ 202 0053 02       		.uleb128 0x2
+ 203 0054 04       		.byte	0x4
+ 204 0055 07       		.byte	0x7
+ 205 0056 35000000 		.4byte	.LASF5
+ 206 005a 02       		.uleb128 0x2
+ 207 005b 08       		.byte	0x8
+ 208 005c 05       		.byte	0x5
+ 209 005d 00000000 		.4byte	.LASF6
+ 210 0061 02       		.uleb128 0x2
+ 211 0062 08       		.byte	0x8
+ 212 0063 07       		.byte	0x7
+ 213 0064 47000000 		.4byte	.LASF7
+ 214 0068 04       		.uleb128 0x4
+ 215 0069 04       		.byte	0x4
+ 216 006a 05       		.byte	0x5
+ 217 006b 696E7400 		.ascii	"int\000"
+ 218 006f 02       		.uleb128 0x2
+ 219 0070 04       		.byte	0x4
+ 220 0071 07       		.byte	0x7
+ 221 0072 14000000 		.4byte	.LASF8
+ 222 0076 03       		.uleb128 0x3
+ 223 0077 B9010000 		.4byte	.LASF10
+ 224 007b 03       		.byte	0x3
+ 225 007c 2C       		.byte	0x2c
+ 226 007d 41000000 		.4byte	0x41
+ 227 0081 02       		.uleb128 0x2
+ 228 0082 08       		.byte	0x8
+ 229 0083 04       		.byte	0x4
+ 230 0084 0D010000 		.4byte	.LASF11
+ 231 0088 02       		.uleb128 0x2
+ 232 0089 01       		.byte	0x1
+ 233 008a 08       		.byte	0x8
+ 234 008b 14010000 		.4byte	.LASF12
+ 235 008f 02       		.uleb128 0x2
+ 236 0090 08       		.byte	0x8
+ 237 0091 04       		.byte	0x4
+ 238 0092 68010000 		.4byte	.LASF13
+ 239 0096 02       		.uleb128 0x2
+ 240 0097 04       		.byte	0x4
+ 241 0098 07       		.byte	0x7
+ 242 0099 74010000 		.4byte	.LASF14
+ 243 009d 05       		.uleb128 0x5
+ 244 009e 04       		.byte	0x4
+ 245 009f 88000000 		.4byte	0x88
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccL0fMTa.s 			page 6
+
+
+ 246 00a3 05       		.uleb128 0x5
+ 247 00a4 04       		.byte	0x4
+ 248 00a5 A9000000 		.4byte	0xa9
+ 249 00a9 06       		.uleb128 0x6
+ 250 00aa 88000000 		.4byte	0x88
+ 251 00ae 02       		.uleb128 0x2
+ 252 00af 04       		.byte	0x4
+ 253 00b0 04       		.byte	0x4
+ 254 00b1 AA010000 		.4byte	.LASF15
+ 255 00b5 07       		.uleb128 0x7
+ 256 00b6 B0010000 		.4byte	.LASF24
+ 257 00ba 01       		.byte	0x1
+ 258 00bb 10       		.byte	0x10
+ 259 00bc 00000000 		.4byte	.LFB63
+ 260 00c0 0C000000 		.4byte	.LFE63-.LFB63
+ 261 00c4 01       		.uleb128 0x1
+ 262 00c5 9C       		.byte	0x9c
+ 263 00c6 08       		.uleb128 0x8
+ 264 00c7 96010000 		.4byte	.LASF25
+ 265 00cb 01       		.byte	0x1
+ 266 00cc 15       		.byte	0x15
+ 267 00cd 00000000 		.4byte	.LFB64
+ 268 00d1 9C000000 		.4byte	.LFE64-.LFB64
+ 269 00d5 01       		.uleb128 0x1
+ 270 00d6 9C       		.byte	0x9c
+ 271 00d7 56010000 		.4byte	0x156
+ 272 00db 09       		.uleb128 0x9
+ 273 00dc 0E000000 		.4byte	.LASF16
+ 274 00e0 01       		.byte	0x1
+ 275 00e1 15       		.byte	0x15
+ 276 00e2 68000000 		.4byte	0x68
+ 277 00e6 02       		.uleb128 0x2
+ 278 00e7 91       		.byte	0x91
+ 279 00e8 6C       		.sleb128 -20
+ 280 00e9 09       		.uleb128 0x9
+ 281 00ea 58010000 		.4byte	.LASF17
+ 282 00ee 01       		.byte	0x1
+ 283 00ef 15       		.byte	0x15
+ 284 00f0 56010000 		.4byte	0x156
+ 285 00f4 02       		.uleb128 0x2
+ 286 00f5 91       		.byte	0x91
+ 287 00f6 6B       		.sleb128 -21
+ 288 00f7 0A       		.uleb128 0xa
+ 289 00f8 68657800 		.ascii	"hex\000"
+ 290 00fc 01       		.byte	0x1
+ 291 00fd 23       		.byte	0x23
+ 292 00fe 5D010000 		.4byte	0x15d
+ 293 0102 05       		.uleb128 0x5
+ 294 0103 03       		.byte	0x3
+ 295 0104 04000000 		.4byte	hex.6887
+ 296 0108 0B       		.uleb128 0xb
+ 297 0109 21000000 		.4byte	.LASF26
+ 298 010d 05       		.byte	0x5
+ 299 010e 00       		.byte	0
+ 300 010f 68000000 		.4byte	0x68
+ 301 0113 23010000 		.4byte	0x123
+ 302 0117 0C       		.uleb128 0xc
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccL0fMTa.s 			page 7
+
+
+ 303 0118 9D000000 		.4byte	0x9d
+ 304 011c 0C       		.uleb128 0xc
+ 305 011d A3000000 		.4byte	0xa3
+ 306 0121 0D       		.uleb128 0xd
+ 307 0122 00       		.byte	0
+ 308 0123 0E       		.uleb128 0xe
+ 309 0124 1A000000 		.4byte	.LBB2
+ 310 0128 18000000 		.4byte	.LBE2-.LBB2
+ 311 012c 0A       		.uleb128 0xa
+ 312 012d 68657800 		.ascii	"hex\000"
+ 313 0131 01       		.byte	0x1
+ 314 0132 1A       		.byte	0x1a
+ 315 0133 5D010000 		.4byte	0x15d
+ 316 0137 05       		.uleb128 0x5
+ 317 0138 03       		.byte	0x3
+ 318 0139 00000000 		.4byte	hex.6885
+ 319 013d 0F       		.uleb128 0xf
+ 320 013e 21000000 		.4byte	.LASF26
+ 321 0142 05       		.byte	0x5
+ 322 0143 00       		.byte	0
+ 323 0144 68000000 		.4byte	0x68
+ 324 0148 0C       		.uleb128 0xc
+ 325 0149 9D000000 		.4byte	0x9d
+ 326 014d 0C       		.uleb128 0xc
+ 327 014e A3000000 		.4byte	0xa3
+ 328 0152 0D       		.uleb128 0xd
+ 329 0153 00       		.byte	0
+ 330 0154 00       		.byte	0
+ 331 0155 00       		.byte	0
+ 332 0156 02       		.uleb128 0x2
+ 333 0157 01       		.byte	0x1
+ 334 0158 02       		.byte	0x2
+ 335 0159 62010000 		.4byte	.LASF18
+ 336 015d 10       		.uleb128 0x10
+ 337 015e 88000000 		.4byte	0x88
+ 338 0162 6D010000 		.4byte	0x16d
+ 339 0166 11       		.uleb128 0x11
+ 340 0167 96000000 		.4byte	0x96
+ 341 016b 02       		.byte	0x2
+ 342 016c 00       		.byte	0
+ 343 016d 12       		.uleb128 0x12
+ 344 016e 29000000 		.4byte	.LASF19
+ 345 0172 01       		.byte	0x1
+ 346 0173 0D       		.byte	0xd
+ 347 0174 56010000 		.4byte	0x156
+ 348 0178 13       		.uleb128 0x13
+ 349 0179 7D010000 		.4byte	.LASF20
+ 350 017d 04       		.byte	0x4
+ 351 017e 9606     		.2byte	0x696
+ 352 0180 84010000 		.4byte	0x184
+ 353 0184 14       		.uleb128 0x14
+ 354 0185 76000000 		.4byte	0x76
+ 355 0189 00       		.byte	0
+ 356              		.section	.debug_abbrev,"",%progbits
+ 357              	.Ldebug_abbrev0:
+ 358 0000 01       		.uleb128 0x1
+ 359 0001 11       		.uleb128 0x11
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccL0fMTa.s 			page 8
+
+
+ 360 0002 01       		.byte	0x1
+ 361 0003 25       		.uleb128 0x25
+ 362 0004 0E       		.uleb128 0xe
+ 363 0005 13       		.uleb128 0x13
+ 364 0006 0B       		.uleb128 0xb
+ 365 0007 03       		.uleb128 0x3
+ 366 0008 0E       		.uleb128 0xe
+ 367 0009 1B       		.uleb128 0x1b
+ 368 000a 0E       		.uleb128 0xe
+ 369 000b 55       		.uleb128 0x55
+ 370 000c 17       		.uleb128 0x17
+ 371 000d 11       		.uleb128 0x11
+ 372 000e 01       		.uleb128 0x1
+ 373 000f 10       		.uleb128 0x10
+ 374 0010 17       		.uleb128 0x17
+ 375 0011 00       		.byte	0
+ 376 0012 00       		.byte	0
+ 377 0013 02       		.uleb128 0x2
+ 378 0014 24       		.uleb128 0x24
+ 379 0015 00       		.byte	0
+ 380 0016 0B       		.uleb128 0xb
+ 381 0017 0B       		.uleb128 0xb
+ 382 0018 3E       		.uleb128 0x3e
+ 383 0019 0B       		.uleb128 0xb
+ 384 001a 03       		.uleb128 0x3
+ 385 001b 0E       		.uleb128 0xe
+ 386 001c 00       		.byte	0
+ 387 001d 00       		.byte	0
+ 388 001e 03       		.uleb128 0x3
+ 389 001f 16       		.uleb128 0x16
+ 390 0020 00       		.byte	0
+ 391 0021 03       		.uleb128 0x3
+ 392 0022 0E       		.uleb128 0xe
+ 393 0023 3A       		.uleb128 0x3a
+ 394 0024 0B       		.uleb128 0xb
+ 395 0025 3B       		.uleb128 0x3b
+ 396 0026 0B       		.uleb128 0xb
+ 397 0027 49       		.uleb128 0x49
+ 398 0028 13       		.uleb128 0x13
+ 399 0029 00       		.byte	0
+ 400 002a 00       		.byte	0
+ 401 002b 04       		.uleb128 0x4
+ 402 002c 24       		.uleb128 0x24
+ 403 002d 00       		.byte	0
+ 404 002e 0B       		.uleb128 0xb
+ 405 002f 0B       		.uleb128 0xb
+ 406 0030 3E       		.uleb128 0x3e
+ 407 0031 0B       		.uleb128 0xb
+ 408 0032 03       		.uleb128 0x3
+ 409 0033 08       		.uleb128 0x8
+ 410 0034 00       		.byte	0
+ 411 0035 00       		.byte	0
+ 412 0036 05       		.uleb128 0x5
+ 413 0037 0F       		.uleb128 0xf
+ 414 0038 00       		.byte	0
+ 415 0039 0B       		.uleb128 0xb
+ 416 003a 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccL0fMTa.s 			page 9
+
+
+ 417 003b 49       		.uleb128 0x49
+ 418 003c 13       		.uleb128 0x13
+ 419 003d 00       		.byte	0
+ 420 003e 00       		.byte	0
+ 421 003f 06       		.uleb128 0x6
+ 422 0040 26       		.uleb128 0x26
+ 423 0041 00       		.byte	0
+ 424 0042 49       		.uleb128 0x49
+ 425 0043 13       		.uleb128 0x13
+ 426 0044 00       		.byte	0
+ 427 0045 00       		.byte	0
+ 428 0046 07       		.uleb128 0x7
+ 429 0047 2E       		.uleb128 0x2e
+ 430 0048 00       		.byte	0
+ 431 0049 3F       		.uleb128 0x3f
+ 432 004a 19       		.uleb128 0x19
+ 433 004b 03       		.uleb128 0x3
+ 434 004c 0E       		.uleb128 0xe
+ 435 004d 3A       		.uleb128 0x3a
+ 436 004e 0B       		.uleb128 0xb
+ 437 004f 3B       		.uleb128 0x3b
+ 438 0050 0B       		.uleb128 0xb
+ 439 0051 11       		.uleb128 0x11
+ 440 0052 01       		.uleb128 0x1
+ 441 0053 12       		.uleb128 0x12
+ 442 0054 06       		.uleb128 0x6
+ 443 0055 40       		.uleb128 0x40
+ 444 0056 18       		.uleb128 0x18
+ 445 0057 9642     		.uleb128 0x2116
+ 446 0059 19       		.uleb128 0x19
+ 447 005a 00       		.byte	0
+ 448 005b 00       		.byte	0
+ 449 005c 08       		.uleb128 0x8
+ 450 005d 2E       		.uleb128 0x2e
+ 451 005e 01       		.byte	0x1
+ 452 005f 3F       		.uleb128 0x3f
+ 453 0060 19       		.uleb128 0x19
+ 454 0061 03       		.uleb128 0x3
+ 455 0062 0E       		.uleb128 0xe
+ 456 0063 3A       		.uleb128 0x3a
+ 457 0064 0B       		.uleb128 0xb
+ 458 0065 3B       		.uleb128 0x3b
+ 459 0066 0B       		.uleb128 0xb
+ 460 0067 27       		.uleb128 0x27
+ 461 0068 19       		.uleb128 0x19
+ 462 0069 11       		.uleb128 0x11
+ 463 006a 01       		.uleb128 0x1
+ 464 006b 12       		.uleb128 0x12
+ 465 006c 06       		.uleb128 0x6
+ 466 006d 40       		.uleb128 0x40
+ 467 006e 18       		.uleb128 0x18
+ 468 006f 9642     		.uleb128 0x2116
+ 469 0071 19       		.uleb128 0x19
+ 470 0072 01       		.uleb128 0x1
+ 471 0073 13       		.uleb128 0x13
+ 472 0074 00       		.byte	0
+ 473 0075 00       		.byte	0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccL0fMTa.s 			page 10
+
+
+ 474 0076 09       		.uleb128 0x9
+ 475 0077 05       		.uleb128 0x5
+ 476 0078 00       		.byte	0
+ 477 0079 03       		.uleb128 0x3
+ 478 007a 0E       		.uleb128 0xe
+ 479 007b 3A       		.uleb128 0x3a
+ 480 007c 0B       		.uleb128 0xb
+ 481 007d 3B       		.uleb128 0x3b
+ 482 007e 0B       		.uleb128 0xb
+ 483 007f 49       		.uleb128 0x49
+ 484 0080 13       		.uleb128 0x13
+ 485 0081 02       		.uleb128 0x2
+ 486 0082 18       		.uleb128 0x18
+ 487 0083 00       		.byte	0
+ 488 0084 00       		.byte	0
+ 489 0085 0A       		.uleb128 0xa
+ 490 0086 34       		.uleb128 0x34
+ 491 0087 00       		.byte	0
+ 492 0088 03       		.uleb128 0x3
+ 493 0089 08       		.uleb128 0x8
+ 494 008a 3A       		.uleb128 0x3a
+ 495 008b 0B       		.uleb128 0xb
+ 496 008c 3B       		.uleb128 0x3b
+ 497 008d 0B       		.uleb128 0xb
+ 498 008e 49       		.uleb128 0x49
+ 499 008f 13       		.uleb128 0x13
+ 500 0090 02       		.uleb128 0x2
+ 501 0091 18       		.uleb128 0x18
+ 502 0092 00       		.byte	0
+ 503 0093 00       		.byte	0
+ 504 0094 0B       		.uleb128 0xb
+ 505 0095 2E       		.uleb128 0x2e
+ 506 0096 01       		.byte	0x1
+ 507 0097 3F       		.uleb128 0x3f
+ 508 0098 19       		.uleb128 0x19
+ 509 0099 03       		.uleb128 0x3
+ 510 009a 0E       		.uleb128 0xe
+ 511 009b 3A       		.uleb128 0x3a
+ 512 009c 0B       		.uleb128 0xb
+ 513 009d 3B       		.uleb128 0x3b
+ 514 009e 0B       		.uleb128 0xb
+ 515 009f 27       		.uleb128 0x27
+ 516 00a0 19       		.uleb128 0x19
+ 517 00a1 49       		.uleb128 0x49
+ 518 00a2 13       		.uleb128 0x13
+ 519 00a3 3C       		.uleb128 0x3c
+ 520 00a4 19       		.uleb128 0x19
+ 521 00a5 01       		.uleb128 0x1
+ 522 00a6 13       		.uleb128 0x13
+ 523 00a7 00       		.byte	0
+ 524 00a8 00       		.byte	0
+ 525 00a9 0C       		.uleb128 0xc
+ 526 00aa 05       		.uleb128 0x5
+ 527 00ab 00       		.byte	0
+ 528 00ac 49       		.uleb128 0x49
+ 529 00ad 13       		.uleb128 0x13
+ 530 00ae 00       		.byte	0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccL0fMTa.s 			page 11
+
+
+ 531 00af 00       		.byte	0
+ 532 00b0 0D       		.uleb128 0xd
+ 533 00b1 18       		.uleb128 0x18
+ 534 00b2 00       		.byte	0
+ 535 00b3 00       		.byte	0
+ 536 00b4 00       		.byte	0
+ 537 00b5 0E       		.uleb128 0xe
+ 538 00b6 0B       		.uleb128 0xb
+ 539 00b7 01       		.byte	0x1
+ 540 00b8 11       		.uleb128 0x11
+ 541 00b9 01       		.uleb128 0x1
+ 542 00ba 12       		.uleb128 0x12
+ 543 00bb 06       		.uleb128 0x6
+ 544 00bc 00       		.byte	0
+ 545 00bd 00       		.byte	0
+ 546 00be 0F       		.uleb128 0xf
+ 547 00bf 2E       		.uleb128 0x2e
+ 548 00c0 01       		.byte	0x1
+ 549 00c1 3F       		.uleb128 0x3f
+ 550 00c2 19       		.uleb128 0x19
+ 551 00c3 03       		.uleb128 0x3
+ 552 00c4 0E       		.uleb128 0xe
+ 553 00c5 3A       		.uleb128 0x3a
+ 554 00c6 0B       		.uleb128 0xb
+ 555 00c7 3B       		.uleb128 0x3b
+ 556 00c8 0B       		.uleb128 0xb
+ 557 00c9 27       		.uleb128 0x27
+ 558 00ca 19       		.uleb128 0x19
+ 559 00cb 49       		.uleb128 0x49
+ 560 00cc 13       		.uleb128 0x13
+ 561 00cd 3C       		.uleb128 0x3c
+ 562 00ce 19       		.uleb128 0x19
+ 563 00cf 00       		.byte	0
+ 564 00d0 00       		.byte	0
+ 565 00d1 10       		.uleb128 0x10
+ 566 00d2 01       		.uleb128 0x1
+ 567 00d3 01       		.byte	0x1
+ 568 00d4 49       		.uleb128 0x49
+ 569 00d5 13       		.uleb128 0x13
+ 570 00d6 01       		.uleb128 0x1
+ 571 00d7 13       		.uleb128 0x13
+ 572 00d8 00       		.byte	0
+ 573 00d9 00       		.byte	0
+ 574 00da 11       		.uleb128 0x11
+ 575 00db 21       		.uleb128 0x21
+ 576 00dc 00       		.byte	0
+ 577 00dd 49       		.uleb128 0x49
+ 578 00de 13       		.uleb128 0x13
+ 579 00df 2F       		.uleb128 0x2f
+ 580 00e0 0B       		.uleb128 0xb
+ 581 00e1 00       		.byte	0
+ 582 00e2 00       		.byte	0
+ 583 00e3 12       		.uleb128 0x12
+ 584 00e4 34       		.uleb128 0x34
+ 585 00e5 00       		.byte	0
+ 586 00e6 03       		.uleb128 0x3
+ 587 00e7 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccL0fMTa.s 			page 12
+
+
+ 588 00e8 3A       		.uleb128 0x3a
+ 589 00e9 0B       		.uleb128 0xb
+ 590 00ea 3B       		.uleb128 0x3b
+ 591 00eb 0B       		.uleb128 0xb
+ 592 00ec 49       		.uleb128 0x49
+ 593 00ed 13       		.uleb128 0x13
+ 594 00ee 3F       		.uleb128 0x3f
+ 595 00ef 19       		.uleb128 0x19
+ 596 00f0 3C       		.uleb128 0x3c
+ 597 00f1 19       		.uleb128 0x19
+ 598 00f2 00       		.byte	0
+ 599 00f3 00       		.byte	0
+ 600 00f4 13       		.uleb128 0x13
+ 601 00f5 34       		.uleb128 0x34
+ 602 00f6 00       		.byte	0
+ 603 00f7 03       		.uleb128 0x3
+ 604 00f8 0E       		.uleb128 0xe
+ 605 00f9 3A       		.uleb128 0x3a
+ 606 00fa 0B       		.uleb128 0xb
+ 607 00fb 3B       		.uleb128 0x3b
+ 608 00fc 05       		.uleb128 0x5
+ 609 00fd 49       		.uleb128 0x49
+ 610 00fe 13       		.uleb128 0x13
+ 611 00ff 3F       		.uleb128 0x3f
+ 612 0100 19       		.uleb128 0x19
+ 613 0101 3C       		.uleb128 0x3c
+ 614 0102 19       		.uleb128 0x19
+ 615 0103 00       		.byte	0
+ 616 0104 00       		.byte	0
+ 617 0105 14       		.uleb128 0x14
+ 618 0106 35       		.uleb128 0x35
+ 619 0107 00       		.byte	0
+ 620 0108 49       		.uleb128 0x49
+ 621 0109 13       		.uleb128 0x13
+ 622 010a 00       		.byte	0
+ 623 010b 00       		.byte	0
+ 624 010c 00       		.byte	0
+ 625              		.section	.debug_aranges,"",%progbits
+ 626 0000 24000000 		.4byte	0x24
+ 627 0004 0200     		.2byte	0x2
+ 628 0006 00000000 		.4byte	.Ldebug_info0
+ 629 000a 04       		.byte	0x4
+ 630 000b 00       		.byte	0
+ 631 000c 0000     		.2byte	0
+ 632 000e 0000     		.2byte	0
+ 633 0010 00000000 		.4byte	.LFB63
+ 634 0014 0C000000 		.4byte	.LFE63-.LFB63
+ 635 0018 00000000 		.4byte	.LFB64
+ 636 001c 9C000000 		.4byte	.LFE64-.LFB64
+ 637 0020 00000000 		.4byte	0
+ 638 0024 00000000 		.4byte	0
+ 639              		.section	.debug_ranges,"",%progbits
+ 640              	.Ldebug_ranges0:
+ 641 0000 00000000 		.4byte	.LFB63
+ 642 0004 0C000000 		.4byte	.LFE63
+ 643 0008 00000000 		.4byte	.LFB64
+ 644 000c 9C000000 		.4byte	.LFE64
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccL0fMTa.s 			page 13
+
+
+ 645 0010 00000000 		.4byte	0
+ 646 0014 00000000 		.4byte	0
+ 647              		.section	.debug_line,"",%progbits
+ 648              	.Ldebug_line0:
+ 649 0000 83010000 		.section	.debug_str,"MS",%progbits,1
+ 649      02005101 
+ 649      00000201 
+ 649      FB0E0D00 
+ 649      01010101 
+ 650              	.LASF6:
+ 651 0000 6C6F6E67 		.ascii	"long long int\000"
+ 651      206C6F6E 
+ 651      6720696E 
+ 651      7400
+ 652              	.LASF16:
+ 653 000e 76616C75 		.ascii	"value\000"
+ 653      6500
+ 654              	.LASF8:
+ 655 0014 756E7369 		.ascii	"unsigned int\000"
+ 655      676E6564 
+ 655      20696E74 
+ 655      00
+ 656              	.LASF26:
+ 657 0021 73707269 		.ascii	"sprintf\000"
+ 657      6E746600 
+ 658              	.LASF19:
+ 659 0029 656E6162 		.ascii	"enableMotor\000"
+ 659      6C654D6F 
+ 659      746F7200 
+ 660              	.LASF5:
+ 661 0035 6C6F6E67 		.ascii	"long unsigned int\000"
+ 661      20756E73 
+ 661      69676E65 
+ 661      6420696E 
+ 661      7400
+ 662              	.LASF7:
+ 663 0047 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 663      206C6F6E 
+ 663      6720756E 
+ 663      7369676E 
+ 663      65642069 
+ 664              	.LASF3:
+ 665 005e 73686F72 		.ascii	"short unsigned int\000"
+ 665      7420756E 
+ 665      7369676E 
+ 665      65642069 
+ 665      6E7400
+ 666              	.LASF21:
+ 667 0071 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 667      43313120 
+ 667      352E342E 
+ 667      31203230 
+ 667      31363036 
+ 668 00a4 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 668      20726576 
+ 668      6973696F 
+ 668      6E203233 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccL0fMTa.s 			page 14
+
+
+ 668      37373135 
+ 669 00d7 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 669      66756E63 
+ 669      74696F6E 
+ 669      2D736563 
+ 669      74696F6E 
+ 670              	.LASF1:
+ 671 00ff 756E7369 		.ascii	"unsigned char\000"
+ 671      676E6564 
+ 671      20636861 
+ 671      7200
+ 672              	.LASF11:
+ 673 010d 646F7562 		.ascii	"double\000"
+ 673      6C6500
+ 674              	.LASF12:
+ 675 0114 63686172 		.ascii	"char\000"
+ 675      00
+ 676              	.LASF23:
+ 677 0119 433A5C55 		.ascii	"C:\\Users\\Albert\\Documents\\6115_fp\\IWP.cydsn\000"
+ 677      73657273 
+ 677      5C416C62 
+ 677      6572745C 
+ 677      446F6375 
+ 678              	.LASF4:
+ 679 0145 6C6F6E67 		.ascii	"long int\000"
+ 679      20696E74 
+ 679      00
+ 680              	.LASF2:
+ 681 014e 73686F72 		.ascii	"short int\000"
+ 681      7420696E 
+ 681      7400
+ 682              	.LASF17:
+ 683 0158 64697265 		.ascii	"direction\000"
+ 683      6374696F 
+ 683      6E00
+ 684              	.LASF18:
+ 685 0162 5F426F6F 		.ascii	"_Bool\000"
+ 685      6C00
+ 686              	.LASF13:
+ 687 0168 6C6F6E67 		.ascii	"long double\000"
+ 687      20646F75 
+ 687      626C6500 
+ 688              	.LASF14:
+ 689 0174 73697A65 		.ascii	"sizetype\000"
+ 689      74797065 
+ 689      00
+ 690              	.LASF20:
+ 691 017d 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 691      52784275 
+ 691      66666572 
+ 691      00
+ 692              	.LASF0:
+ 693 018a 7369676E 		.ascii	"signed char\000"
+ 693      65642063 
+ 693      68617200 
+ 694              	.LASF25:
+ 695 0196 73656E64 		.ascii	"sendValue\000"
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccL0fMTa.s 			page 15
+
+
+ 695      56616C75 
+ 695      6500
+ 696              	.LASF9:
+ 697 01a0 5F5F696E 		.ascii	"__int32_t\000"
+ 697      7433325F 
+ 697      7400
+ 698              	.LASF15:
+ 699 01aa 666C6F61 		.ascii	"float\000"
+ 699      7400
+ 700              	.LASF24:
+ 701 01b0 696E6974 		.ascii	"initUART\000"
+ 701      55415254 
+ 701      00
+ 702              	.LASF10:
+ 703 01b9 696E7433 		.ascii	"int32_t\000"
+ 703      325F7400 
+ 704              	.LASF22:
+ 705 01c1 75617274 		.ascii	"uartUtil.c\000"
+ 705      5574696C 
+ 705      2E6300
+ 706              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

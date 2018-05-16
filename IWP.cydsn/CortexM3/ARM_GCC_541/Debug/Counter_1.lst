@@ -1,0 +1,2319 @@
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"Counter_1.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	Counter_1_initVar
+  20              		.bss
+  21              		.type	Counter_1_initVar, %object
+  22              		.size	Counter_1_initVar, 1
+  23              	Counter_1_initVar:
+  24 0000 00       		.space	1
+  25              		.section	.text.Counter_1_Init,"ax",%progbits
+  26              		.align	2
+  27              		.global	Counter_1_Init
+  28              		.thumb
+  29              		.thumb_func
+  30              		.type	Counter_1_Init, %function
+  31              	Counter_1_Init:
+  32              	.LFB0:
+  33              		.file 1 "Generated_Source\\PSoC5\\Counter_1.c"
+   1:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/Counter_1.c **** * File Name: Counter_1.c  
+   3:Generated_Source\PSoC5/Counter_1.c **** * Version 3.0
+   4:Generated_Source\PSoC5/Counter_1.c **** *
+   5:Generated_Source\PSoC5/Counter_1.c **** *  Description:
+   6:Generated_Source\PSoC5/Counter_1.c **** *     The Counter component consists of a 8, 16, 24 or 32-bit counter with
+   7:Generated_Source\PSoC5/Counter_1.c **** *     a selectable period between 2 and 2^Width - 1.  
+   8:Generated_Source\PSoC5/Counter_1.c **** *
+   9:Generated_Source\PSoC5/Counter_1.c **** *   Note:
+  10:Generated_Source\PSoC5/Counter_1.c **** *     None
+  11:Generated_Source\PSoC5/Counter_1.c **** *
+  12:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+  13:Generated_Source\PSoC5/Counter_1.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  14:Generated_Source\PSoC5/Counter_1.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  15:Generated_Source\PSoC5/Counter_1.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  16:Generated_Source\PSoC5/Counter_1.c **** * the software package with which this file was provided.
+  17:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+  18:Generated_Source\PSoC5/Counter_1.c **** 
+  19:Generated_Source\PSoC5/Counter_1.c **** #include "Counter_1.h"
+  20:Generated_Source\PSoC5/Counter_1.c **** 
+  21:Generated_Source\PSoC5/Counter_1.c **** uint8 Counter_1_initVar = 0u;
+  22:Generated_Source\PSoC5/Counter_1.c **** 
+  23:Generated_Source\PSoC5/Counter_1.c **** 
+  24:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 2
+
+
+  25:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_Init
+  26:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+  27:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+  28:Generated_Source\PSoC5/Counter_1.c **** *     Initialize to the schematic state
+  29:Generated_Source\PSoC5/Counter_1.c **** * 
+  30:Generated_Source\PSoC5/Counter_1.c **** * Parameters:  
+  31:Generated_Source\PSoC5/Counter_1.c **** *  void  
+  32:Generated_Source\PSoC5/Counter_1.c **** *
+  33:Generated_Source\PSoC5/Counter_1.c **** * Return: 
+  34:Generated_Source\PSoC5/Counter_1.c **** *  void
+  35:Generated_Source\PSoC5/Counter_1.c **** *
+  36:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+  37:Generated_Source\PSoC5/Counter_1.c **** void Counter_1_Init(void) 
+  38:Generated_Source\PSoC5/Counter_1.c **** {
+  34              		.loc 1 38 0
+  35              		.cfi_startproc
+  36              		@ args = 0, pretend = 0, frame = 8
+  37              		@ frame_needed = 1, uses_anonymous_args = 0
+  38 0000 80B5     		push	{r7, lr}
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 7, -8
+  41              		.cfi_offset 14, -4
+  42 0002 82B0     		sub	sp, sp, #8
+  43              		.cfi_def_cfa_offset 16
+  44 0004 00AF     		add	r7, sp, #0
+  45              		.cfi_def_cfa_register 7
+  39:Generated_Source\PSoC5/Counter_1.c ****         #if (!Counter_1_UsingFixedFunction && !Counter_1_ControlRegRemoved)
+  40:Generated_Source\PSoC5/Counter_1.c ****             uint8 ctrl;
+  41:Generated_Source\PSoC5/Counter_1.c ****         #endif /* (!Counter_1_UsingFixedFunction && !Counter_1_ControlRegRemoved) */
+  42:Generated_Source\PSoC5/Counter_1.c ****         
+  43:Generated_Source\PSoC5/Counter_1.c ****         #if(!Counter_1_UsingFixedFunction) 
+  44:Generated_Source\PSoC5/Counter_1.c ****             /* Interrupt State Backup for Critical Region*/
+  45:Generated_Source\PSoC5/Counter_1.c ****             uint8 Counter_1_interruptState;
+  46:Generated_Source\PSoC5/Counter_1.c ****         #endif /* (!Counter_1_UsingFixedFunction) */
+  47:Generated_Source\PSoC5/Counter_1.c ****         
+  48:Generated_Source\PSoC5/Counter_1.c ****         #if (Counter_1_UsingFixedFunction)
+  49:Generated_Source\PSoC5/Counter_1.c ****             /* Clear all bits but the enable bit (if it's already set for Timer operation */
+  50:Generated_Source\PSoC5/Counter_1.c ****             Counter_1_CONTROL &= Counter_1_CTRL_ENABLE;
+  51:Generated_Source\PSoC5/Counter_1.c ****             
+  52:Generated_Source\PSoC5/Counter_1.c ****             /* Clear the mode bits for continuous run mode */
+  53:Generated_Source\PSoC5/Counter_1.c ****             #if (CY_PSOC5A)
+  54:Generated_Source\PSoC5/Counter_1.c ****                 Counter_1_CONTROL2 &= ((uint8)(~Counter_1_CTRL_MODE_MASK));
+  55:Generated_Source\PSoC5/Counter_1.c ****             #endif /* (CY_PSOC5A) */
+  56:Generated_Source\PSoC5/Counter_1.c ****             #if (CY_PSOC3 || CY_PSOC5LP)
+  57:Generated_Source\PSoC5/Counter_1.c ****                 Counter_1_CONTROL3 &= ((uint8)(~Counter_1_CTRL_MODE_MASK));                
+  58:Generated_Source\PSoC5/Counter_1.c ****             #endif /* (CY_PSOC3 || CY_PSOC5LP) */
+  59:Generated_Source\PSoC5/Counter_1.c ****             /* Check if One Shot mode is enabled i.e. RunMode !=0*/
+  60:Generated_Source\PSoC5/Counter_1.c ****             #if (Counter_1_RunModeUsed != 0x0u)
+  61:Generated_Source\PSoC5/Counter_1.c ****                 /* Set 3rd bit of Control register to enable one shot mode */
+  62:Generated_Source\PSoC5/Counter_1.c ****                 Counter_1_CONTROL |= Counter_1_ONESHOT;
+  63:Generated_Source\PSoC5/Counter_1.c ****             #endif /* (Counter_1_RunModeUsed != 0x0u) */
+  64:Generated_Source\PSoC5/Counter_1.c ****             
+  65:Generated_Source\PSoC5/Counter_1.c ****             /* Set the IRQ to use the status register interrupts */
+  66:Generated_Source\PSoC5/Counter_1.c ****             Counter_1_CONTROL2 |= Counter_1_CTRL2_IRQ_SEL;
+  67:Generated_Source\PSoC5/Counter_1.c ****             
+  68:Generated_Source\PSoC5/Counter_1.c ****             /* Clear and Set SYNCTC and SYNCCMP bits of RT1 register */
+  69:Generated_Source\PSoC5/Counter_1.c ****             Counter_1_RT1 &= ((uint8)(~Counter_1_RT1_MASK));
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 3
+
+
+  70:Generated_Source\PSoC5/Counter_1.c ****             Counter_1_RT1 |= Counter_1_SYNC;     
+  71:Generated_Source\PSoC5/Counter_1.c ****                     
+  72:Generated_Source\PSoC5/Counter_1.c ****             /*Enable DSI Sync all all inputs of the Timer*/
+  73:Generated_Source\PSoC5/Counter_1.c ****             Counter_1_RT1 &= ((uint8)(~Counter_1_SYNCDSI_MASK));
+  74:Generated_Source\PSoC5/Counter_1.c ****             Counter_1_RT1 |= Counter_1_SYNCDSI_EN;
+  75:Generated_Source\PSoC5/Counter_1.c **** 
+  76:Generated_Source\PSoC5/Counter_1.c ****         #else
+  77:Generated_Source\PSoC5/Counter_1.c ****             #if(!Counter_1_ControlRegRemoved)
+  78:Generated_Source\PSoC5/Counter_1.c ****             /* Set the default compare mode defined in the parameter */
+  79:Generated_Source\PSoC5/Counter_1.c ****             ctrl = Counter_1_CONTROL & ((uint8)(~Counter_1_CTRL_CMPMODE_MASK));
+  46              		.loc 1 79 0
+  47 0006 1D4B     		ldr	r3, .L2
+  48 0008 1B78     		ldrb	r3, [r3]
+  49 000a DBB2     		uxtb	r3, r3
+  50 000c 23F00703 		bic	r3, r3, #7
+  51 0010 FB71     		strb	r3, [r7, #7]
+  80:Generated_Source\PSoC5/Counter_1.c ****             Counter_1_CONTROL = ctrl | Counter_1_DEFAULT_COMPARE_MODE;
+  52              		.loc 1 80 0
+  53 0012 1A4A     		ldr	r2, .L2
+  54 0014 FB79     		ldrb	r3, [r7, #7]
+  55 0016 43F00103 		orr	r3, r3, #1
+  56 001a DBB2     		uxtb	r3, r3
+  57 001c 1370     		strb	r3, [r2]
+  81:Generated_Source\PSoC5/Counter_1.c ****             
+  82:Generated_Source\PSoC5/Counter_1.c ****             /* Set the default capture mode defined in the parameter */
+  83:Generated_Source\PSoC5/Counter_1.c ****             ctrl = Counter_1_CONTROL & ((uint8)(~Counter_1_CTRL_CAPMODE_MASK));
+  58              		.loc 1 83 0
+  59 001e 174B     		ldr	r3, .L2
+  60 0020 1B78     		ldrb	r3, [r3]
+  61 0022 DBB2     		uxtb	r3, r3
+  62 0024 23F00303 		bic	r3, r3, #3
+  63 0028 FB71     		strb	r3, [r7, #7]
+  84:Generated_Source\PSoC5/Counter_1.c ****             
+  85:Generated_Source\PSoC5/Counter_1.c ****             #if( 0 != Counter_1_CAPTURE_MODE_CONF)
+  86:Generated_Source\PSoC5/Counter_1.c ****                 Counter_1_CONTROL = ctrl | Counter_1_DEFAULT_CAPTURE_MODE;
+  87:Generated_Source\PSoC5/Counter_1.c ****             #else
+  88:Generated_Source\PSoC5/Counter_1.c ****                 Counter_1_CONTROL = ctrl;
+  64              		.loc 1 88 0
+  65 002a 144A     		ldr	r2, .L2
+  66 002c FB79     		ldrb	r3, [r7, #7]
+  67 002e 1370     		strb	r3, [r2]
+  89:Generated_Source\PSoC5/Counter_1.c ****             #endif /* 0 != Counter_1_CAPTURE_MODE */ 
+  90:Generated_Source\PSoC5/Counter_1.c ****             
+  91:Generated_Source\PSoC5/Counter_1.c ****             #endif /* (!Counter_1_ControlRegRemoved) */
+  92:Generated_Source\PSoC5/Counter_1.c ****         #endif /* (Counter_1_UsingFixedFunction) */
+  93:Generated_Source\PSoC5/Counter_1.c ****         
+  94:Generated_Source\PSoC5/Counter_1.c ****         /* Clear all data in the FIFO's */
+  95:Generated_Source\PSoC5/Counter_1.c ****         #if (!Counter_1_UsingFixedFunction)
+  96:Generated_Source\PSoC5/Counter_1.c ****             Counter_1_ClearFIFO();
+  68              		.loc 1 96 0
+  69 0030 FFF7FEFF 		bl	Counter_1_ClearFIFO
+  97:Generated_Source\PSoC5/Counter_1.c ****         #endif /* (!Counter_1_UsingFixedFunction) */
+  98:Generated_Source\PSoC5/Counter_1.c ****         
+  99:Generated_Source\PSoC5/Counter_1.c ****         /* Set Initial values from Configuration */
+ 100:Generated_Source\PSoC5/Counter_1.c ****         Counter_1_WritePeriod(Counter_1_INIT_PERIOD_VALUE);
+  70              		.loc 1 100 0
+  71 0034 6FF00100 		mvn	r0, #1
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 4
+
+
+  72 0038 FFF7FEFF 		bl	Counter_1_WritePeriod
+ 101:Generated_Source\PSoC5/Counter_1.c ****         #if (!(Counter_1_UsingFixedFunction && (CY_PSOC5A)))
+ 102:Generated_Source\PSoC5/Counter_1.c ****             Counter_1_WriteCounter(Counter_1_INIT_COUNTER_VALUE);
+  73              		.loc 1 102 0
+  74 003c 0020     		movs	r0, #0
+  75 003e FFF7FEFF 		bl	Counter_1_WriteCounter
+ 103:Generated_Source\PSoC5/Counter_1.c ****         #endif /* (!(Counter_1_UsingFixedFunction && (CY_PSOC5A))) */
+ 104:Generated_Source\PSoC5/Counter_1.c ****         Counter_1_SetInterruptMode(Counter_1_INIT_INTERRUPTS_MASK);
+  76              		.loc 1 104 0
+  77 0042 0020     		movs	r0, #0
+  78 0044 FFF7FEFF 		bl	Counter_1_SetInterruptMode
+ 105:Generated_Source\PSoC5/Counter_1.c ****         
+ 106:Generated_Source\PSoC5/Counter_1.c ****         #if (!Counter_1_UsingFixedFunction)
+ 107:Generated_Source\PSoC5/Counter_1.c ****             /* Read the status register to clear the unwanted interrupts */
+ 108:Generated_Source\PSoC5/Counter_1.c ****             (void)Counter_1_ReadStatusRegister();
+  79              		.loc 1 108 0
+  80 0048 FFF7FEFF 		bl	Counter_1_ReadStatusRegister
+ 109:Generated_Source\PSoC5/Counter_1.c ****             /* Set the compare value (only available to non-fixed function implementation */
+ 110:Generated_Source\PSoC5/Counter_1.c ****             Counter_1_WriteCompare(Counter_1_INIT_COMPARE_VALUE);
+  81              		.loc 1 110 0
+  82 004c 8020     		movs	r0, #128
+  83 004e FFF7FEFF 		bl	Counter_1_WriteCompare
+ 111:Generated_Source\PSoC5/Counter_1.c ****             /* Use the interrupt output of the status register for IRQ output */
+ 112:Generated_Source\PSoC5/Counter_1.c ****             
+ 113:Generated_Source\PSoC5/Counter_1.c ****             /* CyEnterCriticalRegion and CyExitCriticalRegion are used to mark following region cri
+ 114:Generated_Source\PSoC5/Counter_1.c ****             /* Enter Critical Region*/
+ 115:Generated_Source\PSoC5/Counter_1.c ****             Counter_1_interruptState = CyEnterCriticalSection();
+  84              		.loc 1 115 0
+  85 0052 FFF7FEFF 		bl	CyEnterCriticalSection
+  86 0056 0346     		mov	r3, r0
+  87 0058 BB71     		strb	r3, [r7, #6]
+ 116:Generated_Source\PSoC5/Counter_1.c ****             
+ 117:Generated_Source\PSoC5/Counter_1.c ****             Counter_1_STATUS_AUX_CTRL |= Counter_1_STATUS_ACTL_INT_EN_MASK;
+  88              		.loc 1 117 0
+  89 005a 094A     		ldr	r2, .L2+4
+  90 005c 084B     		ldr	r3, .L2+4
+  91 005e 1B78     		ldrb	r3, [r3]
+  92 0060 DBB2     		uxtb	r3, r3
+  93 0062 43F01003 		orr	r3, r3, #16
+  94 0066 DBB2     		uxtb	r3, r3
+  95 0068 1370     		strb	r3, [r2]
+ 118:Generated_Source\PSoC5/Counter_1.c ****             
+ 119:Generated_Source\PSoC5/Counter_1.c ****             /* Exit Critical Region*/
+ 120:Generated_Source\PSoC5/Counter_1.c ****             CyExitCriticalSection(Counter_1_interruptState);
+  96              		.loc 1 120 0
+  97 006a BB79     		ldrb	r3, [r7, #6]	@ zero_extendqisi2
+  98 006c 1846     		mov	r0, r3
+  99 006e FFF7FEFF 		bl	CyExitCriticalSection
+ 121:Generated_Source\PSoC5/Counter_1.c ****             
+ 122:Generated_Source\PSoC5/Counter_1.c ****         #endif /* (!Counter_1_UsingFixedFunction) */
+ 123:Generated_Source\PSoC5/Counter_1.c **** }
+ 100              		.loc 1 123 0
+ 101 0072 00BF     		nop
+ 102 0074 0837     		adds	r7, r7, #8
+ 103              		.cfi_def_cfa_offset 8
+ 104 0076 BD46     		mov	sp, r7
+ 105              		.cfi_def_cfa_register 13
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 5
+
+
+ 106              		@ sp needed
+ 107 0078 80BD     		pop	{r7, pc}
+ 108              	.L3:
+ 109 007a 00BF     		.align	2
+ 110              	.L2:
+ 111 007c 76640040 		.word	1073767542
+ 112 0080 97650040 		.word	1073767831
+ 113              		.cfi_endproc
+ 114              	.LFE0:
+ 115              		.size	Counter_1_Init, .-Counter_1_Init
+ 116              		.section	.text.Counter_1_Enable,"ax",%progbits
+ 117              		.align	2
+ 118              		.global	Counter_1_Enable
+ 119              		.thumb
+ 120              		.thumb_func
+ 121              		.type	Counter_1_Enable, %function
+ 122              	Counter_1_Enable:
+ 123              	.LFB1:
+ 124:Generated_Source\PSoC5/Counter_1.c **** 
+ 125:Generated_Source\PSoC5/Counter_1.c **** 
+ 126:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ 127:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_Enable
+ 128:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 129:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 130:Generated_Source\PSoC5/Counter_1.c **** *     Enable the Counter
+ 131:Generated_Source\PSoC5/Counter_1.c **** * 
+ 132:Generated_Source\PSoC5/Counter_1.c **** * Parameters:  
+ 133:Generated_Source\PSoC5/Counter_1.c **** *  void  
+ 134:Generated_Source\PSoC5/Counter_1.c **** *
+ 135:Generated_Source\PSoC5/Counter_1.c **** * Return: 
+ 136:Generated_Source\PSoC5/Counter_1.c **** *  void
+ 137:Generated_Source\PSoC5/Counter_1.c **** *
+ 138:Generated_Source\PSoC5/Counter_1.c **** * Side Effects: 
+ 139:Generated_Source\PSoC5/Counter_1.c **** *   If the Enable mode is set to Hardware only then this function has no effect 
+ 140:Generated_Source\PSoC5/Counter_1.c **** *   on the operation of the counter.
+ 141:Generated_Source\PSoC5/Counter_1.c **** *
+ 142:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ 143:Generated_Source\PSoC5/Counter_1.c **** void Counter_1_Enable(void) 
+ 144:Generated_Source\PSoC5/Counter_1.c **** {
+ 124              		.loc 1 144 0
+ 125              		.cfi_startproc
+ 126              		@ args = 0, pretend = 0, frame = 0
+ 127              		@ frame_needed = 1, uses_anonymous_args = 0
+ 128              		@ link register save eliminated.
+ 129 0000 80B4     		push	{r7}
+ 130              		.cfi_def_cfa_offset 4
+ 131              		.cfi_offset 7, -4
+ 132 0002 00AF     		add	r7, sp, #0
+ 133              		.cfi_def_cfa_register 7
+ 145:Generated_Source\PSoC5/Counter_1.c ****     /* Globally Enable the Fixed Function Block chosen */
+ 146:Generated_Source\PSoC5/Counter_1.c ****     #if (Counter_1_UsingFixedFunction)
+ 147:Generated_Source\PSoC5/Counter_1.c ****         Counter_1_GLOBAL_ENABLE |= Counter_1_BLOCK_EN_MASK;
+ 148:Generated_Source\PSoC5/Counter_1.c ****         Counter_1_GLOBAL_STBY_ENABLE |= Counter_1_BLOCK_STBY_EN_MASK;
+ 149:Generated_Source\PSoC5/Counter_1.c ****     #endif /* (Counter_1_UsingFixedFunction) */  
+ 150:Generated_Source\PSoC5/Counter_1.c ****         
+ 151:Generated_Source\PSoC5/Counter_1.c ****     /* Enable the counter from the control register  */
+ 152:Generated_Source\PSoC5/Counter_1.c ****     /* If Fixed Function then make sure Mode is set correctly */
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 6
+
+
+ 153:Generated_Source\PSoC5/Counter_1.c ****     /* else make sure reset is clear */
+ 154:Generated_Source\PSoC5/Counter_1.c ****     #if(!Counter_1_ControlRegRemoved || Counter_1_UsingFixedFunction)
+ 155:Generated_Source\PSoC5/Counter_1.c ****         Counter_1_CONTROL |= Counter_1_CTRL_ENABLE;                
+ 134              		.loc 1 155 0
+ 135 0004 054A     		ldr	r2, .L5
+ 136 0006 054B     		ldr	r3, .L5
+ 137 0008 1B78     		ldrb	r3, [r3]
+ 138 000a DBB2     		uxtb	r3, r3
+ 139 000c 63F07F03 		orn	r3, r3, #127
+ 140 0010 DBB2     		uxtb	r3, r3
+ 141 0012 1370     		strb	r3, [r2]
+ 156:Generated_Source\PSoC5/Counter_1.c ****     #endif /* (!Counter_1_ControlRegRemoved || Counter_1_UsingFixedFunction) */
+ 157:Generated_Source\PSoC5/Counter_1.c ****     
+ 158:Generated_Source\PSoC5/Counter_1.c **** }
+ 142              		.loc 1 158 0
+ 143 0014 00BF     		nop
+ 144 0016 BD46     		mov	sp, r7
+ 145              		.cfi_def_cfa_register 13
+ 146              		@ sp needed
+ 147 0018 80BC     		pop	{r7}
+ 148              		.cfi_restore 7
+ 149              		.cfi_def_cfa_offset 0
+ 150 001a 7047     		bx	lr
+ 151              	.L6:
+ 152              		.align	2
+ 153              	.L5:
+ 154 001c 76640040 		.word	1073767542
+ 155              		.cfi_endproc
+ 156              	.LFE1:
+ 157              		.size	Counter_1_Enable, .-Counter_1_Enable
+ 158              		.section	.text.Counter_1_Start,"ax",%progbits
+ 159              		.align	2
+ 160              		.global	Counter_1_Start
+ 161              		.thumb
+ 162              		.thumb_func
+ 163              		.type	Counter_1_Start, %function
+ 164              	Counter_1_Start:
+ 165              	.LFB2:
+ 159:Generated_Source\PSoC5/Counter_1.c **** 
+ 160:Generated_Source\PSoC5/Counter_1.c **** 
+ 161:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ 162:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_Start
+ 163:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 164:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 165:Generated_Source\PSoC5/Counter_1.c **** *  Enables the counter for operation 
+ 166:Generated_Source\PSoC5/Counter_1.c **** *
+ 167:Generated_Source\PSoC5/Counter_1.c **** * Parameters:  
+ 168:Generated_Source\PSoC5/Counter_1.c **** *  void  
+ 169:Generated_Source\PSoC5/Counter_1.c **** *
+ 170:Generated_Source\PSoC5/Counter_1.c **** * Return: 
+ 171:Generated_Source\PSoC5/Counter_1.c **** *  void
+ 172:Generated_Source\PSoC5/Counter_1.c **** *
+ 173:Generated_Source\PSoC5/Counter_1.c **** * Global variables:
+ 174:Generated_Source\PSoC5/Counter_1.c **** *  Counter_1_initVar: Is modified when this function is called for the  
+ 175:Generated_Source\PSoC5/Counter_1.c **** *   first time. Is used to ensure that initialization happens only once.
+ 176:Generated_Source\PSoC5/Counter_1.c **** *
+ 177:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 7
+
+
+ 178:Generated_Source\PSoC5/Counter_1.c **** void Counter_1_Start(void) 
+ 179:Generated_Source\PSoC5/Counter_1.c **** {
+ 166              		.loc 1 179 0
+ 167              		.cfi_startproc
+ 168              		@ args = 0, pretend = 0, frame = 0
+ 169              		@ frame_needed = 1, uses_anonymous_args = 0
+ 170 0000 80B5     		push	{r7, lr}
+ 171              		.cfi_def_cfa_offset 8
+ 172              		.cfi_offset 7, -8
+ 173              		.cfi_offset 14, -4
+ 174 0002 00AF     		add	r7, sp, #0
+ 175              		.cfi_def_cfa_register 7
+ 180:Generated_Source\PSoC5/Counter_1.c ****     if(Counter_1_initVar == 0u)
+ 176              		.loc 1 180 0
+ 177 0004 064B     		ldr	r3, .L9
+ 178 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 179 0008 002B     		cmp	r3, #0
+ 180 000a 04D1     		bne	.L8
+ 181:Generated_Source\PSoC5/Counter_1.c ****     {
+ 182:Generated_Source\PSoC5/Counter_1.c ****         Counter_1_Init();
+ 181              		.loc 1 182 0
+ 182 000c FFF7FEFF 		bl	Counter_1_Init
+ 183:Generated_Source\PSoC5/Counter_1.c ****         
+ 184:Generated_Source\PSoC5/Counter_1.c ****         Counter_1_initVar = 1u; /* Clear this bit for Initialization */        
+ 183              		.loc 1 184 0
+ 184 0010 034B     		ldr	r3, .L9
+ 185 0012 0122     		movs	r2, #1
+ 186 0014 1A70     		strb	r2, [r3]
+ 187              	.L8:
+ 185:Generated_Source\PSoC5/Counter_1.c ****     }
+ 186:Generated_Source\PSoC5/Counter_1.c ****     
+ 187:Generated_Source\PSoC5/Counter_1.c ****     /* Enable the Counter */
+ 188:Generated_Source\PSoC5/Counter_1.c ****     Counter_1_Enable();        
+ 188              		.loc 1 188 0
+ 189 0016 FFF7FEFF 		bl	Counter_1_Enable
+ 189:Generated_Source\PSoC5/Counter_1.c **** }
+ 190              		.loc 1 189 0
+ 191 001a 00BF     		nop
+ 192 001c 80BD     		pop	{r7, pc}
+ 193              	.L10:
+ 194 001e 00BF     		.align	2
+ 195              	.L9:
+ 196 0020 00000000 		.word	Counter_1_initVar
+ 197              		.cfi_endproc
+ 198              	.LFE2:
+ 199              		.size	Counter_1_Start, .-Counter_1_Start
+ 200              		.section	.text.Counter_1_Stop,"ax",%progbits
+ 201              		.align	2
+ 202              		.global	Counter_1_Stop
+ 203              		.thumb
+ 204              		.thumb_func
+ 205              		.type	Counter_1_Stop, %function
+ 206              	Counter_1_Stop:
+ 207              	.LFB3:
+ 190:Generated_Source\PSoC5/Counter_1.c **** 
+ 191:Generated_Source\PSoC5/Counter_1.c **** 
+ 192:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 8
+
+
+ 193:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_Stop
+ 194:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 195:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 196:Generated_Source\PSoC5/Counter_1.c **** * Halts the counter, but does not change any modes or disable interrupts.
+ 197:Generated_Source\PSoC5/Counter_1.c **** *
+ 198:Generated_Source\PSoC5/Counter_1.c **** * Parameters:  
+ 199:Generated_Source\PSoC5/Counter_1.c **** *  void  
+ 200:Generated_Source\PSoC5/Counter_1.c **** *
+ 201:Generated_Source\PSoC5/Counter_1.c **** * Return: 
+ 202:Generated_Source\PSoC5/Counter_1.c **** *  void
+ 203:Generated_Source\PSoC5/Counter_1.c **** *
+ 204:Generated_Source\PSoC5/Counter_1.c **** * Side Effects: If the Enable mode is set to Hardware only then this function
+ 205:Generated_Source\PSoC5/Counter_1.c **** *               has no effect on the operation of the counter.
+ 206:Generated_Source\PSoC5/Counter_1.c **** *
+ 207:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ 208:Generated_Source\PSoC5/Counter_1.c **** void Counter_1_Stop(void) 
+ 209:Generated_Source\PSoC5/Counter_1.c **** {
+ 208              		.loc 1 209 0
+ 209              		.cfi_startproc
+ 210              		@ args = 0, pretend = 0, frame = 0
+ 211              		@ frame_needed = 1, uses_anonymous_args = 0
+ 212              		@ link register save eliminated.
+ 213 0000 80B4     		push	{r7}
+ 214              		.cfi_def_cfa_offset 4
+ 215              		.cfi_offset 7, -4
+ 216 0002 00AF     		add	r7, sp, #0
+ 217              		.cfi_def_cfa_register 7
+ 210:Generated_Source\PSoC5/Counter_1.c ****     /* Disable Counter */
+ 211:Generated_Source\PSoC5/Counter_1.c ****     #if(!Counter_1_ControlRegRemoved || Counter_1_UsingFixedFunction)
+ 212:Generated_Source\PSoC5/Counter_1.c ****         Counter_1_CONTROL &= ((uint8)(~Counter_1_CTRL_ENABLE));        
+ 218              		.loc 1 212 0
+ 219 0004 054A     		ldr	r2, .L12
+ 220 0006 054B     		ldr	r3, .L12
+ 221 0008 1B78     		ldrb	r3, [r3]
+ 222 000a DBB2     		uxtb	r3, r3
+ 223 000c 03F07F03 		and	r3, r3, #127
+ 224 0010 DBB2     		uxtb	r3, r3
+ 225 0012 1370     		strb	r3, [r2]
+ 213:Generated_Source\PSoC5/Counter_1.c ****     #endif /* (!Counter_1_ControlRegRemoved || Counter_1_UsingFixedFunction) */
+ 214:Generated_Source\PSoC5/Counter_1.c ****     
+ 215:Generated_Source\PSoC5/Counter_1.c ****     /* Globally disable the Fixed Function Block chosen */
+ 216:Generated_Source\PSoC5/Counter_1.c ****     #if (Counter_1_UsingFixedFunction)
+ 217:Generated_Source\PSoC5/Counter_1.c ****         Counter_1_GLOBAL_ENABLE &= ((uint8)(~Counter_1_BLOCK_EN_MASK));
+ 218:Generated_Source\PSoC5/Counter_1.c ****         Counter_1_GLOBAL_STBY_ENABLE &= ((uint8)(~Counter_1_BLOCK_STBY_EN_MASK));
+ 219:Generated_Source\PSoC5/Counter_1.c ****     #endif /* (Counter_1_UsingFixedFunction) */
+ 220:Generated_Source\PSoC5/Counter_1.c **** }
+ 226              		.loc 1 220 0
+ 227 0014 00BF     		nop
+ 228 0016 BD46     		mov	sp, r7
+ 229              		.cfi_def_cfa_register 13
+ 230              		@ sp needed
+ 231 0018 80BC     		pop	{r7}
+ 232              		.cfi_restore 7
+ 233              		.cfi_def_cfa_offset 0
+ 234 001a 7047     		bx	lr
+ 235              	.L13:
+ 236              		.align	2
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 9
+
+
+ 237              	.L12:
+ 238 001c 76640040 		.word	1073767542
+ 239              		.cfi_endproc
+ 240              	.LFE3:
+ 241              		.size	Counter_1_Stop, .-Counter_1_Stop
+ 242              		.section	.text.Counter_1_SetInterruptMode,"ax",%progbits
+ 243              		.align	2
+ 244              		.global	Counter_1_SetInterruptMode
+ 245              		.thumb
+ 246              		.thumb_func
+ 247              		.type	Counter_1_SetInterruptMode, %function
+ 248              	Counter_1_SetInterruptMode:
+ 249              	.LFB4:
+ 221:Generated_Source\PSoC5/Counter_1.c **** 
+ 222:Generated_Source\PSoC5/Counter_1.c **** 
+ 223:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ 224:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_SetInterruptMode
+ 225:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 226:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 227:Generated_Source\PSoC5/Counter_1.c **** * Configures which interrupt sources are enabled to generate the final interrupt
+ 228:Generated_Source\PSoC5/Counter_1.c **** *
+ 229:Generated_Source\PSoC5/Counter_1.c **** * Parameters:  
+ 230:Generated_Source\PSoC5/Counter_1.c **** *  InterruptsMask: This parameter is an or'd collection of the status bits
+ 231:Generated_Source\PSoC5/Counter_1.c **** *                   which will be allowed to generate the counters interrupt.   
+ 232:Generated_Source\PSoC5/Counter_1.c **** *
+ 233:Generated_Source\PSoC5/Counter_1.c **** * Return: 
+ 234:Generated_Source\PSoC5/Counter_1.c **** *  void
+ 235:Generated_Source\PSoC5/Counter_1.c **** *
+ 236:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ 237:Generated_Source\PSoC5/Counter_1.c **** void Counter_1_SetInterruptMode(uint8 interruptsMask) 
+ 238:Generated_Source\PSoC5/Counter_1.c **** {
+ 250              		.loc 1 238 0
+ 251              		.cfi_startproc
+ 252              		@ args = 0, pretend = 0, frame = 8
+ 253              		@ frame_needed = 1, uses_anonymous_args = 0
+ 254              		@ link register save eliminated.
+ 255 0000 80B4     		push	{r7}
+ 256              		.cfi_def_cfa_offset 4
+ 257              		.cfi_offset 7, -4
+ 258 0002 83B0     		sub	sp, sp, #12
+ 259              		.cfi_def_cfa_offset 16
+ 260 0004 00AF     		add	r7, sp, #0
+ 261              		.cfi_def_cfa_register 7
+ 262 0006 0346     		mov	r3, r0
+ 263 0008 FB71     		strb	r3, [r7, #7]
+ 239:Generated_Source\PSoC5/Counter_1.c ****     Counter_1_STATUS_MASK = interruptsMask;
+ 264              		.loc 1 239 0
+ 265 000a 044A     		ldr	r2, .L15
+ 266 000c FB79     		ldrb	r3, [r7, #7]
+ 267 000e 1370     		strb	r3, [r2]
+ 240:Generated_Source\PSoC5/Counter_1.c **** }
+ 268              		.loc 1 240 0
+ 269 0010 00BF     		nop
+ 270 0012 0C37     		adds	r7, r7, #12
+ 271              		.cfi_def_cfa_offset 4
+ 272 0014 BD46     		mov	sp, r7
+ 273              		.cfi_def_cfa_register 13
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 10
+
+
+ 274              		@ sp needed
+ 275 0016 80BC     		pop	{r7}
+ 276              		.cfi_restore 7
+ 277              		.cfi_def_cfa_offset 0
+ 278 0018 7047     		bx	lr
+ 279              	.L16:
+ 280 001a 00BF     		.align	2
+ 281              	.L15:
+ 282 001c 87650040 		.word	1073767815
+ 283              		.cfi_endproc
+ 284              	.LFE4:
+ 285              		.size	Counter_1_SetInterruptMode, .-Counter_1_SetInterruptMode
+ 286              		.section	.text.Counter_1_ReadStatusRegister,"ax",%progbits
+ 287              		.align	2
+ 288              		.global	Counter_1_ReadStatusRegister
+ 289              		.thumb
+ 290              		.thumb_func
+ 291              		.type	Counter_1_ReadStatusRegister, %function
+ 292              	Counter_1_ReadStatusRegister:
+ 293              	.LFB5:
+ 241:Generated_Source\PSoC5/Counter_1.c **** 
+ 242:Generated_Source\PSoC5/Counter_1.c **** 
+ 243:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ 244:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_ReadStatusRegister
+ 245:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 246:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 247:Generated_Source\PSoC5/Counter_1.c **** *   Reads the status register and returns it's state. This function should use
+ 248:Generated_Source\PSoC5/Counter_1.c **** *       defined types for the bit-field information as the bits in this
+ 249:Generated_Source\PSoC5/Counter_1.c **** *       register may be permuteable.
+ 250:Generated_Source\PSoC5/Counter_1.c **** *
+ 251:Generated_Source\PSoC5/Counter_1.c **** * Parameters:  
+ 252:Generated_Source\PSoC5/Counter_1.c **** *  void
+ 253:Generated_Source\PSoC5/Counter_1.c **** *
+ 254:Generated_Source\PSoC5/Counter_1.c **** * Return: 
+ 255:Generated_Source\PSoC5/Counter_1.c **** *  (uint8) The contents of the status register
+ 256:Generated_Source\PSoC5/Counter_1.c **** *
+ 257:Generated_Source\PSoC5/Counter_1.c **** * Side Effects:
+ 258:Generated_Source\PSoC5/Counter_1.c **** *   Status register bits may be clear on read. 
+ 259:Generated_Source\PSoC5/Counter_1.c **** *
+ 260:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ 261:Generated_Source\PSoC5/Counter_1.c **** uint8   Counter_1_ReadStatusRegister(void) 
+ 262:Generated_Source\PSoC5/Counter_1.c **** {
+ 294              		.loc 1 262 0
+ 295              		.cfi_startproc
+ 296              		@ args = 0, pretend = 0, frame = 0
+ 297              		@ frame_needed = 1, uses_anonymous_args = 0
+ 298              		@ link register save eliminated.
+ 299 0000 80B4     		push	{r7}
+ 300              		.cfi_def_cfa_offset 4
+ 301              		.cfi_offset 7, -4
+ 302 0002 00AF     		add	r7, sp, #0
+ 303              		.cfi_def_cfa_register 7
+ 263:Generated_Source\PSoC5/Counter_1.c ****     return Counter_1_STATUS;
+ 304              		.loc 1 263 0
+ 305 0004 034B     		ldr	r3, .L19
+ 306 0006 1B78     		ldrb	r3, [r3]
+ 307 0008 DBB2     		uxtb	r3, r3
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 11
+
+
+ 264:Generated_Source\PSoC5/Counter_1.c **** }
+ 308              		.loc 1 264 0
+ 309 000a 1846     		mov	r0, r3
+ 310 000c BD46     		mov	sp, r7
+ 311              		.cfi_def_cfa_register 13
+ 312              		@ sp needed
+ 313 000e 80BC     		pop	{r7}
+ 314              		.cfi_restore 7
+ 315              		.cfi_def_cfa_offset 0
+ 316 0010 7047     		bx	lr
+ 317              	.L20:
+ 318 0012 00BF     		.align	2
+ 319              	.L19:
+ 320 0014 67650040 		.word	1073767783
+ 321              		.cfi_endproc
+ 322              	.LFE5:
+ 323              		.size	Counter_1_ReadStatusRegister, .-Counter_1_ReadStatusRegister
+ 324              		.section	.text.Counter_1_ReadControlRegister,"ax",%progbits
+ 325              		.align	2
+ 326              		.global	Counter_1_ReadControlRegister
+ 327              		.thumb
+ 328              		.thumb_func
+ 329              		.type	Counter_1_ReadControlRegister, %function
+ 330              	Counter_1_ReadControlRegister:
+ 331              	.LFB6:
+ 265:Generated_Source\PSoC5/Counter_1.c **** 
+ 266:Generated_Source\PSoC5/Counter_1.c **** 
+ 267:Generated_Source\PSoC5/Counter_1.c **** #if(!Counter_1_ControlRegRemoved)
+ 268:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ 269:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_ReadControlRegister
+ 270:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 271:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 272:Generated_Source\PSoC5/Counter_1.c **** *   Reads the control register and returns it's state. This function should use
+ 273:Generated_Source\PSoC5/Counter_1.c **** *       defined types for the bit-field information as the bits in this
+ 274:Generated_Source\PSoC5/Counter_1.c **** *       register may be permuteable.
+ 275:Generated_Source\PSoC5/Counter_1.c **** *
+ 276:Generated_Source\PSoC5/Counter_1.c **** * Parameters:  
+ 277:Generated_Source\PSoC5/Counter_1.c **** *  void
+ 278:Generated_Source\PSoC5/Counter_1.c **** *
+ 279:Generated_Source\PSoC5/Counter_1.c **** * Return: 
+ 280:Generated_Source\PSoC5/Counter_1.c **** *  (uint8) The contents of the control register
+ 281:Generated_Source\PSoC5/Counter_1.c **** *
+ 282:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ 283:Generated_Source\PSoC5/Counter_1.c **** uint8   Counter_1_ReadControlRegister(void) 
+ 284:Generated_Source\PSoC5/Counter_1.c **** {
+ 332              		.loc 1 284 0
+ 333              		.cfi_startproc
+ 334              		@ args = 0, pretend = 0, frame = 0
+ 335              		@ frame_needed = 1, uses_anonymous_args = 0
+ 336              		@ link register save eliminated.
+ 337 0000 80B4     		push	{r7}
+ 338              		.cfi_def_cfa_offset 4
+ 339              		.cfi_offset 7, -4
+ 340 0002 00AF     		add	r7, sp, #0
+ 341              		.cfi_def_cfa_register 7
+ 285:Generated_Source\PSoC5/Counter_1.c ****     return Counter_1_CONTROL;
+ 342              		.loc 1 285 0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 12
+
+
+ 343 0004 034B     		ldr	r3, .L23
+ 344 0006 1B78     		ldrb	r3, [r3]
+ 345 0008 DBB2     		uxtb	r3, r3
+ 286:Generated_Source\PSoC5/Counter_1.c **** }
+ 346              		.loc 1 286 0
+ 347 000a 1846     		mov	r0, r3
+ 348 000c BD46     		mov	sp, r7
+ 349              		.cfi_def_cfa_register 13
+ 350              		@ sp needed
+ 351 000e 80BC     		pop	{r7}
+ 352              		.cfi_restore 7
+ 353              		.cfi_def_cfa_offset 0
+ 354 0010 7047     		bx	lr
+ 355              	.L24:
+ 356 0012 00BF     		.align	2
+ 357              	.L23:
+ 358 0014 76640040 		.word	1073767542
+ 359              		.cfi_endproc
+ 360              	.LFE6:
+ 361              		.size	Counter_1_ReadControlRegister, .-Counter_1_ReadControlRegister
+ 362              		.section	.text.Counter_1_WriteControlRegister,"ax",%progbits
+ 363              		.align	2
+ 364              		.global	Counter_1_WriteControlRegister
+ 365              		.thumb
+ 366              		.thumb_func
+ 367              		.type	Counter_1_WriteControlRegister, %function
+ 368              	Counter_1_WriteControlRegister:
+ 369              	.LFB7:
+ 287:Generated_Source\PSoC5/Counter_1.c **** 
+ 288:Generated_Source\PSoC5/Counter_1.c **** 
+ 289:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ 290:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_WriteControlRegister
+ 291:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 292:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 293:Generated_Source\PSoC5/Counter_1.c **** *   Sets the bit-field of the control register.  This function should use
+ 294:Generated_Source\PSoC5/Counter_1.c **** *       defined types for the bit-field information as the bits in this
+ 295:Generated_Source\PSoC5/Counter_1.c **** *       register may be permuteable.
+ 296:Generated_Source\PSoC5/Counter_1.c **** *
+ 297:Generated_Source\PSoC5/Counter_1.c **** * Parameters:  
+ 298:Generated_Source\PSoC5/Counter_1.c **** *  void
+ 299:Generated_Source\PSoC5/Counter_1.c **** *
+ 300:Generated_Source\PSoC5/Counter_1.c **** * Return: 
+ 301:Generated_Source\PSoC5/Counter_1.c **** *  (uint8) The contents of the control register
+ 302:Generated_Source\PSoC5/Counter_1.c **** *
+ 303:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ 304:Generated_Source\PSoC5/Counter_1.c **** void    Counter_1_WriteControlRegister(uint8 control) 
+ 305:Generated_Source\PSoC5/Counter_1.c **** {
+ 370              		.loc 1 305 0
+ 371              		.cfi_startproc
+ 372              		@ args = 0, pretend = 0, frame = 8
+ 373              		@ frame_needed = 1, uses_anonymous_args = 0
+ 374              		@ link register save eliminated.
+ 375 0000 80B4     		push	{r7}
+ 376              		.cfi_def_cfa_offset 4
+ 377              		.cfi_offset 7, -4
+ 378 0002 83B0     		sub	sp, sp, #12
+ 379              		.cfi_def_cfa_offset 16
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 13
+
+
+ 380 0004 00AF     		add	r7, sp, #0
+ 381              		.cfi_def_cfa_register 7
+ 382 0006 0346     		mov	r3, r0
+ 383 0008 FB71     		strb	r3, [r7, #7]
+ 306:Generated_Source\PSoC5/Counter_1.c ****     Counter_1_CONTROL = control;
+ 384              		.loc 1 306 0
+ 385 000a 044A     		ldr	r2, .L26
+ 386 000c FB79     		ldrb	r3, [r7, #7]
+ 387 000e 1370     		strb	r3, [r2]
+ 307:Generated_Source\PSoC5/Counter_1.c **** }
+ 388              		.loc 1 307 0
+ 389 0010 00BF     		nop
+ 390 0012 0C37     		adds	r7, r7, #12
+ 391              		.cfi_def_cfa_offset 4
+ 392 0014 BD46     		mov	sp, r7
+ 393              		.cfi_def_cfa_register 13
+ 394              		@ sp needed
+ 395 0016 80BC     		pop	{r7}
+ 396              		.cfi_restore 7
+ 397              		.cfi_def_cfa_offset 0
+ 398 0018 7047     		bx	lr
+ 399              	.L27:
+ 400 001a 00BF     		.align	2
+ 401              	.L26:
+ 402 001c 76640040 		.word	1073767542
+ 403              		.cfi_endproc
+ 404              	.LFE7:
+ 405              		.size	Counter_1_WriteControlRegister, .-Counter_1_WriteControlRegister
+ 406              		.section	.text.Counter_1_WriteCounter,"ax",%progbits
+ 407              		.align	2
+ 408              		.global	Counter_1_WriteCounter
+ 409              		.thumb
+ 410              		.thumb_func
+ 411              		.type	Counter_1_WriteCounter, %function
+ 412              	Counter_1_WriteCounter:
+ 413              	.LFB8:
+ 308:Generated_Source\PSoC5/Counter_1.c **** 
+ 309:Generated_Source\PSoC5/Counter_1.c **** #endif  /* (!Counter_1_ControlRegRemoved) */
+ 310:Generated_Source\PSoC5/Counter_1.c **** 
+ 311:Generated_Source\PSoC5/Counter_1.c **** 
+ 312:Generated_Source\PSoC5/Counter_1.c **** #if (!(Counter_1_UsingFixedFunction && (CY_PSOC5A)))
+ 313:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ 314:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_WriteCounter
+ 315:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 316:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 317:Generated_Source\PSoC5/Counter_1.c **** *   This funtion is used to set the counter to a specific value
+ 318:Generated_Source\PSoC5/Counter_1.c **** *
+ 319:Generated_Source\PSoC5/Counter_1.c **** * Parameters:  
+ 320:Generated_Source\PSoC5/Counter_1.c **** *  counter:  New counter value. 
+ 321:Generated_Source\PSoC5/Counter_1.c **** *
+ 322:Generated_Source\PSoC5/Counter_1.c **** * Return: 
+ 323:Generated_Source\PSoC5/Counter_1.c **** *  void 
+ 324:Generated_Source\PSoC5/Counter_1.c **** *
+ 325:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ 326:Generated_Source\PSoC5/Counter_1.c **** void Counter_1_WriteCounter(uint32 counter) \
+ 327:Generated_Source\PSoC5/Counter_1.c ****                                    
+ 328:Generated_Source\PSoC5/Counter_1.c **** {
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 14
+
+
+ 414              		.loc 1 328 0
+ 415              		.cfi_startproc
+ 416              		@ args = 0, pretend = 0, frame = 8
+ 417              		@ frame_needed = 1, uses_anonymous_args = 0
+ 418              		@ link register save eliminated.
+ 419 0000 80B4     		push	{r7}
+ 420              		.cfi_def_cfa_offset 4
+ 421              		.cfi_offset 7, -4
+ 422 0002 83B0     		sub	sp, sp, #12
+ 423              		.cfi_def_cfa_offset 16
+ 424 0004 00AF     		add	r7, sp, #0
+ 425              		.cfi_def_cfa_register 7
+ 426 0006 7860     		str	r0, [r7, #4]
+ 329:Generated_Source\PSoC5/Counter_1.c ****     #if(Counter_1_UsingFixedFunction)
+ 330:Generated_Source\PSoC5/Counter_1.c ****         /* assert if block is already enabled */
+ 331:Generated_Source\PSoC5/Counter_1.c ****         CYASSERT (0u == (Counter_1_GLOBAL_ENABLE & Counter_1_BLOCK_EN_MASK));
+ 332:Generated_Source\PSoC5/Counter_1.c ****         /* If block is disabled, enable it and then write the counter */
+ 333:Generated_Source\PSoC5/Counter_1.c ****         Counter_1_GLOBAL_ENABLE |= Counter_1_BLOCK_EN_MASK;
+ 334:Generated_Source\PSoC5/Counter_1.c ****         CY_SET_REG16(Counter_1_COUNTER_LSB_PTR, (uint16)counter);
+ 335:Generated_Source\PSoC5/Counter_1.c ****         Counter_1_GLOBAL_ENABLE &= ((uint8)(~Counter_1_BLOCK_EN_MASK));
+ 336:Generated_Source\PSoC5/Counter_1.c ****     #else
+ 337:Generated_Source\PSoC5/Counter_1.c ****         CY_SET_REG32(Counter_1_COUNTER_LSB_PTR, counter);
+ 427              		.loc 1 337 0
+ 428 0008 034A     		ldr	r2, .L29
+ 429 000a 7B68     		ldr	r3, [r7, #4]
+ 430 000c 1360     		str	r3, [r2]
+ 338:Generated_Source\PSoC5/Counter_1.c ****     #endif /* (Counter_1_UsingFixedFunction) */
+ 339:Generated_Source\PSoC5/Counter_1.c **** }
+ 431              		.loc 1 339 0
+ 432 000e 00BF     		nop
+ 433 0010 0C37     		adds	r7, r7, #12
+ 434              		.cfi_def_cfa_offset 4
+ 435 0012 BD46     		mov	sp, r7
+ 436              		.cfi_def_cfa_register 13
+ 437              		@ sp needed
+ 438 0014 80BC     		pop	{r7}
+ 439              		.cfi_restore 7
+ 440              		.cfi_def_cfa_offset 0
+ 441 0016 7047     		bx	lr
+ 442              	.L30:
+ 443              		.align	2
+ 444              	.L29:
+ 445 0018 04650040 		.word	1073767684
+ 446              		.cfi_endproc
+ 447              	.LFE8:
+ 448              		.size	Counter_1_WriteCounter, .-Counter_1_WriteCounter
+ 449              		.section	.text.Counter_1_ReadCounter,"ax",%progbits
+ 450              		.align	2
+ 451              		.global	Counter_1_ReadCounter
+ 452              		.thumb
+ 453              		.thumb_func
+ 454              		.type	Counter_1_ReadCounter, %function
+ 455              	Counter_1_ReadCounter:
+ 456              	.LFB9:
+ 340:Generated_Source\PSoC5/Counter_1.c **** #endif /* (!(Counter_1_UsingFixedFunction && (CY_PSOC5A))) */
+ 341:Generated_Source\PSoC5/Counter_1.c **** 
+ 342:Generated_Source\PSoC5/Counter_1.c **** 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 15
+
+
+ 343:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ 344:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_ReadCounter
+ 345:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 346:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 347:Generated_Source\PSoC5/Counter_1.c **** * Returns the current value of the counter.  It doesn't matter
+ 348:Generated_Source\PSoC5/Counter_1.c **** * if the counter is enabled or running.
+ 349:Generated_Source\PSoC5/Counter_1.c **** *
+ 350:Generated_Source\PSoC5/Counter_1.c **** * Parameters:  
+ 351:Generated_Source\PSoC5/Counter_1.c **** *  void:  
+ 352:Generated_Source\PSoC5/Counter_1.c **** *
+ 353:Generated_Source\PSoC5/Counter_1.c **** * Return: 
+ 354:Generated_Source\PSoC5/Counter_1.c **** *  (uint32) The present value of the counter.
+ 355:Generated_Source\PSoC5/Counter_1.c **** *
+ 356:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ 357:Generated_Source\PSoC5/Counter_1.c **** uint32 Counter_1_ReadCounter(void) 
+ 358:Generated_Source\PSoC5/Counter_1.c **** {
+ 457              		.loc 1 358 0
+ 458              		.cfi_startproc
+ 459              		@ args = 0, pretend = 0, frame = 0
+ 460              		@ frame_needed = 1, uses_anonymous_args = 0
+ 461              		@ link register save eliminated.
+ 462 0000 80B4     		push	{r7}
+ 463              		.cfi_def_cfa_offset 4
+ 464              		.cfi_offset 7, -4
+ 465 0002 00AF     		add	r7, sp, #0
+ 466              		.cfi_def_cfa_register 7
+ 359:Generated_Source\PSoC5/Counter_1.c ****     /* Force capture by reading Accumulator */
+ 360:Generated_Source\PSoC5/Counter_1.c ****     /* Must first do a software capture to be able to read the counter */
+ 361:Generated_Source\PSoC5/Counter_1.c ****     /* It is up to the user code to make sure there isn't already captured data in the FIFO */
+ 362:Generated_Source\PSoC5/Counter_1.c ****     #if(Counter_1_UsingFixedFunction)
+ 363:Generated_Source\PSoC5/Counter_1.c **** 		(void)CY_GET_REG16(Counter_1_COUNTER_LSB_PTR);
+ 364:Generated_Source\PSoC5/Counter_1.c **** 	#else
+ 365:Generated_Source\PSoC5/Counter_1.c **** 		(void)CY_GET_REG8(Counter_1_COUNTER_LSB_PTR_8BIT);
+ 467              		.loc 1 365 0
+ 468 0004 034B     		ldr	r3, .L33
+ 469 0006 1B78     		ldrb	r3, [r3]
+ 366:Generated_Source\PSoC5/Counter_1.c **** 	#endif/* (Counter_1_UsingFixedFunction) */
+ 367:Generated_Source\PSoC5/Counter_1.c ****     
+ 368:Generated_Source\PSoC5/Counter_1.c ****     /* Read the data from the FIFO (or capture register for Fixed Function)*/
+ 369:Generated_Source\PSoC5/Counter_1.c ****     #if(Counter_1_UsingFixedFunction)
+ 370:Generated_Source\PSoC5/Counter_1.c ****         return ((uint32)CY_GET_REG16(Counter_1_STATICCOUNT_LSB_PTR));
+ 371:Generated_Source\PSoC5/Counter_1.c ****     #else
+ 372:Generated_Source\PSoC5/Counter_1.c ****         return (CY_GET_REG32(Counter_1_STATICCOUNT_LSB_PTR));
+ 470              		.loc 1 372 0
+ 471 0008 034B     		ldr	r3, .L33+4
+ 472 000a 1B68     		ldr	r3, [r3]
+ 373:Generated_Source\PSoC5/Counter_1.c ****     #endif /* (Counter_1_UsingFixedFunction) */
+ 374:Generated_Source\PSoC5/Counter_1.c **** }
+ 473              		.loc 1 374 0
+ 474 000c 1846     		mov	r0, r3
+ 475 000e BD46     		mov	sp, r7
+ 476              		.cfi_def_cfa_register 13
+ 477              		@ sp needed
+ 478 0010 80BC     		pop	{r7}
+ 479              		.cfi_restore 7
+ 480              		.cfi_def_cfa_offset 0
+ 481 0012 7047     		bx	lr
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 16
+
+
+ 482              	.L34:
+ 483              		.align	2
+ 484              	.L33:
+ 485 0014 04650040 		.word	1073767684
+ 486 0018 44650040 		.word	1073767748
+ 487              		.cfi_endproc
+ 488              	.LFE9:
+ 489              		.size	Counter_1_ReadCounter, .-Counter_1_ReadCounter
+ 490              		.section	.text.Counter_1_ReadCapture,"ax",%progbits
+ 491              		.align	2
+ 492              		.global	Counter_1_ReadCapture
+ 493              		.thumb
+ 494              		.thumb_func
+ 495              		.type	Counter_1_ReadCapture, %function
+ 496              	Counter_1_ReadCapture:
+ 497              	.LFB10:
+ 375:Generated_Source\PSoC5/Counter_1.c **** 
+ 376:Generated_Source\PSoC5/Counter_1.c **** 
+ 377:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ 378:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_ReadCapture
+ 379:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 380:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 381:Generated_Source\PSoC5/Counter_1.c **** *   This function returns the last value captured.
+ 382:Generated_Source\PSoC5/Counter_1.c **** *
+ 383:Generated_Source\PSoC5/Counter_1.c **** * Parameters:  
+ 384:Generated_Source\PSoC5/Counter_1.c **** *  void
+ 385:Generated_Source\PSoC5/Counter_1.c **** *
+ 386:Generated_Source\PSoC5/Counter_1.c **** * Return: 
+ 387:Generated_Source\PSoC5/Counter_1.c **** *  (uint32) Present Capture value.
+ 388:Generated_Source\PSoC5/Counter_1.c **** *
+ 389:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ 390:Generated_Source\PSoC5/Counter_1.c **** uint32 Counter_1_ReadCapture(void) 
+ 391:Generated_Source\PSoC5/Counter_1.c **** {
+ 498              		.loc 1 391 0
+ 499              		.cfi_startproc
+ 500              		@ args = 0, pretend = 0, frame = 0
+ 501              		@ frame_needed = 1, uses_anonymous_args = 0
+ 502              		@ link register save eliminated.
+ 503 0000 80B4     		push	{r7}
+ 504              		.cfi_def_cfa_offset 4
+ 505              		.cfi_offset 7, -4
+ 506 0002 00AF     		add	r7, sp, #0
+ 507              		.cfi_def_cfa_register 7
+ 392:Generated_Source\PSoC5/Counter_1.c ****     #if(Counter_1_UsingFixedFunction)
+ 393:Generated_Source\PSoC5/Counter_1.c ****         return ((uint32)CY_GET_REG16(Counter_1_STATICCOUNT_LSB_PTR));
+ 394:Generated_Source\PSoC5/Counter_1.c ****     #else
+ 395:Generated_Source\PSoC5/Counter_1.c ****         return (CY_GET_REG32(Counter_1_STATICCOUNT_LSB_PTR));
+ 508              		.loc 1 395 0
+ 509 0004 024B     		ldr	r3, .L37
+ 510 0006 1B68     		ldr	r3, [r3]
+ 396:Generated_Source\PSoC5/Counter_1.c ****     #endif /* (Counter_1_UsingFixedFunction) */
+ 397:Generated_Source\PSoC5/Counter_1.c **** }
+ 511              		.loc 1 397 0
+ 512 0008 1846     		mov	r0, r3
+ 513 000a BD46     		mov	sp, r7
+ 514              		.cfi_def_cfa_register 13
+ 515              		@ sp needed
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 17
+
+
+ 516 000c 80BC     		pop	{r7}
+ 517              		.cfi_restore 7
+ 518              		.cfi_def_cfa_offset 0
+ 519 000e 7047     		bx	lr
+ 520              	.L38:
+ 521              		.align	2
+ 522              	.L37:
+ 523 0010 44650040 		.word	1073767748
+ 524              		.cfi_endproc
+ 525              	.LFE10:
+ 526              		.size	Counter_1_ReadCapture, .-Counter_1_ReadCapture
+ 527              		.section	.text.Counter_1_WritePeriod,"ax",%progbits
+ 528              		.align	2
+ 529              		.global	Counter_1_WritePeriod
+ 530              		.thumb
+ 531              		.thumb_func
+ 532              		.type	Counter_1_WritePeriod, %function
+ 533              	Counter_1_WritePeriod:
+ 534              	.LFB11:
+ 398:Generated_Source\PSoC5/Counter_1.c **** 
+ 399:Generated_Source\PSoC5/Counter_1.c **** 
+ 400:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ 401:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_WritePeriod
+ 402:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 403:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 404:Generated_Source\PSoC5/Counter_1.c **** * Changes the period of the counter.  The new period 
+ 405:Generated_Source\PSoC5/Counter_1.c **** * will be loaded the next time terminal count is detected.
+ 406:Generated_Source\PSoC5/Counter_1.c **** *
+ 407:Generated_Source\PSoC5/Counter_1.c **** * Parameters:  
+ 408:Generated_Source\PSoC5/Counter_1.c **** *  period: (uint32) A value of 0 will result in
+ 409:Generated_Source\PSoC5/Counter_1.c **** *         the counter remaining at zero.  
+ 410:Generated_Source\PSoC5/Counter_1.c **** *
+ 411:Generated_Source\PSoC5/Counter_1.c **** * Return: 
+ 412:Generated_Source\PSoC5/Counter_1.c **** *  void
+ 413:Generated_Source\PSoC5/Counter_1.c **** *
+ 414:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ 415:Generated_Source\PSoC5/Counter_1.c **** void Counter_1_WritePeriod(uint32 period) 
+ 416:Generated_Source\PSoC5/Counter_1.c **** {
+ 535              		.loc 1 416 0
+ 536              		.cfi_startproc
+ 537              		@ args = 0, pretend = 0, frame = 8
+ 538              		@ frame_needed = 1, uses_anonymous_args = 0
+ 539              		@ link register save eliminated.
+ 540 0000 80B4     		push	{r7}
+ 541              		.cfi_def_cfa_offset 4
+ 542              		.cfi_offset 7, -4
+ 543 0002 83B0     		sub	sp, sp, #12
+ 544              		.cfi_def_cfa_offset 16
+ 545 0004 00AF     		add	r7, sp, #0
+ 546              		.cfi_def_cfa_register 7
+ 547 0006 7860     		str	r0, [r7, #4]
+ 417:Generated_Source\PSoC5/Counter_1.c ****     #if(Counter_1_UsingFixedFunction)
+ 418:Generated_Source\PSoC5/Counter_1.c ****         CY_SET_REG16(Counter_1_PERIOD_LSB_PTR,(uint16)period);
+ 419:Generated_Source\PSoC5/Counter_1.c ****     #else
+ 420:Generated_Source\PSoC5/Counter_1.c ****         CY_SET_REG32(Counter_1_PERIOD_LSB_PTR, period);
+ 548              		.loc 1 420 0
+ 549 0008 034A     		ldr	r2, .L40
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 18
+
+
+ 550 000a 7B68     		ldr	r3, [r7, #4]
+ 551 000c 1360     		str	r3, [r2]
+ 421:Generated_Source\PSoC5/Counter_1.c ****     #endif /* (Counter_1_UsingFixedFunction) */
+ 422:Generated_Source\PSoC5/Counter_1.c **** }
+ 552              		.loc 1 422 0
+ 553 000e 00BF     		nop
+ 554 0010 0C37     		adds	r7, r7, #12
+ 555              		.cfi_def_cfa_offset 4
+ 556 0012 BD46     		mov	sp, r7
+ 557              		.cfi_def_cfa_register 13
+ 558              		@ sp needed
+ 559 0014 80BC     		pop	{r7}
+ 560              		.cfi_restore 7
+ 561              		.cfi_def_cfa_offset 0
+ 562 0016 7047     		bx	lr
+ 563              	.L41:
+ 564              		.align	2
+ 565              	.L40:
+ 566 0018 24650040 		.word	1073767716
+ 567              		.cfi_endproc
+ 568              	.LFE11:
+ 569              		.size	Counter_1_WritePeriod, .-Counter_1_WritePeriod
+ 570              		.section	.text.Counter_1_ReadPeriod,"ax",%progbits
+ 571              		.align	2
+ 572              		.global	Counter_1_ReadPeriod
+ 573              		.thumb
+ 574              		.thumb_func
+ 575              		.type	Counter_1_ReadPeriod, %function
+ 576              	Counter_1_ReadPeriod:
+ 577              	.LFB12:
+ 423:Generated_Source\PSoC5/Counter_1.c **** 
+ 424:Generated_Source\PSoC5/Counter_1.c **** 
+ 425:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ 426:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_ReadPeriod
+ 427:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 428:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 429:Generated_Source\PSoC5/Counter_1.c **** * Reads the current period value without affecting counter operation.
+ 430:Generated_Source\PSoC5/Counter_1.c **** *
+ 431:Generated_Source\PSoC5/Counter_1.c **** * Parameters:  
+ 432:Generated_Source\PSoC5/Counter_1.c **** *  void:  
+ 433:Generated_Source\PSoC5/Counter_1.c **** *
+ 434:Generated_Source\PSoC5/Counter_1.c **** * Return: 
+ 435:Generated_Source\PSoC5/Counter_1.c **** *  (uint32) Present period value.
+ 436:Generated_Source\PSoC5/Counter_1.c **** *
+ 437:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ 438:Generated_Source\PSoC5/Counter_1.c **** uint32 Counter_1_ReadPeriod(void) 
+ 439:Generated_Source\PSoC5/Counter_1.c **** {
+ 578              		.loc 1 439 0
+ 579              		.cfi_startproc
+ 580              		@ args = 0, pretend = 0, frame = 0
+ 581              		@ frame_needed = 1, uses_anonymous_args = 0
+ 582              		@ link register save eliminated.
+ 583 0000 80B4     		push	{r7}
+ 584              		.cfi_def_cfa_offset 4
+ 585              		.cfi_offset 7, -4
+ 586 0002 00AF     		add	r7, sp, #0
+ 587              		.cfi_def_cfa_register 7
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 19
+
+
+ 440:Generated_Source\PSoC5/Counter_1.c ****     #if(Counter_1_UsingFixedFunction)
+ 441:Generated_Source\PSoC5/Counter_1.c ****         return ((uint32)CY_GET_REG16(Counter_1_PERIOD_LSB_PTR));
+ 442:Generated_Source\PSoC5/Counter_1.c ****     #else
+ 443:Generated_Source\PSoC5/Counter_1.c ****         return (CY_GET_REG32(Counter_1_PERIOD_LSB_PTR));
+ 588              		.loc 1 443 0
+ 589 0004 024B     		ldr	r3, .L44
+ 590 0006 1B68     		ldr	r3, [r3]
+ 444:Generated_Source\PSoC5/Counter_1.c ****     #endif /* (Counter_1_UsingFixedFunction) */
+ 445:Generated_Source\PSoC5/Counter_1.c **** }
+ 591              		.loc 1 445 0
+ 592 0008 1846     		mov	r0, r3
+ 593 000a BD46     		mov	sp, r7
+ 594              		.cfi_def_cfa_register 13
+ 595              		@ sp needed
+ 596 000c 80BC     		pop	{r7}
+ 597              		.cfi_restore 7
+ 598              		.cfi_def_cfa_offset 0
+ 599 000e 7047     		bx	lr
+ 600              	.L45:
+ 601              		.align	2
+ 602              	.L44:
+ 603 0010 24650040 		.word	1073767716
+ 604              		.cfi_endproc
+ 605              	.LFE12:
+ 606              		.size	Counter_1_ReadPeriod, .-Counter_1_ReadPeriod
+ 607              		.section	.text.Counter_1_WriteCompare,"ax",%progbits
+ 608              		.align	2
+ 609              		.global	Counter_1_WriteCompare
+ 610              		.thumb
+ 611              		.thumb_func
+ 612              		.type	Counter_1_WriteCompare, %function
+ 613              	Counter_1_WriteCompare:
+ 614              	.LFB13:
+ 446:Generated_Source\PSoC5/Counter_1.c **** 
+ 447:Generated_Source\PSoC5/Counter_1.c **** 
+ 448:Generated_Source\PSoC5/Counter_1.c **** #if (!Counter_1_UsingFixedFunction)
+ 449:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ 450:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_WriteCompare
+ 451:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 452:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 453:Generated_Source\PSoC5/Counter_1.c **** * Changes the compare value.  The compare output will 
+ 454:Generated_Source\PSoC5/Counter_1.c **** * reflect the new value on the next UDB clock.  The compare output will be 
+ 455:Generated_Source\PSoC5/Counter_1.c **** * driven high when the present counter value compares true based on the 
+ 456:Generated_Source\PSoC5/Counter_1.c **** * configured compare mode setting. 
+ 457:Generated_Source\PSoC5/Counter_1.c **** *
+ 458:Generated_Source\PSoC5/Counter_1.c **** * Parameters:  
+ 459:Generated_Source\PSoC5/Counter_1.c **** *  Compare:  New compare value. 
+ 460:Generated_Source\PSoC5/Counter_1.c **** *
+ 461:Generated_Source\PSoC5/Counter_1.c **** * Return: 
+ 462:Generated_Source\PSoC5/Counter_1.c **** *  void
+ 463:Generated_Source\PSoC5/Counter_1.c **** *
+ 464:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ 465:Generated_Source\PSoC5/Counter_1.c **** void Counter_1_WriteCompare(uint32 compare) \
+ 466:Generated_Source\PSoC5/Counter_1.c ****                                    
+ 467:Generated_Source\PSoC5/Counter_1.c **** {
+ 615              		.loc 1 467 0
+ 616              		.cfi_startproc
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 20
+
+
+ 617              		@ args = 0, pretend = 0, frame = 8
+ 618              		@ frame_needed = 1, uses_anonymous_args = 0
+ 619              		@ link register save eliminated.
+ 620 0000 80B4     		push	{r7}
+ 621              		.cfi_def_cfa_offset 4
+ 622              		.cfi_offset 7, -4
+ 623 0002 83B0     		sub	sp, sp, #12
+ 624              		.cfi_def_cfa_offset 16
+ 625 0004 00AF     		add	r7, sp, #0
+ 626              		.cfi_def_cfa_register 7
+ 627 0006 7860     		str	r0, [r7, #4]
+ 468:Generated_Source\PSoC5/Counter_1.c ****     #if(Counter_1_UsingFixedFunction)
+ 469:Generated_Source\PSoC5/Counter_1.c ****         CY_SET_REG16(Counter_1_COMPARE_LSB_PTR, (uint16)compare);
+ 470:Generated_Source\PSoC5/Counter_1.c ****     #else
+ 471:Generated_Source\PSoC5/Counter_1.c ****         CY_SET_REG32(Counter_1_COMPARE_LSB_PTR, compare);
+ 628              		.loc 1 471 0
+ 629 0008 034A     		ldr	r2, .L47
+ 630 000a 7B68     		ldr	r3, [r7, #4]
+ 631 000c 1360     		str	r3, [r2]
+ 472:Generated_Source\PSoC5/Counter_1.c ****     #endif /* (Counter_1_UsingFixedFunction) */
+ 473:Generated_Source\PSoC5/Counter_1.c **** }
+ 632              		.loc 1 473 0
+ 633 000e 00BF     		nop
+ 634 0010 0C37     		adds	r7, r7, #12
+ 635              		.cfi_def_cfa_offset 4
+ 636 0012 BD46     		mov	sp, r7
+ 637              		.cfi_def_cfa_register 13
+ 638              		@ sp needed
+ 639 0014 80BC     		pop	{r7}
+ 640              		.cfi_restore 7
+ 641              		.cfi_def_cfa_offset 0
+ 642 0016 7047     		bx	lr
+ 643              	.L48:
+ 644              		.align	2
+ 645              	.L47:
+ 646 0018 34650040 		.word	1073767732
+ 647              		.cfi_endproc
+ 648              	.LFE13:
+ 649              		.size	Counter_1_WriteCompare, .-Counter_1_WriteCompare
+ 650              		.section	.text.Counter_1_ReadCompare,"ax",%progbits
+ 651              		.align	2
+ 652              		.global	Counter_1_ReadCompare
+ 653              		.thumb
+ 654              		.thumb_func
+ 655              		.type	Counter_1_ReadCompare, %function
+ 656              	Counter_1_ReadCompare:
+ 657              	.LFB14:
+ 474:Generated_Source\PSoC5/Counter_1.c **** 
+ 475:Generated_Source\PSoC5/Counter_1.c **** 
+ 476:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ 477:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_ReadCompare
+ 478:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 479:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 480:Generated_Source\PSoC5/Counter_1.c **** * Returns the compare value.
+ 481:Generated_Source\PSoC5/Counter_1.c **** *
+ 482:Generated_Source\PSoC5/Counter_1.c **** * Parameters:  
+ 483:Generated_Source\PSoC5/Counter_1.c **** *  void:
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 21
+
+
+ 484:Generated_Source\PSoC5/Counter_1.c **** *
+ 485:Generated_Source\PSoC5/Counter_1.c **** * Return: 
+ 486:Generated_Source\PSoC5/Counter_1.c **** *  (uint32) Present compare value.
+ 487:Generated_Source\PSoC5/Counter_1.c **** *
+ 488:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ 489:Generated_Source\PSoC5/Counter_1.c **** uint32 Counter_1_ReadCompare(void) 
+ 490:Generated_Source\PSoC5/Counter_1.c **** {
+ 658              		.loc 1 490 0
+ 659              		.cfi_startproc
+ 660              		@ args = 0, pretend = 0, frame = 0
+ 661              		@ frame_needed = 1, uses_anonymous_args = 0
+ 662              		@ link register save eliminated.
+ 663 0000 80B4     		push	{r7}
+ 664              		.cfi_def_cfa_offset 4
+ 665              		.cfi_offset 7, -4
+ 666 0002 00AF     		add	r7, sp, #0
+ 667              		.cfi_def_cfa_register 7
+ 491:Generated_Source\PSoC5/Counter_1.c ****     return (CY_GET_REG32(Counter_1_COMPARE_LSB_PTR));
+ 668              		.loc 1 491 0
+ 669 0004 024B     		ldr	r3, .L51
+ 670 0006 1B68     		ldr	r3, [r3]
+ 492:Generated_Source\PSoC5/Counter_1.c **** }
+ 671              		.loc 1 492 0
+ 672 0008 1846     		mov	r0, r3
+ 673 000a BD46     		mov	sp, r7
+ 674              		.cfi_def_cfa_register 13
+ 675              		@ sp needed
+ 676 000c 80BC     		pop	{r7}
+ 677              		.cfi_restore 7
+ 678              		.cfi_def_cfa_offset 0
+ 679 000e 7047     		bx	lr
+ 680              	.L52:
+ 681              		.align	2
+ 682              	.L51:
+ 683 0010 34650040 		.word	1073767732
+ 684              		.cfi_endproc
+ 685              	.LFE14:
+ 686              		.size	Counter_1_ReadCompare, .-Counter_1_ReadCompare
+ 687              		.section	.text.Counter_1_ClearFIFO,"ax",%progbits
+ 688              		.align	2
+ 689              		.global	Counter_1_ClearFIFO
+ 690              		.thumb
+ 691              		.thumb_func
+ 692              		.type	Counter_1_ClearFIFO, %function
+ 693              	Counter_1_ClearFIFO:
+ 694              	.LFB15:
+ 493:Generated_Source\PSoC5/Counter_1.c **** 
+ 494:Generated_Source\PSoC5/Counter_1.c **** 
+ 495:Generated_Source\PSoC5/Counter_1.c **** #if (Counter_1_COMPARE_MODE_SOFTWARE)
+ 496:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ 497:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_SetCompareMode
+ 498:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 499:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 500:Generated_Source\PSoC5/Counter_1.c **** *  Sets the software controlled Compare Mode.
+ 501:Generated_Source\PSoC5/Counter_1.c **** *
+ 502:Generated_Source\PSoC5/Counter_1.c **** * Parameters:
+ 503:Generated_Source\PSoC5/Counter_1.c **** *  compareMode:  Compare Mode Enumerated Type.
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 22
+
+
+ 504:Generated_Source\PSoC5/Counter_1.c **** *
+ 505:Generated_Source\PSoC5/Counter_1.c **** * Return:
+ 506:Generated_Source\PSoC5/Counter_1.c **** *  void
+ 507:Generated_Source\PSoC5/Counter_1.c **** *
+ 508:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ 509:Generated_Source\PSoC5/Counter_1.c **** void Counter_1_SetCompareMode(uint8 compareMode) 
+ 510:Generated_Source\PSoC5/Counter_1.c **** {
+ 511:Generated_Source\PSoC5/Counter_1.c ****     /* Clear the compare mode bits in the control register */
+ 512:Generated_Source\PSoC5/Counter_1.c ****     Counter_1_CONTROL &= ((uint8)(~Counter_1_CTRL_CMPMODE_MASK));
+ 513:Generated_Source\PSoC5/Counter_1.c ****     
+ 514:Generated_Source\PSoC5/Counter_1.c ****     /* Write the new setting */
+ 515:Generated_Source\PSoC5/Counter_1.c ****     Counter_1_CONTROL |= compareMode;
+ 516:Generated_Source\PSoC5/Counter_1.c **** }
+ 517:Generated_Source\PSoC5/Counter_1.c **** #endif  /* (Counter_1_COMPARE_MODE_SOFTWARE) */
+ 518:Generated_Source\PSoC5/Counter_1.c **** 
+ 519:Generated_Source\PSoC5/Counter_1.c **** 
+ 520:Generated_Source\PSoC5/Counter_1.c **** #if (Counter_1_CAPTURE_MODE_SOFTWARE)
+ 521:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ 522:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_SetCaptureMode
+ 523:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 524:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 525:Generated_Source\PSoC5/Counter_1.c **** *  Sets the software controlled Capture Mode.
+ 526:Generated_Source\PSoC5/Counter_1.c **** *
+ 527:Generated_Source\PSoC5/Counter_1.c **** * Parameters:
+ 528:Generated_Source\PSoC5/Counter_1.c **** *  captureMode:  Capture Mode Enumerated Type.
+ 529:Generated_Source\PSoC5/Counter_1.c **** *
+ 530:Generated_Source\PSoC5/Counter_1.c **** * Return:
+ 531:Generated_Source\PSoC5/Counter_1.c **** *  void
+ 532:Generated_Source\PSoC5/Counter_1.c **** *
+ 533:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ 534:Generated_Source\PSoC5/Counter_1.c **** void Counter_1_SetCaptureMode(uint8 captureMode) 
+ 535:Generated_Source\PSoC5/Counter_1.c **** {
+ 536:Generated_Source\PSoC5/Counter_1.c ****     /* Clear the capture mode bits in the control register */
+ 537:Generated_Source\PSoC5/Counter_1.c ****     Counter_1_CONTROL &= ((uint8)(~Counter_1_CTRL_CAPMODE_MASK));
+ 538:Generated_Source\PSoC5/Counter_1.c ****     
+ 539:Generated_Source\PSoC5/Counter_1.c ****     /* Write the new setting */
+ 540:Generated_Source\PSoC5/Counter_1.c ****     Counter_1_CONTROL |= ((uint8)((uint8)captureMode << Counter_1_CTRL_CAPMODE0_SHIFT));
+ 541:Generated_Source\PSoC5/Counter_1.c **** }
+ 542:Generated_Source\PSoC5/Counter_1.c **** #endif  /* (Counter_1_CAPTURE_MODE_SOFTWARE) */
+ 543:Generated_Source\PSoC5/Counter_1.c **** 
+ 544:Generated_Source\PSoC5/Counter_1.c **** 
+ 545:Generated_Source\PSoC5/Counter_1.c **** /*******************************************************************************
+ 546:Generated_Source\PSoC5/Counter_1.c **** * Function Name: Counter_1_ClearFIFO
+ 547:Generated_Source\PSoC5/Counter_1.c **** ********************************************************************************
+ 548:Generated_Source\PSoC5/Counter_1.c **** * Summary:
+ 549:Generated_Source\PSoC5/Counter_1.c **** *   This function clears all capture data from the capture FIFO
+ 550:Generated_Source\PSoC5/Counter_1.c **** *
+ 551:Generated_Source\PSoC5/Counter_1.c **** * Parameters:  
+ 552:Generated_Source\PSoC5/Counter_1.c **** *  void:
+ 553:Generated_Source\PSoC5/Counter_1.c **** *
+ 554:Generated_Source\PSoC5/Counter_1.c **** * Return: 
+ 555:Generated_Source\PSoC5/Counter_1.c **** *  None
+ 556:Generated_Source\PSoC5/Counter_1.c **** *
+ 557:Generated_Source\PSoC5/Counter_1.c **** *******************************************************************************/
+ 558:Generated_Source\PSoC5/Counter_1.c **** void Counter_1_ClearFIFO(void) 
+ 559:Generated_Source\PSoC5/Counter_1.c **** {
+ 695              		.loc 1 559 0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 23
+
+
+ 696              		.cfi_startproc
+ 697              		@ args = 0, pretend = 0, frame = 0
+ 698              		@ frame_needed = 1, uses_anonymous_args = 0
+ 699 0000 80B5     		push	{r7, lr}
+ 700              		.cfi_def_cfa_offset 8
+ 701              		.cfi_offset 7, -8
+ 702              		.cfi_offset 14, -4
+ 703 0002 00AF     		add	r7, sp, #0
+ 704              		.cfi_def_cfa_register 7
+ 560:Generated_Source\PSoC5/Counter_1.c **** 
+ 561:Generated_Source\PSoC5/Counter_1.c ****     while(0u != (Counter_1_ReadStatusRegister() & Counter_1_STATUS_FIFONEMP))
+ 705              		.loc 1 561 0
+ 706 0004 01E0     		b	.L54
+ 707              	.L55:
+ 562:Generated_Source\PSoC5/Counter_1.c ****     {
+ 563:Generated_Source\PSoC5/Counter_1.c ****         (void)Counter_1_ReadCapture();
+ 708              		.loc 1 563 0
+ 709 0006 FFF7FEFF 		bl	Counter_1_ReadCapture
+ 710              	.L54:
+ 561:Generated_Source\PSoC5/Counter_1.c ****     {
+ 711              		.loc 1 561 0
+ 712 000a FFF7FEFF 		bl	Counter_1_ReadStatusRegister
+ 713 000e 0346     		mov	r3, r0
+ 714 0010 03F04003 		and	r3, r3, #64
+ 715 0014 002B     		cmp	r3, #0
+ 716 0016 F6D1     		bne	.L55
+ 564:Generated_Source\PSoC5/Counter_1.c ****     }
+ 565:Generated_Source\PSoC5/Counter_1.c **** 
+ 566:Generated_Source\PSoC5/Counter_1.c **** }
+ 717              		.loc 1 566 0
+ 718 0018 00BF     		nop
+ 719 001a 80BD     		pop	{r7, pc}
+ 720              		.cfi_endproc
+ 721              	.LFE15:
+ 722              		.size	Counter_1_ClearFIFO, .-Counter_1_ClearFIFO
+ 723              		.text
+ 724              	.Letext0:
+ 725              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 726              		.section	.debug_info,"",%progbits
+ 727              	.Ldebug_info0:
+ 728 0000 86020000 		.4byte	0x286
+ 729 0004 0400     		.2byte	0x4
+ 730 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 731 000a 04       		.byte	0x4
+ 732 000b 01       		.uleb128 0x1
+ 733 000c 1F000000 		.4byte	.LASF40
+ 734 0010 0C       		.byte	0xc
+ 735 0011 AB020000 		.4byte	.LASF41
+ 736 0015 35020000 		.4byte	.LASF42
+ 737 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 738 001d 00000000 		.4byte	0
+ 739 0021 00000000 		.4byte	.Ldebug_line0
+ 740 0025 02       		.uleb128 0x2
+ 741 0026 01       		.byte	0x1
+ 742 0027 06       		.byte	0x6
+ 743 0028 1A030000 		.4byte	.LASF0
+ 744 002c 02       		.uleb128 0x2
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 24
+
+
+ 745 002d 01       		.byte	0x1
+ 746 002e 08       		.byte	0x8
+ 747 002f 2E010000 		.4byte	.LASF1
+ 748 0033 02       		.uleb128 0x2
+ 749 0034 02       		.byte	0x2
+ 750 0035 05       		.byte	0x5
+ 751 0036 A1020000 		.4byte	.LASF2
+ 752 003a 02       		.uleb128 0x2
+ 753 003b 02       		.byte	0x2
+ 754 003c 07       		.byte	0x7
+ 755 003d C3000000 		.4byte	.LASF3
+ 756 0041 02       		.uleb128 0x2
+ 757 0042 04       		.byte	0x4
+ 758 0043 05       		.byte	0x5
+ 759 0044 E4020000 		.4byte	.LASF4
+ 760 0048 02       		.uleb128 0x2
+ 761 0049 04       		.byte	0x4
+ 762 004a 07       		.byte	0x7
+ 763 004b 6C010000 		.4byte	.LASF5
+ 764 004f 02       		.uleb128 0x2
+ 765 0050 08       		.byte	0x8
+ 766 0051 05       		.byte	0x5
+ 767 0052 81020000 		.4byte	.LASF6
+ 768 0056 02       		.uleb128 0x2
+ 769 0057 08       		.byte	0x8
+ 770 0058 07       		.byte	0x7
+ 771 0059 0A020000 		.4byte	.LASF7
+ 772 005d 03       		.uleb128 0x3
+ 773 005e 04       		.byte	0x4
+ 774 005f 05       		.byte	0x5
+ 775 0060 696E7400 		.ascii	"int\000"
+ 776 0064 02       		.uleb128 0x2
+ 777 0065 04       		.byte	0x4
+ 778 0066 07       		.byte	0x7
+ 779 0067 94020000 		.4byte	.LASF8
+ 780 006b 04       		.uleb128 0x4
+ 781 006c 7E010000 		.4byte	.LASF9
+ 782 0070 02       		.byte	0x2
+ 783 0071 9201     		.2byte	0x192
+ 784 0073 2C000000 		.4byte	0x2c
+ 785 0077 04       		.uleb128 0x4
+ 786 0078 EE010000 		.4byte	.LASF10
+ 787 007c 02       		.byte	0x2
+ 788 007d 9401     		.2byte	0x194
+ 789 007f 48000000 		.4byte	0x48
+ 790 0083 02       		.uleb128 0x2
+ 791 0084 08       		.byte	0x8
+ 792 0085 04       		.byte	0x4
+ 793 0086 D1010000 		.4byte	.LASF11
+ 794 008a 02       		.uleb128 0x2
+ 795 008b 01       		.byte	0x1
+ 796 008c 08       		.byte	0x8
+ 797 008d 8F020000 		.4byte	.LASF12
+ 798 0091 04       		.uleb128 0x4
+ 799 0092 50010000 		.4byte	.LASF13
+ 800 0096 02       		.byte	0x2
+ 801 0097 3C02     		.2byte	0x23c
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 25
+
+
+ 802 0099 9D000000 		.4byte	0x9d
+ 803 009d 05       		.uleb128 0x5
+ 804 009e 6B000000 		.4byte	0x6b
+ 805 00a2 04       		.uleb128 0x4
+ 806 00a3 00000000 		.4byte	.LASF14
+ 807 00a7 02       		.byte	0x2
+ 808 00a8 3E02     		.2byte	0x23e
+ 809 00aa AE000000 		.4byte	0xae
+ 810 00ae 05       		.uleb128 0x5
+ 811 00af 77000000 		.4byte	0x77
+ 812 00b3 02       		.uleb128 0x2
+ 813 00b4 08       		.byte	0x8
+ 814 00b5 04       		.byte	0x4
+ 815 00b6 0E030000 		.4byte	.LASF15
+ 816 00ba 02       		.uleb128 0x2
+ 817 00bb 04       		.byte	0x4
+ 818 00bc 07       		.byte	0x7
+ 819 00bd 78020000 		.4byte	.LASF16
+ 820 00c1 06       		.uleb128 0x6
+ 821 00c2 21020000 		.4byte	.LASF22
+ 822 00c6 01       		.byte	0x1
+ 823 00c7 25       		.byte	0x25
+ 824 00c8 00000000 		.4byte	.LFB0
+ 825 00cc 84000000 		.4byte	.LFE0-.LFB0
+ 826 00d0 01       		.uleb128 0x1
+ 827 00d1 9C       		.byte	0x9c
+ 828 00d2 F3000000 		.4byte	0xf3
+ 829 00d6 07       		.uleb128 0x7
+ 830 00d7 30020000 		.4byte	.LASF17
+ 831 00db 01       		.byte	0x1
+ 832 00dc 28       		.byte	0x28
+ 833 00dd 6B000000 		.4byte	0x6b
+ 834 00e1 02       		.uleb128 0x2
+ 835 00e2 91       		.byte	0x91
+ 836 00e3 77       		.sleb128 -9
+ 837 00e4 07       		.uleb128 0x7
+ 838 00e5 06000000 		.4byte	.LASF18
+ 839 00e9 01       		.byte	0x1
+ 840 00ea 2D       		.byte	0x2d
+ 841 00eb 6B000000 		.4byte	0x6b
+ 842 00ef 02       		.uleb128 0x2
+ 843 00f0 91       		.byte	0x91
+ 844 00f1 76       		.sleb128 -10
+ 845 00f2 00       		.byte	0
+ 846 00f3 08       		.uleb128 0x8
+ 847 00f4 FD020000 		.4byte	.LASF19
+ 848 00f8 01       		.byte	0x1
+ 849 00f9 8F       		.byte	0x8f
+ 850 00fa 00000000 		.4byte	.LFB1
+ 851 00fe 20000000 		.4byte	.LFE1-.LFB1
+ 852 0102 01       		.uleb128 0x1
+ 853 0103 9C       		.byte	0x9c
+ 854 0104 09       		.uleb128 0x9
+ 855 0105 ED020000 		.4byte	.LASF20
+ 856 0109 01       		.byte	0x1
+ 857 010a B2       		.byte	0xb2
+ 858 010b 00000000 		.4byte	.LFB2
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 26
+
+
+ 859 010f 24000000 		.4byte	.LFE2-.LFB2
+ 860 0113 01       		.uleb128 0x1
+ 861 0114 9C       		.byte	0x9c
+ 862 0115 08       		.uleb128 0x8
+ 863 0116 2E030000 		.4byte	.LASF21
+ 864 011a 01       		.byte	0x1
+ 865 011b D0       		.byte	0xd0
+ 866 011c 00000000 		.4byte	.LFB3
+ 867 0120 20000000 		.4byte	.LFE3-.LFB3
+ 868 0124 01       		.uleb128 0x1
+ 869 0125 9C       		.byte	0x9c
+ 870 0126 0A       		.uleb128 0xa
+ 871 0127 F5000000 		.4byte	.LASF23
+ 872 012b 01       		.byte	0x1
+ 873 012c ED       		.byte	0xed
+ 874 012d 00000000 		.4byte	.LFB4
+ 875 0131 20000000 		.4byte	.LFE4-.LFB4
+ 876 0135 01       		.uleb128 0x1
+ 877 0136 9C       		.byte	0x9c
+ 878 0137 4A010000 		.4byte	0x14a
+ 879 013b 0B       		.uleb128 0xb
+ 880 013c AD000000 		.4byte	.LASF27
+ 881 0140 01       		.byte	0x1
+ 882 0141 ED       		.byte	0xed
+ 883 0142 6B000000 		.4byte	0x6b
+ 884 0146 02       		.uleb128 0x2
+ 885 0147 91       		.byte	0x91
+ 886 0148 77       		.sleb128 -9
+ 887 0149 00       		.byte	0
+ 888 014a 0C       		.uleb128 0xc
+ 889 014b B4010000 		.4byte	.LASF24
+ 890 014f 01       		.byte	0x1
+ 891 0150 0501     		.2byte	0x105
+ 892 0152 6B000000 		.4byte	0x6b
+ 893 0156 00000000 		.4byte	.LFB5
+ 894 015a 18000000 		.4byte	.LFE5-.LFB5
+ 895 015e 01       		.uleb128 0x1
+ 896 015f 9C       		.byte	0x9c
+ 897 0160 0C       		.uleb128 0xc
+ 898 0161 3D030000 		.4byte	.LASF25
+ 899 0165 01       		.byte	0x1
+ 900 0166 1B01     		.2byte	0x11b
+ 901 0168 6B000000 		.4byte	0x6b
+ 902 016c 00000000 		.4byte	.LFB6
+ 903 0170 18000000 		.4byte	.LFE6-.LFB6
+ 904 0174 01       		.uleb128 0x1
+ 905 0175 9C       		.byte	0x9c
+ 906 0176 0D       		.uleb128 0xd
+ 907 0177 D6000000 		.4byte	.LASF26
+ 908 017b 01       		.byte	0x1
+ 909 017c 3001     		.2byte	0x130
+ 910 017e 00000000 		.4byte	.LFB7
+ 911 0182 20000000 		.4byte	.LFE7-.LFB7
+ 912 0186 01       		.uleb128 0x1
+ 913 0187 9C       		.byte	0x9c
+ 914 0188 9C010000 		.4byte	0x19c
+ 915 018c 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 27
+
+
+ 916 018d 84010000 		.4byte	.LASF28
+ 917 0191 01       		.byte	0x1
+ 918 0192 3001     		.2byte	0x130
+ 919 0194 6B000000 		.4byte	0x6b
+ 920 0198 02       		.uleb128 0x2
+ 921 0199 91       		.byte	0x91
+ 922 019a 77       		.sleb128 -9
+ 923 019b 00       		.byte	0
+ 924 019c 0D       		.uleb128 0xd
+ 925 019d 61020000 		.4byte	.LASF29
+ 926 01a1 01       		.byte	0x1
+ 927 01a2 4601     		.2byte	0x146
+ 928 01a4 00000000 		.4byte	.LFB8
+ 929 01a8 1C000000 		.4byte	.LFE8-.LFB8
+ 930 01ac 01       		.uleb128 0x1
+ 931 01ad 9C       		.byte	0x9c
+ 932 01ae C2010000 		.4byte	0x1c2
+ 933 01b2 0E       		.uleb128 0xe
+ 934 01b3 26010000 		.4byte	.LASF30
+ 935 01b7 01       		.byte	0x1
+ 936 01b8 4601     		.2byte	0x146
+ 937 01ba 77000000 		.4byte	0x77
+ 938 01be 02       		.uleb128 0x2
+ 939 01bf 91       		.byte	0x91
+ 940 01c0 74       		.sleb128 -12
+ 941 01c1 00       		.byte	0
+ 942 01c2 0C       		.uleb128 0xc
+ 943 01c3 10010000 		.4byte	.LASF31
+ 944 01c7 01       		.byte	0x1
+ 945 01c8 6501     		.2byte	0x165
+ 946 01ca 77000000 		.4byte	0x77
+ 947 01ce 00000000 		.4byte	.LFB9
+ 948 01d2 1C000000 		.4byte	.LFE9-.LFB9
+ 949 01d6 01       		.uleb128 0x1
+ 950 01d7 9C       		.byte	0x9c
+ 951 01d8 0C       		.uleb128 0xc
+ 952 01d9 8C010000 		.4byte	.LASF32
+ 953 01dd 01       		.byte	0x1
+ 954 01de 8601     		.2byte	0x186
+ 955 01e0 77000000 		.4byte	0x77
+ 956 01e4 00000000 		.4byte	.LFB10
+ 957 01e8 14000000 		.4byte	.LFE10-.LFB10
+ 958 01ec 01       		.uleb128 0x1
+ 959 01ed 9C       		.byte	0x9c
+ 960 01ee 0D       		.uleb128 0xd
+ 961 01ef D8010000 		.4byte	.LASF33
+ 962 01f3 01       		.byte	0x1
+ 963 01f4 9F01     		.2byte	0x19f
+ 964 01f6 00000000 		.4byte	.LFB11
+ 965 01fa 1C000000 		.4byte	.LFE11-.LFB11
+ 966 01fe 01       		.uleb128 0x1
+ 967 01ff 9C       		.byte	0x9c
+ 968 0200 14020000 		.4byte	0x214
+ 969 0204 0E       		.uleb128 0xe
+ 970 0205 BC000000 		.4byte	.LASF34
+ 971 0209 01       		.byte	0x1
+ 972 020a 9F01     		.2byte	0x19f
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 28
+
+
+ 973 020c 77000000 		.4byte	0x77
+ 974 0210 02       		.uleb128 0x2
+ 975 0211 91       		.byte	0x91
+ 976 0212 74       		.sleb128 -12
+ 977 0213 00       		.byte	0
+ 978 0214 0C       		.uleb128 0xc
+ 979 0215 F5010000 		.4byte	.LASF35
+ 980 0219 01       		.byte	0x1
+ 981 021a B601     		.2byte	0x1b6
+ 982 021c 77000000 		.4byte	0x77
+ 983 0220 00000000 		.4byte	.LFB12
+ 984 0224 14000000 		.4byte	.LFE12-.LFB12
+ 985 0228 01       		.uleb128 0x1
+ 986 0229 9C       		.byte	0x9c
+ 987 022a 0D       		.uleb128 0xd
+ 988 022b 55010000 		.4byte	.LASF36
+ 989 022f 01       		.byte	0x1
+ 990 0230 D101     		.2byte	0x1d1
+ 991 0232 00000000 		.4byte	.LFB13
+ 992 0236 1C000000 		.4byte	.LFE13-.LFB13
+ 993 023a 01       		.uleb128 0x1
+ 994 023b 9C       		.byte	0x9c
+ 995 023c 50020000 		.4byte	0x250
+ 996 0240 0E       		.uleb128 0xe
+ 997 0241 26030000 		.4byte	.LASF37
+ 998 0245 01       		.byte	0x1
+ 999 0246 D101     		.2byte	0x1d1
+ 1000 0248 77000000 		.4byte	0x77
+ 1001 024c 02       		.uleb128 0x2
+ 1002 024d 91       		.byte	0x91
+ 1003 024e 74       		.sleb128 -12
+ 1004 024f 00       		.byte	0
+ 1005 0250 0C       		.uleb128 0xc
+ 1006 0251 CE020000 		.4byte	.LASF38
+ 1007 0255 01       		.byte	0x1
+ 1008 0256 E901     		.2byte	0x1e9
+ 1009 0258 77000000 		.4byte	0x77
+ 1010 025c 00000000 		.4byte	.LFB14
+ 1011 0260 14000000 		.4byte	.LFE14-.LFB14
+ 1012 0264 01       		.uleb128 0x1
+ 1013 0265 9C       		.byte	0x9c
+ 1014 0266 0F       		.uleb128 0xf
+ 1015 0267 3C010000 		.4byte	.LASF39
+ 1016 026b 01       		.byte	0x1
+ 1017 026c 2E02     		.2byte	0x22e
+ 1018 026e 00000000 		.4byte	.LFB15
+ 1019 0272 1C000000 		.4byte	.LFE15-.LFB15
+ 1020 0276 01       		.uleb128 0x1
+ 1021 0277 9C       		.byte	0x9c
+ 1022 0278 10       		.uleb128 0x10
+ 1023 0279 A2010000 		.4byte	.LASF43
+ 1024 027d 01       		.byte	0x1
+ 1025 027e 15       		.byte	0x15
+ 1026 027f 6B000000 		.4byte	0x6b
+ 1027 0283 05       		.uleb128 0x5
+ 1028 0284 03       		.byte	0x3
+ 1029 0285 00000000 		.4byte	Counter_1_initVar
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 29
+
+
+ 1030 0289 00       		.byte	0
+ 1031              		.section	.debug_abbrev,"",%progbits
+ 1032              	.Ldebug_abbrev0:
+ 1033 0000 01       		.uleb128 0x1
+ 1034 0001 11       		.uleb128 0x11
+ 1035 0002 01       		.byte	0x1
+ 1036 0003 25       		.uleb128 0x25
+ 1037 0004 0E       		.uleb128 0xe
+ 1038 0005 13       		.uleb128 0x13
+ 1039 0006 0B       		.uleb128 0xb
+ 1040 0007 03       		.uleb128 0x3
+ 1041 0008 0E       		.uleb128 0xe
+ 1042 0009 1B       		.uleb128 0x1b
+ 1043 000a 0E       		.uleb128 0xe
+ 1044 000b 55       		.uleb128 0x55
+ 1045 000c 17       		.uleb128 0x17
+ 1046 000d 11       		.uleb128 0x11
+ 1047 000e 01       		.uleb128 0x1
+ 1048 000f 10       		.uleb128 0x10
+ 1049 0010 17       		.uleb128 0x17
+ 1050 0011 00       		.byte	0
+ 1051 0012 00       		.byte	0
+ 1052 0013 02       		.uleb128 0x2
+ 1053 0014 24       		.uleb128 0x24
+ 1054 0015 00       		.byte	0
+ 1055 0016 0B       		.uleb128 0xb
+ 1056 0017 0B       		.uleb128 0xb
+ 1057 0018 3E       		.uleb128 0x3e
+ 1058 0019 0B       		.uleb128 0xb
+ 1059 001a 03       		.uleb128 0x3
+ 1060 001b 0E       		.uleb128 0xe
+ 1061 001c 00       		.byte	0
+ 1062 001d 00       		.byte	0
+ 1063 001e 03       		.uleb128 0x3
+ 1064 001f 24       		.uleb128 0x24
+ 1065 0020 00       		.byte	0
+ 1066 0021 0B       		.uleb128 0xb
+ 1067 0022 0B       		.uleb128 0xb
+ 1068 0023 3E       		.uleb128 0x3e
+ 1069 0024 0B       		.uleb128 0xb
+ 1070 0025 03       		.uleb128 0x3
+ 1071 0026 08       		.uleb128 0x8
+ 1072 0027 00       		.byte	0
+ 1073 0028 00       		.byte	0
+ 1074 0029 04       		.uleb128 0x4
+ 1075 002a 16       		.uleb128 0x16
+ 1076 002b 00       		.byte	0
+ 1077 002c 03       		.uleb128 0x3
+ 1078 002d 0E       		.uleb128 0xe
+ 1079 002e 3A       		.uleb128 0x3a
+ 1080 002f 0B       		.uleb128 0xb
+ 1081 0030 3B       		.uleb128 0x3b
+ 1082 0031 05       		.uleb128 0x5
+ 1083 0032 49       		.uleb128 0x49
+ 1084 0033 13       		.uleb128 0x13
+ 1085 0034 00       		.byte	0
+ 1086 0035 00       		.byte	0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 30
+
+
+ 1087 0036 05       		.uleb128 0x5
+ 1088 0037 35       		.uleb128 0x35
+ 1089 0038 00       		.byte	0
+ 1090 0039 49       		.uleb128 0x49
+ 1091 003a 13       		.uleb128 0x13
+ 1092 003b 00       		.byte	0
+ 1093 003c 00       		.byte	0
+ 1094 003d 06       		.uleb128 0x6
+ 1095 003e 2E       		.uleb128 0x2e
+ 1096 003f 01       		.byte	0x1
+ 1097 0040 3F       		.uleb128 0x3f
+ 1098 0041 19       		.uleb128 0x19
+ 1099 0042 03       		.uleb128 0x3
+ 1100 0043 0E       		.uleb128 0xe
+ 1101 0044 3A       		.uleb128 0x3a
+ 1102 0045 0B       		.uleb128 0xb
+ 1103 0046 3B       		.uleb128 0x3b
+ 1104 0047 0B       		.uleb128 0xb
+ 1105 0048 27       		.uleb128 0x27
+ 1106 0049 19       		.uleb128 0x19
+ 1107 004a 11       		.uleb128 0x11
+ 1108 004b 01       		.uleb128 0x1
+ 1109 004c 12       		.uleb128 0x12
+ 1110 004d 06       		.uleb128 0x6
+ 1111 004e 40       		.uleb128 0x40
+ 1112 004f 18       		.uleb128 0x18
+ 1113 0050 9642     		.uleb128 0x2116
+ 1114 0052 19       		.uleb128 0x19
+ 1115 0053 01       		.uleb128 0x1
+ 1116 0054 13       		.uleb128 0x13
+ 1117 0055 00       		.byte	0
+ 1118 0056 00       		.byte	0
+ 1119 0057 07       		.uleb128 0x7
+ 1120 0058 34       		.uleb128 0x34
+ 1121 0059 00       		.byte	0
+ 1122 005a 03       		.uleb128 0x3
+ 1123 005b 0E       		.uleb128 0xe
+ 1124 005c 3A       		.uleb128 0x3a
+ 1125 005d 0B       		.uleb128 0xb
+ 1126 005e 3B       		.uleb128 0x3b
+ 1127 005f 0B       		.uleb128 0xb
+ 1128 0060 49       		.uleb128 0x49
+ 1129 0061 13       		.uleb128 0x13
+ 1130 0062 02       		.uleb128 0x2
+ 1131 0063 18       		.uleb128 0x18
+ 1132 0064 00       		.byte	0
+ 1133 0065 00       		.byte	0
+ 1134 0066 08       		.uleb128 0x8
+ 1135 0067 2E       		.uleb128 0x2e
+ 1136 0068 00       		.byte	0
+ 1137 0069 3F       		.uleb128 0x3f
+ 1138 006a 19       		.uleb128 0x19
+ 1139 006b 03       		.uleb128 0x3
+ 1140 006c 0E       		.uleb128 0xe
+ 1141 006d 3A       		.uleb128 0x3a
+ 1142 006e 0B       		.uleb128 0xb
+ 1143 006f 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 31
+
+
+ 1144 0070 0B       		.uleb128 0xb
+ 1145 0071 27       		.uleb128 0x27
+ 1146 0072 19       		.uleb128 0x19
+ 1147 0073 11       		.uleb128 0x11
+ 1148 0074 01       		.uleb128 0x1
+ 1149 0075 12       		.uleb128 0x12
+ 1150 0076 06       		.uleb128 0x6
+ 1151 0077 40       		.uleb128 0x40
+ 1152 0078 18       		.uleb128 0x18
+ 1153 0079 9742     		.uleb128 0x2117
+ 1154 007b 19       		.uleb128 0x19
+ 1155 007c 00       		.byte	0
+ 1156 007d 00       		.byte	0
+ 1157 007e 09       		.uleb128 0x9
+ 1158 007f 2E       		.uleb128 0x2e
+ 1159 0080 00       		.byte	0
+ 1160 0081 3F       		.uleb128 0x3f
+ 1161 0082 19       		.uleb128 0x19
+ 1162 0083 03       		.uleb128 0x3
+ 1163 0084 0E       		.uleb128 0xe
+ 1164 0085 3A       		.uleb128 0x3a
+ 1165 0086 0B       		.uleb128 0xb
+ 1166 0087 3B       		.uleb128 0x3b
+ 1167 0088 0B       		.uleb128 0xb
+ 1168 0089 27       		.uleb128 0x27
+ 1169 008a 19       		.uleb128 0x19
+ 1170 008b 11       		.uleb128 0x11
+ 1171 008c 01       		.uleb128 0x1
+ 1172 008d 12       		.uleb128 0x12
+ 1173 008e 06       		.uleb128 0x6
+ 1174 008f 40       		.uleb128 0x40
+ 1175 0090 18       		.uleb128 0x18
+ 1176 0091 9642     		.uleb128 0x2116
+ 1177 0093 19       		.uleb128 0x19
+ 1178 0094 00       		.byte	0
+ 1179 0095 00       		.byte	0
+ 1180 0096 0A       		.uleb128 0xa
+ 1181 0097 2E       		.uleb128 0x2e
+ 1182 0098 01       		.byte	0x1
+ 1183 0099 3F       		.uleb128 0x3f
+ 1184 009a 19       		.uleb128 0x19
+ 1185 009b 03       		.uleb128 0x3
+ 1186 009c 0E       		.uleb128 0xe
+ 1187 009d 3A       		.uleb128 0x3a
+ 1188 009e 0B       		.uleb128 0xb
+ 1189 009f 3B       		.uleb128 0x3b
+ 1190 00a0 0B       		.uleb128 0xb
+ 1191 00a1 27       		.uleb128 0x27
+ 1192 00a2 19       		.uleb128 0x19
+ 1193 00a3 11       		.uleb128 0x11
+ 1194 00a4 01       		.uleb128 0x1
+ 1195 00a5 12       		.uleb128 0x12
+ 1196 00a6 06       		.uleb128 0x6
+ 1197 00a7 40       		.uleb128 0x40
+ 1198 00a8 18       		.uleb128 0x18
+ 1199 00a9 9742     		.uleb128 0x2117
+ 1200 00ab 19       		.uleb128 0x19
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 32
+
+
+ 1201 00ac 01       		.uleb128 0x1
+ 1202 00ad 13       		.uleb128 0x13
+ 1203 00ae 00       		.byte	0
+ 1204 00af 00       		.byte	0
+ 1205 00b0 0B       		.uleb128 0xb
+ 1206 00b1 05       		.uleb128 0x5
+ 1207 00b2 00       		.byte	0
+ 1208 00b3 03       		.uleb128 0x3
+ 1209 00b4 0E       		.uleb128 0xe
+ 1210 00b5 3A       		.uleb128 0x3a
+ 1211 00b6 0B       		.uleb128 0xb
+ 1212 00b7 3B       		.uleb128 0x3b
+ 1213 00b8 0B       		.uleb128 0xb
+ 1214 00b9 49       		.uleb128 0x49
+ 1215 00ba 13       		.uleb128 0x13
+ 1216 00bb 02       		.uleb128 0x2
+ 1217 00bc 18       		.uleb128 0x18
+ 1218 00bd 00       		.byte	0
+ 1219 00be 00       		.byte	0
+ 1220 00bf 0C       		.uleb128 0xc
+ 1221 00c0 2E       		.uleb128 0x2e
+ 1222 00c1 00       		.byte	0
+ 1223 00c2 3F       		.uleb128 0x3f
+ 1224 00c3 19       		.uleb128 0x19
+ 1225 00c4 03       		.uleb128 0x3
+ 1226 00c5 0E       		.uleb128 0xe
+ 1227 00c6 3A       		.uleb128 0x3a
+ 1228 00c7 0B       		.uleb128 0xb
+ 1229 00c8 3B       		.uleb128 0x3b
+ 1230 00c9 05       		.uleb128 0x5
+ 1231 00ca 27       		.uleb128 0x27
+ 1232 00cb 19       		.uleb128 0x19
+ 1233 00cc 49       		.uleb128 0x49
+ 1234 00cd 13       		.uleb128 0x13
+ 1235 00ce 11       		.uleb128 0x11
+ 1236 00cf 01       		.uleb128 0x1
+ 1237 00d0 12       		.uleb128 0x12
+ 1238 00d1 06       		.uleb128 0x6
+ 1239 00d2 40       		.uleb128 0x40
+ 1240 00d3 18       		.uleb128 0x18
+ 1241 00d4 9742     		.uleb128 0x2117
+ 1242 00d6 19       		.uleb128 0x19
+ 1243 00d7 00       		.byte	0
+ 1244 00d8 00       		.byte	0
+ 1245 00d9 0D       		.uleb128 0xd
+ 1246 00da 2E       		.uleb128 0x2e
+ 1247 00db 01       		.byte	0x1
+ 1248 00dc 3F       		.uleb128 0x3f
+ 1249 00dd 19       		.uleb128 0x19
+ 1250 00de 03       		.uleb128 0x3
+ 1251 00df 0E       		.uleb128 0xe
+ 1252 00e0 3A       		.uleb128 0x3a
+ 1253 00e1 0B       		.uleb128 0xb
+ 1254 00e2 3B       		.uleb128 0x3b
+ 1255 00e3 05       		.uleb128 0x5
+ 1256 00e4 27       		.uleb128 0x27
+ 1257 00e5 19       		.uleb128 0x19
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 33
+
+
+ 1258 00e6 11       		.uleb128 0x11
+ 1259 00e7 01       		.uleb128 0x1
+ 1260 00e8 12       		.uleb128 0x12
+ 1261 00e9 06       		.uleb128 0x6
+ 1262 00ea 40       		.uleb128 0x40
+ 1263 00eb 18       		.uleb128 0x18
+ 1264 00ec 9742     		.uleb128 0x2117
+ 1265 00ee 19       		.uleb128 0x19
+ 1266 00ef 01       		.uleb128 0x1
+ 1267 00f0 13       		.uleb128 0x13
+ 1268 00f1 00       		.byte	0
+ 1269 00f2 00       		.byte	0
+ 1270 00f3 0E       		.uleb128 0xe
+ 1271 00f4 05       		.uleb128 0x5
+ 1272 00f5 00       		.byte	0
+ 1273 00f6 03       		.uleb128 0x3
+ 1274 00f7 0E       		.uleb128 0xe
+ 1275 00f8 3A       		.uleb128 0x3a
+ 1276 00f9 0B       		.uleb128 0xb
+ 1277 00fa 3B       		.uleb128 0x3b
+ 1278 00fb 05       		.uleb128 0x5
+ 1279 00fc 49       		.uleb128 0x49
+ 1280 00fd 13       		.uleb128 0x13
+ 1281 00fe 02       		.uleb128 0x2
+ 1282 00ff 18       		.uleb128 0x18
+ 1283 0100 00       		.byte	0
+ 1284 0101 00       		.byte	0
+ 1285 0102 0F       		.uleb128 0xf
+ 1286 0103 2E       		.uleb128 0x2e
+ 1287 0104 00       		.byte	0
+ 1288 0105 3F       		.uleb128 0x3f
+ 1289 0106 19       		.uleb128 0x19
+ 1290 0107 03       		.uleb128 0x3
+ 1291 0108 0E       		.uleb128 0xe
+ 1292 0109 3A       		.uleb128 0x3a
+ 1293 010a 0B       		.uleb128 0xb
+ 1294 010b 3B       		.uleb128 0x3b
+ 1295 010c 05       		.uleb128 0x5
+ 1296 010d 27       		.uleb128 0x27
+ 1297 010e 19       		.uleb128 0x19
+ 1298 010f 11       		.uleb128 0x11
+ 1299 0110 01       		.uleb128 0x1
+ 1300 0111 12       		.uleb128 0x12
+ 1301 0112 06       		.uleb128 0x6
+ 1302 0113 40       		.uleb128 0x40
+ 1303 0114 18       		.uleb128 0x18
+ 1304 0115 9642     		.uleb128 0x2116
+ 1305 0117 19       		.uleb128 0x19
+ 1306 0118 00       		.byte	0
+ 1307 0119 00       		.byte	0
+ 1308 011a 10       		.uleb128 0x10
+ 1309 011b 34       		.uleb128 0x34
+ 1310 011c 00       		.byte	0
+ 1311 011d 03       		.uleb128 0x3
+ 1312 011e 0E       		.uleb128 0xe
+ 1313 011f 3A       		.uleb128 0x3a
+ 1314 0120 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 34
+
+
+ 1315 0121 3B       		.uleb128 0x3b
+ 1316 0122 0B       		.uleb128 0xb
+ 1317 0123 49       		.uleb128 0x49
+ 1318 0124 13       		.uleb128 0x13
+ 1319 0125 3F       		.uleb128 0x3f
+ 1320 0126 19       		.uleb128 0x19
+ 1321 0127 02       		.uleb128 0x2
+ 1322 0128 18       		.uleb128 0x18
+ 1323 0129 00       		.byte	0
+ 1324 012a 00       		.byte	0
+ 1325 012b 00       		.byte	0
+ 1326              		.section	.debug_aranges,"",%progbits
+ 1327 0000 94000000 		.4byte	0x94
+ 1328 0004 0200     		.2byte	0x2
+ 1329 0006 00000000 		.4byte	.Ldebug_info0
+ 1330 000a 04       		.byte	0x4
+ 1331 000b 00       		.byte	0
+ 1332 000c 0000     		.2byte	0
+ 1333 000e 0000     		.2byte	0
+ 1334 0010 00000000 		.4byte	.LFB0
+ 1335 0014 84000000 		.4byte	.LFE0-.LFB0
+ 1336 0018 00000000 		.4byte	.LFB1
+ 1337 001c 20000000 		.4byte	.LFE1-.LFB1
+ 1338 0020 00000000 		.4byte	.LFB2
+ 1339 0024 24000000 		.4byte	.LFE2-.LFB2
+ 1340 0028 00000000 		.4byte	.LFB3
+ 1341 002c 20000000 		.4byte	.LFE3-.LFB3
+ 1342 0030 00000000 		.4byte	.LFB4
+ 1343 0034 20000000 		.4byte	.LFE4-.LFB4
+ 1344 0038 00000000 		.4byte	.LFB5
+ 1345 003c 18000000 		.4byte	.LFE5-.LFB5
+ 1346 0040 00000000 		.4byte	.LFB6
+ 1347 0044 18000000 		.4byte	.LFE6-.LFB6
+ 1348 0048 00000000 		.4byte	.LFB7
+ 1349 004c 20000000 		.4byte	.LFE7-.LFB7
+ 1350 0050 00000000 		.4byte	.LFB8
+ 1351 0054 1C000000 		.4byte	.LFE8-.LFB8
+ 1352 0058 00000000 		.4byte	.LFB9
+ 1353 005c 1C000000 		.4byte	.LFE9-.LFB9
+ 1354 0060 00000000 		.4byte	.LFB10
+ 1355 0064 14000000 		.4byte	.LFE10-.LFB10
+ 1356 0068 00000000 		.4byte	.LFB11
+ 1357 006c 1C000000 		.4byte	.LFE11-.LFB11
+ 1358 0070 00000000 		.4byte	.LFB12
+ 1359 0074 14000000 		.4byte	.LFE12-.LFB12
+ 1360 0078 00000000 		.4byte	.LFB13
+ 1361 007c 1C000000 		.4byte	.LFE13-.LFB13
+ 1362 0080 00000000 		.4byte	.LFB14
+ 1363 0084 14000000 		.4byte	.LFE14-.LFB14
+ 1364 0088 00000000 		.4byte	.LFB15
+ 1365 008c 1C000000 		.4byte	.LFE15-.LFB15
+ 1366 0090 00000000 		.4byte	0
+ 1367 0094 00000000 		.4byte	0
+ 1368              		.section	.debug_ranges,"",%progbits
+ 1369              	.Ldebug_ranges0:
+ 1370 0000 00000000 		.4byte	.LFB0
+ 1371 0004 84000000 		.4byte	.LFE0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 35
+
+
+ 1372 0008 00000000 		.4byte	.LFB1
+ 1373 000c 20000000 		.4byte	.LFE1
+ 1374 0010 00000000 		.4byte	.LFB2
+ 1375 0014 24000000 		.4byte	.LFE2
+ 1376 0018 00000000 		.4byte	.LFB3
+ 1377 001c 20000000 		.4byte	.LFE3
+ 1378 0020 00000000 		.4byte	.LFB4
+ 1379 0024 20000000 		.4byte	.LFE4
+ 1380 0028 00000000 		.4byte	.LFB5
+ 1381 002c 18000000 		.4byte	.LFE5
+ 1382 0030 00000000 		.4byte	.LFB6
+ 1383 0034 18000000 		.4byte	.LFE6
+ 1384 0038 00000000 		.4byte	.LFB7
+ 1385 003c 20000000 		.4byte	.LFE7
+ 1386 0040 00000000 		.4byte	.LFB8
+ 1387 0044 1C000000 		.4byte	.LFE8
+ 1388 0048 00000000 		.4byte	.LFB9
+ 1389 004c 1C000000 		.4byte	.LFE9
+ 1390 0050 00000000 		.4byte	.LFB10
+ 1391 0054 14000000 		.4byte	.LFE10
+ 1392 0058 00000000 		.4byte	.LFB11
+ 1393 005c 1C000000 		.4byte	.LFE11
+ 1394 0060 00000000 		.4byte	.LFB12
+ 1395 0064 14000000 		.4byte	.LFE12
+ 1396 0068 00000000 		.4byte	.LFB13
+ 1397 006c 1C000000 		.4byte	.LFE13
+ 1398 0070 00000000 		.4byte	.LFB14
+ 1399 0074 14000000 		.4byte	.LFE14
+ 1400 0078 00000000 		.4byte	.LFB15
+ 1401 007c 1C000000 		.4byte	.LFE15
+ 1402 0080 00000000 		.4byte	0
+ 1403 0084 00000000 		.4byte	0
+ 1404              		.section	.debug_line,"",%progbits
+ 1405              	.Ldebug_line0:
+ 1406 0000 83010000 		.section	.debug_str,"MS",%progbits,1
+ 1406      02004600 
+ 1406      00000201 
+ 1406      FB0E0D00 
+ 1406      01010101 
+ 1407              	.LASF14:
+ 1408 0000 72656733 		.ascii	"reg32\000"
+ 1408      3200
+ 1409              	.LASF18:
+ 1410 0006 436F756E 		.ascii	"Counter_1_interruptState\000"
+ 1410      7465725F 
+ 1410      315F696E 
+ 1410      74657272 
+ 1410      75707453 
+ 1411              	.LASF40:
+ 1412 001f 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1412      43313120 
+ 1412      352E342E 
+ 1412      31203230 
+ 1412      31363036 
+ 1413 0052 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1413      20726576 
+ 1413      6973696F 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 36
+
+
+ 1413      6E203233 
+ 1413      37373135 
+ 1414 0085 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1414      66756E63 
+ 1414      74696F6E 
+ 1414      2D736563 
+ 1414      74696F6E 
+ 1415              	.LASF27:
+ 1416 00ad 696E7465 		.ascii	"interruptsMask\000"
+ 1416      72727570 
+ 1416      74734D61 
+ 1416      736B00
+ 1417              	.LASF34:
+ 1418 00bc 70657269 		.ascii	"period\000"
+ 1418      6F6400
+ 1419              	.LASF3:
+ 1420 00c3 73686F72 		.ascii	"short unsigned int\000"
+ 1420      7420756E 
+ 1420      7369676E 
+ 1420      65642069 
+ 1420      6E7400
+ 1421              	.LASF26:
+ 1422 00d6 436F756E 		.ascii	"Counter_1_WriteControlRegister\000"
+ 1422      7465725F 
+ 1422      315F5772 
+ 1422      69746543 
+ 1422      6F6E7472 
+ 1423              	.LASF23:
+ 1424 00f5 436F756E 		.ascii	"Counter_1_SetInterruptMode\000"
+ 1424      7465725F 
+ 1424      315F5365 
+ 1424      74496E74 
+ 1424      65727275 
+ 1425              	.LASF31:
+ 1426 0110 436F756E 		.ascii	"Counter_1_ReadCounter\000"
+ 1426      7465725F 
+ 1426      315F5265 
+ 1426      6164436F 
+ 1426      756E7465 
+ 1427              	.LASF30:
+ 1428 0126 636F756E 		.ascii	"counter\000"
+ 1428      74657200 
+ 1429              	.LASF1:
+ 1430 012e 756E7369 		.ascii	"unsigned char\000"
+ 1430      676E6564 
+ 1430      20636861 
+ 1430      7200
+ 1431              	.LASF39:
+ 1432 013c 436F756E 		.ascii	"Counter_1_ClearFIFO\000"
+ 1432      7465725F 
+ 1432      315F436C 
+ 1432      65617246 
+ 1432      49464F00 
+ 1433              	.LASF13:
+ 1434 0150 72656738 		.ascii	"reg8\000"
+ 1434      00
+ 1435              	.LASF36:
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 37
+
+
+ 1436 0155 436F756E 		.ascii	"Counter_1_WriteCompare\000"
+ 1436      7465725F 
+ 1436      315F5772 
+ 1436      69746543 
+ 1436      6F6D7061 
+ 1437              	.LASF5:
+ 1438 016c 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1438      20756E73 
+ 1438      69676E65 
+ 1438      6420696E 
+ 1438      7400
+ 1439              	.LASF9:
+ 1440 017e 75696E74 		.ascii	"uint8\000"
+ 1440      3800
+ 1441              	.LASF28:
+ 1442 0184 636F6E74 		.ascii	"control\000"
+ 1442      726F6C00 
+ 1443              	.LASF32:
+ 1444 018c 436F756E 		.ascii	"Counter_1_ReadCapture\000"
+ 1444      7465725F 
+ 1444      315F5265 
+ 1444      61644361 
+ 1444      70747572 
+ 1445              	.LASF43:
+ 1446 01a2 436F756E 		.ascii	"Counter_1_initVar\000"
+ 1446      7465725F 
+ 1446      315F696E 
+ 1446      69745661 
+ 1446      7200
+ 1447              	.LASF24:
+ 1448 01b4 436F756E 		.ascii	"Counter_1_ReadStatusRegister\000"
+ 1448      7465725F 
+ 1448      315F5265 
+ 1448      61645374 
+ 1448      61747573 
+ 1449              	.LASF11:
+ 1450 01d1 646F7562 		.ascii	"double\000"
+ 1450      6C6500
+ 1451              	.LASF33:
+ 1452 01d8 436F756E 		.ascii	"Counter_1_WritePeriod\000"
+ 1452      7465725F 
+ 1452      315F5772 
+ 1452      69746550 
+ 1452      6572696F 
+ 1453              	.LASF10:
+ 1454 01ee 75696E74 		.ascii	"uint32\000"
+ 1454      333200
+ 1455              	.LASF35:
+ 1456 01f5 436F756E 		.ascii	"Counter_1_ReadPeriod\000"
+ 1456      7465725F 
+ 1456      315F5265 
+ 1456      61645065 
+ 1456      72696F64 
+ 1457              	.LASF7:
+ 1458 020a 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1458      206C6F6E 
+ 1458      6720756E 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 38
+
+
+ 1458      7369676E 
+ 1458      65642069 
+ 1459              	.LASF22:
+ 1460 0221 436F756E 		.ascii	"Counter_1_Init\000"
+ 1460      7465725F 
+ 1460      315F496E 
+ 1460      697400
+ 1461              	.LASF17:
+ 1462 0230 6374726C 		.ascii	"ctrl\000"
+ 1462      00
+ 1463              	.LASF42:
+ 1464 0235 433A5C55 		.ascii	"C:\\Users\\Albert\\Documents\\6115_fp\\IWP.cydsn\000"
+ 1464      73657273 
+ 1464      5C416C62 
+ 1464      6572745C 
+ 1464      446F6375 
+ 1465              	.LASF29:
+ 1466 0261 436F756E 		.ascii	"Counter_1_WriteCounter\000"
+ 1466      7465725F 
+ 1466      315F5772 
+ 1466      69746543 
+ 1466      6F756E74 
+ 1467              	.LASF16:
+ 1468 0278 73697A65 		.ascii	"sizetype\000"
+ 1468      74797065 
+ 1468      00
+ 1469              	.LASF6:
+ 1470 0281 6C6F6E67 		.ascii	"long long int\000"
+ 1470      206C6F6E 
+ 1470      6720696E 
+ 1470      7400
+ 1471              	.LASF12:
+ 1472 028f 63686172 		.ascii	"char\000"
+ 1472      00
+ 1473              	.LASF8:
+ 1474 0294 756E7369 		.ascii	"unsigned int\000"
+ 1474      676E6564 
+ 1474      20696E74 
+ 1474      00
+ 1475              	.LASF2:
+ 1476 02a1 73686F72 		.ascii	"short int\000"
+ 1476      7420696E 
+ 1476      7400
+ 1477              	.LASF41:
+ 1478 02ab 47656E65 		.ascii	"Generated_Source\\PSoC5\\Counter_1.c\000"
+ 1478      72617465 
+ 1478      645F536F 
+ 1478      75726365 
+ 1478      5C50536F 
+ 1479              	.LASF38:
+ 1480 02ce 436F756E 		.ascii	"Counter_1_ReadCompare\000"
+ 1480      7465725F 
+ 1480      315F5265 
+ 1480      6164436F 
+ 1480      6D706172 
+ 1481              	.LASF4:
+ 1482 02e4 6C6F6E67 		.ascii	"long int\000"
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cccAcjU0.s 			page 39
+
+
+ 1482      20696E74 
+ 1482      00
+ 1483              	.LASF20:
+ 1484 02ed 436F756E 		.ascii	"Counter_1_Start\000"
+ 1484      7465725F 
+ 1484      315F5374 
+ 1484      61727400 
+ 1485              	.LASF19:
+ 1486 02fd 436F756E 		.ascii	"Counter_1_Enable\000"
+ 1486      7465725F 
+ 1486      315F456E 
+ 1486      61626C65 
+ 1486      00
+ 1487              	.LASF15:
+ 1488 030e 6C6F6E67 		.ascii	"long double\000"
+ 1488      20646F75 
+ 1488      626C6500 
+ 1489              	.LASF0:
+ 1490 031a 7369676E 		.ascii	"signed char\000"
+ 1490      65642063 
+ 1490      68617200 
+ 1491              	.LASF37:
+ 1492 0326 636F6D70 		.ascii	"compare\000"
+ 1492      61726500 
+ 1493              	.LASF21:
+ 1494 032e 436F756E 		.ascii	"Counter_1_Stop\000"
+ 1494      7465725F 
+ 1494      315F5374 
+ 1494      6F7000
+ 1495              	.LASF25:
+ 1496 033d 436F756E 		.ascii	"Counter_1_ReadControlRegister\000"
+ 1496      7465725F 
+ 1496      315F5265 
+ 1496      6164436F 
+ 1496      6E74726F 
+ 1497              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

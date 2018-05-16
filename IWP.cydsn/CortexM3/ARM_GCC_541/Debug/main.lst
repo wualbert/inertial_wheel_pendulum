@@ -1,0 +1,1492 @@
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	thetaShoulder,80,8
+  20              		.comm	thetaWheel,80,8
+  21              		.comm	torque,80,8
+  22              		.comm	thetaWheelDot,80,8
+  23              		.comm	thetaShoulderDot,80,8
+  24              		.global	iError
+  25              		.bss
+  26              		.align	3
+  27              		.type	iError, %object
+  28              		.size	iError, 8
+  29              	iError:
+  30 0000 00000000 		.space	8
+  30      00000000 
+  31              		.comm	positiveFreeTorque,8,8
+  32              		.comm	negativeFreeTorque,8,8
+  33              		.comm	enableMotor,1,1
+  34              		.comm	sampleADC,1,1
+  35              		.section	.text.isr_1_ISR,"ax",%progbits
+  36              		.align	2
+  37              		.global	isr_1_ISR
+  38              		.thumb
+  39              		.thumb_func
+  40              		.type	isr_1_ISR, %function
+  41              	isr_1_ISR:
+  42              	.LFB63:
+  43              		.file 1 "main.c"
+   1:main.c        **** /* ========================================
+   2:main.c        ****  *
+   3:main.c        ****  * Copyright Albert Wu, 2018
+   4:main.c        ****  * All Rights Reserved
+   5:main.c        ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:main.c        ****  *
+   7:main.c        ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:main.c        ****  * WHICH IS THE PROPERTY OF MIT 6.115.
+   9:main.c        ****  *
+  10:main.c        ****  * This file is necessary for your project to build.
+  11:main.c        ****  * Please do not delete it.
+  12:main.c        ****  *
+  13:main.c        ****  * ========================================
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 2
+
+
+  14:main.c        **** */
+  15:main.c        **** 
+  16:main.c        **** //#define TEST
+  17:main.c        **** //#define TEST_DEC
+  18:main.c        **** //#define TEST_THETA_WHEEL
+  19:main.c        **** //#define TEST_THETA_SHOULDER
+  20:main.c        **** //#define TEST_COMM
+  21:main.c        **** //#define TEST_ADC
+  22:main.c        **** //#define TEST_PRINT_double
+  23:main.c        **** //#define TEST_I_SENSING
+  24:main.c        **** //#define TEST_TORQUE_CONTROLLER
+  25:main.c        **** //#define TEST_STRUCT
+  26:main.c        **** //#define TEST_TORQUE_SENSING
+  27:main.c        **** //#define TESE_TORQUE_TRACKING
+  28:main.c        **** //#define TEST_RUNNING_AVG
+  29:main.c        **** //#define TEST_KT
+  30:main.c        **** //#define TEST_TIME
+  31:main.c        **** //end
+  32:main.c        **** 
+  33:main.c        **** 
+  34:main.c        **** #include <device.h>
+  35:main.c        **** #include "sensorStructs.h"
+  36:main.c        **** #include "hardware.h"
+  37:main.c        **** #include "controllers.h"
+  38:main.c        **** #include "controlParameters.h"
+  39:main.c        **** #ifdef TEST
+  40:main.c        ****     #include "test.h"
+  41:main.c        **** #endif
+  42:main.c        **** 
+  43:main.c        **** //Initialize global sensor variables
+  44:main.c        **** MemoryVariable thetaShoulder;
+  45:main.c        **** MemoryVariable thetaWheel;
+  46:main.c        **** MemoryVariable torque;
+  47:main.c        **** MemoryVariable thetaWheelDot;
+  48:main.c        **** MemoryVariable thetaShoulderDot;
+  49:main.c        **** 
+  50:main.c        **** double iError =0;
+  51:main.c        **** 
+  52:main.c        **** double positiveFreeTorque;
+  53:main.c        **** double negativeFreeTorque;
+  54:main.c        **** //On-off switch
+  55:main.c        **** _Bool enableMotor;
+  56:main.c        **** _Bool sampleADC;
+  57:main.c        **** /*
+  58:main.c        **** int RUNNING_AVG_SAMPLES=500.0;
+  59:main.c        **** double adcRunningAvg;
+  60:main.c        **** */
+  61:main.c        **** CY_ISR(isr_1_ISR)
+  62:main.c        **** {
+  44              		.loc 1 62 0
+  45              		.cfi_startproc
+  46              		@ args = 0, pretend = 0, frame = 0
+  47              		@ frame_needed = 1, uses_anonymous_args = 0
+  48              		@ link register save eliminated.
+  49 0000 80B4     		push	{r7}
+  50              		.cfi_def_cfa_offset 4
+  51              		.cfi_offset 7, -4
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 3
+
+
+  52 0002 00AF     		add	r7, sp, #0
+  53              		.cfi_def_cfa_register 7
+  63:main.c        ****     enableMotor = !enableMotor; //toggle motor
+  54              		.loc 1 63 0
+  55 0004 094B     		ldr	r3, .L2
+  56 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  57 0008 002B     		cmp	r3, #0
+  58 000a 14BF     		ite	ne
+  59 000c 0123     		movne	r3, #1
+  60 000e 0023     		moveq	r3, #0
+  61 0010 DBB2     		uxtb	r3, r3
+  62 0012 83F00103 		eor	r3, r3, #1
+  63 0016 DBB2     		uxtb	r3, r3
+  64 0018 03F00103 		and	r3, r3, #1
+  65 001c DAB2     		uxtb	r2, r3
+  66 001e 034B     		ldr	r3, .L2
+  67 0020 1A70     		strb	r2, [r3]
+  64:main.c        **** }
+  68              		.loc 1 64 0
+  69 0022 00BF     		nop
+  70 0024 BD46     		mov	sp, r7
+  71              		.cfi_def_cfa_register 13
+  72              		@ sp needed
+  73 0026 80BC     		pop	{r7}
+  74              		.cfi_restore 7
+  75              		.cfi_def_cfa_offset 0
+  76 0028 7047     		bx	lr
+  77              	.L3:
+  78 002a 00BF     		.align	2
+  79              	.L2:
+  80 002c 00000000 		.word	enableMotor
+  81              		.cfi_endproc
+  82              	.LFE63:
+  83              		.size	isr_1_ISR, .-isr_1_ISR
+  84              		.section	.text.isr_2_ISR,"ax",%progbits
+  85              		.align	2
+  86              		.global	isr_2_ISR
+  87              		.thumb
+  88              		.thumb_func
+  89              		.type	isr_2_ISR, %function
+  90              	isr_2_ISR:
+  91              	.LFB64:
+  65:main.c        **** CY_ISR(isr_2_ISR)
+  66:main.c        **** {
+  92              		.loc 1 66 0
+  93              		.cfi_startproc
+  94              		@ args = 0, pretend = 0, frame = 0
+  95              		@ frame_needed = 1, uses_anonymous_args = 0
+  96              		@ link register save eliminated.
+  97 0000 80B4     		push	{r7}
+  98              		.cfi_def_cfa_offset 4
+  99              		.cfi_offset 7, -4
+ 100 0002 00AF     		add	r7, sp, #0
+ 101              		.cfi_def_cfa_register 7
+  67:main.c        ****     sampleADC = 1;
+ 102              		.loc 1 67 0
+ 103 0004 034B     		ldr	r3, .L5
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 4
+
+
+ 104 0006 0122     		movs	r2, #1
+ 105 0008 1A70     		strb	r2, [r3]
+  68:main.c        **** }
+ 106              		.loc 1 68 0
+ 107 000a 00BF     		nop
+ 108 000c BD46     		mov	sp, r7
+ 109              		.cfi_def_cfa_register 13
+ 110              		@ sp needed
+ 111 000e 80BC     		pop	{r7}
+ 112              		.cfi_restore 7
+ 113              		.cfi_def_cfa_offset 0
+ 114 0010 7047     		bx	lr
+ 115              	.L6:
+ 116 0012 00BF     		.align	2
+ 117              	.L5:
+ 118 0014 00000000 		.word	sampleADC
+ 119              		.cfi_endproc
+ 120              	.LFE64:
+ 121              		.size	isr_2_ISR, .-isr_2_ISR
+ 122              		.section	.rodata
+ 123              		.align	2
+ 124              	.LC0:
+ 125 0000 496E6974 		.ascii	"Init HW...\000"
+ 125      2048572E 
+ 125      2E2E00
+ 126 000b 00       		.align	2
+ 127              	.LC1:
+ 128 000c 43616C69 		.ascii	"Calibrating\000"
+ 128      62726174 
+ 128      696E6700 
+ 129              		.align	2
+ 130              	.LC2:
+ 131 0018 446F6E27 		.ascii	"Don't move...\000"
+ 131      74206D6F 
+ 131      76652E2E 
+ 131      2E00
+ 132 0026 0000     		.align	2
+ 133              	.LC3:
+ 134 0028 52656164 		.ascii	"Ready!\000"
+ 134      792100
+ 135 002f 00       		.align	2
+ 136              	.LC4:
+ 137 0030 53746172 		.ascii	"Starting...\000"
+ 137      74696E67 
+ 137      2E2E2E00 
+ 138              		.align	2
+ 139              	.LC5:
+ 140 003c 4C515200 		.ascii	"LQR\000"
+ 141              		.align	2
+ 142              	.LC6:
+ 143 0040 456E6572 		.ascii	"Energy\000"
+ 143      677900
+ 144 0047 00       		.align	2
+ 145              	.LC7:
+ 146 0048 6D546865 		.ascii	"mTheta:\000"
+ 146      74613A00 
+ 147              		.global	__aeabi_dmul
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 5
+
+
+ 148              		.section	.text.main,"ax",%progbits
+ 149              		.align	2
+ 150              		.global	main
+ 151              		.thumb
+ 152              		.thumb_func
+ 153              		.type	main, %function
+ 154              	main:
+ 155              	.LFB65:
+  69:main.c        **** 
+  70:main.c        **** 
+  71:main.c        **** void main()
+  72:main.c        **** {	
+ 156              		.loc 1 72 0
+ 157              		.cfi_startproc
+ 158              		@ args = 0, pretend = 0, frame = 96
+ 159              		@ frame_needed = 1, uses_anonymous_args = 0
+ 160 0000 90B5     		push	{r4, r7, lr}
+ 161              		.cfi_def_cfa_offset 12
+ 162              		.cfi_offset 4, -12
+ 163              		.cfi_offset 7, -8
+ 164              		.cfi_offset 14, -4
+ 165 0002 99B0     		sub	sp, sp, #100
+ 166              		.cfi_def_cfa_offset 112
+ 167 0004 00AF     		add	r7, sp, #0
+ 168              		.cfi_def_cfa_register 7
+  73:main.c        ****     //Enable interrupts
+  74:main.c        ****     CYGlobalIntEnable;
+ 169              		.loc 1 74 0
+ 170              		.syntax unified
+ 171              	@ 74 "main.c" 1
+ 172 0006 62B6     		CPSIE   i
+ 173              	@ 0 "" 2
+  75:main.c        ****     isr_1_StartEx(isr_1_ISR);    
+ 174              		.loc 1 75 0
+ 175              		.thumb
+ 176              		.syntax unified
+ 177 0008 6C48     		ldr	r0, .L15
+ 178 000a FFF7FEFF 		bl	isr_1_StartEx
+  76:main.c        ****     isr_2_StartEx(isr_2_ISR);    
+ 179              		.loc 1 76 0
+ 180 000e 6C48     		ldr	r0, .L15+4
+ 181 0010 FFF7FEFF 		bl	isr_2_StartEx
+  77:main.c        ****     //Initialize LCD
+  78:main.c        ****     LCD_Start();					    
+ 182              		.loc 1 78 0
+ 183 0014 FFF7FEFF 		bl	LCD_Start
+  79:main.c        ****     LCD_ClearDisplay();
+ 184              		.loc 1 79 0
+ 185 0018 0120     		movs	r0, #1
+ 186 001a FFF7FEFF 		bl	LCD_WriteControl
+  80:main.c        ****     LCD_PrintString("Init HW...");
+ 187              		.loc 1 80 0
+ 188 001e 6948     		ldr	r0, .L15+8
+ 189 0020 FFF7FEFF 		bl	LCD_PrintString
+  81:main.c        ****     //Initialize hardware
+  82:main.c        ****     Clock_1_Start();
+ 190              		.loc 1 82 0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 6
+
+
+ 191 0024 FFF7FEFF 		bl	Clock_1_Start
+  83:main.c        ****     Clock_2_Start();
+ 192              		.loc 1 83 0
+ 193 0028 FFF7FEFF 		bl	Clock_2_Start
+  84:main.c        ****     Clock_3_Start();
+ 194              		.loc 1 84 0
+ 195 002c FFF7FEFF 		bl	Clock_3_Start
+  85:main.c        ****     Clock_Enc_Motor_Start();
+ 196              		.loc 1 85 0
+ 197 0030 FFF7FEFF 		bl	Clock_Enc_Motor_Start
+  86:main.c        ****     Clock_Enc_Shoulder_Start();
+ 198              		.loc 1 86 0
+ 199 0034 FFF7FEFF 		bl	Clock_Enc_Shoulder_Start
+  87:main.c        ****     Counter_1_Start();
+ 200              		.loc 1 87 0
+ 201 0038 FFF7FEFF 		bl	Counter_1_Start
+  88:main.c        ****     initADC();
+ 202              		.loc 1 88 0
+ 203 003c FFF7FEFF 		bl	initADC
+  89:main.c        ****     initQuadDec();
+ 204              		.loc 1 89 0
+ 205 0040 FFF7FEFF 		bl	initQuadDec
+  90:main.c        ****     initUART();
+ 206              		.loc 1 90 0
+ 207 0044 FFF7FEFF 		bl	initUART
+  91:main.c        ****     
+  92:main.c        ****     CyDelay(50);
+ 208              		.loc 1 92 0
+ 209 0048 3220     		movs	r0, #50
+ 210 004a FFF7FEFF 		bl	CyDelay
+  93:main.c        ****     LCD_ClearDisplay();
+ 211              		.loc 1 93 0
+ 212 004e 0120     		movs	r0, #1
+ 213 0050 FFF7FEFF 		bl	LCD_WriteControl
+  94:main.c        ****     LCD_PrintString("Calibrating");
+ 214              		.loc 1 94 0
+ 215 0054 5C48     		ldr	r0, .L15+12
+ 216 0056 FFF7FEFF 		bl	LCD_PrintString
+  95:main.c        ****     LCD_Position(1, 0);  //line feed
+ 217              		.loc 1 95 0
+ 218 005a 0021     		movs	r1, #0
+ 219 005c 0120     		movs	r0, #1
+ 220 005e FFF7FEFF 		bl	LCD_Position
+  96:main.c        ****     LCD_PrintString("Don't move...");
+ 221              		.loc 1 96 0
+ 222 0062 5A48     		ldr	r0, .L15+16
+ 223 0064 FFF7FEFF 		bl	LCD_PrintString
+  97:main.c        ****     //set getter
+  98:main.c        ****     thetaShoulder.valueGetter = &getShoulderAngleReading;
+ 224              		.loc 1 98 0
+ 225 0068 594B     		ldr	r3, .L15+20
+ 226 006a 5A4A     		ldr	r2, .L15+24
+ 227 006c 9A64     		str	r2, [r3, #72]
+  99:main.c        ****     thetaWheel.valueGetter = &getMotorAngleReading;
+ 228              		.loc 1 99 0
+ 229 006e 5A4B     		ldr	r3, .L15+28
+ 230 0070 5A4A     		ldr	r2, .L15+32
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 7
+
+
+ 231 0072 9A64     		str	r2, [r3, #72]
+ 100:main.c        ****     torque.valueGetter = &getTorque;
+ 232              		.loc 1 100 0
+ 233 0074 5A4B     		ldr	r3, .L15+36
+ 234 0076 5B4A     		ldr	r2, .L15+40
+ 235 0078 9A64     		str	r2, [r3, #72]
+ 101:main.c        ****     MemoryVariable freeTorque;
+ 102:main.c        ****     freeTorque.valueGetter = &getTorque;
+ 236              		.loc 1 102 0
+ 237 007a 5A4B     		ldr	r3, .L15+40
+ 238 007c BB64     		str	r3, [r7, #72]
+ 103:main.c        ****     //zero variables
+ 104:main.c        ****     initToZero(&thetaShoulder);
+ 239              		.loc 1 104 0
+ 240 007e 5448     		ldr	r0, .L15+20
+ 241 0080 FFF7FEFF 		bl	initToZero
+ 105:main.c        ****     initToZero(&thetaWheel);
+ 242              		.loc 1 105 0
+ 243 0084 5448     		ldr	r0, .L15+28
+ 244 0086 FFF7FEFF 		bl	initToZero
+ 106:main.c        ****     initToZero(&torque);
+ 245              		.loc 1 106 0
+ 246 008a 5548     		ldr	r0, .L15+36
+ 247 008c FFF7FEFF 		bl	initToZero
+ 107:main.c        ****     enableMotor=0;
+ 248              		.loc 1 107 0
+ 249 0090 554B     		ldr	r3, .L15+44
+ 250 0092 0022     		movs	r2, #0
+ 251 0094 1A70     		strb	r2, [r3]
+ 108:main.c        ****     //Set positive and negative null current
+ 109:main.c        ****     sendValue(0,1);
+ 252              		.loc 1 109 0
+ 253 0096 0121     		movs	r1, #1
+ 254 0098 0020     		movs	r0, #0
+ 255 009a FFF7FEFF 		bl	sendValue
+ 110:main.c        ****     CyDelay(100);
+ 256              		.loc 1 110 0
+ 257 009e 6420     		movs	r0, #100
+ 258 00a0 FFF7FEFF 		bl	CyDelay
+ 111:main.c        ****     initToZero(&freeTorque);
+ 259              		.loc 1 111 0
+ 260 00a4 3B46     		mov	r3, r7
+ 261 00a6 1846     		mov	r0, r3
+ 262 00a8 FFF7FEFF 		bl	initToZero
+ 112:main.c        ****     positiveFreeTorque = freeTorque.offset;
+ 263              		.loc 1 112 0
+ 264 00ac D7E91034 		ldrd	r3, [r7, #64]
+ 265 00b0 4E4A     		ldr	r2, .L15+48
+ 266 00b2 C2E90034 		strd	r3, [r2]
+ 113:main.c        ****     CyDelay(100);
+ 267              		.loc 1 113 0
+ 268 00b6 6420     		movs	r0, #100
+ 269 00b8 FFF7FEFF 		bl	CyDelay
+ 114:main.c        ****     sendValue(0,0);
+ 270              		.loc 1 114 0
+ 271 00bc 0021     		movs	r1, #0
+ 272 00be 0020     		movs	r0, #0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 8
+
+
+ 273 00c0 FFF7FEFF 		bl	sendValue
+ 115:main.c        ****     initToZero(&freeTorque);
+ 274              		.loc 1 115 0
+ 275 00c4 3B46     		mov	r3, r7
+ 276 00c6 1846     		mov	r0, r3
+ 277 00c8 FFF7FEFF 		bl	initToZero
+ 116:main.c        ****     negativeFreeTorque = freeTorque.offset;
+ 278              		.loc 1 116 0
+ 279 00cc D7E91034 		ldrd	r3, [r7, #64]
+ 280 00d0 474A     		ldr	r2, .L15+52
+ 281 00d2 C2E90034 		strd	r3, [r2]
+ 117:main.c        ****     
+ 118:main.c        ****     
+ 119:main.c        ****     LCD_ClearDisplay();
+ 282              		.loc 1 119 0
+ 283 00d6 0120     		movs	r0, #1
+ 284 00d8 FFF7FEFF 		bl	LCD_WriteControl
+ 120:main.c        ****     LCD_PrintString("Ready!");
+ 285              		.loc 1 120 0
+ 286 00dc 4548     		ldr	r0, .L15+56
+ 287 00de FFF7FEFF 		bl	LCD_PrintString
+ 121:main.c        ****     while(!enableMotor)
+ 288              		.loc 1 121 0
+ 289 00e2 00BF     		nop
+ 290              	.L8:
+ 291              		.loc 1 121 0 is_stmt 0 discriminator 1
+ 292 00e4 404B     		ldr	r3, .L15+44
+ 293 00e6 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 294 00e8 83F00103 		eor	r3, r3, #1
+ 295 00ec DBB2     		uxtb	r3, r3
+ 296 00ee 002B     		cmp	r3, #0
+ 297 00f0 F8D1     		bne	.L8
+ 122:main.c        ****     {
+ 123:main.c        ****     }
+ 124:main.c        ****     LCD_ClearDisplay();
+ 298              		.loc 1 124 0 is_stmt 1
+ 299 00f2 0120     		movs	r0, #1
+ 300 00f4 FFF7FEFF 		bl	LCD_WriteControl
+ 125:main.c        ****     LCD_PrintString("Starting...");
+ 301              		.loc 1 125 0
+ 302 00f8 3F48     		ldr	r0, .L15+60
+ 303 00fa FFF7FEFF 		bl	LCD_PrintString
+ 126:main.c        ****     
+ 127:main.c        ****     #ifdef TEST
+ 128:main.c        ****         //sensor testing mode
+ 129:main.c        ****         //initialize sensors
+ 130:main.c        ****         initTests();
+ 131:main.c        ****         int pause = 50;
+ 132:main.c        ****         while(1)
+ 133:main.c        ****         {
+ 134:main.c        ****             #ifdef TEST_DEC
+ 135:main.c        ****             testDec();
+ 136:main.c        ****             CyDelay(pause);
+ 137:main.c        ****             #endif
+ 138:main.c        ****             #ifdef TEST_THETA_WHEEL
+ 139:main.c        ****             testThetaWheel();
+ 140:main.c        ****             CyDelay(pause);
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 9
+
+
+ 141:main.c        ****             #endif
+ 142:main.c        ****             #ifdef TEST_THETA_SHOULDER
+ 143:main.c        ****             testThetaShoulder();
+ 144:main.c        ****             CyDelay(pause);
+ 145:main.c        ****             #endif
+ 146:main.c        ****             #ifdef TEST_ADC
+ 147:main.c        ****             testADC();
+ 148:main.c        ****             CyDelay(pause);
+ 149:main.c        ****             #endif
+ 150:main.c        ****             #ifdef TEST_COMM
+ 151:main.c        ****             testComm();
+ 152:main.c        ****             CyDelay(pause);
+ 153:main.c        ****             #endif
+ 154:main.c        ****             #ifdef TEST_PRINT_double
+ 155:main.c        ****             testPrintdouble();
+ 156:main.c        ****             #endif
+ 157:main.c        ****             #ifdef TEST_I_SENSING
+ 158:main.c        ****             testISensing();
+ 159:main.c        ****             CyDelay(pause);
+ 160:main.c        ****             #endif
+ 161:main.c        ****             #ifdef TEST_TORQUE_CONTROLLER
+ 162:main.c        ****             testTorqueController();
+ 163:main.c        ****             CyDelay(pause);
+ 164:main.c        ****             #endif
+ 165:main.c        ****             #ifdef TEST_STRUCT
+ 166:main.c        ****                 LCD_ClearDisplay();
+ 167:main.c        ****                 printdouble(getValue(&thetaWheel),3);
+ 168:main.c        ****                 LCD_Position(1, 0);  //line feed
+ 169:main.c        ****                 printdouble(getDerivative(&thetaWheel),3);
+ 170:main.c        ****                 CyDelay(50);
+ 171:main.c        ****             #endif
+ 172:main.c        ****             #ifdef TEST_TORQUE_SENSING
+ 173:main.c        ****                 LCD_ClearDisplay();
+ 174:main.c        ****                 printdouble(getValue(&torque),3);
+ 175:main.c        ****                 CyDelay(50);
+ 176:main.c        ****             #endif
+ 177:main.c        ****             #ifdef TEST_RUNNING_AVG
+ 178:main.c        ****                 LCD_ClearDisplay();
+ 179:main.c        ****                 printdouble(adcRunningAvg,0);
+ 180:main.c        ****                 CyDelay(50);
+ 181:main.c        ****             #endif
+ 182:main.c        ****             #ifdef TEST_KT
+ 183:main.c        ****                 LCD_ClearDisplay();
+ 184:main.c        ****                 printdouble(getValue(&thetaWheel),3);
+ 185:main.c        ****                 LCD_Position(1, 0);  //line feed
+ 186:main.c        ****                 printdouble(getDerivativeWithoutUpdate(&thetaWheel),3);
+ 187:main.c        ****                 CyDelay(50);
+ 188:main.c        ****             #endif
+ 189:main.c        ****             #ifdef TEST_TIME
+ 190:main.c        ****                 LCD_ClearDisplay();
+ 191:main.c        ****                 getValue(&thetaShoulder);
+ 192:main.c        ****                 printdouble(getTime(&thetaShoulder),3);
+ 193:main.c        ****                 CyDelay(200);
+ 194:main.c        ****             #endif
+ 195:main.c        ****         }
+ 196:main.c        ****         
+ 197:main.c        ****     #endif
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 10
+
+
+ 198:main.c        ****     
+ 199:main.c        ****     #ifndef TEST
+ 200:main.c        ****     //regular operation
+ 201:main.c        ****     double u = 0;
+ 304              		.loc 1 201 0
+ 305 00fe 4FF00003 		mov	r3, #0
+ 306 0102 4FF00004 		mov	r4, #0
+ 307 0106 C7E91634 		strd	r3, [r7, #88]
+ 202:main.c        ****     int i = 0;
+ 308              		.loc 1 202 0
+ 309 010a 0023     		movs	r3, #0
+ 310 010c 7B65     		str	r3, [r7, #84]
+ 311              	.L14:
+ 203:main.c        ****     while(1)
+ 204:main.c        ****     {
+ 205:main.c        ****         i++;
+ 312              		.loc 1 205 0
+ 313 010e 7B6D     		ldr	r3, [r7, #84]
+ 314 0110 0133     		adds	r3, r3, #1
+ 315 0112 7B65     		str	r3, [r7, #84]
+ 206:main.c        ****         if(inLQRRange())
+ 316              		.loc 1 206 0
+ 317 0114 FFF7FEFF 		bl	inLQRRange
+ 318 0118 0346     		mov	r3, r0
+ 319 011a 002B     		cmp	r3, #0
+ 320 011c 11D0     		beq	.L9
+ 207:main.c        ****         {
+ 208:main.c        ****             if(i==3)
+ 321              		.loc 1 208 0
+ 322 011e 7B6D     		ldr	r3, [r7, #84]
+ 323 0120 032B     		cmp	r3, #3
+ 324 0122 09D1     		bne	.L10
+ 209:main.c        ****             {
+ 210:main.c        ****                 LCD_ClearDisplay();
+ 325              		.loc 1 210 0
+ 326 0124 0120     		movs	r0, #1
+ 327 0126 FFF7FEFF 		bl	LCD_WriteControl
+ 211:main.c        ****                 LCD_PrintString("LQR");
+ 328              		.loc 1 211 0
+ 329 012a 3448     		ldr	r0, .L15+64
+ 330 012c FFF7FEFF 		bl	LCD_PrintString
+ 212:main.c        ****                 LCD_Position(1, 0);  //line feed
+ 331              		.loc 1 212 0
+ 332 0130 0021     		movs	r1, #0
+ 333 0132 0120     		movs	r0, #1
+ 334 0134 FFF7FEFF 		bl	LCD_Position
+ 335              	.L10:
+ 213:main.c        ****             }
+ 214:main.c        ****             u = lqrController();
+ 336              		.loc 1 214 0
+ 337 0138 FFF7FEFF 		bl	lqrController
+ 338 013c C7E91601 		strd	r0, [r7, #88]
+ 339 0140 17E0     		b	.L11
+ 340              	.L9:
+ 215:main.c        ****         }
+ 216:main.c        ****         else
+ 217:main.c        ****         {
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 11
+
+
+ 218:main.c        ****             if(i==3)
+ 341              		.loc 1 218 0
+ 342 0142 7B6D     		ldr	r3, [r7, #84]
+ 343 0144 032B     		cmp	r3, #3
+ 344 0146 09D1     		bne	.L12
+ 219:main.c        ****             {
+ 220:main.c        ****                 LCD_ClearDisplay();
+ 345              		.loc 1 220 0
+ 346 0148 0120     		movs	r0, #1
+ 347 014a FFF7FEFF 		bl	LCD_WriteControl
+ 221:main.c        ****                 LCD_PrintString("Energy");
+ 348              		.loc 1 221 0
+ 349 014e 2C48     		ldr	r0, .L15+68
+ 350 0150 FFF7FEFF 		bl	LCD_PrintString
+ 222:main.c        ****                 LCD_Position(1, 0);  //line feed
+ 351              		.loc 1 222 0
+ 352 0154 0021     		movs	r1, #0
+ 353 0156 0120     		movs	r0, #1
+ 354 0158 FFF7FEFF 		bl	LCD_Position
+ 355              	.L12:
+ 223:main.c        ****             }
+ 224:main.c        ****             u = energyController();
+ 356              		.loc 1 224 0
+ 357 015c FFF7FEFF 		bl	energyController
+ 358 0160 C7E91601 		strd	r0, [r7, #88]
+ 225:main.c        ****             iError = 0;
+ 359              		.loc 1 225 0
+ 360 0164 274A     		ldr	r2, .L15+72
+ 361 0166 4FF00003 		mov	r3, #0
+ 362 016a 4FF00004 		mov	r4, #0
+ 363 016e C2E90034 		strd	r3, [r2]
+ 364              	.L11:
+ 226:main.c        ****         }
+ 227:main.c        ****         if(i==3)
+ 365              		.loc 1 227 0
+ 366 0172 7B6D     		ldr	r3, [r7, #84]
+ 367 0174 032B     		cmp	r3, #3
+ 368 0176 19D1     		bne	.L13
+ 228:main.c        ****         {
+ 229:main.c        ****             LCD_PrintString("mTheta:");
+ 369              		.loc 1 229 0
+ 370 0178 2348     		ldr	r0, .L15+76
+ 371 017a FFF7FEFF 		bl	LCD_PrintString
+ 230:main.c        ****             printdouble(wrapAngle(getValueWithoutUpdate(&thetaShoulder))*1e3,0);
+ 372              		.loc 1 230 0
+ 373 017e 1448     		ldr	r0, .L15+20
+ 374 0180 FFF7FEFF 		bl	getValueWithoutUpdate
+ 375 0184 0346     		mov	r3, r0
+ 376 0186 0C46     		mov	r4, r1
+ 377 0188 1846     		mov	r0, r3
+ 378 018a 2146     		mov	r1, r4
+ 379 018c FFF7FEFF 		bl	wrapAngle
+ 380 0190 4FF00002 		mov	r2, #0
+ 381 0194 1D4B     		ldr	r3, .L15+80
+ 382 0196 FFF7FEFF 		bl	__aeabi_dmul
+ 383 019a 0346     		mov	r3, r0
+ 384 019c 0C46     		mov	r4, r1
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 12
+
+
+ 385 019e 0022     		movs	r2, #0
+ 386 01a0 1846     		mov	r0, r3
+ 387 01a2 2146     		mov	r1, r4
+ 388 01a4 FFF7FEFF 		bl	printdouble
+ 231:main.c        ****             i=0;
+ 389              		.loc 1 231 0
+ 390 01a8 0023     		movs	r3, #0
+ 391 01aa 7B65     		str	r3, [r7, #84]
+ 392              	.L13:
+ 232:main.c        ****         }
+ 233:main.c        ****         setTorque(u,1,1);
+ 393              		.loc 1 233 0
+ 394 01ac 0123     		movs	r3, #1
+ 395 01ae 0122     		movs	r2, #1
+ 396 01b0 D7E91601 		ldrd	r0, [r7, #88]
+ 397 01b4 FFF7FEFF 		bl	setTorque
+ 234:main.c        ****     }
+ 398              		.loc 1 234 0
+ 399 01b8 A9E7     		b	.L14
+ 400              	.L16:
+ 401 01ba 00BF     		.align	2
+ 402              	.L15:
+ 403 01bc 00000000 		.word	isr_1_ISR
+ 404 01c0 00000000 		.word	isr_2_ISR
+ 405 01c4 00000000 		.word	.LC0
+ 406 01c8 0C000000 		.word	.LC1
+ 407 01cc 18000000 		.word	.LC2
+ 408 01d0 00000000 		.word	thetaShoulder
+ 409 01d4 00000000 		.word	getShoulderAngleReading
+ 410 01d8 00000000 		.word	thetaWheel
+ 411 01dc 00000000 		.word	getMotorAngleReading
+ 412 01e0 00000000 		.word	torque
+ 413 01e4 00000000 		.word	getTorque
+ 414 01e8 00000000 		.word	enableMotor
+ 415 01ec 00000000 		.word	positiveFreeTorque
+ 416 01f0 00000000 		.word	negativeFreeTorque
+ 417 01f4 28000000 		.word	.LC3
+ 418 01f8 30000000 		.word	.LC4
+ 419 01fc 3C000000 		.word	.LC5
+ 420 0200 40000000 		.word	.LC6
+ 421 0204 00000000 		.word	iError
+ 422 0208 48000000 		.word	.LC7
+ 423 020c 00408F40 		.word	1083129856
+ 424              		.cfi_endproc
+ 425              	.LFE65:
+ 426              		.size	main, .-main
+ 427              		.text
+ 428              	.Letext0:
+ 429              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 430              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 431              		.file 4 "sensorStructs.h"
+ 432              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 433              		.section	.debug_info,"",%progbits
+ 434              	.Ldebug_info0:
+ 435 0000 2B020000 		.4byte	0x22b
+ 436 0004 0400     		.2byte	0x4
+ 437 0006 00000000 		.4byte	.Ldebug_abbrev0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 13
+
+
+ 438 000a 04       		.byte	0x4
+ 439 000b 01       		.uleb128 0x1
+ 440 000c 13000000 		.4byte	.LASF36
+ 441 0010 0C       		.byte	0xc
+ 442 0011 E2010000 		.4byte	.LASF37
+ 443 0015 9F010000 		.4byte	.LASF38
+ 444 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 445 001d 00000000 		.4byte	0
+ 446 0021 00000000 		.4byte	.Ldebug_line0
+ 447 0025 02       		.uleb128 0x2
+ 448 0026 01       		.byte	0x1
+ 449 0027 06       		.byte	0x6
+ 450 0028 4B020000 		.4byte	.LASF0
+ 451 002c 02       		.uleb128 0x2
+ 452 002d 01       		.byte	0x1
+ 453 002e 08       		.byte	0x8
+ 454 002f DA000000 		.4byte	.LASF1
+ 455 0033 02       		.uleb128 0x2
+ 456 0034 02       		.byte	0x2
+ 457 0035 05       		.byte	0x5
+ 458 0036 AB000000 		.4byte	.LASF2
+ 459 003a 02       		.uleb128 0x2
+ 460 003b 02       		.byte	0x2
+ 461 003c 07       		.byte	0x7
+ 462 003d 12010000 		.4byte	.LASF3
+ 463 0041 03       		.uleb128 0x3
+ 464 0042 A1000000 		.4byte	.LASF9
+ 465 0046 02       		.byte	0x2
+ 466 0047 3F       		.byte	0x3f
+ 467 0048 4C000000 		.4byte	0x4c
+ 468 004c 02       		.uleb128 0x2
+ 469 004d 04       		.byte	0x4
+ 470 004e 05       		.byte	0x5
+ 471 004f 2C020000 		.4byte	.LASF4
+ 472 0053 02       		.uleb128 0x2
+ 473 0054 04       		.byte	0x4
+ 474 0055 07       		.byte	0x7
+ 475 0056 EF000000 		.4byte	.LASF5
+ 476 005a 02       		.uleb128 0x2
+ 477 005b 08       		.byte	0x8
+ 478 005c 05       		.byte	0x5
+ 479 005d D4010000 		.4byte	.LASF6
+ 480 0061 02       		.uleb128 0x2
+ 481 0062 08       		.byte	0x8
+ 482 0063 07       		.byte	0x7
+ 483 0064 65010000 		.4byte	.LASF7
+ 484 0068 04       		.uleb128 0x4
+ 485 0069 04       		.byte	0x4
+ 486 006a 05       		.byte	0x5
+ 487 006b 696E7400 		.ascii	"int\000"
+ 488 006f 02       		.uleb128 0x2
+ 489 0070 04       		.byte	0x4
+ 490 0071 07       		.byte	0x7
+ 491 0072 58010000 		.4byte	.LASF8
+ 492 0076 03       		.uleb128 0x3
+ 493 0077 CC000000 		.4byte	.LASF10
+ 494 007b 03       		.byte	0x3
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 14
+
+
+ 495 007c 2C       		.byte	0x2c
+ 496 007d 41000000 		.4byte	0x41
+ 497 0081 02       		.uleb128 0x2
+ 498 0082 08       		.byte	0x8
+ 499 0083 04       		.byte	0x4
+ 500 0084 3E010000 		.4byte	.LASF11
+ 501 0088 02       		.uleb128 0x2
+ 502 0089 01       		.byte	0x1
+ 503 008a 08       		.byte	0x8
+ 504 008b E9010000 		.4byte	.LASF12
+ 505 008f 02       		.uleb128 0x2
+ 506 0090 08       		.byte	0x8
+ 507 0091 04       		.byte	0x4
+ 508 0092 35020000 		.4byte	.LASF13
+ 509 0096 02       		.uleb128 0x2
+ 510 0097 04       		.byte	0x4
+ 511 0098 07       		.byte	0x7
+ 512 0099 CB010000 		.4byte	.LASF14
+ 513 009d 02       		.uleb128 0x2
+ 514 009e 04       		.byte	0x4
+ 515 009f 04       		.byte	0x4
+ 516 00a0 D4000000 		.4byte	.LASF15
+ 517 00a4 05       		.uleb128 0x5
+ 518 00a5 7C010000 		.4byte	.LASF20
+ 519 00a9 50       		.byte	0x50
+ 520 00aa 04       		.byte	0x4
+ 521 00ab 19       		.byte	0x19
+ 522 00ac E1000000 		.4byte	0xe1
+ 523 00b0 06       		.uleb128 0x6
+ 524 00b1 EE010000 		.4byte	.LASF16
+ 525 00b5 04       		.byte	0x4
+ 526 00b6 1A       		.byte	0x1a
+ 527 00b7 E1000000 		.4byte	0xe1
+ 528 00bb 00       		.byte	0
+ 529 00bc 06       		.uleb128 0x6
+ 530 00bd B5000000 		.4byte	.LASF17
+ 531 00c1 04       		.byte	0x4
+ 532 00c2 1B       		.byte	0x1b
+ 533 00c3 E1000000 		.4byte	0xe1
+ 534 00c7 20       		.byte	0x20
+ 535 00c8 06       		.uleb128 0x6
+ 536 00c9 F5010000 		.4byte	.LASF18
+ 537 00cd 04       		.byte	0x4
+ 538 00ce 1C       		.byte	0x1c
+ 539 00cf 81000000 		.4byte	0x81
+ 540 00d3 40       		.byte	0x40
+ 541 00d4 06       		.uleb128 0x6
+ 542 00d5 C0000000 		.4byte	.LASF19
+ 543 00d9 04       		.byte	0x4
+ 544 00da 1D       		.byte	0x1d
+ 545 00db FC000000 		.4byte	0xfc
+ 546 00df 48       		.byte	0x48
+ 547 00e0 00       		.byte	0
+ 548 00e1 07       		.uleb128 0x7
+ 549 00e2 81000000 		.4byte	0x81
+ 550 00e6 F1000000 		.4byte	0xf1
+ 551 00ea 08       		.uleb128 0x8
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 15
+
+
+ 552 00eb 96000000 		.4byte	0x96
+ 553 00ef 03       		.byte	0x3
+ 554 00f0 00       		.byte	0
+ 555 00f1 09       		.uleb128 0x9
+ 556 00f2 81000000 		.4byte	0x81
+ 557 00f6 FC000000 		.4byte	0xfc
+ 558 00fa 0A       		.uleb128 0xa
+ 559 00fb 00       		.byte	0
+ 560 00fc 0B       		.uleb128 0xb
+ 561 00fd 04       		.byte	0x4
+ 562 00fe F1000000 		.4byte	0xf1
+ 563 0102 03       		.uleb128 0x3
+ 564 0103 7C010000 		.4byte	.LASF20
+ 565 0107 04       		.byte	0x4
+ 566 0108 1E       		.byte	0x1e
+ 567 0109 A4000000 		.4byte	0xa4
+ 568 010d 0C       		.uleb128 0xc
+ 569 010e 8B010000 		.4byte	.LASF21
+ 570 0112 01       		.byte	0x1
+ 571 0113 3D       		.byte	0x3d
+ 572 0114 00000000 		.4byte	.LFB63
+ 573 0118 30000000 		.4byte	.LFE63-.LFB63
+ 574 011c 01       		.uleb128 0x1
+ 575 011d 9C       		.byte	0x9c
+ 576 011e 0C       		.uleb128 0xc
+ 577 011f 41020000 		.4byte	.LASF22
+ 578 0123 01       		.byte	0x1
+ 579 0124 41       		.byte	0x41
+ 580 0125 00000000 		.4byte	.LFB64
+ 581 0129 18000000 		.4byte	.LFE64-.LFB64
+ 582 012d 01       		.uleb128 0x1
+ 583 012e 9C       		.byte	0x9c
+ 584 012f 0D       		.uleb128 0xd
+ 585 0130 53010000 		.4byte	.LASF39
+ 586 0134 01       		.byte	0x1
+ 587 0135 47       		.byte	0x47
+ 588 0136 00000000 		.4byte	.LFB65
+ 589 013a 10020000 		.4byte	.LFE65-.LFB65
+ 590 013e 01       		.uleb128 0x1
+ 591 013f 9C       		.byte	0x9c
+ 592 0140 6C010000 		.4byte	0x16c
+ 593 0144 0E       		.uleb128 0xe
+ 594 0145 03020000 		.4byte	.LASF23
+ 595 0149 01       		.byte	0x1
+ 596 014a 65       		.byte	0x65
+ 597 014b 02010000 		.4byte	0x102
+ 598 014f 03       		.uleb128 0x3
+ 599 0150 91       		.byte	0x91
+ 600 0151 907F     		.sleb128 -112
+ 601 0153 0F       		.uleb128 0xf
+ 602 0154 7500     		.ascii	"u\000"
+ 603 0156 01       		.byte	0x1
+ 604 0157 C9       		.byte	0xc9
+ 605 0158 81000000 		.4byte	0x81
+ 606 015c 02       		.uleb128 0x2
+ 607 015d 91       		.byte	0x91
+ 608 015e 68       		.sleb128 -24
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 16
+
+
+ 609 015f 0F       		.uleb128 0xf
+ 610 0160 6900     		.ascii	"i\000"
+ 611 0162 01       		.byte	0x1
+ 612 0163 CA       		.byte	0xca
+ 613 0164 68000000 		.4byte	0x68
+ 614 0168 02       		.uleb128 0x2
+ 615 0169 91       		.byte	0x91
+ 616 016a 64       		.sleb128 -28
+ 617 016b 00       		.byte	0
+ 618 016c 10       		.uleb128 0x10
+ 619 016d 31010000 		.4byte	.LASF24
+ 620 0171 05       		.byte	0x5
+ 621 0172 9606     		.2byte	0x696
+ 622 0174 78010000 		.4byte	0x178
+ 623 0178 11       		.uleb128 0x11
+ 624 0179 76000000 		.4byte	0x76
+ 625 017d 12       		.uleb128 0x12
+ 626 017e 45010000 		.4byte	.LASF25
+ 627 0182 01       		.byte	0x1
+ 628 0183 2C       		.byte	0x2c
+ 629 0184 02010000 		.4byte	0x102
+ 630 0188 05       		.uleb128 0x5
+ 631 0189 03       		.byte	0x3
+ 632 018a 00000000 		.4byte	thetaShoulder
+ 633 018e 12       		.uleb128 0x12
+ 634 018f 21020000 		.4byte	.LASF26
+ 635 0193 01       		.byte	0x1
+ 636 0194 2D       		.byte	0x2d
+ 637 0195 02010000 		.4byte	0x102
+ 638 0199 05       		.uleb128 0x5
+ 639 019a 03       		.byte	0x3
+ 640 019b 00000000 		.4byte	thetaWheel
+ 641 019f 12       		.uleb128 0x12
+ 642 01a0 FC010000 		.4byte	.LASF27
+ 643 01a4 01       		.byte	0x1
+ 644 01a5 2E       		.byte	0x2e
+ 645 01a6 02010000 		.4byte	0x102
+ 646 01aa 05       		.uleb128 0x5
+ 647 01ab 03       		.byte	0x3
+ 648 01ac 00000000 		.4byte	torque
+ 649 01b0 12       		.uleb128 0x12
+ 650 01b1 57020000 		.4byte	.LASF28
+ 651 01b5 01       		.byte	0x1
+ 652 01b6 2F       		.byte	0x2f
+ 653 01b7 02010000 		.4byte	0x102
+ 654 01bb 05       		.uleb128 0x5
+ 655 01bc 03       		.byte	0x3
+ 656 01bd 00000000 		.4byte	thetaWheelDot
+ 657 01c1 12       		.uleb128 0x12
+ 658 01c2 01010000 		.4byte	.LASF29
+ 659 01c6 01       		.byte	0x1
+ 660 01c7 30       		.byte	0x30
+ 661 01c8 02010000 		.4byte	0x102
+ 662 01cc 05       		.uleb128 0x5
+ 663 01cd 03       		.byte	0x3
+ 664 01ce 00000000 		.4byte	thetaShoulderDot
+ 665 01d2 12       		.uleb128 0x12
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 17
+
+
+ 666 01d3 E8000000 		.4byte	.LASF30
+ 667 01d7 01       		.byte	0x1
+ 668 01d8 32       		.byte	0x32
+ 669 01d9 81000000 		.4byte	0x81
+ 670 01dd 05       		.uleb128 0x5
+ 671 01de 03       		.byte	0x3
+ 672 01df 00000000 		.4byte	iError
+ 673 01e3 12       		.uleb128 0x12
+ 674 01e4 00000000 		.4byte	.LASF31
+ 675 01e8 01       		.byte	0x1
+ 676 01e9 34       		.byte	0x34
+ 677 01ea 81000000 		.4byte	0x81
+ 678 01ee 05       		.uleb128 0x5
+ 679 01ef 03       		.byte	0x3
+ 680 01f0 00000000 		.4byte	positiveFreeTorque
+ 681 01f4 12       		.uleb128 0x12
+ 682 01f5 0E020000 		.4byte	.LASF32
+ 683 01f9 01       		.byte	0x1
+ 684 01fa 35       		.byte	0x35
+ 685 01fb 81000000 		.4byte	0x81
+ 686 01ff 05       		.uleb128 0x5
+ 687 0200 03       		.byte	0x3
+ 688 0201 00000000 		.4byte	negativeFreeTorque
+ 689 0205 12       		.uleb128 0x12
+ 690 0206 25010000 		.4byte	.LASF33
+ 691 020a 01       		.byte	0x1
+ 692 020b 37       		.byte	0x37
+ 693 020c 16020000 		.4byte	0x216
+ 694 0210 05       		.uleb128 0x5
+ 695 0211 03       		.byte	0x3
+ 696 0212 00000000 		.4byte	enableMotor
+ 697 0216 02       		.uleb128 0x2
+ 698 0217 01       		.byte	0x1
+ 699 0218 02       		.byte	0x2
+ 700 0219 65020000 		.4byte	.LASF34
+ 701 021d 12       		.uleb128 0x12
+ 702 021e 95010000 		.4byte	.LASF35
+ 703 0222 01       		.byte	0x1
+ 704 0223 38       		.byte	0x38
+ 705 0224 16020000 		.4byte	0x216
+ 706 0228 05       		.uleb128 0x5
+ 707 0229 03       		.byte	0x3
+ 708 022a 00000000 		.4byte	sampleADC
+ 709 022e 00       		.byte	0
+ 710              		.section	.debug_abbrev,"",%progbits
+ 711              	.Ldebug_abbrev0:
+ 712 0000 01       		.uleb128 0x1
+ 713 0001 11       		.uleb128 0x11
+ 714 0002 01       		.byte	0x1
+ 715 0003 25       		.uleb128 0x25
+ 716 0004 0E       		.uleb128 0xe
+ 717 0005 13       		.uleb128 0x13
+ 718 0006 0B       		.uleb128 0xb
+ 719 0007 03       		.uleb128 0x3
+ 720 0008 0E       		.uleb128 0xe
+ 721 0009 1B       		.uleb128 0x1b
+ 722 000a 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 18
+
+
+ 723 000b 55       		.uleb128 0x55
+ 724 000c 17       		.uleb128 0x17
+ 725 000d 11       		.uleb128 0x11
+ 726 000e 01       		.uleb128 0x1
+ 727 000f 10       		.uleb128 0x10
+ 728 0010 17       		.uleb128 0x17
+ 729 0011 00       		.byte	0
+ 730 0012 00       		.byte	0
+ 731 0013 02       		.uleb128 0x2
+ 732 0014 24       		.uleb128 0x24
+ 733 0015 00       		.byte	0
+ 734 0016 0B       		.uleb128 0xb
+ 735 0017 0B       		.uleb128 0xb
+ 736 0018 3E       		.uleb128 0x3e
+ 737 0019 0B       		.uleb128 0xb
+ 738 001a 03       		.uleb128 0x3
+ 739 001b 0E       		.uleb128 0xe
+ 740 001c 00       		.byte	0
+ 741 001d 00       		.byte	0
+ 742 001e 03       		.uleb128 0x3
+ 743 001f 16       		.uleb128 0x16
+ 744 0020 00       		.byte	0
+ 745 0021 03       		.uleb128 0x3
+ 746 0022 0E       		.uleb128 0xe
+ 747 0023 3A       		.uleb128 0x3a
+ 748 0024 0B       		.uleb128 0xb
+ 749 0025 3B       		.uleb128 0x3b
+ 750 0026 0B       		.uleb128 0xb
+ 751 0027 49       		.uleb128 0x49
+ 752 0028 13       		.uleb128 0x13
+ 753 0029 00       		.byte	0
+ 754 002a 00       		.byte	0
+ 755 002b 04       		.uleb128 0x4
+ 756 002c 24       		.uleb128 0x24
+ 757 002d 00       		.byte	0
+ 758 002e 0B       		.uleb128 0xb
+ 759 002f 0B       		.uleb128 0xb
+ 760 0030 3E       		.uleb128 0x3e
+ 761 0031 0B       		.uleb128 0xb
+ 762 0032 03       		.uleb128 0x3
+ 763 0033 08       		.uleb128 0x8
+ 764 0034 00       		.byte	0
+ 765 0035 00       		.byte	0
+ 766 0036 05       		.uleb128 0x5
+ 767 0037 13       		.uleb128 0x13
+ 768 0038 01       		.byte	0x1
+ 769 0039 03       		.uleb128 0x3
+ 770 003a 0E       		.uleb128 0xe
+ 771 003b 0B       		.uleb128 0xb
+ 772 003c 0B       		.uleb128 0xb
+ 773 003d 3A       		.uleb128 0x3a
+ 774 003e 0B       		.uleb128 0xb
+ 775 003f 3B       		.uleb128 0x3b
+ 776 0040 0B       		.uleb128 0xb
+ 777 0041 01       		.uleb128 0x1
+ 778 0042 13       		.uleb128 0x13
+ 779 0043 00       		.byte	0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 19
+
+
+ 780 0044 00       		.byte	0
+ 781 0045 06       		.uleb128 0x6
+ 782 0046 0D       		.uleb128 0xd
+ 783 0047 00       		.byte	0
+ 784 0048 03       		.uleb128 0x3
+ 785 0049 0E       		.uleb128 0xe
+ 786 004a 3A       		.uleb128 0x3a
+ 787 004b 0B       		.uleb128 0xb
+ 788 004c 3B       		.uleb128 0x3b
+ 789 004d 0B       		.uleb128 0xb
+ 790 004e 49       		.uleb128 0x49
+ 791 004f 13       		.uleb128 0x13
+ 792 0050 38       		.uleb128 0x38
+ 793 0051 0B       		.uleb128 0xb
+ 794 0052 00       		.byte	0
+ 795 0053 00       		.byte	0
+ 796 0054 07       		.uleb128 0x7
+ 797 0055 01       		.uleb128 0x1
+ 798 0056 01       		.byte	0x1
+ 799 0057 49       		.uleb128 0x49
+ 800 0058 13       		.uleb128 0x13
+ 801 0059 01       		.uleb128 0x1
+ 802 005a 13       		.uleb128 0x13
+ 803 005b 00       		.byte	0
+ 804 005c 00       		.byte	0
+ 805 005d 08       		.uleb128 0x8
+ 806 005e 21       		.uleb128 0x21
+ 807 005f 00       		.byte	0
+ 808 0060 49       		.uleb128 0x49
+ 809 0061 13       		.uleb128 0x13
+ 810 0062 2F       		.uleb128 0x2f
+ 811 0063 0B       		.uleb128 0xb
+ 812 0064 00       		.byte	0
+ 813 0065 00       		.byte	0
+ 814 0066 09       		.uleb128 0x9
+ 815 0067 15       		.uleb128 0x15
+ 816 0068 01       		.byte	0x1
+ 817 0069 49       		.uleb128 0x49
+ 818 006a 13       		.uleb128 0x13
+ 819 006b 01       		.uleb128 0x1
+ 820 006c 13       		.uleb128 0x13
+ 821 006d 00       		.byte	0
+ 822 006e 00       		.byte	0
+ 823 006f 0A       		.uleb128 0xa
+ 824 0070 18       		.uleb128 0x18
+ 825 0071 00       		.byte	0
+ 826 0072 00       		.byte	0
+ 827 0073 00       		.byte	0
+ 828 0074 0B       		.uleb128 0xb
+ 829 0075 0F       		.uleb128 0xf
+ 830 0076 00       		.byte	0
+ 831 0077 0B       		.uleb128 0xb
+ 832 0078 0B       		.uleb128 0xb
+ 833 0079 49       		.uleb128 0x49
+ 834 007a 13       		.uleb128 0x13
+ 835 007b 00       		.byte	0
+ 836 007c 00       		.byte	0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 20
+
+
+ 837 007d 0C       		.uleb128 0xc
+ 838 007e 2E       		.uleb128 0x2e
+ 839 007f 00       		.byte	0
+ 840 0080 3F       		.uleb128 0x3f
+ 841 0081 19       		.uleb128 0x19
+ 842 0082 03       		.uleb128 0x3
+ 843 0083 0E       		.uleb128 0xe
+ 844 0084 3A       		.uleb128 0x3a
+ 845 0085 0B       		.uleb128 0xb
+ 846 0086 3B       		.uleb128 0x3b
+ 847 0087 0B       		.uleb128 0xb
+ 848 0088 27       		.uleb128 0x27
+ 849 0089 19       		.uleb128 0x19
+ 850 008a 11       		.uleb128 0x11
+ 851 008b 01       		.uleb128 0x1
+ 852 008c 12       		.uleb128 0x12
+ 853 008d 06       		.uleb128 0x6
+ 854 008e 40       		.uleb128 0x40
+ 855 008f 18       		.uleb128 0x18
+ 856 0090 9742     		.uleb128 0x2117
+ 857 0092 19       		.uleb128 0x19
+ 858 0093 00       		.byte	0
+ 859 0094 00       		.byte	0
+ 860 0095 0D       		.uleb128 0xd
+ 861 0096 2E       		.uleb128 0x2e
+ 862 0097 01       		.byte	0x1
+ 863 0098 3F       		.uleb128 0x3f
+ 864 0099 19       		.uleb128 0x19
+ 865 009a 03       		.uleb128 0x3
+ 866 009b 0E       		.uleb128 0xe
+ 867 009c 3A       		.uleb128 0x3a
+ 868 009d 0B       		.uleb128 0xb
+ 869 009e 3B       		.uleb128 0x3b
+ 870 009f 0B       		.uleb128 0xb
+ 871 00a0 11       		.uleb128 0x11
+ 872 00a1 01       		.uleb128 0x1
+ 873 00a2 12       		.uleb128 0x12
+ 874 00a3 06       		.uleb128 0x6
+ 875 00a4 40       		.uleb128 0x40
+ 876 00a5 18       		.uleb128 0x18
+ 877 00a6 9642     		.uleb128 0x2116
+ 878 00a8 19       		.uleb128 0x19
+ 879 00a9 01       		.uleb128 0x1
+ 880 00aa 13       		.uleb128 0x13
+ 881 00ab 00       		.byte	0
+ 882 00ac 00       		.byte	0
+ 883 00ad 0E       		.uleb128 0xe
+ 884 00ae 34       		.uleb128 0x34
+ 885 00af 00       		.byte	0
+ 886 00b0 03       		.uleb128 0x3
+ 887 00b1 0E       		.uleb128 0xe
+ 888 00b2 3A       		.uleb128 0x3a
+ 889 00b3 0B       		.uleb128 0xb
+ 890 00b4 3B       		.uleb128 0x3b
+ 891 00b5 0B       		.uleb128 0xb
+ 892 00b6 49       		.uleb128 0x49
+ 893 00b7 13       		.uleb128 0x13
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 21
+
+
+ 894 00b8 02       		.uleb128 0x2
+ 895 00b9 18       		.uleb128 0x18
+ 896 00ba 00       		.byte	0
+ 897 00bb 00       		.byte	0
+ 898 00bc 0F       		.uleb128 0xf
+ 899 00bd 34       		.uleb128 0x34
+ 900 00be 00       		.byte	0
+ 901 00bf 03       		.uleb128 0x3
+ 902 00c0 08       		.uleb128 0x8
+ 903 00c1 3A       		.uleb128 0x3a
+ 904 00c2 0B       		.uleb128 0xb
+ 905 00c3 3B       		.uleb128 0x3b
+ 906 00c4 0B       		.uleb128 0xb
+ 907 00c5 49       		.uleb128 0x49
+ 908 00c6 13       		.uleb128 0x13
+ 909 00c7 02       		.uleb128 0x2
+ 910 00c8 18       		.uleb128 0x18
+ 911 00c9 00       		.byte	0
+ 912 00ca 00       		.byte	0
+ 913 00cb 10       		.uleb128 0x10
+ 914 00cc 34       		.uleb128 0x34
+ 915 00cd 00       		.byte	0
+ 916 00ce 03       		.uleb128 0x3
+ 917 00cf 0E       		.uleb128 0xe
+ 918 00d0 3A       		.uleb128 0x3a
+ 919 00d1 0B       		.uleb128 0xb
+ 920 00d2 3B       		.uleb128 0x3b
+ 921 00d3 05       		.uleb128 0x5
+ 922 00d4 49       		.uleb128 0x49
+ 923 00d5 13       		.uleb128 0x13
+ 924 00d6 3F       		.uleb128 0x3f
+ 925 00d7 19       		.uleb128 0x19
+ 926 00d8 3C       		.uleb128 0x3c
+ 927 00d9 19       		.uleb128 0x19
+ 928 00da 00       		.byte	0
+ 929 00db 00       		.byte	0
+ 930 00dc 11       		.uleb128 0x11
+ 931 00dd 35       		.uleb128 0x35
+ 932 00de 00       		.byte	0
+ 933 00df 49       		.uleb128 0x49
+ 934 00e0 13       		.uleb128 0x13
+ 935 00e1 00       		.byte	0
+ 936 00e2 00       		.byte	0
+ 937 00e3 12       		.uleb128 0x12
+ 938 00e4 34       		.uleb128 0x34
+ 939 00e5 00       		.byte	0
+ 940 00e6 03       		.uleb128 0x3
+ 941 00e7 0E       		.uleb128 0xe
+ 942 00e8 3A       		.uleb128 0x3a
+ 943 00e9 0B       		.uleb128 0xb
+ 944 00ea 3B       		.uleb128 0x3b
+ 945 00eb 0B       		.uleb128 0xb
+ 946 00ec 49       		.uleb128 0x49
+ 947 00ed 13       		.uleb128 0x13
+ 948 00ee 3F       		.uleb128 0x3f
+ 949 00ef 19       		.uleb128 0x19
+ 950 00f0 02       		.uleb128 0x2
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 22
+
+
+ 951 00f1 18       		.uleb128 0x18
+ 952 00f2 00       		.byte	0
+ 953 00f3 00       		.byte	0
+ 954 00f4 00       		.byte	0
+ 955              		.section	.debug_aranges,"",%progbits
+ 956 0000 2C000000 		.4byte	0x2c
+ 957 0004 0200     		.2byte	0x2
+ 958 0006 00000000 		.4byte	.Ldebug_info0
+ 959 000a 04       		.byte	0x4
+ 960 000b 00       		.byte	0
+ 961 000c 0000     		.2byte	0
+ 962 000e 0000     		.2byte	0
+ 963 0010 00000000 		.4byte	.LFB63
+ 964 0014 30000000 		.4byte	.LFE63-.LFB63
+ 965 0018 00000000 		.4byte	.LFB64
+ 966 001c 18000000 		.4byte	.LFE64-.LFB64
+ 967 0020 00000000 		.4byte	.LFB65
+ 968 0024 10020000 		.4byte	.LFE65-.LFB65
+ 969 0028 00000000 		.4byte	0
+ 970 002c 00000000 		.4byte	0
+ 971              		.section	.debug_ranges,"",%progbits
+ 972              	.Ldebug_ranges0:
+ 973 0000 00000000 		.4byte	.LFB63
+ 974 0004 30000000 		.4byte	.LFE63
+ 975 0008 00000000 		.4byte	.LFB64
+ 976 000c 18000000 		.4byte	.LFE64
+ 977 0010 00000000 		.4byte	.LFB65
+ 978 0014 10020000 		.4byte	.LFE65
+ 979 0018 00000000 		.4byte	0
+ 980 001c 00000000 		.4byte	0
+ 981              		.section	.debug_line,"",%progbits
+ 982              	.Ldebug_line0:
+ 983 0000 D4010000 		.section	.debug_str,"MS",%progbits,1
+ 983      02005201 
+ 983      00000201 
+ 983      FB0E0D00 
+ 983      01010101 
+ 984              	.LASF31:
+ 985 0000 706F7369 		.ascii	"positiveFreeTorque\000"
+ 985      74697665 
+ 985      46726565 
+ 985      546F7271 
+ 985      756500
+ 986              	.LASF36:
+ 987 0013 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 987      43313120 
+ 987      352E342E 
+ 987      31203230 
+ 987      31363036 
+ 988 0046 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 988      20726576 
+ 988      6973696F 
+ 988      6E203233 
+ 988      37373135 
+ 989 0079 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 989      66756E63 
+ 989      74696F6E 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 23
+
+
+ 989      2D736563 
+ 989      74696F6E 
+ 990              	.LASF9:
+ 991 00a1 5F5F696E 		.ascii	"__int32_t\000"
+ 991      7433325F 
+ 991      7400
+ 992              	.LASF2:
+ 993 00ab 73686F72 		.ascii	"short int\000"
+ 993      7420696E 
+ 993      7400
+ 994              	.LASF17:
+ 995 00b5 74696D65 		.ascii	"timeStamps\000"
+ 995      5374616D 
+ 995      707300
+ 996              	.LASF19:
+ 997 00c0 76616C75 		.ascii	"valueGetter\000"
+ 997      65476574 
+ 997      74657200 
+ 998              	.LASF10:
+ 999 00cc 696E7433 		.ascii	"int32_t\000"
+ 999      325F7400 
+ 1000              	.LASF15:
+ 1001 00d4 666C6F61 		.ascii	"float\000"
+ 1001      7400
+ 1002              	.LASF1:
+ 1003 00da 756E7369 		.ascii	"unsigned char\000"
+ 1003      676E6564 
+ 1003      20636861 
+ 1003      7200
+ 1004              	.LASF30:
+ 1005 00e8 69457272 		.ascii	"iError\000"
+ 1005      6F7200
+ 1006              	.LASF5:
+ 1007 00ef 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1007      20756E73 
+ 1007      69676E65 
+ 1007      6420696E 
+ 1007      7400
+ 1008              	.LASF29:
+ 1009 0101 74686574 		.ascii	"thetaShoulderDot\000"
+ 1009      6153686F 
+ 1009      756C6465 
+ 1009      72446F74 
+ 1009      00
+ 1010              	.LASF3:
+ 1011 0112 73686F72 		.ascii	"short unsigned int\000"
+ 1011      7420756E 
+ 1011      7369676E 
+ 1011      65642069 
+ 1011      6E7400
+ 1012              	.LASF33:
+ 1013 0125 656E6162 		.ascii	"enableMotor\000"
+ 1013      6C654D6F 
+ 1013      746F7200 
+ 1014              	.LASF24:
+ 1015 0131 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1015      52784275 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 24
+
+
+ 1015      66666572 
+ 1015      00
+ 1016              	.LASF11:
+ 1017 013e 646F7562 		.ascii	"double\000"
+ 1017      6C6500
+ 1018              	.LASF25:
+ 1019 0145 74686574 		.ascii	"thetaShoulder\000"
+ 1019      6153686F 
+ 1019      756C6465 
+ 1019      7200
+ 1020              	.LASF39:
+ 1021 0153 6D61696E 		.ascii	"main\000"
+ 1021      00
+ 1022              	.LASF8:
+ 1023 0158 756E7369 		.ascii	"unsigned int\000"
+ 1023      676E6564 
+ 1023      20696E74 
+ 1023      00
+ 1024              	.LASF7:
+ 1025 0165 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1025      206C6F6E 
+ 1025      6720756E 
+ 1025      7369676E 
+ 1025      65642069 
+ 1026              	.LASF20:
+ 1027 017c 4D656D6F 		.ascii	"MemoryVariable\000"
+ 1027      72795661 
+ 1027      72696162 
+ 1027      6C6500
+ 1028              	.LASF21:
+ 1029 018b 6973725F 		.ascii	"isr_1_ISR\000"
+ 1029      315F4953 
+ 1029      5200
+ 1030              	.LASF35:
+ 1031 0195 73616D70 		.ascii	"sampleADC\000"
+ 1031      6C654144 
+ 1031      4300
+ 1032              	.LASF38:
+ 1033 019f 433A5C55 		.ascii	"C:\\Users\\Albert\\Documents\\6115_fp\\IWP.cydsn\000"
+ 1033      73657273 
+ 1033      5C416C62 
+ 1033      6572745C 
+ 1033      446F6375 
+ 1034              	.LASF14:
+ 1035 01cb 73697A65 		.ascii	"sizetype\000"
+ 1035      74797065 
+ 1035      00
+ 1036              	.LASF6:
+ 1037 01d4 6C6F6E67 		.ascii	"long long int\000"
+ 1037      206C6F6E 
+ 1037      6720696E 
+ 1037      7400
+ 1038              	.LASF37:
+ 1039 01e2 6D61696E 		.ascii	"main.c\000"
+ 1039      2E6300
+ 1040              	.LASF12:
+ 1041 01e9 63686172 		.ascii	"char\000"
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccg6k6kf.s 			page 25
+
+
+ 1041      00
+ 1042              	.LASF16:
+ 1043 01ee 76616C75 		.ascii	"values\000"
+ 1043      657300
+ 1044              	.LASF18:
+ 1045 01f5 6F666673 		.ascii	"offset\000"
+ 1045      657400
+ 1046              	.LASF27:
+ 1047 01fc 746F7271 		.ascii	"torque\000"
+ 1047      756500
+ 1048              	.LASF23:
+ 1049 0203 66726565 		.ascii	"freeTorque\000"
+ 1049      546F7271 
+ 1049      756500
+ 1050              	.LASF32:
+ 1051 020e 6E656761 		.ascii	"negativeFreeTorque\000"
+ 1051      74697665 
+ 1051      46726565 
+ 1051      546F7271 
+ 1051      756500
+ 1052              	.LASF26:
+ 1053 0221 74686574 		.ascii	"thetaWheel\000"
+ 1053      61576865 
+ 1053      656C00
+ 1054              	.LASF4:
+ 1055 022c 6C6F6E67 		.ascii	"long int\000"
+ 1055      20696E74 
+ 1055      00
+ 1056              	.LASF13:
+ 1057 0235 6C6F6E67 		.ascii	"long double\000"
+ 1057      20646F75 
+ 1057      626C6500 
+ 1058              	.LASF22:
+ 1059 0241 6973725F 		.ascii	"isr_2_ISR\000"
+ 1059      325F4953 
+ 1059      5200
+ 1060              	.LASF0:
+ 1061 024b 7369676E 		.ascii	"signed char\000"
+ 1061      65642063 
+ 1061      68617200 
+ 1062              	.LASF28:
+ 1063 0257 74686574 		.ascii	"thetaWheelDot\000"
+ 1063      61576865 
+ 1063      656C446F 
+ 1063      7400
+ 1064              	.LASF34:
+ 1065 0265 5F426F6F 		.ascii	"_Bool\000"
+ 1065      6C00
+ 1066              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

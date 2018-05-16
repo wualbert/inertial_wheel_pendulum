@@ -1,0 +1,590 @@
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccChvSqj.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"quadDecUtil.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.initQuadDec,"ax",%progbits
+  20              		.align	2
+  21              		.global	initQuadDec
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	initQuadDec, %function
+  25              	initQuadDec:
+  26              	.LFB63:
+  27              		.file 1 "quadDecUtil.c"
+   1:quadDecUtil.c **** /* ========================================
+   2:quadDecUtil.c ****  *
+   3:quadDecUtil.c ****  * Copyright Albert Wu, 2018
+   4:quadDecUtil.c ****  * All Rights Reserved
+   5:quadDecUtil.c ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:quadDecUtil.c ****  *
+   7:quadDecUtil.c ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:quadDecUtil.c ****  * WHICH IS THE PROPERTY OF your company.
+   9:quadDecUtil.c ****  *
+  10:quadDecUtil.c ****  * ========================================
+  11:quadDecUtil.c **** */
+  12:quadDecUtil.c **** #include "quadDecUtil.h"
+  13:quadDecUtil.c **** 
+  14:quadDecUtil.c **** void initQuadDec()
+  15:quadDecUtil.c **** {
+  28              		.loc 1 15 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 00AF     		add	r7, sp, #0
+  37              		.cfi_def_cfa_register 7
+  16:quadDecUtil.c ****     QuadDec_Motor_Start();
+  38              		.loc 1 16 0
+  39 0004 FFF7FEFF 		bl	QuadDec_Motor_Start
+  17:quadDecUtil.c ****     QuadDec_Shoulder_Start();
+  40              		.loc 1 17 0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccChvSqj.s 			page 2
+
+
+  41 0008 FFF7FEFF 		bl	QuadDec_Shoulder_Start
+  18:quadDecUtil.c ****     
+  19:quadDecUtil.c ****     //Zero the decoders
+  20:quadDecUtil.c ****     QuadDec_Motor_SetCounter(0);
+  42              		.loc 1 20 0
+  43 000c 0020     		movs	r0, #0
+  44 000e FFF7FEFF 		bl	QuadDec_Motor_SetCounter
+  21:quadDecUtil.c ****     QuadDec_Shoulder_SetCounter(0);
+  45              		.loc 1 21 0
+  46 0012 0020     		movs	r0, #0
+  47 0014 FFF7FEFF 		bl	QuadDec_Shoulder_SetCounter
+  22:quadDecUtil.c **** }
+  48              		.loc 1 22 0
+  49 0018 00BF     		nop
+  50 001a 80BD     		pop	{r7, pc}
+  51              		.cfi_endproc
+  52              	.LFE63:
+  53              		.size	initQuadDec, .-initQuadDec
+  54              		.section	.text.getMotorDecReading,"ax",%progbits
+  55              		.align	2
+  56              		.global	getMotorDecReading
+  57              		.thumb
+  58              		.thumb_func
+  59              		.type	getMotorDecReading, %function
+  60              	getMotorDecReading:
+  61              	.LFB64:
+  23:quadDecUtil.c **** 
+  24:quadDecUtil.c **** int16 getMotorDecReading()
+  25:quadDecUtil.c **** {
+  62              		.loc 1 25 0
+  63              		.cfi_startproc
+  64              		@ args = 0, pretend = 0, frame = 0
+  65              		@ frame_needed = 1, uses_anonymous_args = 0
+  66 0000 80B5     		push	{r7, lr}
+  67              		.cfi_def_cfa_offset 8
+  68              		.cfi_offset 7, -8
+  69              		.cfi_offset 14, -4
+  70 0002 00AF     		add	r7, sp, #0
+  71              		.cfi_def_cfa_register 7
+  26:quadDecUtil.c ****     return QuadDec_Motor_GetCounter();
+  72              		.loc 1 26 0
+  73 0004 FFF7FEFF 		bl	QuadDec_Motor_GetCounter
+  74 0008 0346     		mov	r3, r0
+  75 000a 1BB2     		sxth	r3, r3
+  27:quadDecUtil.c **** }
+  76              		.loc 1 27 0
+  77 000c 1846     		mov	r0, r3
+  78 000e 80BD     		pop	{r7, pc}
+  79              		.cfi_endproc
+  80              	.LFE64:
+  81              		.size	getMotorDecReading, .-getMotorDecReading
+  82              		.section	.text.getShoulderDecReading,"ax",%progbits
+  83              		.align	2
+  84              		.global	getShoulderDecReading
+  85              		.thumb
+  86              		.thumb_func
+  87              		.type	getShoulderDecReading, %function
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccChvSqj.s 			page 3
+
+
+  88              	getShoulderDecReading:
+  89              	.LFB65:
+  28:quadDecUtil.c **** int16 getShoulderDecReading()
+  29:quadDecUtil.c **** {
+  90              		.loc 1 29 0
+  91              		.cfi_startproc
+  92              		@ args = 0, pretend = 0, frame = 0
+  93              		@ frame_needed = 1, uses_anonymous_args = 0
+  94 0000 80B5     		push	{r7, lr}
+  95              		.cfi_def_cfa_offset 8
+  96              		.cfi_offset 7, -8
+  97              		.cfi_offset 14, -4
+  98 0002 00AF     		add	r7, sp, #0
+  99              		.cfi_def_cfa_register 7
+  30:quadDecUtil.c ****     return QuadDec_Shoulder_GetCounter();
+ 100              		.loc 1 30 0
+ 101 0004 FFF7FEFF 		bl	QuadDec_Shoulder_GetCounter
+ 102 0008 0346     		mov	r3, r0
+  31:quadDecUtil.c **** }
+ 103              		.loc 1 31 0
+ 104 000a 1846     		mov	r0, r3
+ 105 000c 80BD     		pop	{r7, pc}
+ 106              		.cfi_endproc
+ 107              	.LFE65:
+ 108              		.size	getShoulderDecReading, .-getShoulderDecReading
+ 109 000e 00BF     		.text
+ 110              	.Letext0:
+ 111              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 112              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 113              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 114              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 115              		.section	.debug_info,"",%progbits
+ 116              	.Ldebug_info0:
+ 117 0000 F9000000 		.4byte	0xf9
+ 118 0004 0400     		.2byte	0x4
+ 119 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 120 000a 04       		.byte	0x4
+ 121 000b 01       		.uleb128 0x1
+ 122 000c 5F000000 		.4byte	.LASF19
+ 123 0010 0C       		.byte	0xc
+ 124 0011 3A000000 		.4byte	.LASF20
+ 125 0015 00010000 		.4byte	.LASF21
+ 126 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 127 001d 00000000 		.4byte	0
+ 128 0021 00000000 		.4byte	.Ldebug_line0
+ 129 0025 02       		.uleb128 0x2
+ 130 0026 01       		.byte	0x1
+ 131 0027 06       		.byte	0x6
+ 132 0028 5B010000 		.4byte	.LASF0
+ 133 002c 02       		.uleb128 0x2
+ 134 002d 01       		.byte	0x1
+ 135 002e 08       		.byte	0x8
+ 136 002f ED000000 		.4byte	.LASF1
+ 137 0033 02       		.uleb128 0x2
+ 138 0034 02       		.byte	0x2
+ 139 0035 05       		.byte	0x5
+ 140 0036 9C010000 		.4byte	.LASF2
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccChvSqj.s 			page 4
+
+
+ 141 003a 02       		.uleb128 0x2
+ 142 003b 02       		.byte	0x2
+ 143 003c 07       		.byte	0x7
+ 144 003d 0E000000 		.4byte	.LASF3
+ 145 0041 03       		.uleb128 0x3
+ 146 0042 73010000 		.4byte	.LASF9
+ 147 0046 02       		.byte	0x2
+ 148 0047 3F       		.byte	0x3f
+ 149 0048 4C000000 		.4byte	0x4c
+ 150 004c 02       		.uleb128 0x2
+ 151 004d 04       		.byte	0x4
+ 152 004e 05       		.byte	0x5
+ 153 004f 2C010000 		.4byte	.LASF4
+ 154 0053 02       		.uleb128 0x2
+ 155 0054 04       		.byte	0x4
+ 156 0055 07       		.byte	0x7
+ 157 0056 35010000 		.4byte	.LASF5
+ 158 005a 02       		.uleb128 0x2
+ 159 005b 08       		.byte	0x8
+ 160 005c 05       		.byte	0x5
+ 161 005d 00000000 		.4byte	.LASF6
+ 162 0061 02       		.uleb128 0x2
+ 163 0062 08       		.byte	0x8
+ 164 0063 07       		.byte	0x7
+ 165 0064 48000000 		.4byte	.LASF7
+ 166 0068 04       		.uleb128 0x4
+ 167 0069 04       		.byte	0x4
+ 168 006a 05       		.byte	0x5
+ 169 006b 696E7400 		.ascii	"int\000"
+ 170 006f 02       		.uleb128 0x2
+ 171 0070 04       		.byte	0x4
+ 172 0071 07       		.byte	0x7
+ 173 0072 21000000 		.4byte	.LASF8
+ 174 0076 03       		.uleb128 0x3
+ 175 0077 A6010000 		.4byte	.LASF10
+ 176 007b 03       		.byte	0x3
+ 177 007c 2C       		.byte	0x2c
+ 178 007d 41000000 		.4byte	0x41
+ 179 0081 05       		.uleb128 0x5
+ 180 0082 96010000 		.4byte	.LASF11
+ 181 0086 04       		.byte	0x4
+ 182 0087 9601     		.2byte	0x196
+ 183 0089 33000000 		.4byte	0x33
+ 184 008d 02       		.uleb128 0x2
+ 185 008e 04       		.byte	0x4
+ 186 008f 04       		.byte	0x4
+ 187 0090 90010000 		.4byte	.LASF12
+ 188 0094 02       		.uleb128 0x2
+ 189 0095 08       		.byte	0x8
+ 190 0096 04       		.byte	0x4
+ 191 0097 47010000 		.4byte	.LASF13
+ 192 009b 02       		.uleb128 0x2
+ 193 009c 01       		.byte	0x1
+ 194 009d 08       		.byte	0x8
+ 195 009e FB000000 		.4byte	.LASF14
+ 196 00a2 02       		.uleb128 0x2
+ 197 00a3 08       		.byte	0x8
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccChvSqj.s 			page 5
+
+
+ 198 00a4 04       		.byte	0x4
+ 199 00a5 67010000 		.4byte	.LASF15
+ 200 00a9 02       		.uleb128 0x2
+ 201 00aa 04       		.byte	0x4
+ 202 00ab 07       		.byte	0x7
+ 203 00ac C4010000 		.4byte	.LASF16
+ 204 00b0 06       		.uleb128 0x6
+ 205 00b1 2E000000 		.4byte	.LASF22
+ 206 00b5 01       		.byte	0x1
+ 207 00b6 0E       		.byte	0xe
+ 208 00b7 00000000 		.4byte	.LFB63
+ 209 00bb 1C000000 		.4byte	.LFE63-.LFB63
+ 210 00bf 01       		.uleb128 0x1
+ 211 00c0 9C       		.byte	0x9c
+ 212 00c1 07       		.uleb128 0x7
+ 213 00c2 7D010000 		.4byte	.LASF17
+ 214 00c6 01       		.byte	0x1
+ 215 00c7 18       		.byte	0x18
+ 216 00c8 81000000 		.4byte	0x81
+ 217 00cc 00000000 		.4byte	.LFB64
+ 218 00d0 10000000 		.4byte	.LFE64-.LFB64
+ 219 00d4 01       		.uleb128 0x1
+ 220 00d5 9C       		.byte	0x9c
+ 221 00d6 07       		.uleb128 0x7
+ 222 00d7 AE010000 		.4byte	.LASF18
+ 223 00db 01       		.byte	0x1
+ 224 00dc 1C       		.byte	0x1c
+ 225 00dd 81000000 		.4byte	0x81
+ 226 00e1 00000000 		.4byte	.LFB65
+ 227 00e5 0E000000 		.4byte	.LFE65-.LFB65
+ 228 00e9 01       		.uleb128 0x1
+ 229 00ea 9C       		.byte	0x9c
+ 230 00eb 08       		.uleb128 0x8
+ 231 00ec 4E010000 		.4byte	.LASF23
+ 232 00f0 05       		.byte	0x5
+ 233 00f1 9606     		.2byte	0x696
+ 234 00f3 F7000000 		.4byte	0xf7
+ 235 00f7 09       		.uleb128 0x9
+ 236 00f8 76000000 		.4byte	0x76
+ 237 00fc 00       		.byte	0
+ 238              		.section	.debug_abbrev,"",%progbits
+ 239              	.Ldebug_abbrev0:
+ 240 0000 01       		.uleb128 0x1
+ 241 0001 11       		.uleb128 0x11
+ 242 0002 01       		.byte	0x1
+ 243 0003 25       		.uleb128 0x25
+ 244 0004 0E       		.uleb128 0xe
+ 245 0005 13       		.uleb128 0x13
+ 246 0006 0B       		.uleb128 0xb
+ 247 0007 03       		.uleb128 0x3
+ 248 0008 0E       		.uleb128 0xe
+ 249 0009 1B       		.uleb128 0x1b
+ 250 000a 0E       		.uleb128 0xe
+ 251 000b 55       		.uleb128 0x55
+ 252 000c 17       		.uleb128 0x17
+ 253 000d 11       		.uleb128 0x11
+ 254 000e 01       		.uleb128 0x1
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccChvSqj.s 			page 6
+
+
+ 255 000f 10       		.uleb128 0x10
+ 256 0010 17       		.uleb128 0x17
+ 257 0011 00       		.byte	0
+ 258 0012 00       		.byte	0
+ 259 0013 02       		.uleb128 0x2
+ 260 0014 24       		.uleb128 0x24
+ 261 0015 00       		.byte	0
+ 262 0016 0B       		.uleb128 0xb
+ 263 0017 0B       		.uleb128 0xb
+ 264 0018 3E       		.uleb128 0x3e
+ 265 0019 0B       		.uleb128 0xb
+ 266 001a 03       		.uleb128 0x3
+ 267 001b 0E       		.uleb128 0xe
+ 268 001c 00       		.byte	0
+ 269 001d 00       		.byte	0
+ 270 001e 03       		.uleb128 0x3
+ 271 001f 16       		.uleb128 0x16
+ 272 0020 00       		.byte	0
+ 273 0021 03       		.uleb128 0x3
+ 274 0022 0E       		.uleb128 0xe
+ 275 0023 3A       		.uleb128 0x3a
+ 276 0024 0B       		.uleb128 0xb
+ 277 0025 3B       		.uleb128 0x3b
+ 278 0026 0B       		.uleb128 0xb
+ 279 0027 49       		.uleb128 0x49
+ 280 0028 13       		.uleb128 0x13
+ 281 0029 00       		.byte	0
+ 282 002a 00       		.byte	0
+ 283 002b 04       		.uleb128 0x4
+ 284 002c 24       		.uleb128 0x24
+ 285 002d 00       		.byte	0
+ 286 002e 0B       		.uleb128 0xb
+ 287 002f 0B       		.uleb128 0xb
+ 288 0030 3E       		.uleb128 0x3e
+ 289 0031 0B       		.uleb128 0xb
+ 290 0032 03       		.uleb128 0x3
+ 291 0033 08       		.uleb128 0x8
+ 292 0034 00       		.byte	0
+ 293 0035 00       		.byte	0
+ 294 0036 05       		.uleb128 0x5
+ 295 0037 16       		.uleb128 0x16
+ 296 0038 00       		.byte	0
+ 297 0039 03       		.uleb128 0x3
+ 298 003a 0E       		.uleb128 0xe
+ 299 003b 3A       		.uleb128 0x3a
+ 300 003c 0B       		.uleb128 0xb
+ 301 003d 3B       		.uleb128 0x3b
+ 302 003e 05       		.uleb128 0x5
+ 303 003f 49       		.uleb128 0x49
+ 304 0040 13       		.uleb128 0x13
+ 305 0041 00       		.byte	0
+ 306 0042 00       		.byte	0
+ 307 0043 06       		.uleb128 0x6
+ 308 0044 2E       		.uleb128 0x2e
+ 309 0045 00       		.byte	0
+ 310 0046 3F       		.uleb128 0x3f
+ 311 0047 19       		.uleb128 0x19
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccChvSqj.s 			page 7
+
+
+ 312 0048 03       		.uleb128 0x3
+ 313 0049 0E       		.uleb128 0xe
+ 314 004a 3A       		.uleb128 0x3a
+ 315 004b 0B       		.uleb128 0xb
+ 316 004c 3B       		.uleb128 0x3b
+ 317 004d 0B       		.uleb128 0xb
+ 318 004e 11       		.uleb128 0x11
+ 319 004f 01       		.uleb128 0x1
+ 320 0050 12       		.uleb128 0x12
+ 321 0051 06       		.uleb128 0x6
+ 322 0052 40       		.uleb128 0x40
+ 323 0053 18       		.uleb128 0x18
+ 324 0054 9642     		.uleb128 0x2116
+ 325 0056 19       		.uleb128 0x19
+ 326 0057 00       		.byte	0
+ 327 0058 00       		.byte	0
+ 328 0059 07       		.uleb128 0x7
+ 329 005a 2E       		.uleb128 0x2e
+ 330 005b 00       		.byte	0
+ 331 005c 3F       		.uleb128 0x3f
+ 332 005d 19       		.uleb128 0x19
+ 333 005e 03       		.uleb128 0x3
+ 334 005f 0E       		.uleb128 0xe
+ 335 0060 3A       		.uleb128 0x3a
+ 336 0061 0B       		.uleb128 0xb
+ 337 0062 3B       		.uleb128 0x3b
+ 338 0063 0B       		.uleb128 0xb
+ 339 0064 49       		.uleb128 0x49
+ 340 0065 13       		.uleb128 0x13
+ 341 0066 11       		.uleb128 0x11
+ 342 0067 01       		.uleb128 0x1
+ 343 0068 12       		.uleb128 0x12
+ 344 0069 06       		.uleb128 0x6
+ 345 006a 40       		.uleb128 0x40
+ 346 006b 18       		.uleb128 0x18
+ 347 006c 9642     		.uleb128 0x2116
+ 348 006e 19       		.uleb128 0x19
+ 349 006f 00       		.byte	0
+ 350 0070 00       		.byte	0
+ 351 0071 08       		.uleb128 0x8
+ 352 0072 34       		.uleb128 0x34
+ 353 0073 00       		.byte	0
+ 354 0074 03       		.uleb128 0x3
+ 355 0075 0E       		.uleb128 0xe
+ 356 0076 3A       		.uleb128 0x3a
+ 357 0077 0B       		.uleb128 0xb
+ 358 0078 3B       		.uleb128 0x3b
+ 359 0079 05       		.uleb128 0x5
+ 360 007a 49       		.uleb128 0x49
+ 361 007b 13       		.uleb128 0x13
+ 362 007c 3F       		.uleb128 0x3f
+ 363 007d 19       		.uleb128 0x19
+ 364 007e 3C       		.uleb128 0x3c
+ 365 007f 19       		.uleb128 0x19
+ 366 0080 00       		.byte	0
+ 367 0081 00       		.byte	0
+ 368 0082 09       		.uleb128 0x9
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccChvSqj.s 			page 8
+
+
+ 369 0083 35       		.uleb128 0x35
+ 370 0084 00       		.byte	0
+ 371 0085 49       		.uleb128 0x49
+ 372 0086 13       		.uleb128 0x13
+ 373 0087 00       		.byte	0
+ 374 0088 00       		.byte	0
+ 375 0089 00       		.byte	0
+ 376              		.section	.debug_aranges,"",%progbits
+ 377 0000 2C000000 		.4byte	0x2c
+ 378 0004 0200     		.2byte	0x2
+ 379 0006 00000000 		.4byte	.Ldebug_info0
+ 380 000a 04       		.byte	0x4
+ 381 000b 00       		.byte	0
+ 382 000c 0000     		.2byte	0
+ 383 000e 0000     		.2byte	0
+ 384 0010 00000000 		.4byte	.LFB63
+ 385 0014 1C000000 		.4byte	.LFE63-.LFB63
+ 386 0018 00000000 		.4byte	.LFB64
+ 387 001c 10000000 		.4byte	.LFE64-.LFB64
+ 388 0020 00000000 		.4byte	.LFB65
+ 389 0024 0E000000 		.4byte	.LFE65-.LFB65
+ 390 0028 00000000 		.4byte	0
+ 391 002c 00000000 		.4byte	0
+ 392              		.section	.debug_ranges,"",%progbits
+ 393              	.Ldebug_ranges0:
+ 394 0000 00000000 		.4byte	.LFB63
+ 395 0004 1C000000 		.4byte	.LFE63
+ 396 0008 00000000 		.4byte	.LFB64
+ 397 000c 10000000 		.4byte	.LFE64
+ 398 0010 00000000 		.4byte	.LFB65
+ 399 0014 0E000000 		.4byte	.LFE65
+ 400 0018 00000000 		.4byte	0
+ 401 001c 00000000 		.4byte	0
+ 402              		.section	.debug_line,"",%progbits
+ 403              	.Ldebug_line0:
+ 404 0000 8F010000 		.section	.debug_str,"MS",%progbits,1
+ 404      02005301 
+ 404      00000201 
+ 404      FB0E0D00 
+ 404      01010101 
+ 405              	.LASF6:
+ 406 0000 6C6F6E67 		.ascii	"long long int\000"
+ 406      206C6F6E 
+ 406      6720696E 
+ 406      7400
+ 407              	.LASF3:
+ 408 000e 73686F72 		.ascii	"short unsigned int\000"
+ 408      7420756E 
+ 408      7369676E 
+ 408      65642069 
+ 408      6E7400
+ 409              	.LASF8:
+ 410 0021 756E7369 		.ascii	"unsigned int\000"
+ 410      676E6564 
+ 410      20696E74 
+ 410      00
+ 411              	.LASF22:
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccChvSqj.s 			page 9
+
+
+ 412 002e 696E6974 		.ascii	"initQuadDec\000"
+ 412      51756164 
+ 412      44656300 
+ 413              	.LASF20:
+ 414 003a 71756164 		.ascii	"quadDecUtil.c\000"
+ 414      44656355 
+ 414      74696C2E 
+ 414      6300
+ 415              	.LASF7:
+ 416 0048 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 416      206C6F6E 
+ 416      6720756E 
+ 416      7369676E 
+ 416      65642069 
+ 417              	.LASF19:
+ 418 005f 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 418      43313120 
+ 418      352E342E 
+ 418      31203230 
+ 418      31363036 
+ 419 0092 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 419      20726576 
+ 419      6973696F 
+ 419      6E203233 
+ 419      37373135 
+ 420 00c5 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 420      66756E63 
+ 420      74696F6E 
+ 420      2D736563 
+ 420      74696F6E 
+ 421              	.LASF1:
+ 422 00ed 756E7369 		.ascii	"unsigned char\000"
+ 422      676E6564 
+ 422      20636861 
+ 422      7200
+ 423              	.LASF14:
+ 424 00fb 63686172 		.ascii	"char\000"
+ 424      00
+ 425              	.LASF21:
+ 426 0100 433A5C55 		.ascii	"C:\\Users\\Albert\\Documents\\6115_fp\\IWP.cydsn\000"
+ 426      73657273 
+ 426      5C416C62 
+ 426      6572745C 
+ 426      446F6375 
+ 427              	.LASF4:
+ 428 012c 6C6F6E67 		.ascii	"long int\000"
+ 428      20696E74 
+ 428      00
+ 429              	.LASF5:
+ 430 0135 6C6F6E67 		.ascii	"long unsigned int\000"
+ 430      20756E73 
+ 430      69676E65 
+ 430      6420696E 
+ 430      7400
+ 431              	.LASF13:
+ 432 0147 646F7562 		.ascii	"double\000"
+ 432      6C6500
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccChvSqj.s 			page 10
+
+
+ 433              	.LASF23:
+ 434 014e 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 434      52784275 
+ 434      66666572 
+ 434      00
+ 435              	.LASF0:
+ 436 015b 7369676E 		.ascii	"signed char\000"
+ 436      65642063 
+ 436      68617200 
+ 437              	.LASF15:
+ 438 0167 6C6F6E67 		.ascii	"long double\000"
+ 438      20646F75 
+ 438      626C6500 
+ 439              	.LASF9:
+ 440 0173 5F5F696E 		.ascii	"__int32_t\000"
+ 440      7433325F 
+ 440      7400
+ 441              	.LASF17:
+ 442 017d 6765744D 		.ascii	"getMotorDecReading\000"
+ 442      6F746F72 
+ 442      44656352 
+ 442      65616469 
+ 442      6E6700
+ 443              	.LASF12:
+ 444 0190 666C6F61 		.ascii	"float\000"
+ 444      7400
+ 445              	.LASF11:
+ 446 0196 696E7431 		.ascii	"int16\000"
+ 446      3600
+ 447              	.LASF2:
+ 448 019c 73686F72 		.ascii	"short int\000"
+ 448      7420696E 
+ 448      7400
+ 449              	.LASF10:
+ 450 01a6 696E7433 		.ascii	"int32_t\000"
+ 450      325F7400 
+ 451              	.LASF18:
+ 452 01ae 67657453 		.ascii	"getShoulderDecReading\000"
+ 452      686F756C 
+ 452      64657244 
+ 452      65635265 
+ 452      6164696E 
+ 453              	.LASF16:
+ 454 01c4 73697A65 		.ascii	"sizetype\000"
+ 454      74797065 
+ 454      00
+ 455              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

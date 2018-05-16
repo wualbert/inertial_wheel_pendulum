@@ -1,0 +1,1654 @@
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"test.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.initTests,"ax",%progbits
+  20              		.align	2
+  21              		.global	initTests
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	initTests, %function
+  25              	initTests:
+  26              	.LFB64:
+  27              		.file 1 "test.c"
+   1:test.c        **** /* ========================================
+   2:test.c        ****  *
+   3:test.c        ****  * Copyright Albert Wu, 2018
+   4:test.c        ****  * All Rights Reserved
+   5:test.c        ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:test.c        ****  *
+   7:test.c        ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:test.c        ****  * WHICH IS THE PROPERTY OF your company.
+   9:test.c        ****  *
+  10:test.c        ****  * ========================================
+  11:test.c        **** */
+  12:test.c        **** 
+  13:test.c        **** #include <string.h>
+  14:test.c        **** #include <time.h>
+  15:test.c        **** #include <stdlib.h>
+  16:test.c        **** #include <stdio.h>
+  17:test.c        **** #include <math.h>
+  18:test.c        **** #include "hardware.h"
+  19:test.c        **** #include "hardwareParameters.h"
+  20:test.c        **** #include "controllers.h"
+  21:test.c        **** #include "mathUtility.h"
+  22:test.c        **** #include "sensorStructs.h"
+  23:test.c        **** 
+  24:test.c        **** extern MemoryVariable thetaShoulder;
+  25:test.c        **** extern MemoryVariable thetaWheel;
+  26:test.c        **** extern MemoryVariable torque; 
+  27:test.c        **** 
+  28:test.c        **** void initTests()
+  29:test.c        **** {
+  28              		.loc 1 29 0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 2
+
+
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 7, -8
+  35              		.cfi_offset 14, -4
+  36 0002 00AF     		add	r7, sp, #0
+  37              		.cfi_def_cfa_register 7
+  30:test.c        ****     srand(time(NULL));   
+  38              		.loc 1 30 0
+  39 0004 0020     		movs	r0, #0
+  40 0006 FFF7FEFF 		bl	time
+  41 000a 0346     		mov	r3, r0
+  42 000c 1846     		mov	r0, r3
+  43 000e FFF7FEFF 		bl	srand
+  31:test.c        **** }
+  44              		.loc 1 31 0
+  45 0012 00BF     		nop
+  46 0014 80BD     		pop	{r7, pc}
+  47              		.cfi_endproc
+  48              	.LFE64:
+  49              		.size	initTests, .-initTests
+  50 0016 00BF     		.section	.rodata
+  51              		.align	2
+  52              	.LC0:
+  53 0000 4D747220 		.ascii	"Mtr Dec: \000"
+  53      4465633A 
+  53      2000
+  54              		.global	__aeabi_i2d
+  55 000a 0000     		.align	2
+  56              	.LC1:
+  57 000c 53686472 		.ascii	"Shdr Dec: \000"
+  57      20446563 
+  57      3A2000
+  58              		.section	.text.testDec,"ax",%progbits
+  59              		.align	2
+  60              		.global	testDec
+  61              		.thumb
+  62              		.thumb_func
+  63              		.type	testDec, %function
+  64              	testDec:
+  65              	.LFB65:
+  32:test.c        **** void testDec()
+  33:test.c        **** {
+  66              		.loc 1 33 0
+  67              		.cfi_startproc
+  68              		@ args = 0, pretend = 0, frame = 0
+  69              		@ frame_needed = 1, uses_anonymous_args = 0
+  70 0000 98B5     		push	{r3, r4, r7, lr}
+  71              		.cfi_def_cfa_offset 16
+  72              		.cfi_offset 3, -16
+  73              		.cfi_offset 4, -12
+  74              		.cfi_offset 7, -8
+  75              		.cfi_offset 14, -4
+  76 0002 00AF     		add	r7, sp, #0
+  77              		.cfi_def_cfa_register 7
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 3
+
+
+  34:test.c        ****     LCD_ClearDisplay();
+  78              		.loc 1 34 0
+  79 0004 0120     		movs	r0, #1
+  80 0006 FFF7FEFF 		bl	LCD_WriteControl
+  35:test.c        ****     LCD_PrintString("Mtr Dec: ");
+  81              		.loc 1 35 0
+  82 000a 1348     		ldr	r0, .L3
+  83 000c FFF7FEFF 		bl	LCD_PrintString
+  36:test.c        ****     printdouble(getMotorDecReading(),3);
+  84              		.loc 1 36 0
+  85 0010 FFF7FEFF 		bl	getMotorDecReading
+  86 0014 0346     		mov	r3, r0
+  87 0016 1846     		mov	r0, r3
+  88 0018 FFF7FEFF 		bl	__aeabi_i2d
+  89 001c 0346     		mov	r3, r0
+  90 001e 0C46     		mov	r4, r1
+  91 0020 0322     		movs	r2, #3
+  92 0022 1846     		mov	r0, r3
+  93 0024 2146     		mov	r1, r4
+  94 0026 FFF7FEFF 		bl	printdouble
+  37:test.c        ****     LCD_Position(1, 0);  //line feed
+  95              		.loc 1 37 0
+  96 002a 0021     		movs	r1, #0
+  97 002c 0120     		movs	r0, #1
+  98 002e FFF7FEFF 		bl	LCD_Position
+  38:test.c        ****     LCD_PrintString("Shdr Dec: ");
+  99              		.loc 1 38 0
+ 100 0032 0A48     		ldr	r0, .L3+4
+ 101 0034 FFF7FEFF 		bl	LCD_PrintString
+  39:test.c        ****     printdouble(getShoulderDecReading(),3);    
+ 102              		.loc 1 39 0
+ 103 0038 FFF7FEFF 		bl	getShoulderDecReading
+ 104 003c 0346     		mov	r3, r0
+ 105 003e 1846     		mov	r0, r3
+ 106 0040 FFF7FEFF 		bl	__aeabi_i2d
+ 107 0044 0346     		mov	r3, r0
+ 108 0046 0C46     		mov	r4, r1
+ 109 0048 0322     		movs	r2, #3
+ 110 004a 1846     		mov	r0, r3
+ 111 004c 2146     		mov	r1, r4
+ 112 004e FFF7FEFF 		bl	printdouble
+  40:test.c        **** }
+ 113              		.loc 1 40 0
+ 114 0052 00BF     		nop
+ 115 0054 98BD     		pop	{r3, r4, r7, pc}
+ 116              	.L4:
+ 117 0056 00BF     		.align	2
+ 118              	.L3:
+ 119 0058 00000000 		.word	.LC0
+ 120 005c 0C000000 		.word	.LC1
+ 121              		.cfi_endproc
+ 122              	.LFE65:
+ 123              		.size	testDec, .-testDec
+ 124              		.section	.rodata
+ 125 0017 00       		.align	2
+ 126              	.LC2:
+ 127 0018 54686574 		.ascii	"ThetaW: \000"
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 4
+
+
+ 127      61573A20 
+ 127      00
+ 128 0021 000000   		.align	2
+ 129              	.LC3:
+ 130 0024 4F6D6567 		.ascii	"OmegaW: \000"
+ 130      61573A20 
+ 130      00
+ 131              		.section	.text.testThetaWheel,"ax",%progbits
+ 132              		.align	2
+ 133              		.global	testThetaWheel
+ 134              		.thumb
+ 135              		.thumb_func
+ 136              		.type	testThetaWheel, %function
+ 137              	testThetaWheel:
+ 138              	.LFB66:
+  41:test.c        **** void testThetaWheel()
+  42:test.c        **** {
+ 139              		.loc 1 42 0
+ 140              		.cfi_startproc
+ 141              		@ args = 0, pretend = 0, frame = 0
+ 142              		@ frame_needed = 1, uses_anonymous_args = 0
+ 143 0000 98B5     		push	{r3, r4, r7, lr}
+ 144              		.cfi_def_cfa_offset 16
+ 145              		.cfi_offset 3, -16
+ 146              		.cfi_offset 4, -12
+ 147              		.cfi_offset 7, -8
+ 148              		.cfi_offset 14, -4
+ 149 0002 00AF     		add	r7, sp, #0
+ 150              		.cfi_def_cfa_register 7
+  43:test.c        ****     LCD_ClearDisplay();
+ 151              		.loc 1 43 0
+ 152 0004 0120     		movs	r0, #1
+ 153 0006 FFF7FEFF 		bl	LCD_WriteControl
+  44:test.c        ****     LCD_PrintString("ThetaW: ");
+ 154              		.loc 1 44 0
+ 155 000a 1048     		ldr	r0, .L6
+ 156 000c FFF7FEFF 		bl	LCD_PrintString
+  45:test.c        ****     printdouble(getValue(&thetaWheel),3);
+ 157              		.loc 1 45 0
+ 158 0010 0F48     		ldr	r0, .L6+4
+ 159 0012 FFF7FEFF 		bl	getValue
+ 160 0016 0346     		mov	r3, r0
+ 161 0018 0C46     		mov	r4, r1
+ 162 001a 0322     		movs	r2, #3
+ 163 001c 1846     		mov	r0, r3
+ 164 001e 2146     		mov	r1, r4
+ 165 0020 FFF7FEFF 		bl	printdouble
+  46:test.c        ****     LCD_Position(1, 0);  //line feed
+ 166              		.loc 1 46 0
+ 167 0024 0021     		movs	r1, #0
+ 168 0026 0120     		movs	r0, #1
+ 169 0028 FFF7FEFF 		bl	LCD_Position
+  47:test.c        ****     LCD_PrintString("OmegaW: ");
+ 170              		.loc 1 47 0
+ 171 002c 0948     		ldr	r0, .L6+8
+ 172 002e FFF7FEFF 		bl	LCD_PrintString
+  48:test.c        ****     printdouble(getDerivative(&thetaWheel),3);       
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 5
+
+
+ 173              		.loc 1 48 0
+ 174 0032 0748     		ldr	r0, .L6+4
+ 175 0034 FFF7FEFF 		bl	getDerivative
+ 176 0038 0346     		mov	r3, r0
+ 177 003a 0C46     		mov	r4, r1
+ 178 003c 0322     		movs	r2, #3
+ 179 003e 1846     		mov	r0, r3
+ 180 0040 2146     		mov	r1, r4
+ 181 0042 FFF7FEFF 		bl	printdouble
+  49:test.c        **** }
+ 182              		.loc 1 49 0
+ 183 0046 00BF     		nop
+ 184 0048 98BD     		pop	{r3, r4, r7, pc}
+ 185              	.L7:
+ 186 004a 00BF     		.align	2
+ 187              	.L6:
+ 188 004c 18000000 		.word	.LC2
+ 189 0050 00000000 		.word	thetaWheel
+ 190 0054 24000000 		.word	.LC3
+ 191              		.cfi_endproc
+ 192              	.LFE66:
+ 193              		.size	testThetaWheel, .-testThetaWheel
+ 194              		.section	.rodata
+ 195 002d 000000   		.align	2
+ 196              	.LC4:
+ 197 0030 54686574 		.ascii	"ThetaS: \000"
+ 197      61533A20 
+ 197      00
+ 198 0039 000000   		.align	2
+ 199              	.LC5:
+ 200 003c 4F6D6567 		.ascii	"OmegaS: \000"
+ 200      61533A20 
+ 200      00
+ 201              		.section	.text.testThetaShoulder,"ax",%progbits
+ 202              		.align	2
+ 203              		.global	testThetaShoulder
+ 204              		.thumb
+ 205              		.thumb_func
+ 206              		.type	testThetaShoulder, %function
+ 207              	testThetaShoulder:
+ 208              	.LFB67:
+  50:test.c        **** void testThetaShoulder()
+  51:test.c        **** {
+ 209              		.loc 1 51 0
+ 210              		.cfi_startproc
+ 211              		@ args = 0, pretend = 0, frame = 0
+ 212              		@ frame_needed = 1, uses_anonymous_args = 0
+ 213 0000 98B5     		push	{r3, r4, r7, lr}
+ 214              		.cfi_def_cfa_offset 16
+ 215              		.cfi_offset 3, -16
+ 216              		.cfi_offset 4, -12
+ 217              		.cfi_offset 7, -8
+ 218              		.cfi_offset 14, -4
+ 219 0002 00AF     		add	r7, sp, #0
+ 220              		.cfi_def_cfa_register 7
+  52:test.c        ****     LCD_ClearDisplay();
+ 221              		.loc 1 52 0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 6
+
+
+ 222 0004 0120     		movs	r0, #1
+ 223 0006 FFF7FEFF 		bl	LCD_WriteControl
+  53:test.c        ****     LCD_PrintString("ThetaS: ");
+ 224              		.loc 1 53 0
+ 225 000a 1048     		ldr	r0, .L9
+ 226 000c FFF7FEFF 		bl	LCD_PrintString
+  54:test.c        ****     printdouble(getValue(&thetaShoulder),3);
+ 227              		.loc 1 54 0
+ 228 0010 0F48     		ldr	r0, .L9+4
+ 229 0012 FFF7FEFF 		bl	getValue
+ 230 0016 0346     		mov	r3, r0
+ 231 0018 0C46     		mov	r4, r1
+ 232 001a 0322     		movs	r2, #3
+ 233 001c 1846     		mov	r0, r3
+ 234 001e 2146     		mov	r1, r4
+ 235 0020 FFF7FEFF 		bl	printdouble
+  55:test.c        ****     LCD_Position(1, 0);  //line feed
+ 236              		.loc 1 55 0
+ 237 0024 0021     		movs	r1, #0
+ 238 0026 0120     		movs	r0, #1
+ 239 0028 FFF7FEFF 		bl	LCD_Position
+  56:test.c        ****     LCD_PrintString("OmegaS: ");
+ 240              		.loc 1 56 0
+ 241 002c 0948     		ldr	r0, .L9+8
+ 242 002e FFF7FEFF 		bl	LCD_PrintString
+  57:test.c        ****     printdouble(getDerivative(&thetaShoulder),3);       
+ 243              		.loc 1 57 0
+ 244 0032 0748     		ldr	r0, .L9+4
+ 245 0034 FFF7FEFF 		bl	getDerivative
+ 246 0038 0346     		mov	r3, r0
+ 247 003a 0C46     		mov	r4, r1
+ 248 003c 0322     		movs	r2, #3
+ 249 003e 1846     		mov	r0, r3
+ 250 0040 2146     		mov	r1, r4
+ 251 0042 FFF7FEFF 		bl	printdouble
+  58:test.c        **** }
+ 252              		.loc 1 58 0
+ 253 0046 00BF     		nop
+ 254 0048 98BD     		pop	{r3, r4, r7, pc}
+ 255              	.L10:
+ 256 004a 00BF     		.align	2
+ 257              	.L9:
+ 258 004c 30000000 		.word	.LC4
+ 259 0050 00000000 		.word	thetaShoulder
+ 260 0054 3C000000 		.word	.LC5
+ 261              		.cfi_endproc
+ 262              	.LFE67:
+ 263              		.size	testThetaShoulder, .-testThetaShoulder
+ 264              		.section	.rodata
+ 265 0045 000000   		.align	2
+ 266              	.LC6:
+ 267 0048 41444320 		.ascii	"ADC \000"
+ 267      00
+ 268 004d 000000   		.align	2
+ 269              	.LC7:
+ 270 0050 3A2000   		.ascii	": \000"
+ 271              		.section	.text.testADC,"ax",%progbits
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 7
+
+
+ 272              		.align	2
+ 273              		.global	testADC
+ 274              		.thumb
+ 275              		.thumb_func
+ 276              		.type	testADC, %function
+ 277              	testADC:
+ 278              	.LFB68:
+  59:test.c        **** void testADC()
+  60:test.c        **** {
+ 279              		.loc 1 60 0
+ 280              		.cfi_startproc
+ 281              		@ args = 0, pretend = 0, frame = 0
+ 282              		@ frame_needed = 1, uses_anonymous_args = 0
+ 283 0000 80B5     		push	{r7, lr}
+ 284              		.cfi_def_cfa_offset 8
+ 285              		.cfi_offset 7, -8
+ 286              		.cfi_offset 14, -4
+ 287 0002 00AF     		add	r7, sp, #0
+ 288              		.cfi_def_cfa_register 7
+  61:test.c        ****     LCD_ClearDisplay();
+ 289              		.loc 1 61 0
+ 290 0004 0120     		movs	r0, #1
+ 291 0006 FFF7FEFF 		bl	LCD_WriteControl
+  62:test.c        ****     LCD_PrintString("ADC ");
+ 292              		.loc 1 62 0
+ 293 000a 0748     		ldr	r0, .L12
+ 294 000c FFF7FEFF 		bl	LCD_PrintString
+  63:test.c        ****     LCD_PrintString(": ");
+ 295              		.loc 1 63 0
+ 296 0010 0648     		ldr	r0, .L12+4
+ 297 0012 FFF7FEFF 		bl	LCD_PrintString
+  64:test.c        ****     LCD_PrintNumber(getADCReading());
+ 298              		.loc 1 64 0
+ 299 0016 FFF7FEFF 		bl	getADCReading
+ 300 001a 0346     		mov	r3, r0
+ 301 001c 9BB2     		uxth	r3, r3
+ 302 001e 1846     		mov	r0, r3
+ 303 0020 FFF7FEFF 		bl	LCD_PrintU32Number
+  65:test.c        **** }
+ 304              		.loc 1 65 0
+ 305 0024 00BF     		nop
+ 306 0026 80BD     		pop	{r7, pc}
+ 307              	.L13:
+ 308              		.align	2
+ 309              	.L12:
+ 310 0028 48000000 		.word	.LC6
+ 311 002c 50000000 		.word	.LC7
+ 312              		.cfi_endproc
+ 313              	.LFE68:
+ 314              		.size	testADC, .-testADC
+ 315              		.section	.rodata
+ 316 0053 00       		.align	2
+ 317              	.LC8:
+ 318 0054 53656E64 		.ascii	"Sending \000"
+ 318      696E6720 
+ 318      00
+ 319 005d 000000   		.align	2
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 8
+
+
+ 320              	.LC9:
+ 321 0060 44697220 		.ascii	"Dir \000"
+ 321      00
+ 322              		.section	.text.testComm,"ax",%progbits
+ 323              		.align	2
+ 324              		.global	testComm
+ 325              		.thumb
+ 326              		.thumb_func
+ 327              		.type	testComm, %function
+ 328              	testComm:
+ 329              	.LFB69:
+  66:test.c        **** void testComm()
+  67:test.c        **** {
+ 330              		.loc 1 67 0
+ 331              		.cfi_startproc
+ 332              		@ args = 0, pretend = 0, frame = 8
+ 333              		@ frame_needed = 1, uses_anonymous_args = 0
+ 334 0000 80B5     		push	{r7, lr}
+ 335              		.cfi_def_cfa_offset 8
+ 336              		.cfi_offset 7, -8
+ 337              		.cfi_offset 14, -4
+ 338 0002 82B0     		sub	sp, sp, #8
+ 339              		.cfi_def_cfa_offset 16
+ 340 0004 00AF     		add	r7, sp, #0
+ 341              		.cfi_def_cfa_register 7
+  68:test.c        ****     LCD_ClearDisplay();
+ 342              		.loc 1 68 0
+ 343 0006 0120     		movs	r0, #1
+ 344 0008 FFF7FEFF 		bl	LCD_WriteControl
+  69:test.c        ****     LCD_PrintString("Sending ");
+ 345              		.loc 1 69 0
+ 346 000c 1C48     		ldr	r0, .L17
+ 347 000e FFF7FEFF 		bl	LCD_PrintString
+  70:test.c        ****     int randNum = rand()%256;
+ 348              		.loc 1 70 0
+ 349 0012 FFF7FEFF 		bl	rand
+ 350 0016 0246     		mov	r2, r0
+ 351 0018 1A4B     		ldr	r3, .L17+4
+ 352 001a 1340     		ands	r3, r3, r2
+ 353 001c 002B     		cmp	r3, #0
+ 354 001e 03DA     		bge	.L15
+ 355 0020 013B     		subs	r3, r3, #1
+ 356 0022 63F0FF03 		orn	r3, r3, #255
+ 357 0026 0133     		adds	r3, r3, #1
+ 358              	.L15:
+ 359 0028 7B60     		str	r3, [r7, #4]
+  71:test.c        ****     LCD_PrintNumber(randNum);
+ 360              		.loc 1 71 0
+ 361 002a 7B68     		ldr	r3, [r7, #4]
+ 362 002c 9BB2     		uxth	r3, r3
+ 363 002e 1846     		mov	r0, r3
+ 364 0030 FFF7FEFF 		bl	LCD_PrintU32Number
+  72:test.c        ****     LCD_Position(1, 0);  //line feed
+ 365              		.loc 1 72 0
+ 366 0034 0021     		movs	r1, #0
+ 367 0036 0120     		movs	r0, #1
+ 368 0038 FFF7FEFF 		bl	LCD_Position
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 9
+
+
+  73:test.c        ****     LCD_PrintString("Dir ");
+ 369              		.loc 1 73 0
+ 370 003c 1248     		ldr	r0, .L17+8
+ 371 003e FFF7FEFF 		bl	LCD_PrintString
+  74:test.c        ****     int randDir = rand()%2;
+ 372              		.loc 1 74 0
+ 373 0042 FFF7FEFF 		bl	rand
+ 374 0046 0246     		mov	r2, r0
+ 375 0048 104B     		ldr	r3, .L17+12
+ 376 004a 1340     		ands	r3, r3, r2
+ 377 004c 002B     		cmp	r3, #0
+ 378 004e 03DA     		bge	.L16
+ 379 0050 013B     		subs	r3, r3, #1
+ 380 0052 63F00103 		orn	r3, r3, #1
+ 381 0056 0133     		adds	r3, r3, #1
+ 382              	.L16:
+ 383 0058 3B60     		str	r3, [r7]
+  75:test.c        ****     LCD_PrintNumber(randDir);
+ 384              		.loc 1 75 0
+ 385 005a 3B68     		ldr	r3, [r7]
+ 386 005c 9BB2     		uxth	r3, r3
+ 387 005e 1846     		mov	r0, r3
+ 388 0060 FFF7FEFF 		bl	LCD_PrintU32Number
+  76:test.c        ****     sendValue(randNum,randDir);
+ 389              		.loc 1 76 0
+ 390 0064 3B68     		ldr	r3, [r7]
+ 391 0066 002B     		cmp	r3, #0
+ 392 0068 14BF     		ite	ne
+ 393 006a 0123     		movne	r3, #1
+ 394 006c 0023     		moveq	r3, #0
+ 395 006e DBB2     		uxtb	r3, r3
+ 396 0070 1946     		mov	r1, r3
+ 397 0072 7868     		ldr	r0, [r7, #4]
+ 398 0074 FFF7FEFF 		bl	sendValue
+  77:test.c        **** }
+ 399              		.loc 1 77 0
+ 400 0078 00BF     		nop
+ 401 007a 0837     		adds	r7, r7, #8
+ 402              		.cfi_def_cfa_offset 8
+ 403 007c BD46     		mov	sp, r7
+ 404              		.cfi_def_cfa_register 13
+ 405              		@ sp needed
+ 406 007e 80BD     		pop	{r7, pc}
+ 407              	.L18:
+ 408              		.align	2
+ 409              	.L17:
+ 410 0080 54000000 		.word	.LC8
+ 411 0084 FF000080 		.word	-2147483393
+ 412 0088 60000000 		.word	.LC9
+ 413 008c 01000080 		.word	-2147483647
+ 414              		.cfi_endproc
+ 415              	.LFE69:
+ 416              		.size	testComm, .-testComm
+ 417              		.section	.text.testPrintdouble,"ax",%progbits
+ 418              		.align	2
+ 419              		.global	testPrintdouble
+ 420              		.thumb
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 10
+
+
+ 421              		.thumb_func
+ 422              		.type	testPrintdouble, %function
+ 423              	testPrintdouble:
+ 424              	.LFB70:
+  78:test.c        **** void testPrintdouble()
+  79:test.c        **** {
+ 425              		.loc 1 79 0
+ 426              		.cfi_startproc
+ 427              		@ args = 0, pretend = 0, frame = 0
+ 428              		@ frame_needed = 1, uses_anonymous_args = 0
+ 429 0000 80B5     		push	{r7, lr}
+ 430              		.cfi_def_cfa_offset 8
+ 431              		.cfi_offset 7, -8
+ 432              		.cfi_offset 14, -4
+ 433 0002 00AF     		add	r7, sp, #0
+ 434              		.cfi_def_cfa_register 7
+  80:test.c        ****     LCD_ClearDisplay();
+ 435              		.loc 1 80 0
+ 436 0004 0120     		movs	r0, #1
+ 437 0006 FFF7FEFF 		bl	LCD_WriteControl
+  81:test.c        ****     printdouble(1.2346,3);
+ 438              		.loc 1 81 0
+ 439 000a 0322     		movs	r2, #3
+ 440 000c 08A1     		adr	r1, .L20
+ 441 000e D1E90001 		ldrd	r0, [r1]
+ 442 0012 FFF7FEFF 		bl	printdouble
+  82:test.c        ****     LCD_Position(1, 0);  //line feed
+ 443              		.loc 1 82 0
+ 444 0016 0021     		movs	r1, #0
+ 445 0018 0120     		movs	r0, #1
+ 446 001a FFF7FEFF 		bl	LCD_Position
+  83:test.c        ****     printdouble(-1.2344,3);
+ 447              		.loc 1 83 0
+ 448 001e 0322     		movs	r2, #3
+ 449 0020 05A1     		adr	r1, .L20+8
+ 450 0022 D1E90001 		ldrd	r0, [r1]
+ 451 0026 FFF7FEFF 		bl	printdouble
+  84:test.c        **** }
+ 452              		.loc 1 84 0
+ 453 002a 00BF     		nop
+ 454 002c 80BD     		pop	{r7, pc}
+ 455              	.L21:
+ 456 002e 00BF     		.align	3
+ 457              	.L20:
+ 458 0030 FE43FAED 		.word	-302365698
+ 459 0034 EBC0F33F 		.word	1072939243
+ 460 0038 1CEBE236 		.word	920840988
+ 461 003c 1AC0F3BF 		.word	-1074544614
+ 462              		.cfi_endproc
+ 463              	.LFE70:
+ 464              		.size	testPrintdouble, .-testPrintdouble
+ 465              		.section	.rodata
+ 466 0065 000000   		.align	2
+ 467              	.LC10:
+ 468 0068 493A00   		.ascii	"I:\000"
+ 469              		.global	__aeabi_dmul
+ 470 006b 00       		.align	2
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 11
+
+
+ 471              	.LC11:
+ 472 006c 2C00     		.ascii	",\000"
+ 473              		.section	.text.testISensing,"ax",%progbits
+ 474              		.align	2
+ 475              		.global	testISensing
+ 476              		.thumb
+ 477              		.thumb_func
+ 478              		.type	testISensing, %function
+ 479              	testISensing:
+ 480              	.LFB71:
+  85:test.c        **** void testISensing()
+  86:test.c        **** {
+ 481              		.loc 1 86 0
+ 482              		.cfi_startproc
+ 483              		@ args = 0, pretend = 0, frame = 0
+ 484              		@ frame_needed = 1, uses_anonymous_args = 0
+ 485 0000 98B5     		push	{r3, r4, r7, lr}
+ 486              		.cfi_def_cfa_offset 16
+ 487              		.cfi_offset 3, -16
+ 488              		.cfi_offset 4, -12
+ 489              		.cfi_offset 7, -8
+ 490              		.cfi_offset 14, -4
+ 491 0002 00AF     		add	r7, sp, #0
+ 492              		.cfi_def_cfa_register 7
+  87:test.c        ****     LCD_ClearDisplay();
+ 493              		.loc 1 87 0
+ 494 0004 0120     		movs	r0, #1
+ 495 0006 FFF7FEFF 		bl	LCD_WriteControl
+  88:test.c        ****     sendValue(70,1);
+ 496              		.loc 1 88 0
+ 497 000a 0121     		movs	r1, #1
+ 498 000c 4620     		movs	r0, #70
+ 499 000e FFF7FEFF 		bl	sendValue
+  89:test.c        ****     LCD_PrintString("I:");
+ 500              		.loc 1 89 0
+ 501 0012 1B48     		ldr	r0, .L23
+ 502 0014 FFF7FEFF 		bl	LCD_PrintString
+  90:test.c        ****     printdouble(getCurrent()*1e3,0);
+ 503              		.loc 1 90 0
+ 504 0018 FFF7FEFF 		bl	getCurrent
+ 505 001c 4FF00002 		mov	r2, #0
+ 506 0020 184B     		ldr	r3, .L23+4
+ 507 0022 FFF7FEFF 		bl	__aeabi_dmul
+ 508 0026 0346     		mov	r3, r0
+ 509 0028 0C46     		mov	r4, r1
+ 510 002a 0022     		movs	r2, #0
+ 511 002c 1846     		mov	r0, r3
+ 512 002e 2146     		mov	r1, r4
+ 513 0030 FFF7FEFF 		bl	printdouble
+  91:test.c        ****     LCD_Position(1, 0);  //line feed
+ 514              		.loc 1 91 0
+ 515 0034 0021     		movs	r1, #0
+ 516 0036 0120     		movs	r0, #1
+ 517 0038 FFF7FEFF 		bl	LCD_Position
+  92:test.c        ****     printdouble(getADCReading(1),0);
+ 518              		.loc 1 92 0
+ 519 003c 0120     		movs	r0, #1
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 12
+
+
+ 520 003e FFF7FEFF 		bl	getADCReading
+ 521 0042 0346     		mov	r3, r0
+ 522 0044 1846     		mov	r0, r3
+ 523 0046 FFF7FEFF 		bl	__aeabi_i2d
+ 524 004a 0346     		mov	r3, r0
+ 525 004c 0C46     		mov	r4, r1
+ 526 004e 0022     		movs	r2, #0
+ 527 0050 1846     		mov	r0, r3
+ 528 0052 2146     		mov	r1, r4
+ 529 0054 FFF7FEFF 		bl	printdouble
+  93:test.c        ****     LCD_PrintString(",");
+ 530              		.loc 1 93 0
+ 531 0058 0B48     		ldr	r0, .L23+8
+ 532 005a FFF7FEFF 		bl	LCD_PrintString
+  94:test.c        ****     printdouble(getADCReading(2),0);
+ 533              		.loc 1 94 0
+ 534 005e 0220     		movs	r0, #2
+ 535 0060 FFF7FEFF 		bl	getADCReading
+ 536 0064 0346     		mov	r3, r0
+ 537 0066 1846     		mov	r0, r3
+ 538 0068 FFF7FEFF 		bl	__aeabi_i2d
+ 539 006c 0346     		mov	r3, r0
+ 540 006e 0C46     		mov	r4, r1
+ 541 0070 0022     		movs	r2, #0
+ 542 0072 1846     		mov	r0, r3
+ 543 0074 2146     		mov	r1, r4
+ 544 0076 FFF7FEFF 		bl	printdouble
+  95:test.c        **** }
+ 545              		.loc 1 95 0
+ 546 007a 00BF     		nop
+ 547 007c 98BD     		pop	{r3, r4, r7, pc}
+ 548              	.L24:
+ 549 007e 00BF     		.align	2
+ 550              	.L23:
+ 551 0080 68000000 		.word	.LC10
+ 552 0084 00408F40 		.word	1083129856
+ 553 0088 6C000000 		.word	.LC11
+ 554              		.cfi_endproc
+ 555              	.LFE71:
+ 556              		.size	testISensing, .-testISensing
+ 557              		.section	.rodata
+ 558 006e 0000     		.align	2
+ 559              	.LC12:
+ 560 0070 4D656173 		.ascii	"Meas Tau:\000"
+ 560      20546175 
+ 560      3A00
+ 561 007a 0000     		.align	2
+ 562              	.LC13:
+ 563 007c 4F6D6567 		.ascii	"OmegaWheel:\000"
+ 563      61576865 
+ 563      656C3A00 
+ 564              		.section	.text.testTorqueController,"ax",%progbits
+ 565              		.align	2
+ 566              		.global	testTorqueController
+ 567              		.thumb
+ 568              		.thumb_func
+ 569              		.type	testTorqueController, %function
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 13
+
+
+ 570              	testTorqueController:
+ 571              	.LFB72:
+  96:test.c        **** void testTorqueController()
+  97:test.c        **** {    
+ 572              		.loc 1 97 0
+ 573              		.cfi_startproc
+ 574              		@ args = 0, pretend = 0, frame = 16
+ 575              		@ frame_needed = 1, uses_anonymous_args = 0
+ 576 0000 90B5     		push	{r4, r7, lr}
+ 577              		.cfi_def_cfa_offset 12
+ 578              		.cfi_offset 4, -12
+ 579              		.cfi_offset 7, -8
+ 580              		.cfi_offset 14, -4
+ 581 0002 85B0     		sub	sp, sp, #20
+ 582              		.cfi_def_cfa_offset 32
+ 583 0004 00AF     		add	r7, sp, #0
+ 584              		.cfi_def_cfa_register 7
+  98:test.c        ****     //double goalTorque = fmod(rand(),1.8*MAX_TORQUE);
+  99:test.c        ****     //goalTorque-=0.9*MAX_TORQUE;
+ 100:test.c        ****     //setTorque(randTorque,0);
+ 101:test.c        ****     double goalTorque = 0.02;
+ 585              		.loc 1 101 0
+ 586 0006 1EA4     		adr	r4, .L28
+ 587 0008 D4E90034 		ldrd	r3, [r4]
+ 588 000c C7E90034 		strd	r3, [r7]
+ 102:test.c        ****     int i=0;
+ 589              		.loc 1 102 0
+ 590 0010 0023     		movs	r3, #0
+ 591 0012 FB60     		str	r3, [r7, #12]
+ 592              	.L27:
+ 103:test.c        ****     while(1)
+ 104:test.c        ****     {
+ 105:test.c        ****         setTorque(goalTorque,1,1);
+ 593              		.loc 1 105 0
+ 594 0014 0123     		movs	r3, #1
+ 595 0016 0122     		movs	r2, #1
+ 596 0018 D7E90001 		ldrd	r0, [r7]
+ 597 001c FFF7FEFF 		bl	setTorque
+ 106:test.c        ****         i++;
+ 598              		.loc 1 106 0
+ 599 0020 FB68     		ldr	r3, [r7, #12]
+ 600 0022 0133     		adds	r3, r3, #1
+ 601 0024 FB60     		str	r3, [r7, #12]
+ 107:test.c        ****         if(i==1)
+ 602              		.loc 1 107 0
+ 603 0026 FB68     		ldr	r3, [r7, #12]
+ 604 0028 012B     		cmp	r3, #1
+ 605 002a F3D1     		bne	.L27
+ 108:test.c        ****         {
+ 109:test.c        ****             LCD_ClearDisplay();
+ 606              		.loc 1 109 0
+ 607 002c 0120     		movs	r0, #1
+ 608 002e FFF7FEFF 		bl	LCD_WriteControl
+ 110:test.c        ****             LCD_PrintString("Meas Tau:");
+ 609              		.loc 1 110 0
+ 610 0032 1548     		ldr	r0, .L28+8
+ 611 0034 FFF7FEFF 		bl	LCD_PrintString
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 14
+
+
+ 111:test.c        ****             printdouble(getValue(&torque)*1e3,3);
+ 612              		.loc 1 111 0
+ 613 0038 1448     		ldr	r0, .L28+12
+ 614 003a FFF7FEFF 		bl	getValue
+ 615 003e 4FF00002 		mov	r2, #0
+ 616 0042 134B     		ldr	r3, .L28+16
+ 617 0044 FFF7FEFF 		bl	__aeabi_dmul
+ 618 0048 0346     		mov	r3, r0
+ 619 004a 0C46     		mov	r4, r1
+ 620 004c 0322     		movs	r2, #3
+ 621 004e 1846     		mov	r0, r3
+ 622 0050 2146     		mov	r1, r4
+ 623 0052 FFF7FEFF 		bl	printdouble
+ 112:test.c        ****             LCD_Position(1, 0);  //line feed
+ 624              		.loc 1 112 0
+ 625 0056 0021     		movs	r1, #0
+ 626 0058 0120     		movs	r0, #1
+ 627 005a FFF7FEFF 		bl	LCD_Position
+ 113:test.c        ****             LCD_PrintString("OmegaWheel:");
+ 628              		.loc 1 113 0
+ 629 005e 0D48     		ldr	r0, .L28+20
+ 630 0060 FFF7FEFF 		bl	LCD_PrintString
+ 114:test.c        ****             printdouble(getDerivative(&thetaWheel),3);
+ 631              		.loc 1 114 0
+ 632 0064 0C48     		ldr	r0, .L28+24
+ 633 0066 FFF7FEFF 		bl	getDerivative
+ 634 006a 0346     		mov	r3, r0
+ 635 006c 0C46     		mov	r4, r1
+ 636 006e 0322     		movs	r2, #3
+ 637 0070 1846     		mov	r0, r3
+ 638 0072 2146     		mov	r1, r4
+ 639 0074 FFF7FEFF 		bl	printdouble
+ 115:test.c        ****             i=0;
+ 640              		.loc 1 115 0
+ 641 0078 0023     		movs	r3, #0
+ 642 007a FB60     		str	r3, [r7, #12]
+ 116:test.c        ****         }
+ 117:test.c        ****     }
+ 643              		.loc 1 117 0
+ 644 007c CAE7     		b	.L27
+ 645              	.L29:
+ 646 007e 00BF     		.align	3
+ 647              	.L28:
+ 648 0080 7B14AE47 		.word	1202590843
+ 649 0084 E17A943F 		.word	1066695393
+ 650 0088 70000000 		.word	.LC12
+ 651 008c 00000000 		.word	torque
+ 652 0090 00408F40 		.word	1083129856
+ 653 0094 7C000000 		.word	.LC13
+ 654 0098 00000000 		.word	thetaWheel
+ 655              		.cfi_endproc
+ 656              	.LFE72:
+ 657              		.size	testTorqueController, .-testTorqueController
+ 658              		.text
+ 659              	.Letext0:
+ 660              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 661              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 15
+
+
+ 662              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 663              		.file 5 "sensorStructs.h"
+ 664              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
+ 665              		.section	.debug_info,"",%progbits
+ 666              	.Ldebug_info0:
+ 667 0000 21020000 		.4byte	0x221
+ 668 0004 0400     		.2byte	0x4
+ 669 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 670 000a 04       		.byte	0x4
+ 671 000b 01       		.uleb128 0x1
+ 672 000c 00000000 		.4byte	.LASF38
+ 673 0010 0C       		.byte	0xc
+ 674 0011 A1000000 		.4byte	.LASF39
+ 675 0015 B3010000 		.4byte	.LASF40
+ 676 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 677 001d 00000000 		.4byte	0
+ 678 0021 00000000 		.4byte	.Ldebug_line0
+ 679 0025 02       		.uleb128 0x2
+ 680 0026 04       		.byte	0x4
+ 681 0027 05       		.byte	0x5
+ 682 0028 696E7400 		.ascii	"int\000"
+ 683 002c 03       		.uleb128 0x3
+ 684 002d 04       		.byte	0x4
+ 685 002e 07       		.byte	0x7
+ 686 002f 78010000 		.4byte	.LASF0
+ 687 0033 03       		.uleb128 0x3
+ 688 0034 08       		.byte	0x8
+ 689 0035 05       		.byte	0x5
+ 690 0036 E8010000 		.4byte	.LASF1
+ 691 003a 03       		.uleb128 0x3
+ 692 003b 08       		.byte	0x8
+ 693 003c 04       		.byte	0x4
+ 694 003d 5B020000 		.4byte	.LASF2
+ 695 0041 03       		.uleb128 0x3
+ 696 0042 01       		.byte	0x1
+ 697 0043 06       		.byte	0x6
+ 698 0044 CF000000 		.4byte	.LASF3
+ 699 0048 03       		.uleb128 0x3
+ 700 0049 01       		.byte	0x1
+ 701 004a 08       		.byte	0x8
+ 702 004b ED000000 		.4byte	.LASF4
+ 703 004f 03       		.uleb128 0x3
+ 704 0050 02       		.byte	0x2
+ 705 0051 05       		.byte	0x5
+ 706 0052 A8000000 		.4byte	.LASF5
+ 707 0056 03       		.uleb128 0x3
+ 708 0057 02       		.byte	0x2
+ 709 0058 07       		.byte	0x7
+ 710 0059 32010000 		.4byte	.LASF6
+ 711 005d 04       		.uleb128 0x4
+ 712 005e 8E000000 		.4byte	.LASF12
+ 713 0062 02       		.byte	0x2
+ 714 0063 3F       		.byte	0x3f
+ 715 0064 68000000 		.4byte	0x68
+ 716 0068 03       		.uleb128 0x3
+ 717 0069 04       		.byte	0x4
+ 718 006a 05       		.byte	0x5
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 16
+
+
+ 719 006b 98000000 		.4byte	.LASF7
+ 720 006f 03       		.uleb128 0x3
+ 721 0070 04       		.byte	0x4
+ 722 0071 07       		.byte	0x7
+ 723 0072 18010000 		.4byte	.LASF8
+ 724 0076 03       		.uleb128 0x3
+ 725 0077 08       		.byte	0x8
+ 726 0078 07       		.byte	0x7
+ 727 0079 85010000 		.4byte	.LASF9
+ 728 007d 03       		.uleb128 0x3
+ 729 007e 04       		.byte	0x4
+ 730 007f 07       		.byte	0x7
+ 731 0080 DF010000 		.4byte	.LASF10
+ 732 0084 03       		.uleb128 0x3
+ 733 0085 01       		.byte	0x1
+ 734 0086 08       		.byte	0x8
+ 735 0087 0B020000 		.4byte	.LASF11
+ 736 008b 04       		.uleb128 0x4
+ 737 008c AB010000 		.4byte	.LASF13
+ 738 0090 03       		.byte	0x3
+ 739 0091 2C       		.byte	0x2c
+ 740 0092 5D000000 		.4byte	0x5d
+ 741 0096 03       		.uleb128 0x3
+ 742 0097 08       		.byte	0x8
+ 743 0098 04       		.byte	0x4
+ 744 0099 52010000 		.4byte	.LASF14
+ 745 009d 03       		.uleb128 0x3
+ 746 009e 04       		.byte	0x4
+ 747 009f 04       		.byte	0x4
+ 748 00a0 C9000000 		.4byte	.LASF15
+ 749 00a4 05       		.uleb128 0x5
+ 750 00a5 67010000 		.4byte	.LASF16
+ 751 00a9 04       		.byte	0x4
+ 752 00aa 9301     		.2byte	0x193
+ 753 00ac 56000000 		.4byte	0x56
+ 754 00b0 06       		.uleb128 0x6
+ 755 00b1 9C010000 		.4byte	.LASF21
+ 756 00b5 50       		.byte	0x50
+ 757 00b6 05       		.byte	0x5
+ 758 00b7 19       		.byte	0x19
+ 759 00b8 ED000000 		.4byte	0xed
+ 760 00bc 07       		.uleb128 0x7
+ 761 00bd 10020000 		.4byte	.LASF17
+ 762 00c1 05       		.byte	0x5
+ 763 00c2 1A       		.byte	0x1a
+ 764 00c3 ED000000 		.4byte	0xed
+ 765 00c7 00       		.byte	0
+ 766 00c8 07       		.uleb128 0x7
+ 767 00c9 B2000000 		.4byte	.LASF18
+ 768 00cd 05       		.byte	0x5
+ 769 00ce 1B       		.byte	0x1b
+ 770 00cf ED000000 		.4byte	0xed
+ 771 00d3 20       		.byte	0x20
+ 772 00d4 07       		.uleb128 0x7
+ 773 00d5 2E020000 		.4byte	.LASF19
+ 774 00d9 05       		.byte	0x5
+ 775 00da 1C       		.byte	0x1c
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 17
+
+
+ 776 00db 96000000 		.4byte	0x96
+ 777 00df 40       		.byte	0x40
+ 778 00e0 07       		.uleb128 0x7
+ 779 00e1 BD000000 		.4byte	.LASF20
+ 780 00e5 05       		.byte	0x5
+ 781 00e6 1D       		.byte	0x1d
+ 782 00e7 08010000 		.4byte	0x108
+ 783 00eb 48       		.byte	0x48
+ 784 00ec 00       		.byte	0
+ 785 00ed 08       		.uleb128 0x8
+ 786 00ee 96000000 		.4byte	0x96
+ 787 00f2 FD000000 		.4byte	0xfd
+ 788 00f6 09       		.uleb128 0x9
+ 789 00f7 7D000000 		.4byte	0x7d
+ 790 00fb 03       		.byte	0x3
+ 791 00fc 00       		.byte	0
+ 792 00fd 0A       		.uleb128 0xa
+ 793 00fe 96000000 		.4byte	0x96
+ 794 0102 08010000 		.4byte	0x108
+ 795 0106 0B       		.uleb128 0xb
+ 796 0107 00       		.byte	0
+ 797 0108 0C       		.uleb128 0xc
+ 798 0109 04       		.byte	0x4
+ 799 010a FD000000 		.4byte	0xfd
+ 800 010e 04       		.uleb128 0x4
+ 801 010f 9C010000 		.4byte	.LASF21
+ 802 0113 05       		.byte	0x5
+ 803 0114 1E       		.byte	0x1e
+ 804 0115 B0000000 		.4byte	0xb0
+ 805 0119 0D       		.uleb128 0xd
+ 806 011a 6E010000 		.4byte	.LASF22
+ 807 011e 01       		.byte	0x1
+ 808 011f 1C       		.byte	0x1c
+ 809 0120 00000000 		.4byte	.LFB64
+ 810 0124 16000000 		.4byte	.LFE64-.LFB64
+ 811 0128 01       		.uleb128 0x1
+ 812 0129 9C       		.byte	0x9c
+ 813 012a 0D       		.uleb128 0xd
+ 814 012b 2A010000 		.4byte	.LASF23
+ 815 012f 01       		.byte	0x1
+ 816 0130 20       		.byte	0x20
+ 817 0131 00000000 		.4byte	.LFB65
+ 818 0135 60000000 		.4byte	.LFE65-.LFB65
+ 819 0139 01       		.uleb128 0x1
+ 820 013a 9C       		.byte	0x9c
+ 821 013b 0D       		.uleb128 0xd
+ 822 013c 1F020000 		.4byte	.LASF24
+ 823 0140 01       		.byte	0x1
+ 824 0141 29       		.byte	0x29
+ 825 0142 00000000 		.4byte	.LFB66
+ 826 0146 58000000 		.4byte	.LFE66-.LFB66
+ 827 014a 01       		.uleb128 0x1
+ 828 014b 9C       		.byte	0x9c
+ 829 014c 0D       		.uleb128 0xd
+ 830 014d DB000000 		.4byte	.LASF25
+ 831 0151 01       		.byte	0x1
+ 832 0152 32       		.byte	0x32
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 18
+
+
+ 833 0153 00000000 		.4byte	.LFB67
+ 834 0157 58000000 		.4byte	.LFE67-.LFB67
+ 835 015b 01       		.uleb128 0x1
+ 836 015c 9C       		.byte	0x9c
+ 837 015d 0D       		.uleb128 0xd
+ 838 015e 6F020000 		.4byte	.LASF26
+ 839 0162 01       		.byte	0x1
+ 840 0163 3B       		.byte	0x3b
+ 841 0164 00000000 		.4byte	.LFB68
+ 842 0168 30000000 		.4byte	.LFE68-.LFB68
+ 843 016c 01       		.uleb128 0x1
+ 844 016d 9C       		.byte	0x9c
+ 845 016e 0E       		.uleb128 0xe
+ 846 016f 52020000 		.4byte	.LASF31
+ 847 0173 01       		.byte	0x1
+ 848 0174 42       		.byte	0x42
+ 849 0175 00000000 		.4byte	.LFB69
+ 850 0179 90000000 		.4byte	.LFE69-.LFB69
+ 851 017d 01       		.uleb128 0x1
+ 852 017e 9C       		.byte	0x9c
+ 853 017f A0010000 		.4byte	0x1a0
+ 854 0183 0F       		.uleb128 0xf
+ 855 0184 67020000 		.4byte	.LASF27
+ 856 0188 01       		.byte	0x1
+ 857 0189 46       		.byte	0x46
+ 858 018a 25000000 		.4byte	0x25
+ 859 018e 02       		.uleb128 0x2
+ 860 018f 91       		.byte	0x91
+ 861 0190 74       		.sleb128 -12
+ 862 0191 0F       		.uleb128 0xf
+ 863 0192 17020000 		.4byte	.LASF28
+ 864 0196 01       		.byte	0x1
+ 865 0197 4A       		.byte	0x4a
+ 866 0198 25000000 		.4byte	0x25
+ 867 019c 02       		.uleb128 0x2
+ 868 019d 91       		.byte	0x91
+ 869 019e 70       		.sleb128 -16
+ 870 019f 00       		.byte	0
+ 871 01a0 0D       		.uleb128 0xd
+ 872 01a1 08010000 		.4byte	.LASF29
+ 873 01a5 01       		.byte	0x1
+ 874 01a6 4E       		.byte	0x4e
+ 875 01a7 00000000 		.4byte	.LFB70
+ 876 01ab 40000000 		.4byte	.LFE70-.LFB70
+ 877 01af 01       		.uleb128 0x1
+ 878 01b0 9C       		.byte	0x9c
+ 879 01b1 0D       		.uleb128 0xd
+ 880 01b2 FB000000 		.4byte	.LASF30
+ 881 01b6 01       		.byte	0x1
+ 882 01b7 55       		.byte	0x55
+ 883 01b8 00000000 		.4byte	.LFB71
+ 884 01bc 8C000000 		.4byte	.LFE71-.LFB71
+ 885 01c0 01       		.uleb128 0x1
+ 886 01c1 9C       		.byte	0x9c
+ 887 01c2 0E       		.uleb128 0xe
+ 888 01c3 F6010000 		.4byte	.LASF32
+ 889 01c7 01       		.byte	0x1
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 19
+
+
+ 890 01c8 60       		.byte	0x60
+ 891 01c9 00000000 		.4byte	.LFB72
+ 892 01cd 9C000000 		.4byte	.LFE72-.LFB72
+ 893 01d1 01       		.uleb128 0x1
+ 894 01d2 9C       		.byte	0x9c
+ 895 01d3 F2010000 		.4byte	0x1f2
+ 896 01d7 0F       		.uleb128 0xf
+ 897 01d8 47020000 		.4byte	.LASF33
+ 898 01dc 01       		.byte	0x1
+ 899 01dd 65       		.byte	0x65
+ 900 01de 96000000 		.4byte	0x96
+ 901 01e2 02       		.uleb128 0x2
+ 902 01e3 91       		.byte	0x91
+ 903 01e4 60       		.sleb128 -32
+ 904 01e5 10       		.uleb128 0x10
+ 905 01e6 6900     		.ascii	"i\000"
+ 906 01e8 01       		.byte	0x1
+ 907 01e9 66       		.byte	0x66
+ 908 01ea 25000000 		.4byte	0x25
+ 909 01ee 02       		.uleb128 0x2
+ 910 01ef 91       		.byte	0x91
+ 911 01f0 6C       		.sleb128 -20
+ 912 01f1 00       		.byte	0
+ 913 01f2 11       		.uleb128 0x11
+ 914 01f3 45010000 		.4byte	.LASF34
+ 915 01f7 06       		.byte	0x6
+ 916 01f8 9606     		.2byte	0x696
+ 917 01fa FE010000 		.4byte	0x1fe
+ 918 01fe 12       		.uleb128 0x12
+ 919 01ff 8B000000 		.4byte	0x8b
+ 920 0203 13       		.uleb128 0x13
+ 921 0204 59010000 		.4byte	.LASF35
+ 922 0208 01       		.byte	0x1
+ 923 0209 18       		.byte	0x18
+ 924 020a 0E010000 		.4byte	0x10e
+ 925 020e 13       		.uleb128 0x13
+ 926 020f 3C020000 		.4byte	.LASF36
+ 927 0213 01       		.byte	0x1
+ 928 0214 19       		.byte	0x19
+ 929 0215 0E010000 		.4byte	0x10e
+ 930 0219 13       		.uleb128 0x13
+ 931 021a 35020000 		.4byte	.LASF37
+ 932 021e 01       		.byte	0x1
+ 933 021f 1A       		.byte	0x1a
+ 934 0220 0E010000 		.4byte	0x10e
+ 935 0224 00       		.byte	0
+ 936              		.section	.debug_abbrev,"",%progbits
+ 937              	.Ldebug_abbrev0:
+ 938 0000 01       		.uleb128 0x1
+ 939 0001 11       		.uleb128 0x11
+ 940 0002 01       		.byte	0x1
+ 941 0003 25       		.uleb128 0x25
+ 942 0004 0E       		.uleb128 0xe
+ 943 0005 13       		.uleb128 0x13
+ 944 0006 0B       		.uleb128 0xb
+ 945 0007 03       		.uleb128 0x3
+ 946 0008 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 20
+
+
+ 947 0009 1B       		.uleb128 0x1b
+ 948 000a 0E       		.uleb128 0xe
+ 949 000b 55       		.uleb128 0x55
+ 950 000c 17       		.uleb128 0x17
+ 951 000d 11       		.uleb128 0x11
+ 952 000e 01       		.uleb128 0x1
+ 953 000f 10       		.uleb128 0x10
+ 954 0010 17       		.uleb128 0x17
+ 955 0011 00       		.byte	0
+ 956 0012 00       		.byte	0
+ 957 0013 02       		.uleb128 0x2
+ 958 0014 24       		.uleb128 0x24
+ 959 0015 00       		.byte	0
+ 960 0016 0B       		.uleb128 0xb
+ 961 0017 0B       		.uleb128 0xb
+ 962 0018 3E       		.uleb128 0x3e
+ 963 0019 0B       		.uleb128 0xb
+ 964 001a 03       		.uleb128 0x3
+ 965 001b 08       		.uleb128 0x8
+ 966 001c 00       		.byte	0
+ 967 001d 00       		.byte	0
+ 968 001e 03       		.uleb128 0x3
+ 969 001f 24       		.uleb128 0x24
+ 970 0020 00       		.byte	0
+ 971 0021 0B       		.uleb128 0xb
+ 972 0022 0B       		.uleb128 0xb
+ 973 0023 3E       		.uleb128 0x3e
+ 974 0024 0B       		.uleb128 0xb
+ 975 0025 03       		.uleb128 0x3
+ 976 0026 0E       		.uleb128 0xe
+ 977 0027 00       		.byte	0
+ 978 0028 00       		.byte	0
+ 979 0029 04       		.uleb128 0x4
+ 980 002a 16       		.uleb128 0x16
+ 981 002b 00       		.byte	0
+ 982 002c 03       		.uleb128 0x3
+ 983 002d 0E       		.uleb128 0xe
+ 984 002e 3A       		.uleb128 0x3a
+ 985 002f 0B       		.uleb128 0xb
+ 986 0030 3B       		.uleb128 0x3b
+ 987 0031 0B       		.uleb128 0xb
+ 988 0032 49       		.uleb128 0x49
+ 989 0033 13       		.uleb128 0x13
+ 990 0034 00       		.byte	0
+ 991 0035 00       		.byte	0
+ 992 0036 05       		.uleb128 0x5
+ 993 0037 16       		.uleb128 0x16
+ 994 0038 00       		.byte	0
+ 995 0039 03       		.uleb128 0x3
+ 996 003a 0E       		.uleb128 0xe
+ 997 003b 3A       		.uleb128 0x3a
+ 998 003c 0B       		.uleb128 0xb
+ 999 003d 3B       		.uleb128 0x3b
+ 1000 003e 05       		.uleb128 0x5
+ 1001 003f 49       		.uleb128 0x49
+ 1002 0040 13       		.uleb128 0x13
+ 1003 0041 00       		.byte	0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 21
+
+
+ 1004 0042 00       		.byte	0
+ 1005 0043 06       		.uleb128 0x6
+ 1006 0044 13       		.uleb128 0x13
+ 1007 0045 01       		.byte	0x1
+ 1008 0046 03       		.uleb128 0x3
+ 1009 0047 0E       		.uleb128 0xe
+ 1010 0048 0B       		.uleb128 0xb
+ 1011 0049 0B       		.uleb128 0xb
+ 1012 004a 3A       		.uleb128 0x3a
+ 1013 004b 0B       		.uleb128 0xb
+ 1014 004c 3B       		.uleb128 0x3b
+ 1015 004d 0B       		.uleb128 0xb
+ 1016 004e 01       		.uleb128 0x1
+ 1017 004f 13       		.uleb128 0x13
+ 1018 0050 00       		.byte	0
+ 1019 0051 00       		.byte	0
+ 1020 0052 07       		.uleb128 0x7
+ 1021 0053 0D       		.uleb128 0xd
+ 1022 0054 00       		.byte	0
+ 1023 0055 03       		.uleb128 0x3
+ 1024 0056 0E       		.uleb128 0xe
+ 1025 0057 3A       		.uleb128 0x3a
+ 1026 0058 0B       		.uleb128 0xb
+ 1027 0059 3B       		.uleb128 0x3b
+ 1028 005a 0B       		.uleb128 0xb
+ 1029 005b 49       		.uleb128 0x49
+ 1030 005c 13       		.uleb128 0x13
+ 1031 005d 38       		.uleb128 0x38
+ 1032 005e 0B       		.uleb128 0xb
+ 1033 005f 00       		.byte	0
+ 1034 0060 00       		.byte	0
+ 1035 0061 08       		.uleb128 0x8
+ 1036 0062 01       		.uleb128 0x1
+ 1037 0063 01       		.byte	0x1
+ 1038 0064 49       		.uleb128 0x49
+ 1039 0065 13       		.uleb128 0x13
+ 1040 0066 01       		.uleb128 0x1
+ 1041 0067 13       		.uleb128 0x13
+ 1042 0068 00       		.byte	0
+ 1043 0069 00       		.byte	0
+ 1044 006a 09       		.uleb128 0x9
+ 1045 006b 21       		.uleb128 0x21
+ 1046 006c 00       		.byte	0
+ 1047 006d 49       		.uleb128 0x49
+ 1048 006e 13       		.uleb128 0x13
+ 1049 006f 2F       		.uleb128 0x2f
+ 1050 0070 0B       		.uleb128 0xb
+ 1051 0071 00       		.byte	0
+ 1052 0072 00       		.byte	0
+ 1053 0073 0A       		.uleb128 0xa
+ 1054 0074 15       		.uleb128 0x15
+ 1055 0075 01       		.byte	0x1
+ 1056 0076 49       		.uleb128 0x49
+ 1057 0077 13       		.uleb128 0x13
+ 1058 0078 01       		.uleb128 0x1
+ 1059 0079 13       		.uleb128 0x13
+ 1060 007a 00       		.byte	0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 22
+
+
+ 1061 007b 00       		.byte	0
+ 1062 007c 0B       		.uleb128 0xb
+ 1063 007d 18       		.uleb128 0x18
+ 1064 007e 00       		.byte	0
+ 1065 007f 00       		.byte	0
+ 1066 0080 00       		.byte	0
+ 1067 0081 0C       		.uleb128 0xc
+ 1068 0082 0F       		.uleb128 0xf
+ 1069 0083 00       		.byte	0
+ 1070 0084 0B       		.uleb128 0xb
+ 1071 0085 0B       		.uleb128 0xb
+ 1072 0086 49       		.uleb128 0x49
+ 1073 0087 13       		.uleb128 0x13
+ 1074 0088 00       		.byte	0
+ 1075 0089 00       		.byte	0
+ 1076 008a 0D       		.uleb128 0xd
+ 1077 008b 2E       		.uleb128 0x2e
+ 1078 008c 00       		.byte	0
+ 1079 008d 3F       		.uleb128 0x3f
+ 1080 008e 19       		.uleb128 0x19
+ 1081 008f 03       		.uleb128 0x3
+ 1082 0090 0E       		.uleb128 0xe
+ 1083 0091 3A       		.uleb128 0x3a
+ 1084 0092 0B       		.uleb128 0xb
+ 1085 0093 3B       		.uleb128 0x3b
+ 1086 0094 0B       		.uleb128 0xb
+ 1087 0095 11       		.uleb128 0x11
+ 1088 0096 01       		.uleb128 0x1
+ 1089 0097 12       		.uleb128 0x12
+ 1090 0098 06       		.uleb128 0x6
+ 1091 0099 40       		.uleb128 0x40
+ 1092 009a 18       		.uleb128 0x18
+ 1093 009b 9642     		.uleb128 0x2116
+ 1094 009d 19       		.uleb128 0x19
+ 1095 009e 00       		.byte	0
+ 1096 009f 00       		.byte	0
+ 1097 00a0 0E       		.uleb128 0xe
+ 1098 00a1 2E       		.uleb128 0x2e
+ 1099 00a2 01       		.byte	0x1
+ 1100 00a3 3F       		.uleb128 0x3f
+ 1101 00a4 19       		.uleb128 0x19
+ 1102 00a5 03       		.uleb128 0x3
+ 1103 00a6 0E       		.uleb128 0xe
+ 1104 00a7 3A       		.uleb128 0x3a
+ 1105 00a8 0B       		.uleb128 0xb
+ 1106 00a9 3B       		.uleb128 0x3b
+ 1107 00aa 0B       		.uleb128 0xb
+ 1108 00ab 11       		.uleb128 0x11
+ 1109 00ac 01       		.uleb128 0x1
+ 1110 00ad 12       		.uleb128 0x12
+ 1111 00ae 06       		.uleb128 0x6
+ 1112 00af 40       		.uleb128 0x40
+ 1113 00b0 18       		.uleb128 0x18
+ 1114 00b1 9642     		.uleb128 0x2116
+ 1115 00b3 19       		.uleb128 0x19
+ 1116 00b4 01       		.uleb128 0x1
+ 1117 00b5 13       		.uleb128 0x13
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 23
+
+
+ 1118 00b6 00       		.byte	0
+ 1119 00b7 00       		.byte	0
+ 1120 00b8 0F       		.uleb128 0xf
+ 1121 00b9 34       		.uleb128 0x34
+ 1122 00ba 00       		.byte	0
+ 1123 00bb 03       		.uleb128 0x3
+ 1124 00bc 0E       		.uleb128 0xe
+ 1125 00bd 3A       		.uleb128 0x3a
+ 1126 00be 0B       		.uleb128 0xb
+ 1127 00bf 3B       		.uleb128 0x3b
+ 1128 00c0 0B       		.uleb128 0xb
+ 1129 00c1 49       		.uleb128 0x49
+ 1130 00c2 13       		.uleb128 0x13
+ 1131 00c3 02       		.uleb128 0x2
+ 1132 00c4 18       		.uleb128 0x18
+ 1133 00c5 00       		.byte	0
+ 1134 00c6 00       		.byte	0
+ 1135 00c7 10       		.uleb128 0x10
+ 1136 00c8 34       		.uleb128 0x34
+ 1137 00c9 00       		.byte	0
+ 1138 00ca 03       		.uleb128 0x3
+ 1139 00cb 08       		.uleb128 0x8
+ 1140 00cc 3A       		.uleb128 0x3a
+ 1141 00cd 0B       		.uleb128 0xb
+ 1142 00ce 3B       		.uleb128 0x3b
+ 1143 00cf 0B       		.uleb128 0xb
+ 1144 00d0 49       		.uleb128 0x49
+ 1145 00d1 13       		.uleb128 0x13
+ 1146 00d2 02       		.uleb128 0x2
+ 1147 00d3 18       		.uleb128 0x18
+ 1148 00d4 00       		.byte	0
+ 1149 00d5 00       		.byte	0
+ 1150 00d6 11       		.uleb128 0x11
+ 1151 00d7 34       		.uleb128 0x34
+ 1152 00d8 00       		.byte	0
+ 1153 00d9 03       		.uleb128 0x3
+ 1154 00da 0E       		.uleb128 0xe
+ 1155 00db 3A       		.uleb128 0x3a
+ 1156 00dc 0B       		.uleb128 0xb
+ 1157 00dd 3B       		.uleb128 0x3b
+ 1158 00de 05       		.uleb128 0x5
+ 1159 00df 49       		.uleb128 0x49
+ 1160 00e0 13       		.uleb128 0x13
+ 1161 00e1 3F       		.uleb128 0x3f
+ 1162 00e2 19       		.uleb128 0x19
+ 1163 00e3 3C       		.uleb128 0x3c
+ 1164 00e4 19       		.uleb128 0x19
+ 1165 00e5 00       		.byte	0
+ 1166 00e6 00       		.byte	0
+ 1167 00e7 12       		.uleb128 0x12
+ 1168 00e8 35       		.uleb128 0x35
+ 1169 00e9 00       		.byte	0
+ 1170 00ea 49       		.uleb128 0x49
+ 1171 00eb 13       		.uleb128 0x13
+ 1172 00ec 00       		.byte	0
+ 1173 00ed 00       		.byte	0
+ 1174 00ee 13       		.uleb128 0x13
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 24
+
+
+ 1175 00ef 34       		.uleb128 0x34
+ 1176 00f0 00       		.byte	0
+ 1177 00f1 03       		.uleb128 0x3
+ 1178 00f2 0E       		.uleb128 0xe
+ 1179 00f3 3A       		.uleb128 0x3a
+ 1180 00f4 0B       		.uleb128 0xb
+ 1181 00f5 3B       		.uleb128 0x3b
+ 1182 00f6 0B       		.uleb128 0xb
+ 1183 00f7 49       		.uleb128 0x49
+ 1184 00f8 13       		.uleb128 0x13
+ 1185 00f9 3F       		.uleb128 0x3f
+ 1186 00fa 19       		.uleb128 0x19
+ 1187 00fb 3C       		.uleb128 0x3c
+ 1188 00fc 19       		.uleb128 0x19
+ 1189 00fd 00       		.byte	0
+ 1190 00fe 00       		.byte	0
+ 1191 00ff 00       		.byte	0
+ 1192              		.section	.debug_aranges,"",%progbits
+ 1193 0000 5C000000 		.4byte	0x5c
+ 1194 0004 0200     		.2byte	0x2
+ 1195 0006 00000000 		.4byte	.Ldebug_info0
+ 1196 000a 04       		.byte	0x4
+ 1197 000b 00       		.byte	0
+ 1198 000c 0000     		.2byte	0
+ 1199 000e 0000     		.2byte	0
+ 1200 0010 00000000 		.4byte	.LFB64
+ 1201 0014 16000000 		.4byte	.LFE64-.LFB64
+ 1202 0018 00000000 		.4byte	.LFB65
+ 1203 001c 60000000 		.4byte	.LFE65-.LFB65
+ 1204 0020 00000000 		.4byte	.LFB66
+ 1205 0024 58000000 		.4byte	.LFE66-.LFB66
+ 1206 0028 00000000 		.4byte	.LFB67
+ 1207 002c 58000000 		.4byte	.LFE67-.LFB67
+ 1208 0030 00000000 		.4byte	.LFB68
+ 1209 0034 30000000 		.4byte	.LFE68-.LFB68
+ 1210 0038 00000000 		.4byte	.LFB69
+ 1211 003c 90000000 		.4byte	.LFE69-.LFB69
+ 1212 0040 00000000 		.4byte	.LFB70
+ 1213 0044 40000000 		.4byte	.LFE70-.LFB70
+ 1214 0048 00000000 		.4byte	.LFB71
+ 1215 004c 8C000000 		.4byte	.LFE71-.LFB71
+ 1216 0050 00000000 		.4byte	.LFB72
+ 1217 0054 9C000000 		.4byte	.LFE72-.LFB72
+ 1218 0058 00000000 		.4byte	0
+ 1219 005c 00000000 		.4byte	0
+ 1220              		.section	.debug_ranges,"",%progbits
+ 1221              	.Ldebug_ranges0:
+ 1222 0000 00000000 		.4byte	.LFB64
+ 1223 0004 16000000 		.4byte	.LFE64
+ 1224 0008 00000000 		.4byte	.LFB65
+ 1225 000c 60000000 		.4byte	.LFE65
+ 1226 0010 00000000 		.4byte	.LFB66
+ 1227 0014 58000000 		.4byte	.LFE66
+ 1228 0018 00000000 		.4byte	.LFB67
+ 1229 001c 58000000 		.4byte	.LFE67
+ 1230 0020 00000000 		.4byte	.LFB68
+ 1231 0024 30000000 		.4byte	.LFE68
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 25
+
+
+ 1232 0028 00000000 		.4byte	.LFB69
+ 1233 002c 90000000 		.4byte	.LFE69
+ 1234 0030 00000000 		.4byte	.LFB70
+ 1235 0034 40000000 		.4byte	.LFE70
+ 1236 0038 00000000 		.4byte	.LFB71
+ 1237 003c 8C000000 		.4byte	.LFE71
+ 1238 0040 00000000 		.4byte	.LFB72
+ 1239 0044 9C000000 		.4byte	.LFE72
+ 1240 0048 00000000 		.4byte	0
+ 1241 004c 00000000 		.4byte	0
+ 1242              		.section	.debug_line,"",%progbits
+ 1243              	.Ldebug_line0:
+ 1244 0000 31020000 		.section	.debug_str,"MS",%progbits,1
+ 1244      02005F01 
+ 1244      00000201 
+ 1244      FB0E0D00 
+ 1244      01010101 
+ 1245              	.LASF38:
+ 1246 0000 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1246      43313120 
+ 1246      352E342E 
+ 1246      31203230 
+ 1246      31363036 
+ 1247 0033 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1247      20726576 
+ 1247      6973696F 
+ 1247      6E203233 
+ 1247      37373135 
+ 1248 0066 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1248      66756E63 
+ 1248      74696F6E 
+ 1248      2D736563 
+ 1248      74696F6E 
+ 1249              	.LASF12:
+ 1250 008e 5F5F696E 		.ascii	"__int32_t\000"
+ 1250      7433325F 
+ 1250      7400
+ 1251              	.LASF7:
+ 1252 0098 6C6F6E67 		.ascii	"long int\000"
+ 1252      20696E74 
+ 1252      00
+ 1253              	.LASF39:
+ 1254 00a1 74657374 		.ascii	"test.c\000"
+ 1254      2E6300
+ 1255              	.LASF5:
+ 1256 00a8 73686F72 		.ascii	"short int\000"
+ 1256      7420696E 
+ 1256      7400
+ 1257              	.LASF18:
+ 1258 00b2 74696D65 		.ascii	"timeStamps\000"
+ 1258      5374616D 
+ 1258      707300
+ 1259              	.LASF20:
+ 1260 00bd 76616C75 		.ascii	"valueGetter\000"
+ 1260      65476574 
+ 1260      74657200 
+ 1261              	.LASF15:
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 26
+
+
+ 1262 00c9 666C6F61 		.ascii	"float\000"
+ 1262      7400
+ 1263              	.LASF3:
+ 1264 00cf 7369676E 		.ascii	"signed char\000"
+ 1264      65642063 
+ 1264      68617200 
+ 1265              	.LASF25:
+ 1266 00db 74657374 		.ascii	"testThetaShoulder\000"
+ 1266      54686574 
+ 1266      6153686F 
+ 1266      756C6465 
+ 1266      7200
+ 1267              	.LASF4:
+ 1268 00ed 756E7369 		.ascii	"unsigned char\000"
+ 1268      676E6564 
+ 1268      20636861 
+ 1268      7200
+ 1269              	.LASF30:
+ 1270 00fb 74657374 		.ascii	"testISensing\000"
+ 1270      4953656E 
+ 1270      73696E67 
+ 1270      00
+ 1271              	.LASF29:
+ 1272 0108 74657374 		.ascii	"testPrintdouble\000"
+ 1272      5072696E 
+ 1272      74646F75 
+ 1272      626C6500 
+ 1273              	.LASF8:
+ 1274 0118 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1274      20756E73 
+ 1274      69676E65 
+ 1274      6420696E 
+ 1274      7400
+ 1275              	.LASF23:
+ 1276 012a 74657374 		.ascii	"testDec\000"
+ 1276      44656300 
+ 1277              	.LASF6:
+ 1278 0132 73686F72 		.ascii	"short unsigned int\000"
+ 1278      7420756E 
+ 1278      7369676E 
+ 1278      65642069 
+ 1278      6E7400
+ 1279              	.LASF34:
+ 1280 0145 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1280      52784275 
+ 1280      66666572 
+ 1280      00
+ 1281              	.LASF14:
+ 1282 0152 646F7562 		.ascii	"double\000"
+ 1282      6C6500
+ 1283              	.LASF35:
+ 1284 0159 74686574 		.ascii	"thetaShoulder\000"
+ 1284      6153686F 
+ 1284      756C6465 
+ 1284      7200
+ 1285              	.LASF16:
+ 1286 0167 75696E74 		.ascii	"uint16\000"
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 27
+
+
+ 1286      313600
+ 1287              	.LASF22:
+ 1288 016e 696E6974 		.ascii	"initTests\000"
+ 1288      54657374 
+ 1288      7300
+ 1289              	.LASF0:
+ 1290 0178 756E7369 		.ascii	"unsigned int\000"
+ 1290      676E6564 
+ 1290      20696E74 
+ 1290      00
+ 1291              	.LASF9:
+ 1292 0185 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1292      206C6F6E 
+ 1292      6720756E 
+ 1292      7369676E 
+ 1292      65642069 
+ 1293              	.LASF21:
+ 1294 019c 4D656D6F 		.ascii	"MemoryVariable\000"
+ 1294      72795661 
+ 1294      72696162 
+ 1294      6C6500
+ 1295              	.LASF13:
+ 1296 01ab 696E7433 		.ascii	"int32_t\000"
+ 1296      325F7400 
+ 1297              	.LASF40:
+ 1298 01b3 433A5C55 		.ascii	"C:\\Users\\Albert\\Documents\\6115_fp\\IWP.cydsn\000"
+ 1298      73657273 
+ 1298      5C416C62 
+ 1298      6572745C 
+ 1298      446F6375 
+ 1299              	.LASF10:
+ 1300 01df 73697A65 		.ascii	"sizetype\000"
+ 1300      74797065 
+ 1300      00
+ 1301              	.LASF1:
+ 1302 01e8 6C6F6E67 		.ascii	"long long int\000"
+ 1302      206C6F6E 
+ 1302      6720696E 
+ 1302      7400
+ 1303              	.LASF32:
+ 1304 01f6 74657374 		.ascii	"testTorqueController\000"
+ 1304      546F7271 
+ 1304      7565436F 
+ 1304      6E74726F 
+ 1304      6C6C6572 
+ 1305              	.LASF11:
+ 1306 020b 63686172 		.ascii	"char\000"
+ 1306      00
+ 1307              	.LASF17:
+ 1308 0210 76616C75 		.ascii	"values\000"
+ 1308      657300
+ 1309              	.LASF28:
+ 1310 0217 72616E64 		.ascii	"randDir\000"
+ 1310      44697200 
+ 1311              	.LASF24:
+ 1312 021f 74657374 		.ascii	"testThetaWheel\000"
+ 1312      54686574 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccTTlgdU.s 			page 28
+
+
+ 1312      61576865 
+ 1312      656C00
+ 1313              	.LASF19:
+ 1314 022e 6F666673 		.ascii	"offset\000"
+ 1314      657400
+ 1315              	.LASF37:
+ 1316 0235 746F7271 		.ascii	"torque\000"
+ 1316      756500
+ 1317              	.LASF36:
+ 1318 023c 74686574 		.ascii	"thetaWheel\000"
+ 1318      61576865 
+ 1318      656C00
+ 1319              	.LASF33:
+ 1320 0247 676F616C 		.ascii	"goalTorque\000"
+ 1320      546F7271 
+ 1320      756500
+ 1321              	.LASF31:
+ 1322 0252 74657374 		.ascii	"testComm\000"
+ 1322      436F6D6D 
+ 1322      00
+ 1323              	.LASF2:
+ 1324 025b 6C6F6E67 		.ascii	"long double\000"
+ 1324      20646F75 
+ 1324      626C6500 
+ 1325              	.LASF27:
+ 1326 0267 72616E64 		.ascii	"randNum\000"
+ 1326      4E756D00 
+ 1327              	.LASF26:
+ 1328 026f 74657374 		.ascii	"testADC\000"
+ 1328      41444300 
+ 1329              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

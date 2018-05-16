@@ -1,0 +1,7 @@
+--------------- Rebuild Started: 05/08/2018 14:56:49 Project: test.c, Configuration: ARM GCC 5.4-2016-q2-update Debug ---------------
+arm-none-eabi-gcc.exe -mcpu=cortex-m3 -mthumb -I. -IGenerated_Source\PSoC5 -Wa,-alh=.\CortexM3\ARM_GCC_541\Debug/test.lst -g -Wall -ffunction-sections -ffat-lto-objects -O0 -c test.c -o .\CortexM3\ARM_GCC_541\Debug\test.o
+test.c: In function 'testComm':
+test.c:61:5: warning: implicit declaration of function 'sendValue' [-Wimplicit-function-declaration]
+     sendValue(randNum,randDir);
+     ^
+--------------- Rebuild Succeeded: 05/08/2018 14:56:49 ---------------

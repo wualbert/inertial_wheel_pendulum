@@ -1,0 +1,834 @@
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccoxPcNg.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"ADC1_In.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ADC1_In_Write,"ax",%progbits
+  20              		.align	2
+  21              		.global	ADC1_In_Write
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	ADC1_In_Write, %function
+  25              	ADC1_In_Write:
+  26              	.LFB0:
+  27              		.file 1 "Generated_Source\\PSoC5\\ADC1_In.c"
+   1:Generated_Source\PSoC5/ADC1_In.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/ADC1_In.c **** * File Name: ADC1_In.c  
+   3:Generated_Source\PSoC5/ADC1_In.c **** * Version 2.20
+   4:Generated_Source\PSoC5/ADC1_In.c **** *
+   5:Generated_Source\PSoC5/ADC1_In.c **** * Description:
+   6:Generated_Source\PSoC5/ADC1_In.c **** *  This file contains API to enable firmware control of a Pins component.
+   7:Generated_Source\PSoC5/ADC1_In.c **** *
+   8:Generated_Source\PSoC5/ADC1_In.c **** * Note:
+   9:Generated_Source\PSoC5/ADC1_In.c **** *
+  10:Generated_Source\PSoC5/ADC1_In.c **** ********************************************************************************
+  11:Generated_Source\PSoC5/ADC1_In.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  12:Generated_Source\PSoC5/ADC1_In.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  13:Generated_Source\PSoC5/ADC1_In.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  14:Generated_Source\PSoC5/ADC1_In.c **** * the software package with which this file was provided.
+  15:Generated_Source\PSoC5/ADC1_In.c **** *******************************************************************************/
+  16:Generated_Source\PSoC5/ADC1_In.c **** 
+  17:Generated_Source\PSoC5/ADC1_In.c **** #include "cytypes.h"
+  18:Generated_Source\PSoC5/ADC1_In.c **** #include "ADC1_In.h"
+  19:Generated_Source\PSoC5/ADC1_In.c **** 
+  20:Generated_Source\PSoC5/ADC1_In.c **** /* APIs are not generated for P15[7:6] on PSoC 5 */
+  21:Generated_Source\PSoC5/ADC1_In.c **** #if !(CY_PSOC5A &&\
+  22:Generated_Source\PSoC5/ADC1_In.c **** 	 ADC1_In__PORT == 15 && ((ADC1_In__MASK & 0xC0) != 0))
+  23:Generated_Source\PSoC5/ADC1_In.c **** 
+  24:Generated_Source\PSoC5/ADC1_In.c **** 
+  25:Generated_Source\PSoC5/ADC1_In.c **** /*******************************************************************************
+  26:Generated_Source\PSoC5/ADC1_In.c **** * Function Name: ADC1_In_Write
+  27:Generated_Source\PSoC5/ADC1_In.c **** ****************************************************************************//**
+  28:Generated_Source\PSoC5/ADC1_In.c **** *
+  29:Generated_Source\PSoC5/ADC1_In.c **** * \brief Writes the value to the physical port (data output register), masking
+  30:Generated_Source\PSoC5/ADC1_In.c **** *  and shifting the bits appropriately. 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccoxPcNg.s 			page 2
+
+
+  31:Generated_Source\PSoC5/ADC1_In.c **** *
+  32:Generated_Source\PSoC5/ADC1_In.c **** * The data output register controls the signal applied to the physical pin in 
+  33:Generated_Source\PSoC5/ADC1_In.c **** * conjunction with the drive mode parameter. This function avoids changing 
+  34:Generated_Source\PSoC5/ADC1_In.c **** * other bits in the port by using the appropriate method (read-modify-write or
+  35:Generated_Source\PSoC5/ADC1_In.c **** * bit banding).
+  36:Generated_Source\PSoC5/ADC1_In.c **** *
+  37:Generated_Source\PSoC5/ADC1_In.c **** * <b>Note</b> This function should not be used on a hardware digital output pin 
+  38:Generated_Source\PSoC5/ADC1_In.c **** * as it is driven by the hardware signal attached to it.
+  39:Generated_Source\PSoC5/ADC1_In.c **** *
+  40:Generated_Source\PSoC5/ADC1_In.c **** * \param value
+  41:Generated_Source\PSoC5/ADC1_In.c **** *  Value to write to the component instance.
+  42:Generated_Source\PSoC5/ADC1_In.c **** *
+  43:Generated_Source\PSoC5/ADC1_In.c **** * \return 
+  44:Generated_Source\PSoC5/ADC1_In.c **** *  None 
+  45:Generated_Source\PSoC5/ADC1_In.c **** *
+  46:Generated_Source\PSoC5/ADC1_In.c **** * \sideeffect
+  47:Generated_Source\PSoC5/ADC1_In.c **** *  If you use read-modify-write operations that are not atomic; the Interrupt 
+  48:Generated_Source\PSoC5/ADC1_In.c **** *  Service Routines (ISR) can cause corruption of this function. An ISR that 
+  49:Generated_Source\PSoC5/ADC1_In.c **** *  interrupts this function and performs writes to the Pins component data 
+  50:Generated_Source\PSoC5/ADC1_In.c **** *  register can cause corrupted port data. To avoid this issue, you should 
+  51:Generated_Source\PSoC5/ADC1_In.c **** *  either use the Per-Pin APIs (primary method) or disable interrupts around 
+  52:Generated_Source\PSoC5/ADC1_In.c **** *  this function.
+  53:Generated_Source\PSoC5/ADC1_In.c **** *
+  54:Generated_Source\PSoC5/ADC1_In.c **** * \funcusage
+  55:Generated_Source\PSoC5/ADC1_In.c **** *  \snippet ADC1_In_SUT.c usage_ADC1_In_Write
+  56:Generated_Source\PSoC5/ADC1_In.c **** *******************************************************************************/
+  57:Generated_Source\PSoC5/ADC1_In.c **** void ADC1_In_Write(uint8 value)
+  58:Generated_Source\PSoC5/ADC1_In.c **** {
+  28              		.loc 1 58 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 16
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 7, -4
+  36 0002 85B0     		sub	sp, sp, #20
+  37              		.cfi_def_cfa_offset 24
+  38 0004 00AF     		add	r7, sp, #0
+  39              		.cfi_def_cfa_register 7
+  40 0006 0346     		mov	r3, r0
+  41 0008 FB71     		strb	r3, [r7, #7]
+  59:Generated_Source\PSoC5/ADC1_In.c ****     uint8 staticBits = (ADC1_In_DR & (uint8)(~ADC1_In_MASK));
+  42              		.loc 1 59 0
+  43 000a 0A4B     		ldr	r3, .L2
+  44 000c 1B78     		ldrb	r3, [r3]
+  45 000e DBB2     		uxtb	r3, r3
+  46 0010 23F00103 		bic	r3, r3, #1
+  47 0014 FB73     		strb	r3, [r7, #15]
+  60:Generated_Source\PSoC5/ADC1_In.c ****     ADC1_In_DR = staticBits | ((uint8)(value << ADC1_In_SHIFT) & ADC1_In_MASK);
+  48              		.loc 1 60 0
+  49 0016 0749     		ldr	r1, .L2
+  50 0018 FB79     		ldrb	r3, [r7, #7]
+  51 001a 03F00103 		and	r3, r3, #1
+  52 001e DAB2     		uxtb	r2, r3
+  53 0020 FB7B     		ldrb	r3, [r7, #15]
+  54 0022 1343     		orrs	r3, r3, r2
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccoxPcNg.s 			page 3
+
+
+  55 0024 DBB2     		uxtb	r3, r3
+  56 0026 0B70     		strb	r3, [r1]
+  61:Generated_Source\PSoC5/ADC1_In.c **** }
+  57              		.loc 1 61 0
+  58 0028 00BF     		nop
+  59 002a 1437     		adds	r7, r7, #20
+  60              		.cfi_def_cfa_offset 4
+  61 002c BD46     		mov	sp, r7
+  62              		.cfi_def_cfa_register 13
+  63              		@ sp needed
+  64 002e 80BC     		pop	{r7}
+  65              		.cfi_restore 7
+  66              		.cfi_def_cfa_offset 0
+  67 0030 7047     		bx	lr
+  68              	.L3:
+  69 0032 00BF     		.align	2
+  70              	.L2:
+  71 0034 30510040 		.word	1073762608
+  72              		.cfi_endproc
+  73              	.LFE0:
+  74              		.size	ADC1_In_Write, .-ADC1_In_Write
+  75              		.section	.text.ADC1_In_SetDriveMode,"ax",%progbits
+  76              		.align	2
+  77              		.global	ADC1_In_SetDriveMode
+  78              		.thumb
+  79              		.thumb_func
+  80              		.type	ADC1_In_SetDriveMode, %function
+  81              	ADC1_In_SetDriveMode:
+  82              	.LFB1:
+  62:Generated_Source\PSoC5/ADC1_In.c **** 
+  63:Generated_Source\PSoC5/ADC1_In.c **** 
+  64:Generated_Source\PSoC5/ADC1_In.c **** /*******************************************************************************
+  65:Generated_Source\PSoC5/ADC1_In.c **** * Function Name: ADC1_In_SetDriveMode
+  66:Generated_Source\PSoC5/ADC1_In.c **** ****************************************************************************//**
+  67:Generated_Source\PSoC5/ADC1_In.c **** *
+  68:Generated_Source\PSoC5/ADC1_In.c **** * \brief Sets the drive mode for each of the Pins component's pins.
+  69:Generated_Source\PSoC5/ADC1_In.c **** * 
+  70:Generated_Source\PSoC5/ADC1_In.c **** * <b>Note</b> This affects all pins in the Pins component instance. Use the
+  71:Generated_Source\PSoC5/ADC1_In.c **** * Per-Pin APIs if you wish to control individual pin's drive modes.
+  72:Generated_Source\PSoC5/ADC1_In.c **** *
+  73:Generated_Source\PSoC5/ADC1_In.c **** * \param mode
+  74:Generated_Source\PSoC5/ADC1_In.c **** *  Mode for the selected signals. Valid options are documented in 
+  75:Generated_Source\PSoC5/ADC1_In.c **** *  \ref driveMode.
+  76:Generated_Source\PSoC5/ADC1_In.c **** *
+  77:Generated_Source\PSoC5/ADC1_In.c **** * \return
+  78:Generated_Source\PSoC5/ADC1_In.c **** *  None
+  79:Generated_Source\PSoC5/ADC1_In.c **** *
+  80:Generated_Source\PSoC5/ADC1_In.c **** * \sideeffect
+  81:Generated_Source\PSoC5/ADC1_In.c **** *  If you use read-modify-write operations that are not atomic, the ISR can
+  82:Generated_Source\PSoC5/ADC1_In.c **** *  cause corruption of this function. An ISR that interrupts this function 
+  83:Generated_Source\PSoC5/ADC1_In.c **** *  and performs writes to the Pins component Drive Mode registers can cause 
+  84:Generated_Source\PSoC5/ADC1_In.c **** *  corrupted port data. To avoid this issue, you should either use the Per-Pin
+  85:Generated_Source\PSoC5/ADC1_In.c **** *  APIs (primary method) or disable interrupts around this function.
+  86:Generated_Source\PSoC5/ADC1_In.c **** *
+  87:Generated_Source\PSoC5/ADC1_In.c **** * \funcusage
+  88:Generated_Source\PSoC5/ADC1_In.c **** *  \snippet ADC1_In_SUT.c usage_ADC1_In_SetDriveMode
+  89:Generated_Source\PSoC5/ADC1_In.c **** *******************************************************************************/
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccoxPcNg.s 			page 4
+
+
+  90:Generated_Source\PSoC5/ADC1_In.c **** void ADC1_In_SetDriveMode(uint8 mode)
+  91:Generated_Source\PSoC5/ADC1_In.c **** {
+  83              		.loc 1 91 0
+  84              		.cfi_startproc
+  85              		@ args = 0, pretend = 0, frame = 8
+  86              		@ frame_needed = 1, uses_anonymous_args = 0
+  87              		@ link register save eliminated.
+  88 0000 80B4     		push	{r7}
+  89              		.cfi_def_cfa_offset 4
+  90              		.cfi_offset 7, -4
+  91 0002 83B0     		sub	sp, sp, #12
+  92              		.cfi_def_cfa_offset 16
+  93 0004 00AF     		add	r7, sp, #0
+  94              		.cfi_def_cfa_register 7
+  95 0006 0346     		mov	r3, r0
+  96 0008 FB71     		strb	r3, [r7, #7]
+  92:Generated_Source\PSoC5/ADC1_In.c **** 	CyPins_SetPinDriveMode(ADC1_In_0, mode);
+  97              		.loc 1 92 0
+  98 000a 0B49     		ldr	r1, .L5
+  99 000c 0A4B     		ldr	r3, .L5
+ 100 000e 1B78     		ldrb	r3, [r3]
+ 101 0010 DBB2     		uxtb	r3, r3
+ 102 0012 5BB2     		sxtb	r3, r3
+ 103 0014 23F00E03 		bic	r3, r3, #14
+ 104 0018 5AB2     		sxtb	r2, r3
+ 105 001a 97F90730 		ldrsb	r3, [r7, #7]
+ 106 001e 03F00E03 		and	r3, r3, #14
+ 107 0022 5BB2     		sxtb	r3, r3
+ 108 0024 1343     		orrs	r3, r3, r2
+ 109 0026 5BB2     		sxtb	r3, r3
+ 110 0028 DBB2     		uxtb	r3, r3
+ 111 002a 0B70     		strb	r3, [r1]
+  93:Generated_Source\PSoC5/ADC1_In.c **** }
+ 112              		.loc 1 93 0
+ 113 002c 00BF     		nop
+ 114 002e 0C37     		adds	r7, r7, #12
+ 115              		.cfi_def_cfa_offset 4
+ 116 0030 BD46     		mov	sp, r7
+ 117              		.cfi_def_cfa_register 13
+ 118              		@ sp needed
+ 119 0032 80BC     		pop	{r7}
+ 120              		.cfi_restore 7
+ 121              		.cfi_def_cfa_offset 0
+ 122 0034 7047     		bx	lr
+ 123              	.L6:
+ 124 0036 00BF     		.align	2
+ 125              	.L5:
+ 126 0038 18500040 		.word	1073762328
+ 127              		.cfi_endproc
+ 128              	.LFE1:
+ 129              		.size	ADC1_In_SetDriveMode, .-ADC1_In_SetDriveMode
+ 130              		.section	.text.ADC1_In_Read,"ax",%progbits
+ 131              		.align	2
+ 132              		.global	ADC1_In_Read
+ 133              		.thumb
+ 134              		.thumb_func
+ 135              		.type	ADC1_In_Read, %function
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccoxPcNg.s 			page 5
+
+
+ 136              	ADC1_In_Read:
+ 137              	.LFB2:
+  94:Generated_Source\PSoC5/ADC1_In.c **** 
+  95:Generated_Source\PSoC5/ADC1_In.c **** 
+  96:Generated_Source\PSoC5/ADC1_In.c **** /*******************************************************************************
+  97:Generated_Source\PSoC5/ADC1_In.c **** * Function Name: ADC1_In_Read
+  98:Generated_Source\PSoC5/ADC1_In.c **** ****************************************************************************//**
+  99:Generated_Source\PSoC5/ADC1_In.c **** *
+ 100:Generated_Source\PSoC5/ADC1_In.c **** * \brief Reads the associated physical port (pin status register) and masks 
+ 101:Generated_Source\PSoC5/ADC1_In.c **** *  the required bits according to the width and bit position of the component
+ 102:Generated_Source\PSoC5/ADC1_In.c **** *  instance. 
+ 103:Generated_Source\PSoC5/ADC1_In.c **** *
+ 104:Generated_Source\PSoC5/ADC1_In.c **** * The pin's status register returns the current logic level present on the 
+ 105:Generated_Source\PSoC5/ADC1_In.c **** * physical pin.
+ 106:Generated_Source\PSoC5/ADC1_In.c **** *
+ 107:Generated_Source\PSoC5/ADC1_In.c **** * \return 
+ 108:Generated_Source\PSoC5/ADC1_In.c **** *  The current value for the pins in the component as a right justified number.
+ 109:Generated_Source\PSoC5/ADC1_In.c **** *
+ 110:Generated_Source\PSoC5/ADC1_In.c **** * \funcusage
+ 111:Generated_Source\PSoC5/ADC1_In.c **** *  \snippet ADC1_In_SUT.c usage_ADC1_In_Read  
+ 112:Generated_Source\PSoC5/ADC1_In.c **** *******************************************************************************/
+ 113:Generated_Source\PSoC5/ADC1_In.c **** uint8 ADC1_In_Read(void)
+ 114:Generated_Source\PSoC5/ADC1_In.c **** {
+ 138              		.loc 1 114 0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 1, uses_anonymous_args = 0
+ 142              		@ link register save eliminated.
+ 143 0000 80B4     		push	{r7}
+ 144              		.cfi_def_cfa_offset 4
+ 145              		.cfi_offset 7, -4
+ 146 0002 00AF     		add	r7, sp, #0
+ 147              		.cfi_def_cfa_register 7
+ 115:Generated_Source\PSoC5/ADC1_In.c ****     return (ADC1_In_PS & ADC1_In_MASK) >> ADC1_In_SHIFT;
+ 148              		.loc 1 115 0
+ 149 0004 044B     		ldr	r3, .L9
+ 150 0006 1B78     		ldrb	r3, [r3]
+ 151 0008 DBB2     		uxtb	r3, r3
+ 152 000a 03F00103 		and	r3, r3, #1
+ 153 000e DBB2     		uxtb	r3, r3
+ 116:Generated_Source\PSoC5/ADC1_In.c **** }
+ 154              		.loc 1 116 0
+ 155 0010 1846     		mov	r0, r3
+ 156 0012 BD46     		mov	sp, r7
+ 157              		.cfi_def_cfa_register 13
+ 158              		@ sp needed
+ 159 0014 80BC     		pop	{r7}
+ 160              		.cfi_restore 7
+ 161              		.cfi_def_cfa_offset 0
+ 162 0016 7047     		bx	lr
+ 163              	.L10:
+ 164              		.align	2
+ 165              	.L9:
+ 166 0018 31510040 		.word	1073762609
+ 167              		.cfi_endproc
+ 168              	.LFE2:
+ 169              		.size	ADC1_In_Read, .-ADC1_In_Read
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccoxPcNg.s 			page 6
+
+
+ 170              		.section	.text.ADC1_In_ReadDataReg,"ax",%progbits
+ 171              		.align	2
+ 172              		.global	ADC1_In_ReadDataReg
+ 173              		.thumb
+ 174              		.thumb_func
+ 175              		.type	ADC1_In_ReadDataReg, %function
+ 176              	ADC1_In_ReadDataReg:
+ 177              	.LFB3:
+ 117:Generated_Source\PSoC5/ADC1_In.c **** 
+ 118:Generated_Source\PSoC5/ADC1_In.c **** 
+ 119:Generated_Source\PSoC5/ADC1_In.c **** /*******************************************************************************
+ 120:Generated_Source\PSoC5/ADC1_In.c **** * Function Name: ADC1_In_ReadDataReg
+ 121:Generated_Source\PSoC5/ADC1_In.c **** ****************************************************************************//**
+ 122:Generated_Source\PSoC5/ADC1_In.c **** *
+ 123:Generated_Source\PSoC5/ADC1_In.c **** * \brief Reads the associated physical port's data output register and masks 
+ 124:Generated_Source\PSoC5/ADC1_In.c **** *  the correct bits according to the width and bit position of the component 
+ 125:Generated_Source\PSoC5/ADC1_In.c **** *  instance. 
+ 126:Generated_Source\PSoC5/ADC1_In.c **** *
+ 127:Generated_Source\PSoC5/ADC1_In.c **** * The data output register controls the signal applied to the physical pin in 
+ 128:Generated_Source\PSoC5/ADC1_In.c **** * conjunction with the drive mode parameter. This is not the same as the 
+ 129:Generated_Source\PSoC5/ADC1_In.c **** * preferred ADC1_In_Read() API because the 
+ 130:Generated_Source\PSoC5/ADC1_In.c **** * ADC1_In_ReadDataReg() reads the data register instead of the status 
+ 131:Generated_Source\PSoC5/ADC1_In.c **** * register. For output pins this is a useful function to determine the value 
+ 132:Generated_Source\PSoC5/ADC1_In.c **** * just written to the pin.
+ 133:Generated_Source\PSoC5/ADC1_In.c **** *
+ 134:Generated_Source\PSoC5/ADC1_In.c **** * \return 
+ 135:Generated_Source\PSoC5/ADC1_In.c **** *  The current value of the data register masked and shifted into a right 
+ 136:Generated_Source\PSoC5/ADC1_In.c **** *  justified number for the component instance.
+ 137:Generated_Source\PSoC5/ADC1_In.c **** *
+ 138:Generated_Source\PSoC5/ADC1_In.c **** * \funcusage
+ 139:Generated_Source\PSoC5/ADC1_In.c **** *  \snippet ADC1_In_SUT.c usage_ADC1_In_ReadDataReg 
+ 140:Generated_Source\PSoC5/ADC1_In.c **** *******************************************************************************/
+ 141:Generated_Source\PSoC5/ADC1_In.c **** uint8 ADC1_In_ReadDataReg(void)
+ 142:Generated_Source\PSoC5/ADC1_In.c **** {
+ 178              		.loc 1 142 0
+ 179              		.cfi_startproc
+ 180              		@ args = 0, pretend = 0, frame = 0
+ 181              		@ frame_needed = 1, uses_anonymous_args = 0
+ 182              		@ link register save eliminated.
+ 183 0000 80B4     		push	{r7}
+ 184              		.cfi_def_cfa_offset 4
+ 185              		.cfi_offset 7, -4
+ 186 0002 00AF     		add	r7, sp, #0
+ 187              		.cfi_def_cfa_register 7
+ 143:Generated_Source\PSoC5/ADC1_In.c ****     return (ADC1_In_DR & ADC1_In_MASK) >> ADC1_In_SHIFT;
+ 188              		.loc 1 143 0
+ 189 0004 044B     		ldr	r3, .L13
+ 190 0006 1B78     		ldrb	r3, [r3]
+ 191 0008 DBB2     		uxtb	r3, r3
+ 192 000a 03F00103 		and	r3, r3, #1
+ 193 000e DBB2     		uxtb	r3, r3
+ 144:Generated_Source\PSoC5/ADC1_In.c **** }
+ 194              		.loc 1 144 0
+ 195 0010 1846     		mov	r0, r3
+ 196 0012 BD46     		mov	sp, r7
+ 197              		.cfi_def_cfa_register 13
+ 198              		@ sp needed
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccoxPcNg.s 			page 7
+
+
+ 199 0014 80BC     		pop	{r7}
+ 200              		.cfi_restore 7
+ 201              		.cfi_def_cfa_offset 0
+ 202 0016 7047     		bx	lr
+ 203              	.L14:
+ 204              		.align	2
+ 205              	.L13:
+ 206 0018 30510040 		.word	1073762608
+ 207              		.cfi_endproc
+ 208              	.LFE3:
+ 209              		.size	ADC1_In_ReadDataReg, .-ADC1_In_ReadDataReg
+ 210              		.text
+ 211              	.Letext0:
+ 212              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 213              		.section	.debug_info,"",%progbits
+ 214              	.Ldebug_info0:
+ 215 0000 13010000 		.4byte	0x113
+ 216 0004 0400     		.2byte	0x4
+ 217 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 218 000a 04       		.byte	0x4
+ 219 000b 01       		.uleb128 0x1
+ 220 000c 00000000 		.4byte	.LASF19
+ 221 0010 0C       		.byte	0xc
+ 222 0011 9F000000 		.4byte	.LASF20
+ 223 0015 49010000 		.4byte	.LASF21
+ 224 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 225 001d 00000000 		.4byte	0
+ 226 0021 00000000 		.4byte	.Ldebug_line0
+ 227 0025 02       		.uleb128 0x2
+ 228 0026 01       		.byte	0x1
+ 229 0027 06       		.byte	0x6
+ 230 0028 AF010000 		.4byte	.LASF0
+ 231 002c 02       		.uleb128 0x2
+ 232 002d 01       		.byte	0x1
+ 233 002e 08       		.byte	0x8
+ 234 002f C0000000 		.4byte	.LASF1
+ 235 0033 02       		.uleb128 0x2
+ 236 0034 02       		.byte	0x2
+ 237 0035 05       		.byte	0x5
+ 238 0036 96010000 		.4byte	.LASF2
+ 239 003a 02       		.uleb128 0x2
+ 240 003b 02       		.byte	0x2
+ 241 003c 07       		.byte	0x7
+ 242 003d E5000000 		.4byte	.LASF3
+ 243 0041 02       		.uleb128 0x2
+ 244 0042 04       		.byte	0x4
+ 245 0043 05       		.byte	0x5
+ 246 0044 A6010000 		.4byte	.LASF4
+ 247 0048 02       		.uleb128 0x2
+ 248 0049 04       		.byte	0x4
+ 249 004a 07       		.byte	0x7
+ 250 004b D3000000 		.4byte	.LASF5
+ 251 004f 02       		.uleb128 0x2
+ 252 0050 08       		.byte	0x8
+ 253 0051 05       		.byte	0x5
+ 254 0052 75010000 		.4byte	.LASF6
+ 255 0056 02       		.uleb128 0x2
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccoxPcNg.s 			page 8
+
+
+ 256 0057 08       		.byte	0x8
+ 257 0058 07       		.byte	0x7
+ 258 0059 2D010000 		.4byte	.LASF7
+ 259 005d 03       		.uleb128 0x3
+ 260 005e 04       		.byte	0x4
+ 261 005f 05       		.byte	0x5
+ 262 0060 696E7400 		.ascii	"int\000"
+ 263 0064 02       		.uleb128 0x2
+ 264 0065 04       		.byte	0x4
+ 265 0066 07       		.byte	0x7
+ 266 0067 20010000 		.4byte	.LASF8
+ 267 006b 04       		.uleb128 0x4
+ 268 006c A0010000 		.4byte	.LASF11
+ 269 0070 02       		.byte	0x2
+ 270 0071 9201     		.2byte	0x192
+ 271 0073 2C000000 		.4byte	0x2c
+ 272 0077 02       		.uleb128 0x2
+ 273 0078 08       		.byte	0x8
+ 274 0079 04       		.byte	0x4
+ 275 007a 0C010000 		.4byte	.LASF9
+ 276 007e 02       		.uleb128 0x2
+ 277 007f 01       		.byte	0x1
+ 278 0080 08       		.byte	0x8
+ 279 0081 83010000 		.4byte	.LASF10
+ 280 0085 04       		.uleb128 0x4
+ 281 0086 CE000000 		.4byte	.LASF12
+ 282 008a 02       		.byte	0x2
+ 283 008b 3C02     		.2byte	0x23c
+ 284 008d 91000000 		.4byte	0x91
+ 285 0091 05       		.uleb128 0x5
+ 286 0092 6B000000 		.4byte	0x6b
+ 287 0096 06       		.uleb128 0x6
+ 288 0097 88010000 		.4byte	.LASF13
+ 289 009b 01       		.byte	0x1
+ 290 009c 39       		.byte	0x39
+ 291 009d 00000000 		.4byte	.LFB0
+ 292 00a1 38000000 		.4byte	.LFE0-.LFB0
+ 293 00a5 01       		.uleb128 0x1
+ 294 00a6 9C       		.byte	0x9c
+ 295 00a7 C8000000 		.4byte	0xc8
+ 296 00ab 07       		.uleb128 0x7
+ 297 00ac 8E000000 		.4byte	.LASF15
+ 298 00b0 01       		.byte	0x1
+ 299 00b1 39       		.byte	0x39
+ 300 00b2 6B000000 		.4byte	0x6b
+ 301 00b6 02       		.uleb128 0x2
+ 302 00b7 91       		.byte	0x91
+ 303 00b8 6F       		.sleb128 -17
+ 304 00b9 08       		.uleb128 0x8
+ 305 00ba 94000000 		.4byte	.LASF22
+ 306 00be 01       		.byte	0x1
+ 307 00bf 3B       		.byte	0x3b
+ 308 00c0 6B000000 		.4byte	0x6b
+ 309 00c4 02       		.uleb128 0x2
+ 310 00c5 91       		.byte	0x91
+ 311 00c6 77       		.sleb128 -9
+ 312 00c7 00       		.byte	0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccoxPcNg.s 			page 9
+
+
+ 313 00c8 06       		.uleb128 0x6
+ 314 00c9 BB010000 		.4byte	.LASF14
+ 315 00cd 01       		.byte	0x1
+ 316 00ce 5A       		.byte	0x5a
+ 317 00cf 00000000 		.4byte	.LFB1
+ 318 00d3 3C000000 		.4byte	.LFE1-.LFB1
+ 319 00d7 01       		.uleb128 0x1
+ 320 00d8 9C       		.byte	0x9c
+ 321 00d9 EC000000 		.4byte	0xec
+ 322 00dd 07       		.uleb128 0x7
+ 323 00de 44010000 		.4byte	.LASF16
+ 324 00e2 01       		.byte	0x1
+ 325 00e3 5A       		.byte	0x5a
+ 326 00e4 6B000000 		.4byte	0x6b
+ 327 00e8 02       		.uleb128 0x2
+ 328 00e9 91       		.byte	0x91
+ 329 00ea 77       		.sleb128 -9
+ 330 00eb 00       		.byte	0
+ 331 00ec 09       		.uleb128 0x9
+ 332 00ed 13010000 		.4byte	.LASF17
+ 333 00f1 01       		.byte	0x1
+ 334 00f2 71       		.byte	0x71
+ 335 00f3 6B000000 		.4byte	0x6b
+ 336 00f7 00000000 		.4byte	.LFB2
+ 337 00fb 1C000000 		.4byte	.LFE2-.LFB2
+ 338 00ff 01       		.uleb128 0x1
+ 339 0100 9C       		.byte	0x9c
+ 340 0101 09       		.uleb128 0x9
+ 341 0102 F8000000 		.4byte	.LASF18
+ 342 0106 01       		.byte	0x1
+ 343 0107 8D       		.byte	0x8d
+ 344 0108 6B000000 		.4byte	0x6b
+ 345 010c 00000000 		.4byte	.LFB3
+ 346 0110 1C000000 		.4byte	.LFE3-.LFB3
+ 347 0114 01       		.uleb128 0x1
+ 348 0115 9C       		.byte	0x9c
+ 349 0116 00       		.byte	0
+ 350              		.section	.debug_abbrev,"",%progbits
+ 351              	.Ldebug_abbrev0:
+ 352 0000 01       		.uleb128 0x1
+ 353 0001 11       		.uleb128 0x11
+ 354 0002 01       		.byte	0x1
+ 355 0003 25       		.uleb128 0x25
+ 356 0004 0E       		.uleb128 0xe
+ 357 0005 13       		.uleb128 0x13
+ 358 0006 0B       		.uleb128 0xb
+ 359 0007 03       		.uleb128 0x3
+ 360 0008 0E       		.uleb128 0xe
+ 361 0009 1B       		.uleb128 0x1b
+ 362 000a 0E       		.uleb128 0xe
+ 363 000b 55       		.uleb128 0x55
+ 364 000c 17       		.uleb128 0x17
+ 365 000d 11       		.uleb128 0x11
+ 366 000e 01       		.uleb128 0x1
+ 367 000f 10       		.uleb128 0x10
+ 368 0010 17       		.uleb128 0x17
+ 369 0011 00       		.byte	0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccoxPcNg.s 			page 10
+
+
+ 370 0012 00       		.byte	0
+ 371 0013 02       		.uleb128 0x2
+ 372 0014 24       		.uleb128 0x24
+ 373 0015 00       		.byte	0
+ 374 0016 0B       		.uleb128 0xb
+ 375 0017 0B       		.uleb128 0xb
+ 376 0018 3E       		.uleb128 0x3e
+ 377 0019 0B       		.uleb128 0xb
+ 378 001a 03       		.uleb128 0x3
+ 379 001b 0E       		.uleb128 0xe
+ 380 001c 00       		.byte	0
+ 381 001d 00       		.byte	0
+ 382 001e 03       		.uleb128 0x3
+ 383 001f 24       		.uleb128 0x24
+ 384 0020 00       		.byte	0
+ 385 0021 0B       		.uleb128 0xb
+ 386 0022 0B       		.uleb128 0xb
+ 387 0023 3E       		.uleb128 0x3e
+ 388 0024 0B       		.uleb128 0xb
+ 389 0025 03       		.uleb128 0x3
+ 390 0026 08       		.uleb128 0x8
+ 391 0027 00       		.byte	0
+ 392 0028 00       		.byte	0
+ 393 0029 04       		.uleb128 0x4
+ 394 002a 16       		.uleb128 0x16
+ 395 002b 00       		.byte	0
+ 396 002c 03       		.uleb128 0x3
+ 397 002d 0E       		.uleb128 0xe
+ 398 002e 3A       		.uleb128 0x3a
+ 399 002f 0B       		.uleb128 0xb
+ 400 0030 3B       		.uleb128 0x3b
+ 401 0031 05       		.uleb128 0x5
+ 402 0032 49       		.uleb128 0x49
+ 403 0033 13       		.uleb128 0x13
+ 404 0034 00       		.byte	0
+ 405 0035 00       		.byte	0
+ 406 0036 05       		.uleb128 0x5
+ 407 0037 35       		.uleb128 0x35
+ 408 0038 00       		.byte	0
+ 409 0039 49       		.uleb128 0x49
+ 410 003a 13       		.uleb128 0x13
+ 411 003b 00       		.byte	0
+ 412 003c 00       		.byte	0
+ 413 003d 06       		.uleb128 0x6
+ 414 003e 2E       		.uleb128 0x2e
+ 415 003f 01       		.byte	0x1
+ 416 0040 3F       		.uleb128 0x3f
+ 417 0041 19       		.uleb128 0x19
+ 418 0042 03       		.uleb128 0x3
+ 419 0043 0E       		.uleb128 0xe
+ 420 0044 3A       		.uleb128 0x3a
+ 421 0045 0B       		.uleb128 0xb
+ 422 0046 3B       		.uleb128 0x3b
+ 423 0047 0B       		.uleb128 0xb
+ 424 0048 27       		.uleb128 0x27
+ 425 0049 19       		.uleb128 0x19
+ 426 004a 11       		.uleb128 0x11
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccoxPcNg.s 			page 11
+
+
+ 427 004b 01       		.uleb128 0x1
+ 428 004c 12       		.uleb128 0x12
+ 429 004d 06       		.uleb128 0x6
+ 430 004e 40       		.uleb128 0x40
+ 431 004f 18       		.uleb128 0x18
+ 432 0050 9742     		.uleb128 0x2117
+ 433 0052 19       		.uleb128 0x19
+ 434 0053 01       		.uleb128 0x1
+ 435 0054 13       		.uleb128 0x13
+ 436 0055 00       		.byte	0
+ 437 0056 00       		.byte	0
+ 438 0057 07       		.uleb128 0x7
+ 439 0058 05       		.uleb128 0x5
+ 440 0059 00       		.byte	0
+ 441 005a 03       		.uleb128 0x3
+ 442 005b 0E       		.uleb128 0xe
+ 443 005c 3A       		.uleb128 0x3a
+ 444 005d 0B       		.uleb128 0xb
+ 445 005e 3B       		.uleb128 0x3b
+ 446 005f 0B       		.uleb128 0xb
+ 447 0060 49       		.uleb128 0x49
+ 448 0061 13       		.uleb128 0x13
+ 449 0062 02       		.uleb128 0x2
+ 450 0063 18       		.uleb128 0x18
+ 451 0064 00       		.byte	0
+ 452 0065 00       		.byte	0
+ 453 0066 08       		.uleb128 0x8
+ 454 0067 34       		.uleb128 0x34
+ 455 0068 00       		.byte	0
+ 456 0069 03       		.uleb128 0x3
+ 457 006a 0E       		.uleb128 0xe
+ 458 006b 3A       		.uleb128 0x3a
+ 459 006c 0B       		.uleb128 0xb
+ 460 006d 3B       		.uleb128 0x3b
+ 461 006e 0B       		.uleb128 0xb
+ 462 006f 49       		.uleb128 0x49
+ 463 0070 13       		.uleb128 0x13
+ 464 0071 02       		.uleb128 0x2
+ 465 0072 18       		.uleb128 0x18
+ 466 0073 00       		.byte	0
+ 467 0074 00       		.byte	0
+ 468 0075 09       		.uleb128 0x9
+ 469 0076 2E       		.uleb128 0x2e
+ 470 0077 00       		.byte	0
+ 471 0078 3F       		.uleb128 0x3f
+ 472 0079 19       		.uleb128 0x19
+ 473 007a 03       		.uleb128 0x3
+ 474 007b 0E       		.uleb128 0xe
+ 475 007c 3A       		.uleb128 0x3a
+ 476 007d 0B       		.uleb128 0xb
+ 477 007e 3B       		.uleb128 0x3b
+ 478 007f 0B       		.uleb128 0xb
+ 479 0080 27       		.uleb128 0x27
+ 480 0081 19       		.uleb128 0x19
+ 481 0082 49       		.uleb128 0x49
+ 482 0083 13       		.uleb128 0x13
+ 483 0084 11       		.uleb128 0x11
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccoxPcNg.s 			page 12
+
+
+ 484 0085 01       		.uleb128 0x1
+ 485 0086 12       		.uleb128 0x12
+ 486 0087 06       		.uleb128 0x6
+ 487 0088 40       		.uleb128 0x40
+ 488 0089 18       		.uleb128 0x18
+ 489 008a 9742     		.uleb128 0x2117
+ 490 008c 19       		.uleb128 0x19
+ 491 008d 00       		.byte	0
+ 492 008e 00       		.byte	0
+ 493 008f 00       		.byte	0
+ 494              		.section	.debug_aranges,"",%progbits
+ 495 0000 34000000 		.4byte	0x34
+ 496 0004 0200     		.2byte	0x2
+ 497 0006 00000000 		.4byte	.Ldebug_info0
+ 498 000a 04       		.byte	0x4
+ 499 000b 00       		.byte	0
+ 500 000c 0000     		.2byte	0
+ 501 000e 0000     		.2byte	0
+ 502 0010 00000000 		.4byte	.LFB0
+ 503 0014 38000000 		.4byte	.LFE0-.LFB0
+ 504 0018 00000000 		.4byte	.LFB1
+ 505 001c 3C000000 		.4byte	.LFE1-.LFB1
+ 506 0020 00000000 		.4byte	.LFB2
+ 507 0024 1C000000 		.4byte	.LFE2-.LFB2
+ 508 0028 00000000 		.4byte	.LFB3
+ 509 002c 1C000000 		.4byte	.LFE3-.LFB3
+ 510 0030 00000000 		.4byte	0
+ 511 0034 00000000 		.4byte	0
+ 512              		.section	.debug_ranges,"",%progbits
+ 513              	.Ldebug_ranges0:
+ 514 0000 00000000 		.4byte	.LFB0
+ 515 0004 38000000 		.4byte	.LFE0
+ 516 0008 00000000 		.4byte	.LFB1
+ 517 000c 3C000000 		.4byte	.LFE1
+ 518 0010 00000000 		.4byte	.LFB2
+ 519 0014 1C000000 		.4byte	.LFE2
+ 520 0018 00000000 		.4byte	.LFB3
+ 521 001c 1C000000 		.4byte	.LFE3
+ 522 0020 00000000 		.4byte	0
+ 523 0024 00000000 		.4byte	0
+ 524              		.section	.debug_line,"",%progbits
+ 525              	.Ldebug_line0:
+ 526 0000 93000000 		.section	.debug_str,"MS",%progbits,1
+ 526      02004400 
+ 526      00000201 
+ 526      FB0E0D00 
+ 526      01010101 
+ 527              	.LASF19:
+ 528 0000 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 528      43313120 
+ 528      352E342E 
+ 528      31203230 
+ 528      31363036 
+ 529 0033 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 529      20726576 
+ 529      6973696F 
+ 529      6E203233 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccoxPcNg.s 			page 13
+
+
+ 529      37373135 
+ 530 0066 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 530      66756E63 
+ 530      74696F6E 
+ 530      2D736563 
+ 530      74696F6E 
+ 531              	.LASF15:
+ 532 008e 76616C75 		.ascii	"value\000"
+ 532      6500
+ 533              	.LASF22:
+ 534 0094 73746174 		.ascii	"staticBits\000"
+ 534      69634269 
+ 534      747300
+ 535              	.LASF20:
+ 536 009f 47656E65 		.ascii	"Generated_Source\\PSoC5\\ADC1_In.c\000"
+ 536      72617465 
+ 536      645F536F 
+ 536      75726365 
+ 536      5C50536F 
+ 537              	.LASF1:
+ 538 00c0 756E7369 		.ascii	"unsigned char\000"
+ 538      676E6564 
+ 538      20636861 
+ 538      7200
+ 539              	.LASF12:
+ 540 00ce 72656738 		.ascii	"reg8\000"
+ 540      00
+ 541              	.LASF5:
+ 542 00d3 6C6F6E67 		.ascii	"long unsigned int\000"
+ 542      20756E73 
+ 542      69676E65 
+ 542      6420696E 
+ 542      7400
+ 543              	.LASF3:
+ 544 00e5 73686F72 		.ascii	"short unsigned int\000"
+ 544      7420756E 
+ 544      7369676E 
+ 544      65642069 
+ 544      6E7400
+ 545              	.LASF18:
+ 546 00f8 41444331 		.ascii	"ADC1_In_ReadDataReg\000"
+ 546      5F496E5F 
+ 546      52656164 
+ 546      44617461 
+ 546      52656700 
+ 547              	.LASF9:
+ 548 010c 646F7562 		.ascii	"double\000"
+ 548      6C6500
+ 549              	.LASF17:
+ 550 0113 41444331 		.ascii	"ADC1_In_Read\000"
+ 550      5F496E5F 
+ 550      52656164 
+ 550      00
+ 551              	.LASF8:
+ 552 0120 756E7369 		.ascii	"unsigned int\000"
+ 552      676E6564 
+ 552      20696E74 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\ccoxPcNg.s 			page 14
+
+
+ 552      00
+ 553              	.LASF7:
+ 554 012d 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 554      206C6F6E 
+ 554      6720756E 
+ 554      7369676E 
+ 554      65642069 
+ 555              	.LASF16:
+ 556 0144 6D6F6465 		.ascii	"mode\000"
+ 556      00
+ 557              	.LASF21:
+ 558 0149 433A5C55 		.ascii	"C:\\Users\\Albert\\Documents\\6115_fp\\IWP.cydsn\000"
+ 558      73657273 
+ 558      5C416C62 
+ 558      6572745C 
+ 558      446F6375 
+ 559              	.LASF6:
+ 560 0175 6C6F6E67 		.ascii	"long long int\000"
+ 560      206C6F6E 
+ 560      6720696E 
+ 560      7400
+ 561              	.LASF10:
+ 562 0183 63686172 		.ascii	"char\000"
+ 562      00
+ 563              	.LASF13:
+ 564 0188 41444331 		.ascii	"ADC1_In_Write\000"
+ 564      5F496E5F 
+ 564      57726974 
+ 564      6500
+ 565              	.LASF2:
+ 566 0196 73686F72 		.ascii	"short int\000"
+ 566      7420696E 
+ 566      7400
+ 567              	.LASF11:
+ 568 01a0 75696E74 		.ascii	"uint8\000"
+ 568      3800
+ 569              	.LASF4:
+ 570 01a6 6C6F6E67 		.ascii	"long int\000"
+ 570      20696E74 
+ 570      00
+ 571              	.LASF0:
+ 572 01af 7369676E 		.ascii	"signed char\000"
+ 572      65642063 
+ 572      68617200 
+ 573              	.LASF14:
+ 574 01bb 41444331 		.ascii	"ADC1_In_SetDriveMode\000"
+ 574      5F496E5F 
+ 574      53657444 
+ 574      72697665 
+ 574      4D6F6465 
+ 575              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

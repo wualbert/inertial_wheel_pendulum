@@ -1,0 +1,425 @@
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cc8mLVYF.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"Filter_Coefficients.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	Filter_ChannelAFirCoefficients
+  20              		.section	.rodata
+  21              		.align	2
+  22              		.type	Filter_ChannelAFirCoefficients, %object
+  23              		.size	Filter_ChannelAFirCoefficients, 64
+  24              	Filter_ChannelAFirCoefficients:
+  25 0000 08       		.byte	8
+  26 0001 77       		.byte	119
+  27 0002 00       		.byte	0
+  28 0003 00       		.byte	0
+  29 0004 FA       		.byte	-6
+  30 0005 7B       		.byte	123
+  31 0006 00       		.byte	0
+  32 0007 00       		.byte	0
+  33 0008 B6       		.byte	-74
+  34 0009 F4       		.byte	-12
+  35 000a FE       		.byte	-2
+  36 000b 00       		.byte	0
+  37 000c E8       		.byte	-24
+  38 000d F0       		.byte	-16
+  39 000e FB       		.byte	-5
+  40 000f 00       		.byte	0
+  41 0010 9E       		.byte	-98
+  42 0011 57       		.byte	87
+  43 0012 FC       		.byte	-4
+  44 0013 00       		.byte	0
+  45 0014 15       		.byte	21
+  46 0015 7A       		.byte	122
+  47 0016 06       		.byte	6
+  48 0017 00       		.byte	0
+  49 0018 98       		.byte	-104
+  50 0019 0C       		.byte	12
+  51 001a 19       		.byte	25
+  52 001b 00       		.byte	0
+  53 001c DC       		.byte	-36
+  54 001d 61       		.byte	97
+  55 001e 28       		.byte	40
+  56 001f 00       		.byte	0
+  57 0020 DC       		.byte	-36
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cc8mLVYF.s 			page 2
+
+
+  58 0021 61       		.byte	97
+  59 0022 28       		.byte	40
+  60 0023 00       		.byte	0
+  61 0024 98       		.byte	-104
+  62 0025 0C       		.byte	12
+  63 0026 19       		.byte	25
+  64 0027 00       		.byte	0
+  65 0028 15       		.byte	21
+  66 0029 7A       		.byte	122
+  67 002a 06       		.byte	6
+  68 002b 00       		.byte	0
+  69 002c 9E       		.byte	-98
+  70 002d 57       		.byte	87
+  71 002e FC       		.byte	-4
+  72 002f 00       		.byte	0
+  73 0030 E8       		.byte	-24
+  74 0031 F0       		.byte	-16
+  75 0032 FB       		.byte	-5
+  76 0033 00       		.byte	0
+  77 0034 B6       		.byte	-74
+  78 0035 F4       		.byte	-12
+  79 0036 FE       		.byte	-2
+  80 0037 00       		.byte	0
+  81 0038 FA       		.byte	-6
+  82 0039 7B       		.byte	123
+  83 003a 00       		.byte	0
+  84 003b 00       		.byte	0
+  85 003c 08       		.byte	8
+  86 003d 77       		.byte	119
+  87 003e 00       		.byte	0
+  88 003f 00       		.byte	0
+  89              		.text
+  90              	.Letext0:
+  91              		.file 1 "Generated_Source\\PSoC5\\cytypes.h"
+  92              		.file 2 "Generated_Source\\PSoC5\\Filter_Coefficients.c"
+  93              		.section	.debug_info,"",%progbits
+  94              	.Ldebug_info0:
+  95 0000 BA000000 		.4byte	0xba
+  96 0004 0400     		.2byte	0x4
+  97 0006 00000000 		.4byte	.Ldebug_abbrev0
+  98 000a 04       		.byte	0x4
+  99 000b 01       		.uleb128 0x1
+ 100 000c 50000000 		.4byte	.LASF14
+ 101 0010 0C       		.byte	0xc
+ 102 0011 8A010000 		.4byte	.LASF15
+ 103 0015 F1000000 		.4byte	.LASF16
+ 104 0019 00000000 		.4byte	.Ldebug_line0
+ 105 001d 02       		.uleb128 0x2
+ 106 001e 04       		.byte	0x4
+ 107 001f 05       		.byte	0x5
+ 108 0020 696E7400 		.ascii	"int\000"
+ 109 0024 03       		.uleb128 0x3
+ 110 0025 04       		.byte	0x4
+ 111 0026 07       		.byte	0x7
+ 112 0027 0E000000 		.4byte	.LASF0
+ 113 002b 03       		.uleb128 0x3
+ 114 002c 08       		.byte	0x8
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cc8mLVYF.s 			page 3
+
+
+ 115 002d 05       		.byte	0x5
+ 116 002e 00000000 		.4byte	.LASF1
+ 117 0032 03       		.uleb128 0x3
+ 118 0033 08       		.byte	0x8
+ 119 0034 04       		.byte	0x4
+ 120 0035 4C010000 		.4byte	.LASF2
+ 121 0039 03       		.uleb128 0x3
+ 122 003a 01       		.byte	0x1
+ 123 003b 06       		.byte	0x6
+ 124 003c 40010000 		.4byte	.LASF3
+ 125 0040 03       		.uleb128 0x3
+ 126 0041 01       		.byte	0x1
+ 127 0042 08       		.byte	0x8
+ 128 0043 DE000000 		.4byte	.LASF4
+ 129 0047 03       		.uleb128 0x3
+ 130 0048 02       		.byte	0x2
+ 131 0049 05       		.byte	0x5
+ 132 004a 58010000 		.4byte	.LASF5
+ 133 004e 03       		.uleb128 0x3
+ 134 004f 02       		.byte	0x2
+ 135 0050 07       		.byte	0x7
+ 136 0051 2D010000 		.4byte	.LASF6
+ 137 0055 03       		.uleb128 0x3
+ 138 0056 04       		.byte	0x4
+ 139 0057 05       		.byte	0x5
+ 140 0058 1D010000 		.4byte	.LASF7
+ 141 005c 03       		.uleb128 0x3
+ 142 005d 04       		.byte	0x4
+ 143 005e 07       		.byte	0x7
+ 144 005f 21000000 		.4byte	.LASF8
+ 145 0063 03       		.uleb128 0x3
+ 146 0064 08       		.byte	0x8
+ 147 0065 07       		.byte	0x7
+ 148 0066 33000000 		.4byte	.LASF9
+ 149 006a 03       		.uleb128 0x3
+ 150 006b 04       		.byte	0x4
+ 151 006c 07       		.byte	0x7
+ 152 006d 81010000 		.4byte	.LASF10
+ 153 0071 03       		.uleb128 0x3
+ 154 0072 01       		.byte	0x1
+ 155 0073 08       		.byte	0x8
+ 156 0074 EC000000 		.4byte	.LASF11
+ 157 0078 04       		.uleb128 0x4
+ 158 0079 1B000000 		.4byte	.LASF17
+ 159 007d 01       		.byte	0x1
+ 160 007e 9201     		.2byte	0x192
+ 161 0080 40000000 		.4byte	0x40
+ 162 0084 03       		.uleb128 0x3
+ 163 0085 04       		.byte	0x4
+ 164 0086 04       		.byte	0x4
+ 165 0087 4A000000 		.4byte	.LASF12
+ 166 008b 03       		.uleb128 0x3
+ 167 008c 08       		.byte	0x8
+ 168 008d 04       		.byte	0x4
+ 169 008e 26010000 		.4byte	.LASF13
+ 170 0092 05       		.uleb128 0x5
+ 171 0093 A2000000 		.4byte	0xa2
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cc8mLVYF.s 			page 4
+
+
+ 172 0097 A2000000 		.4byte	0xa2
+ 173 009b 06       		.uleb128 0x6
+ 174 009c 6A000000 		.4byte	0x6a
+ 175 00a0 3F       		.byte	0x3f
+ 176 00a1 00       		.byte	0
+ 177 00a2 07       		.uleb128 0x7
+ 178 00a3 78000000 		.4byte	0x78
+ 179 00a7 08       		.uleb128 0x8
+ 180 00a8 62010000 		.4byte	.LASF18
+ 181 00ac 02       		.byte	0x2
+ 182 00ad 11       		.byte	0x11
+ 183 00ae B8000000 		.4byte	0xb8
+ 184 00b2 05       		.uleb128 0x5
+ 185 00b3 03       		.byte	0x3
+ 186 00b4 00000000 		.4byte	Filter_ChannelAFirCoefficients
+ 187 00b8 07       		.uleb128 0x7
+ 188 00b9 92000000 		.4byte	0x92
+ 189 00bd 00       		.byte	0
+ 190              		.section	.debug_abbrev,"",%progbits
+ 191              	.Ldebug_abbrev0:
+ 192 0000 01       		.uleb128 0x1
+ 193 0001 11       		.uleb128 0x11
+ 194 0002 01       		.byte	0x1
+ 195 0003 25       		.uleb128 0x25
+ 196 0004 0E       		.uleb128 0xe
+ 197 0005 13       		.uleb128 0x13
+ 198 0006 0B       		.uleb128 0xb
+ 199 0007 03       		.uleb128 0x3
+ 200 0008 0E       		.uleb128 0xe
+ 201 0009 1B       		.uleb128 0x1b
+ 202 000a 0E       		.uleb128 0xe
+ 203 000b 10       		.uleb128 0x10
+ 204 000c 17       		.uleb128 0x17
+ 205 000d 00       		.byte	0
+ 206 000e 00       		.byte	0
+ 207 000f 02       		.uleb128 0x2
+ 208 0010 24       		.uleb128 0x24
+ 209 0011 00       		.byte	0
+ 210 0012 0B       		.uleb128 0xb
+ 211 0013 0B       		.uleb128 0xb
+ 212 0014 3E       		.uleb128 0x3e
+ 213 0015 0B       		.uleb128 0xb
+ 214 0016 03       		.uleb128 0x3
+ 215 0017 08       		.uleb128 0x8
+ 216 0018 00       		.byte	0
+ 217 0019 00       		.byte	0
+ 218 001a 03       		.uleb128 0x3
+ 219 001b 24       		.uleb128 0x24
+ 220 001c 00       		.byte	0
+ 221 001d 0B       		.uleb128 0xb
+ 222 001e 0B       		.uleb128 0xb
+ 223 001f 3E       		.uleb128 0x3e
+ 224 0020 0B       		.uleb128 0xb
+ 225 0021 03       		.uleb128 0x3
+ 226 0022 0E       		.uleb128 0xe
+ 227 0023 00       		.byte	0
+ 228 0024 00       		.byte	0
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cc8mLVYF.s 			page 5
+
+
+ 229 0025 04       		.uleb128 0x4
+ 230 0026 16       		.uleb128 0x16
+ 231 0027 00       		.byte	0
+ 232 0028 03       		.uleb128 0x3
+ 233 0029 0E       		.uleb128 0xe
+ 234 002a 3A       		.uleb128 0x3a
+ 235 002b 0B       		.uleb128 0xb
+ 236 002c 3B       		.uleb128 0x3b
+ 237 002d 05       		.uleb128 0x5
+ 238 002e 49       		.uleb128 0x49
+ 239 002f 13       		.uleb128 0x13
+ 240 0030 00       		.byte	0
+ 241 0031 00       		.byte	0
+ 242 0032 05       		.uleb128 0x5
+ 243 0033 01       		.uleb128 0x1
+ 244 0034 01       		.byte	0x1
+ 245 0035 49       		.uleb128 0x49
+ 246 0036 13       		.uleb128 0x13
+ 247 0037 01       		.uleb128 0x1
+ 248 0038 13       		.uleb128 0x13
+ 249 0039 00       		.byte	0
+ 250 003a 00       		.byte	0
+ 251 003b 06       		.uleb128 0x6
+ 252 003c 21       		.uleb128 0x21
+ 253 003d 00       		.byte	0
+ 254 003e 49       		.uleb128 0x49
+ 255 003f 13       		.uleb128 0x13
+ 256 0040 2F       		.uleb128 0x2f
+ 257 0041 0B       		.uleb128 0xb
+ 258 0042 00       		.byte	0
+ 259 0043 00       		.byte	0
+ 260 0044 07       		.uleb128 0x7
+ 261 0045 26       		.uleb128 0x26
+ 262 0046 00       		.byte	0
+ 263 0047 49       		.uleb128 0x49
+ 264 0048 13       		.uleb128 0x13
+ 265 0049 00       		.byte	0
+ 266 004a 00       		.byte	0
+ 267 004b 08       		.uleb128 0x8
+ 268 004c 34       		.uleb128 0x34
+ 269 004d 00       		.byte	0
+ 270 004e 03       		.uleb128 0x3
+ 271 004f 0E       		.uleb128 0xe
+ 272 0050 3A       		.uleb128 0x3a
+ 273 0051 0B       		.uleb128 0xb
+ 274 0052 3B       		.uleb128 0x3b
+ 275 0053 0B       		.uleb128 0xb
+ 276 0054 49       		.uleb128 0x49
+ 277 0055 13       		.uleb128 0x13
+ 278 0056 3F       		.uleb128 0x3f
+ 279 0057 19       		.uleb128 0x19
+ 280 0058 02       		.uleb128 0x2
+ 281 0059 18       		.uleb128 0x18
+ 282 005a 00       		.byte	0
+ 283 005b 00       		.byte	0
+ 284 005c 00       		.byte	0
+ 285              		.section	.debug_aranges,"",%progbits
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cc8mLVYF.s 			page 6
+
+
+ 286 0000 14000000 		.4byte	0x14
+ 287 0004 0200     		.2byte	0x2
+ 288 0006 00000000 		.4byte	.Ldebug_info0
+ 289 000a 04       		.byte	0x4
+ 290 000b 00       		.byte	0
+ 291 000c 0000     		.2byte	0
+ 292 000e 0000     		.2byte	0
+ 293 0010 00000000 		.4byte	0
+ 294 0014 00000000 		.4byte	0
+ 295              		.section	.debug_line,"",%progbits
+ 296              	.Ldebug_line0:
+ 297 0000 56000000 		.section	.debug_str,"MS",%progbits,1
+ 297      02005000 
+ 297      00000201 
+ 297      FB0E0D00 
+ 297      01010101 
+ 298              	.LASF1:
+ 299 0000 6C6F6E67 		.ascii	"long long int\000"
+ 299      206C6F6E 
+ 299      6720696E 
+ 299      7400
+ 300              	.LASF0:
+ 301 000e 756E7369 		.ascii	"unsigned int\000"
+ 301      676E6564 
+ 301      20696E74 
+ 301      00
+ 302              	.LASF17:
+ 303 001b 75696E74 		.ascii	"uint8\000"
+ 303      3800
+ 304              	.LASF8:
+ 305 0021 6C6F6E67 		.ascii	"long unsigned int\000"
+ 305      20756E73 
+ 305      69676E65 
+ 305      6420696E 
+ 305      7400
+ 306              	.LASF9:
+ 307 0033 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 307      206C6F6E 
+ 307      6720756E 
+ 307      7369676E 
+ 307      65642069 
+ 308              	.LASF12:
+ 309 004a 666C6F61 		.ascii	"float\000"
+ 309      7400
+ 310              	.LASF14:
+ 311 0050 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 311      43313120 
+ 311      352E342E 
+ 311      31203230 
+ 311      31363036 
+ 312 0083 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 312      20726576 
+ 312      6973696F 
+ 312      6E203233 
+ 312      37373135 
+ 313 00b6 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 313      66756E63 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cc8mLVYF.s 			page 7
+
+
+ 313      74696F6E 
+ 313      2D736563 
+ 313      74696F6E 
+ 314              	.LASF4:
+ 315 00de 756E7369 		.ascii	"unsigned char\000"
+ 315      676E6564 
+ 315      20636861 
+ 315      7200
+ 316              	.LASF11:
+ 317 00ec 63686172 		.ascii	"char\000"
+ 317      00
+ 318              	.LASF16:
+ 319 00f1 433A5C55 		.ascii	"C:\\Users\\Albert\\Documents\\6115_fp\\IWP.cydsn\000"
+ 319      73657273 
+ 319      5C416C62 
+ 319      6572745C 
+ 319      446F6375 
+ 320              	.LASF7:
+ 321 011d 6C6F6E67 		.ascii	"long int\000"
+ 321      20696E74 
+ 321      00
+ 322              	.LASF13:
+ 323 0126 646F7562 		.ascii	"double\000"
+ 323      6C6500
+ 324              	.LASF6:
+ 325 012d 73686F72 		.ascii	"short unsigned int\000"
+ 325      7420756E 
+ 325      7369676E 
+ 325      65642069 
+ 325      6E7400
+ 326              	.LASF3:
+ 327 0140 7369676E 		.ascii	"signed char\000"
+ 327      65642063 
+ 327      68617200 
+ 328              	.LASF2:
+ 329 014c 6C6F6E67 		.ascii	"long double\000"
+ 329      20646F75 
+ 329      626C6500 
+ 330              	.LASF5:
+ 331 0158 73686F72 		.ascii	"short int\000"
+ 331      7420696E 
+ 331      7400
+ 332              	.LASF18:
+ 333 0162 46696C74 		.ascii	"Filter_ChannelAFirCoefficients\000"
+ 333      65725F43 
+ 333      68616E6E 
+ 333      656C4146 
+ 333      6972436F 
+ 334              	.LASF10:
+ 335 0181 73697A65 		.ascii	"sizetype\000"
+ 335      74797065 
+ 335      00
+ 336              	.LASF15:
+ 337 018a 47656E65 		.ascii	"Generated_Source\\PSoC5\\Filter_Coefficients.c\000"
+ 337      72617465 
+ 337      645F536F 
+ 337      75726365 
+ARM GAS  C:\Users\Albert\AppData\Local\Temp\cc8mLVYF.s 			page 8
+
+
+ 337      5C50536F 
+ 338              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
